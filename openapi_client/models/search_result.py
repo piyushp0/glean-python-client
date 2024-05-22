@@ -46,7 +46,6 @@ class SearchResult(BaseModel):
     attachments: Optional[List[SearchResult]] = Field(default=None, description="A (potentially partial) list of results representing documents attached to the main result document.")
     backlink_results: Optional[List[SearchResult]] = Field(default=None, description="A list of results that should be displayed as backlinks of this result in reverse chronological order.", alias="backlinkResults")
     cluster_type: Optional[ClusterTypeEnum] = Field(default=None, alias="clusterType")
-    must_include_suggestions: Optional[QuerySuggestionList] = Field(default=None, alias="mustIncludeSuggestions")
     query_suggestion: Optional[QuerySuggestion] = Field(default=None, alias="querySuggestion")
     prominence: Optional[SearchResultProminenceEnum] = None
     attachment_context: Optional[StrictStr] = Field(default=None, description="Additional context for the relationship between the result and the document it's attached to.", alias="attachmentContext")
