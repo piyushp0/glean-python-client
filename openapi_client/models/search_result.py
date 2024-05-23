@@ -185,7 +185,6 @@ class SearchResult(BaseModel):
             "attachments": [SearchResult.from_dict(_item) for _item in obj["attachments"]] if obj.get("attachments") is not None else None,
             "backlinkResults": [SearchResult.from_dict(_item) for _item in obj["backlinkResults"]] if obj.get("backlinkResults") is not None else None,
             "clusterType": obj.get("clusterType"),
-            "mustIncludeSuggestions": QuerySuggestionList.from_dict(obj["mustIncludeSuggestions"]) if obj.get("mustIncludeSuggestions") is not None else None,
             "querySuggestion": QuerySuggestion.from_dict(obj["querySuggestion"]) if obj.get("querySuggestion") is not None else None,
             "prominence": obj.get("prominence"),
             "attachmentContext": obj.get("attachmentContext"),
