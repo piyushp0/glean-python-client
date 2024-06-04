@@ -13,45 +13,26 @@
 """  # noqa: E501
 
 
-import unittest
+from __future__ import annotations
+import json
+from enum import Enum
+from typing_extensions import Self
 
-from openapi_client.models.chat_metadata import ChatMetadata
 
-class TestChatMetadata(unittest.TestCase):
-    """ChatMetadata unit test stubs"""
+class ChatFileFailureReason(str, Enum):
+    """
+    Reason for failed status.
+    """
 
-    def setUp(self):
-        pass
+    """
+    allowed enum values
+    """
+    PARSE_FAILED = 'PARSE_FAILED'
+    AV_SCAN_FAILED = 'AV_SCAN_FAILED'
 
-    def tearDown(self):
-        pass
+    @classmethod
+    def from_json(cls, json_str: str) -> Self:
+        """Create an instance of ChatFileFailureReason from a JSON string"""
+        return cls(json.loads(json_str))
 
-    def make_instance(self, include_optional) -> ChatMetadata:
-        """Test ChatMetadata
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
-        # uncomment below to create an instance of `ChatMetadata`
-        """
-        model = ChatMetadata()
-        if include_optional:
-            return ChatMetadata(
-                id = '',
-                create_time = 56,
-                created_by = {"name":"George Clooney","obfuscatedId":"abc123"},
-                update_time = 56,
-                name = '',
-                application_id = ''
-            )
-        else:
-            return ChatMetadata(
-        )
-        """
 
-    def testChatMetadata(self):
-        """Test ChatMetadata"""
-        # inst_req_only = self.make_instance(include_optional=False)
-        # inst_req_and_optional = self.make_instance(include_optional=True)
-
-if __name__ == '__main__':
-    unittest.main()

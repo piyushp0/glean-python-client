@@ -43,9 +43,6 @@ class TestQuerySuggestionList(unittest.TestCase):
             )
         else:
             return QuerySuggestionList(
-                suggestions = [
-                    {"query":"app:github type:pull author:mortimer","label":"Mortimer's PRs","datasource":"github"}
-                    ],
         )
         """
 

@@ -88,7 +88,6 @@ class TestDocumentOrError(unittest.TestCase):
                         id = '', 
                         datasource = '', 
                         doc_type = '', 
-                        parent_document = , 
                         title = '', 
                         url = '', 
                         metadata = {"container":"container","parentId":"JIRA_EN-1337","createTime":"2000-01-23T04:56:07.000Z","datasource":"datasource","author":{"name":"name"},"documentId":"documentId","updateTime":"2000-01-23T04:56:07.000Z","mimeType":"mimeType","objectType":"Feature Request","components":["Backend","Networking"],"status":["Done"],"customData":{"someCustomField":"someCustomValue"}}, 
@@ -97,7 +96,6 @@ class TestDocumentOrError(unittest.TestCase):
                                 title = '', 
                                 url = '', )
                             ], ), 
-                    parent_document = , 
                     title = '', 
                     url = '', 
                     metadata = {"container":"container","parentId":"JIRA_EN-1337","createTime":"2000-01-23T04:56:07.000Z","datasource":"datasource","author":{"name":"name"},"documentId":"documentId","updateTime":"2000-01-23T04:56:07.000Z","mimeType":"mimeType","objectType":"Feature Request","components":["Backend","Networking"],"status":["Done"],"customData":{"someCustomField":"someCustomValue"}}, 

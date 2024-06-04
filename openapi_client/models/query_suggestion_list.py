@@ -27,7 +27,7 @@ class QuerySuggestionList(BaseModel):
     """
     QuerySuggestionList
     """ # noqa: E501
-    suggestions: List[QuerySuggestion]
+    suggestions: Optional[List[QuerySuggestion]] = None
     person: Optional[Person] = None
     __properties: ClassVar[List[str]] = ["suggestions", "person"]
 

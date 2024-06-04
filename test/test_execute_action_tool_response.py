@@ -36,6 +36,7 @@ class TestExecuteActionToolResponse(unittest.TestCase):
         model = ExecuteActionToolResponse()
         if include_optional:
             return ExecuteActionToolResponse(
+                message = '',
                 error = '',
                 result_url = ''
             )

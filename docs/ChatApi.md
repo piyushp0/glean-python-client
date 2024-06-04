@@ -11,7 +11,6 @@ Method | HTTP request | Description
 [**getchat**](ChatApi.md#getchat) | **POST** /getchat | Retrieves a Chat
 [**getchatapplication**](ChatApi.md#getchatapplication) | **POST** /getchatapplication | Gets the metadata for a custom Chat application
 [**listchats**](ChatApi.md#listchats) | **POST** /listchats | Retrieves all saved Chats
-[**runworkflow**](ChatApi.md#runworkflow) | **POST** /runworkflow | Runs a workflow.
 
 
 # **ask**
@@ -603,93 +602,6 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **401** | Not Authorized |  -  |
 **403** | Forbidden |  -  |
-**429** | Too Many Requests |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **runworkflow**
-> ChatResponse runworkflow(payload, x_scio_actas=x_scio_actas, timezone_offset=timezone_offset)
-
-Runs a workflow.
-
-Trigger a workflow with a given ID.
-
-### Example
-
-* Bearer Authentication (BearerAuth):
-
-```python
-import openapi_client
-from openapi_client.models.chat_response import ChatResponse
-from openapi_client.models.run_workflow_request import RunWorkflowRequest
-from openapi_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://domain-be.glean.com/rest/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://domain-be.glean.com/rest/api/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: BearerAuth
-configuration = openapi_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.ChatApi(api_client)
-    payload = openapi_client.RunWorkflowRequest() # RunWorkflowRequest | 
-    x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-    timezone_offset = 56 # int | The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC. (optional)
-
-    try:
-        # Runs a workflow.
-        api_response = api_instance.runworkflow(payload, x_scio_actas=x_scio_actas, timezone_offset=timezone_offset)
-        print("The response of ChatApi->runworkflow:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ChatApi->runworkflow: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **payload** | [**RunWorkflowRequest**](RunWorkflowRequest.md)|  | 
- **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
- **timezone_offset** | **int**| The offset of the client&#39;s timezone in minutes from UTC. e.g. PDT is -420 because it&#39;s 7 hours behind UTC. | [optional] 
-
-### Return type
-
-[**ChatResponse**](ChatResponse.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Invalid request |  -  |
-**401** | Not Authorized |  -  |
-**408** | Request Timeout |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

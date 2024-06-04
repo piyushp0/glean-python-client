@@ -76,13 +76,6 @@ class TestChatApi(unittest.TestCase):
         """
         pass
 
-    def test_runworkflow(self) -> None:
-        """Test case for runworkflow
-
-        Runs a workflow.
-        """
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()

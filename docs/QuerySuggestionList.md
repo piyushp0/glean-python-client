@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**suggestions** | [**List[QuerySuggestion]**](QuerySuggestion.md) |  | 
+**suggestions** | [**List[QuerySuggestion]**](QuerySuggestion.md) |  | [optional] 
 **person** | [**Person**](Person.md) |  | [optional] 
 
 ## Example

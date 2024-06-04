@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.chat_file import ChatFile
 from openapi_client.models.query_suggestion import QuerySuggestion
 from openapi_client.models.structured_result import StructuredResult
 from openapi_client.models.write_action import WriteAction
@@ -35,7 +36,8 @@ class ChatMessageFragment(BaseModel):
     text: Optional[StrictStr] = None
     query_suggestion: Optional[QuerySuggestion] = Field(default=None, alias="querySuggestion")
     write_action: Optional[WriteAction] = Field(default=None, alias="writeAction")
-    __properties: ClassVar[List[str]] = ["structuredResults", "trackingToken", "text", "querySuggestion", "writeAction"]
+    file: Optional[ChatFile] = None
+    __properties: ClassVar[List[str]] = ["structuredResults", "trackingToken", "text", "querySuggestion", "writeAction", "file"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,9 @@ class ChatMessageFragment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of write_action
         if self.write_action:
             _dict['writeAction'] = self.write_action.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of file
+        if self.file:
+            _dict['file'] = self.file.to_dict()
         return _dict
 
     @classmethod
@@ -105,7 +110,8 @@ class ChatMessageFragment(BaseModel):
             "trackingToken": obj.get("trackingToken"),
             "text": obj.get("text"),
             "querySuggestion": QuerySuggestion.from_dict(obj["querySuggestion"]) if obj.get("querySuggestion") is not None else None,
-            "writeAction": WriteAction.from_dict(obj["writeAction"]) if obj.get("writeAction") is not None else None
+            "writeAction": WriteAction.from_dict(obj["writeAction"]) if obj.get("writeAction") is not None else None,
+            "file": ChatFile.from_dict(obj["file"]) if obj.get("file") is not None else None
         })
         return _obj
 

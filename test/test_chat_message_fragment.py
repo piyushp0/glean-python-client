@@ -190,7 +190,15 @@ class TestChatMessageFragment(unittest.TestCase):
                                     value = '', 
                                     label = '', )
                                 ], )
-                        }, )
+                        }, ),
+                file = openapi_client.models.chat_file.ChatFile(
+                    id = 'FILE_1234', 
+                    name = 'sample.pdf', 
+                    metadata = openapi_client.models.chat_file_metadata.ChatFileMetadata(
+                        status = 'PROCESSING', 
+                        upload_time = 56, 
+                        processed_size = 56, 
+                        failure_reason = 'PARSE_FAILED', ), )
             )
         else:
             return ChatMessageFragment(

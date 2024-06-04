@@ -52,6 +52,8 @@ class PersonMetadata(BaseModel):
     manager: Optional[Person] = None
     management_chain: Optional[List[Person]] = Field(default=None, description="The chain of reporting in the company as far up as it goes. The last entry is this person's direct manager.", alias="managementChain")
     phone: Optional[StrictStr] = Field(default=None, description="Phone number as a number string.")
+    timezone: Optional[StrictStr] = Field(default=None, description="The timezone of the person. E.g. \"Pacific Daylight Time\".")
+    timezone_offset: Optional[StrictInt] = Field(default=None, description="The offset of the person's timezone in seconds from UTC.", alias="timezoneOffset")
     photo_url: Optional[StrictStr] = Field(default=None, description="The URL of the person's avatar. Public, glean-authenticated and Base64 encoded data URLs are all valid (but not third-party-authenticated URLs).", alias="photoUrl")
     unedited_photo_url: Optional[StrictStr] = Field(default=None, description="The original photo URL of the person's avatar before any edits they made are applied", alias="uneditedPhotoUrl")
     banner_url: Optional[StrictStr] = Field(default=None, description="The URL of the person's banner photo.", alias="bannerUrl")
@@ -78,7 +80,7 @@ class PersonMetadata(BaseModel):
     profile_bool_settings: Optional[Dict[str, StrictBool]] = Field(default=None, description="flag settings to indicate user profile settings for certain items", alias="profileBoolSettings")
     badges: Optional[List[Badge]] = Field(default=None, description="The badges that a user has earned over their lifetime.")
     is_org_root: Optional[StrictBool] = Field(default=None, description="Whether this person is a \"root\" node in their organization's hierarchy.", alias="isOrgRoot")
-    __properties: ClassVar[List[str]] = ["type", "firstName", "lastName", "title", "businessUnit", "department", "teams", "departmentCount", "email", "aliasEmails", "location", "structuredLocation", "externalProfileLink", "manager", "managementChain", "phone", "photoUrl", "uneditedPhotoUrl", "bannerUrl", "reports", "startDate", "endDate", "bio", "pronoun", "orgSizeCount", "directReportsCount", "preferredName", "socialNetwork", "datasourceProfile", "querySuggestions", "peopleDistance", "inviteInfo", "isSignedUp", "lastExtensionUse", "permissions", "customFields", "loggingId", "startDatePercentile", "busyEvents", "profileBoolSettings", "badges", "isOrgRoot"]
+    __properties: ClassVar[List[str]] = ["type", "firstName", "lastName", "title", "businessUnit", "department", "teams", "departmentCount", "email", "aliasEmails", "location", "structuredLocation", "externalProfileLink", "manager", "managementChain", "phone", "timezone", "timezoneOffset", "photoUrl", "uneditedPhotoUrl", "bannerUrl", "reports", "startDate", "endDate", "bio", "pronoun", "orgSizeCount", "directReportsCount", "preferredName", "socialNetwork", "datasourceProfile", "querySuggestions", "peopleDistance", "inviteInfo", "isSignedUp", "lastExtensionUse", "permissions", "customFields", "loggingId", "startDatePercentile", "busyEvents", "profileBoolSettings", "badges", "isOrgRoot"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -235,6 +237,8 @@ class PersonMetadata(BaseModel):
             "manager": Person.from_dict(obj["manager"]) if obj.get("manager") is not None else None,
             "managementChain": [Person.from_dict(_item) for _item in obj["managementChain"]] if obj.get("managementChain") is not None else None,
             "phone": obj.get("phone"),
+            "timezone": obj.get("timezone"),
+            "timezoneOffset": obj.get("timezoneOffset"),
             "photoUrl": obj.get("photoUrl"),
             "uneditedPhotoUrl": obj.get("uneditedPhotoUrl"),
             "bannerUrl": obj.get("bannerUrl"),

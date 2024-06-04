@@ -43,7 +43,8 @@ class TestListChatsResponse(unittest.TestCase):
                             create_time = 56, 
                             created_by = {"name":"George Clooney","obfuscatedId":"abc123"}, 
                             update_time = 56, 
-                            name = '', ), 
+                            name = '', 
+                            application_id = '', ), 
                         tracking_token = '', )
                     ]
             )

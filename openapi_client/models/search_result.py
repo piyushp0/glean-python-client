@@ -46,6 +46,7 @@ class SearchResult(BaseModel):
     attachments: Optional[List[SearchResult]] = Field(default=None, description="A (potentially partial) list of results representing documents attached to the main result document.")
     backlink_results: Optional[List[SearchResult]] = Field(default=None, description="A list of results that should be displayed as backlinks of this result in reverse chronological order.", alias="backlinkResults")
     cluster_type: Optional[ClusterTypeEnum] = Field(default=None, alias="clusterType")
+    must_include_suggestions: Optional[QuerySuggestionList] = Field(default=None, alias="mustIncludeSuggestions")
     query_suggestion: Optional[QuerySuggestion] = Field(default=None, alias="querySuggestion")
     prominence: Optional[SearchResultProminenceEnum] = None
     attachment_context: Optional[StrictStr] = Field(default=None, description="Additional context for the relationship between the result and the document it's attached to.", alias="attachmentContext")
@@ -185,6 +186,7 @@ class SearchResult(BaseModel):
             "attachments": [SearchResult.from_dict(_item) for _item in obj["attachments"]] if obj.get("attachments") is not None else None,
             "backlinkResults": [SearchResult.from_dict(_item) for _item in obj["backlinkResults"]] if obj.get("backlinkResults") is not None else None,
             "clusterType": obj.get("clusterType"),
+            "mustIncludeSuggestions": QuerySuggestionList.from_dict(obj["mustIncludeSuggestions"]) if obj.get("mustIncludeSuggestions") is not None else None,
             "querySuggestion": QuerySuggestion.from_dict(obj["querySuggestion"]) if obj.get("querySuggestion") is not None else None,
             "prominence": obj.get("prominence"),
             "attachmentContext": obj.get("attachmentContext"),

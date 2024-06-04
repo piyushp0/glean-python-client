@@ -72,6 +72,8 @@ class TestPersonMetadata(unittest.TestCase):
                     {"name":"George Clooney","obfuscatedId":"abc123"}
                     ],
                 phone = '',
+                timezone = '',
+                timezone_offset = 56,
                 photo_url = '',
                 unedited_photo_url = '',
                 banner_url = '',

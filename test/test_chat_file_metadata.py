@@ -15,10 +15,10 @@
 
 import unittest
 
-from openapi_client.models.chat_metadata import ChatMetadata
+from openapi_client.models.chat_file_metadata import ChatFileMetadata
 
-class TestChatMetadata(unittest.TestCase):
-    """ChatMetadata unit test stubs"""
+class TestChatFileMetadata(unittest.TestCase):
+    """ChatFileMetadata unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,30 +26,28 @@ class TestChatMetadata(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ChatMetadata:
-        """Test ChatMetadata
+    def make_instance(self, include_optional) -> ChatFileMetadata:
+        """Test ChatFileMetadata
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ChatMetadata`
+        # uncomment below to create an instance of `ChatFileMetadata`
         """
-        model = ChatMetadata()
+        model = ChatFileMetadata()
         if include_optional:
-            return ChatMetadata(
-                id = '',
-                create_time = 56,
-                created_by = {"name":"George Clooney","obfuscatedId":"abc123"},
-                update_time = 56,
-                name = '',
-                application_id = ''
+            return ChatFileMetadata(
+                status = 'PROCESSING',
+                upload_time = 56,
+                processed_size = 56,
+                failure_reason = 'PARSE_FAILED'
             )
         else:
-            return ChatMetadata(
+            return ChatFileMetadata(
         )
         """
 
-    def testChatMetadata(self):
-        """Test ChatMetadata"""
+    def testChatFileMetadata(self):
+        """Test ChatFileMetadata"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

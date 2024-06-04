@@ -1232,40 +1232,6 @@ paths:
           description: Not Authorized
         '403':
           description: Forbidden
-  /runworkflow:
-    post:
-      tags:
-        - Chat
-      summary: Runs a workflow.
-      description: Trigger a workflow with a given ID.
-      operationId: runworkflow
-      x-visibility: Private
-      x-codegen-request-body-name: payload
-      parameters:
-        - $ref: '#/components/parameters/xScioActAsHeader'
-        - $ref: '#/components/parameters/timezoneOffset'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RunWorkflowRequest'
-        required: true
-        x-exportParamName: Request
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatResponse'
-        '400':
-          description: Invalid request
-        '401':
-          description: Not Authorized
-        '408':
-          description: Request Timeout
-        '429':
-          description: Too Many Requests
   /addcollectionitems:
     post:
       tags:
@@ -5017,8 +4983,6 @@ components:
               - startIndex: 12
                 endIndex: 17
     QuerySuggestionList:
-      required:
-        - suggestions
       properties:
         suggestions:
           type: array
@@ -5634,6 +5598,13 @@ components:
         phone:
           type: string
           description: Phone number as a number string.
+        timezone:
+          type: string
+          description: The timezone of the person. E.g. "Pacific Daylight Time".
+        timezoneOffset:
+          type: integer
+          format: int64
+          description: The offset of the person's timezone in seconds from UTC.
         photoUrl:
           type: string
           format: url
@@ -7006,11 +6977,14 @@ components:
           facetFilters:
             - fieldName: type
               values:
-                - article
-                - document
+                - value: article
+                  relationType: EQUALS
+                - value: document
+                  relationType: EQUALS
             - fieldName: department
               values:
-                - engineering
+                - value: engineering
+                  relationType: EQUALS
     AskRequest:
       required:
         - searchRequest
@@ -7477,6 +7451,52 @@ components:
           description: The parameters to be passed to the redirect URL for actions.
           additionalProperties:
             $ref: '#/components/schemas/WriteActionParameter'
+    ChatFileStatus:
+      type: string
+      description: Current status of the file.
+      x-include-enum-class-prefix: true
+      enum:
+        - PROCESSING
+        - PROCESSED
+        - FAILED
+        - DELETED
+    ChatFileFailureReason:
+      type: string
+      description: Reason for failed status.
+      x-include-enum-class-prefix: true
+      enum:
+        - PARSE_FAILED
+        - AV_SCAN_FAILED
+    ChatFileMetadata:
+      type: object
+      description: Metadata of a file uploaded by a user for Chat.
+      properties:
+        status:
+          $ref: '#/components/schemas/ChatFileStatus'
+        uploadTime:
+          type: integer
+          format: int64
+          description: Upload time, in epoch seconds.
+        processedSize:
+          type: integer
+          format: int64
+          description: Size of the processed file in bytes.
+        failureReason:
+          $ref: '#/components/schemas/ChatFileFailureReason'
+    ChatFile:
+      type: object
+      description: Structure for file uploaded by a user for Chat.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the file.
+          example: FILE_1234
+        name:
+          type: string
+          description: Name of the uploaded file.
+          example: sample.pdf
+        metadata:
+          $ref: '#/components/schemas/ChatFileMetadata'
     ChatMessageFragment:
       description: One fragment of a message.
       allOf:
@@ -7489,6 +7509,9 @@ components:
               $ref: '#/components/schemas/QuerySuggestion'
             writeAction:
               $ref: '#/components/schemas/WriteAction'
+            file:
+              description: File uploaded by user to be referenced for answering.
+              $ref: '#/components/schemas/ChatFile'
     ChatMessage:
       description: A message that is rendered as one coherent unit with one given sender.
       properties:
@@ -7639,6 +7662,9 @@ components:
         name:
           type: string
           description: The name of the Chat.
+        applicationId:
+          type: string
+          description: The ID of the AI App that this Chat is associated to.
     Chat:
       description: A historical representation of a series of chat messages a user had with Glean Assistant.
       allOf:
@@ -7685,18 +7711,6 @@ components:
       properties:
         application:
           $ref: '#/components/schemas/ChatApplicationDetails'
-    RunWorkflowRequest:
-      required:
-        - workflowId
-      properties:
-        workflowId:
-          type: string
-          description: The ID of the workflow to be triggered.
-        fields:
-          type: object
-          description: Key-value mapping of string -> string where the key is the name of the field in the prompt.
-          additionalProperties:
-            type: string
     CollectionItemDescriptor:
       allOf:
         - $ref: '#/components/schemas/CollectionItemMutableProperties'
@@ -9450,6 +9464,9 @@ components:
             $ref: '#/components/schemas/WriteActionParameter'
     ExecuteActionToolResponse:
       properties:
+        message:
+          type: string
+          description: A descriptive message about the execution of the action tool.
         error:
           type: string
           description: Error message, if any, when executing the action.

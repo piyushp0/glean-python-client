@@ -33,7 +33,8 @@ class ChatMetadata(BaseModel):
     created_by: Optional[Person] = Field(default=None, alias="createdBy")
     update_time: Optional[StrictInt] = Field(default=None, description="Server Unix timestamp of the update time (in seconds since epoch UTC).", alias="updateTime")
     name: Optional[StrictStr] = Field(default=None, description="The name of the Chat.")
-    __properties: ClassVar[List[str]] = ["id", "createTime", "createdBy", "updateTime", "name"]
+    application_id: Optional[StrictStr] = Field(default=None, description="The ID of the AI App that this Chat is associated to.", alias="applicationId")
+    __properties: ClassVar[List[str]] = ["id", "createTime", "createdBy", "updateTime", "name", "applicationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,8 @@ class ChatMetadata(BaseModel):
             "createTime": obj.get("createTime"),
             "createdBy": Person.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
             "updateTime": obj.get("updateTime"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "applicationId": obj.get("applicationId")
         })
         return _obj
 

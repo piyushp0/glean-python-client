@@ -15,10 +15,10 @@
 
 import unittest
 
-from openapi_client.models.run_workflow_request import RunWorkflowRequest
+from openapi_client.models.chat_file_status import ChatFileStatus
 
-class TestRunWorkflowRequest(unittest.TestCase):
-    """RunWorkflowRequest unit test stubs"""
+class TestChatFileStatus(unittest.TestCase):
+    """ChatFileStatus unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,31 +26,9 @@ class TestRunWorkflowRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> RunWorkflowRequest:
-        """Test RunWorkflowRequest
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
-        # uncomment below to create an instance of `RunWorkflowRequest`
-        """
-        model = RunWorkflowRequest()
-        if include_optional:
-            return RunWorkflowRequest(
-                workflow_id = '',
-                fields = {
-                    'key' : ''
-                    }
-            )
-        else:
-            return RunWorkflowRequest(
-                workflow_id = '',
-        )
-        """
-
-    def testRunWorkflowRequest(self):
-        """Test RunWorkflowRequest"""
-        # inst_req_only = self.make_instance(include_optional=False)
-        # inst_req_and_optional = self.make_instance(include_optional=True)
+    def testChatFileStatus(self):
+        """Test ChatFileStatus"""
+        # inst = ChatFileStatus()
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **created_by** | [**Person**](Person.md) |  | [optional] 
 **update_time** | **int** | Server Unix timestamp of the update time (in seconds since epoch UTC). | [optional] 
 **name** | **str** | The name of the Chat. | [optional] 
+**application_id** | **str** | The ID of the AI App that this Chat is associated to. | [optional] 
 
 ## Example
 

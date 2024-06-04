@@ -41,7 +41,7 @@ class TestAskRequest(unittest.TestCase):
                     query_has_mentions = True, 
                     query_is_length_appropriate = True, 
                     query_is_answerable = True, ),
-                search_request = {"trackingToken":"trackingToken","query":"vacation policy","pageSize":10,"requestOptions":{"facetFilters":[{"fieldName":"type","values":["article","document"]},{"fieldName":"department","values":["engineering"]}]}},
+                search_request = {"trackingToken":"trackingToken","query":"vacation policy","pageSize":10,"requestOptions":{"facetFilters":[{"fieldName":"type","values":[{"value":"article","relationType":"EQUALS"},{"value":"document","relationType":"EQUALS"}]},{"fieldName":"department","values":[{"value":"engineering","relationType":"EQUALS"}]}]}},
                 excluded_document_specs = [
                     null
                     ],
@@ -51,7 +51,7 @@ class TestAskRequest(unittest.TestCase):
             )
         else:
             return AskRequest(
-                search_request = {"trackingToken":"trackingToken","query":"vacation policy","pageSize":10,"requestOptions":{"facetFilters":[{"fieldName":"type","values":["article","document"]},{"fieldName":"department","values":["engineering"]}]}},
+                search_request = {"trackingToken":"trackingToken","query":"vacation policy","pageSize":10,"requestOptions":{"facetFilters":[{"fieldName":"type","values":[{"value":"article","relationType":"EQUALS"},{"value":"document","relationType":"EQUALS"}]},{"fieldName":"department","values":[{"value":"engineering","relationType":"EQUALS"}]}]}},
         )
         """
 

@@ -102,6 +102,10 @@ from openapi_client.models.calendar_attendees import CalendarAttendees
 from openapi_client.models.calendar_event import CalendarEvent
 from openapi_client.models.channel_invite_info import ChannelInviteInfo
 from openapi_client.models.chat import Chat
+from openapi_client.models.chat_file import ChatFile
+from openapi_client.models.chat_file_failure_reason import ChatFileFailureReason
+from openapi_client.models.chat_file_metadata import ChatFileMetadata
+from openapi_client.models.chat_file_status import ChatFileStatus
 from openapi_client.models.chat_message import ChatMessage
 from openapi_client.models.chat_message_citation import ChatMessageCitation
 from openapi_client.models.chat_message_fragment import ChatMessageFragment
@@ -370,7 +374,6 @@ from openapi_client.models.result_tab import ResultTab
 from openapi_client.models.results_description import ResultsDescription
 from openapi_client.models.results_request import ResultsRequest
 from openapi_client.models.results_response import ResultsResponse
-from openapi_client.models.run_workflow_request import RunWorkflowRequest
 from openapi_client.models.scope_type import ScopeType
 from openapi_client.models.search_request import SearchRequest
 from openapi_client.models.search_request_input_details import SearchRequestInputDetails

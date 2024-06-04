@@ -20,16 +20,18 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.chat_file_metadata import ChatFileMetadata
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RunWorkflowRequest(BaseModel):
+class ChatFile(BaseModel):
     """
-    RunWorkflowRequest
+    Structure for file uploaded by a user for Chat.
     """ # noqa: E501
-    workflow_id: StrictStr = Field(description="The ID of the workflow to be triggered.", alias="workflowId")
-    fields: Optional[Dict[str, StrictStr]] = Field(default=None, description="Key-value mapping of string -> string where the key is the name of the field in the prompt.")
-    __properties: ClassVar[List[str]] = ["workflowId", "fields"]
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the file.")
+    name: Optional[StrictStr] = Field(default=None, description="Name of the uploaded file.")
+    metadata: Optional[ChatFileMetadata] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +51,7 @@ class RunWorkflowRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RunWorkflowRequest from a JSON string"""
+        """Create an instance of ChatFile from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,11 +72,14 @@ class RunWorkflowRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of metadata
+        if self.metadata:
+            _dict['metadata'] = self.metadata.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RunWorkflowRequest from a dict"""
+        """Create an instance of ChatFile from a dict"""
         if obj is None:
             return None
 
@@ -82,8 +87,9 @@ class RunWorkflowRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "workflowId": obj.get("workflowId"),
-            "fields": obj.get("fields")
+            "id": obj.get("id"),
+            "name": obj.get("name"),
+            "metadata": ChatFileMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None
         })
         return _obj
 

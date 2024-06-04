@@ -18,25 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.chat_message import ChatMessage
-from openapi_client.models.person import Person
+from openapi_client.models.chat_file_failure_reason import ChatFileFailureReason
+from openapi_client.models.chat_file_status import ChatFileStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Chat(BaseModel):
+class ChatFileMetadata(BaseModel):
     """
-    A historical representation of a series of chat messages a user had with Glean Assistant.
+    Metadata of a file uploaded by a user for Chat.
     """ # noqa: E501
-    messages: Optional[List[ChatMessage]] = Field(default=None, description="The chat messages within a Chat.")
-    id: Optional[StrictStr] = Field(default=None, description="The opaque id of the Chat.")
-    create_time: Optional[StrictInt] = Field(default=None, description="Server Unix timestamp of the creation time (in seconds since epoch UTC).", alias="createTime")
-    created_by: Optional[Person] = Field(default=None, alias="createdBy")
-    update_time: Optional[StrictInt] = Field(default=None, description="Server Unix timestamp of the update time (in seconds since epoch UTC).", alias="updateTime")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the Chat.")
-    application_id: Optional[StrictStr] = Field(default=None, description="The ID of the AI App that this Chat is associated to.", alias="applicationId")
-    __properties: ClassVar[List[str]] = ["id", "createTime", "createdBy", "updateTime", "name", "applicationId"]
+    status: Optional[ChatFileStatus] = None
+    upload_time: Optional[StrictInt] = Field(default=None, description="Upload time, in epoch seconds.", alias="uploadTime")
+    processed_size: Optional[StrictInt] = Field(default=None, description="Size of the processed file in bytes.", alias="processedSize")
+    failure_reason: Optional[ChatFileFailureReason] = Field(default=None, alias="failureReason")
+    __properties: ClassVar[List[str]] = ["status", "uploadTime", "processedSize", "failureReason"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +53,7 @@ class Chat(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Chat from a JSON string"""
+        """Create an instance of ChatFileMetadata from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,14 +74,11 @@ class Chat(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of created_by
-        if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Chat from a dict"""
+        """Create an instance of ChatFileMetadata from a dict"""
         if obj is None:
             return None
 
@@ -92,12 +86,10 @@ class Chat(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "createTime": obj.get("createTime"),
-            "createdBy": Person.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "updateTime": obj.get("updateTime"),
-            "name": obj.get("name"),
-            "applicationId": obj.get("applicationId")
+            "status": obj.get("status"),
+            "uploadTime": obj.get("uploadTime"),
+            "processedSize": obj.get("processedSize"),
+            "failureReason": obj.get("failureReason")
         })
         return _obj
 

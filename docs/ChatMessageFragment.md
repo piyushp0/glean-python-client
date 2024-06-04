@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **text** | **str** |  | [optional] 
 **query_suggestion** | [**QuerySuggestion**](QuerySuggestion.md) |  | [optional] 
 **write_action** | [**WriteAction**](WriteAction.md) |  | [optional] 
+**file** | [**ChatFile**](ChatFile.md) |  | [optional] 
 
 ## Example
 

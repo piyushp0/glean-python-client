@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **manager** | [**Person**](Person.md) |  | [optional] 
 **management_chain** | [**List[Person]**](Person.md) | The chain of reporting in the company as far up as it goes. The last entry is this person&#39;s direct manager. | [optional] 
 **phone** | **str** | Phone number as a number string. | [optional] 
+**timezone** | **str** | The timezone of the person. E.g. \&quot;Pacific Daylight Time\&quot;. | [optional] 
+**timezone_offset** | **int** | The offset of the person&#39;s timezone in seconds from UTC. | [optional] 
 **photo_url** | **str** | The URL of the person&#39;s avatar. Public, glean-authenticated and Base64 encoded data URLs are all valid (but not third-party-authenticated URLs). | [optional] 
 **unedited_photo_url** | **str** | The original photo URL of the person&#39;s avatar before any edits they made are applied | [optional] 
 **banner_url** | **str** | The URL of the person&#39;s banner photo. | [optional] 
