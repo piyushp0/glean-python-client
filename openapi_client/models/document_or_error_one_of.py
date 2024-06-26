@@ -81,7 +81,7 @@ class DocumentOrErrorOneOf(BaseModel):
             return cls.model_validate(obj)
 
         if not obj.get("error"):
-            return None
+            raise ValueError("Not an error !")
 
         _obj = cls.model_validate({
             "error": obj.get("error")
