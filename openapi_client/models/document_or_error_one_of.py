@@ -80,8 +80,8 @@ class DocumentOrErrorOneOf(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-	if not obj.get("error"):
-	    return None
+        if not obj.get("error"):
+            return None
 
         _obj = cls.model_validate({
             "error": obj.get("error")
