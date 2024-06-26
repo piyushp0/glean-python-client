@@ -103,7 +103,7 @@ class DocumentOrError(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into DocumentOrError with oneOf schemas: Document, DocumentOrErrorOneOf. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into DocumentOrError with oneOf schemas: Document, DocumentOrErrorOneOf. Details: " + ", ".join(error_messages) + " Json input:" + json_str)
         elif match == 0:
             # no match
             raise ValueError("No match found when deserializing the JSON string into DocumentOrError with oneOf schemas: Document, DocumentOrErrorOneOf. Details: " + ", ".join(error_messages))
