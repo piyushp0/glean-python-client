@@ -79,6 +79,9 @@ class DocumentOrErrorOneOf(BaseModel):
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
+        
+        if not obj.get("error"):
+            raise ValueError("Not an error !")
 
         _obj = cls.model_validate({
             "error": obj.get("error")
