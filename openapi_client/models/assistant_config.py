@@ -37,9 +37,10 @@ class AssistantConfig(BaseModel):
     redlisted_datasources: Optional[List[StrictStr]] = Field(default=None, description="A list of datasources that are disabled in Chat", alias="redlistedDatasources")
     greenlisted_datasource_instances: Optional[List[StrictStr]] = Field(default=None, description="A list of datasources that are always visible in Chat", alias="greenlistedDatasourceInstances")
     gpt_agent_enabled: Optional[StrictBool] = Field(default=None, description="Whether the GPT agent (general mode) for Chat is enabled", alias="gptAgentEnabled")
+    file_upload_enabled: Optional[StrictBool] = Field(default=None, description="Whether file upload for Chat is enabled for the deployment", alias="fileUploadEnabled")
     chat_history_enabled: Optional[StrictBool] = Field(default=None, description="Whether the chat history for Chat is enabled for the deployment", alias="chatHistoryEnabled")
     chat_guide_url: Optional[StrictStr] = Field(default=None, description="Redirect URL for \"Chat guide\" in the default chat starter subheader", alias="chatGuideUrl")
-    __properties: ClassVar[List[str]] = ["chatBannerText", "chatBoxDisclaimer", "chatLinkUrlTemplate", "chatStarterHeader", "chatStarterSubheader", "agentClientConfigs", "redlistedDatasources", "greenlistedDatasourceInstances", "gptAgentEnabled", "chatHistoryEnabled", "chatGuideUrl"]
+    __properties: ClassVar[List[str]] = ["chatBannerText", "chatBoxDisclaimer", "chatLinkUrlTemplate", "chatStarterHeader", "chatStarterSubheader", "agentClientConfigs", "redlistedDatasources", "greenlistedDatasourceInstances", "gptAgentEnabled", "fileUploadEnabled", "chatHistoryEnabled", "chatGuideUrl"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,6 +109,7 @@ class AssistantConfig(BaseModel):
             "redlistedDatasources": obj.get("redlistedDatasources"),
             "greenlistedDatasourceInstances": obj.get("greenlistedDatasourceInstances"),
             "gptAgentEnabled": obj.get("gptAgentEnabled"),
+            "fileUploadEnabled": obj.get("fileUploadEnabled"),
             "chatHistoryEnabled": obj.get("chatHistoryEnabled"),
             "chatGuideUrl": obj.get("chatGuideUrl")
         })

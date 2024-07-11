@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | The time the tool was created in ISO format (ISO 8601) | [optional] 
 **last_updated_at** | **datetime** | The time the tool was last updated in ISO format (ISO 8601) | [optional] 
 **auth** | [**AuthConfig**](AuthConfig.md) |  | [optional] 
+**permissions** | [**ObjectPermissions**](ObjectPermissions.md) |  | [optional] 
 
 ## Example
 

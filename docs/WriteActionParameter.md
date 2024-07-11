@@ -6,7 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of the value (e.g., integer, string, etc.) | [optional] 
+**display_name** | **str** | Human readable display name for the key. | [optional] 
 **value** | **str** | The value of the field. | [optional] 
+**label** | **str** | User-friendly label associated with the value. | [optional] 
 **is_required** | **bool** | Is the parameter a required field. | [optional] 
 **description** | **str** | Description of the parameter. | [optional] 
 **possible_values** | [**List[PossibleValue]**](PossibleValue.md) | Possible values that the parameter can take. | [optional] 

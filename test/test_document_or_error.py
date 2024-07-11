@@ -28,7 +28,7 @@ class TestDocumentOrError(unittest.TestCase):
 
     def make_instance(self, include_optional) -> DocumentOrError:
         """Test DocumentOrError
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `DocumentOrError`
@@ -88,6 +88,7 @@ class TestDocumentOrError(unittest.TestCase):
                         id = '', 
                         datasource = '', 
                         doc_type = '', 
+                        parent_document = , 
                         title = '', 
                         url = '', 
                         metadata = {"container":"container","parentId":"JIRA_EN-1337","createTime":"2000-01-23T04:56:07.000Z","datasource":"datasource","author":{"name":"name"},"documentId":"documentId","updateTime":"2000-01-23T04:56:07.000Z","mimeType":"mimeType","objectType":"Feature Request","components":["Backend","Networking"],"status":["Done"],"customData":{"someCustomField":"someCustomValue"}}, 
@@ -96,6 +97,7 @@ class TestDocumentOrError(unittest.TestCase):
                                 title = '', 
                                 url = '', )
                             ], ), 
+                    parent_document = , 
                     title = '', 
                     url = '', 
                     metadata = {"container":"container","parentId":"JIRA_EN-1337","createTime":"2000-01-23T04:56:07.000Z","datasource":"datasource","author":{"name":"name"},"documentId":"documentId","updateTime":"2000-01-23T04:56:07.000Z","mimeType":"mimeType","objectType":"Feature Request","components":["Backend","Networking"],"status":["Done"],"customData":{"someCustomField":"someCustomValue"}}, 

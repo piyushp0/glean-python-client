@@ -36,8 +36,8 @@ class SearchWarning(BaseModel):
     @field_validator('warning_type')
     def warning_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['LONG_QUERY', 'QUOTED_PUNCTUATION', 'PUNCTUATION_ONLY', 'COPYPASTED_QUOTES', 'INVALID_OPERATOR']):
-            raise ValueError("must be one of enum values ('LONG_QUERY', 'QUOTED_PUNCTUATION', 'PUNCTUATION_ONLY', 'COPYPASTED_QUOTES', 'INVALID_OPERATOR')")
+        if value not in set(['LONG_QUERY', 'QUOTED_PUNCTUATION', 'PUNCTUATION_ONLY', 'COPYPASTED_QUOTES', 'INVALID_OPERATOR', 'MAYBE_INVALID_FACET_QUERY']):
+            raise ValueError("must be one of enum values ('LONG_QUERY', 'QUOTED_PUNCTUATION', 'PUNCTUATION_ONLY', 'COPYPASTED_QUOTES', 'INVALID_OPERATOR', 'MAYBE_INVALID_FACET_QUERY')")
         return value
 
     model_config = ConfigDict(

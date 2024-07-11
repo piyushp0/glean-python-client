@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **thumbnail** | [**Thumbnail**](Thumbnail.md) |  | [optional] 
 **created_by** | [**Person**](Person.md) |  | [optional] 
 **ui_config** | [**FeedEntryUiConfig**](FeedEntryUiConfig.md) |  | [optional] 
-**snippet** | **str** | A textual snippet representing this entry, dependent on type. For example, for USER_MENTION, it may contain the sentence in which the mention occurred. | [optional] 
 **justification_type** | **str** | Type of the justification. | [optional] 
 **justification** | **str** | Server side generated justification string if server provides one. | [optional] 
 **tracking_token** | **str** | An opaque token that represents this particular feed entry in this particular response. To be used for /feedback reporting. | [optional] 
+**view_url** | **str** | View URL for the entry if based on links that are not documents in Glean. | [optional] 
 **document** | [**Document**](Document.md) |  | [optional] 
 **event** | [**CalendarEvent**](CalendarEvent.md) |  | [optional] 
 **announcement** | [**Announcement**](Announcement.md) |  | [optional] 
@@ -23,8 +23,6 @@ Name | Type | Description | Notes
 **app** | [**AppResult**](AppResult.md) |  | [optional] 
 **activities** | [**List[UserActivity]**](UserActivity.md) | List of activity where each activity has user, action, timestamp. | [optional] 
 **document_visitor_count** | [**CountInfo**](CountInfo.md) |  | [optional] 
-**view_url** | **str** | View URL for the entry if based on links that are not documents in Glean. | [optional] 
-**additional_client_actions** | [**List[ClientAction]**](ClientAction.md) | List of client actions suggested by the backend to be included for entry. | [optional] 
 
 ## Example
 

@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.auth_token import AuthToken
 from openapi_client.models.feed_request_options_category_to_result_size_value import FeedRequestOptionsCategoryToResultSizeValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,8 +32,7 @@ class FeedRequestOptions(BaseModel):
     timezone_offset: Optional[StrictInt] = Field(default=None, description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.", alias="timezoneOffset")
     category_to_result_size: Optional[Dict[str, FeedRequestOptionsCategoryToResultSizeValue]] = Field(default=None, description="Mapping from category to number of results asked for the category.", alias="categoryToResultSize")
     datasource_filter: Optional[List[StrictStr]] = Field(default=None, description="Datasources for which content should be included. Empty is for all.", alias="datasourceFilter")
-    auth_tokens: Optional[List[AuthToken]] = Field(default=None, description="Auth tokens which may be used for federated retrieval of Feed entries.", alias="authTokens")
-    __properties: ClassVar[List[str]] = ["resultSize", "timezoneOffset", "categoryToResultSize", "datasourceFilter", "authTokens"]
+    __properties: ClassVar[List[str]] = ["resultSize", "timezoneOffset", "categoryToResultSize", "datasourceFilter"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,13 +80,6 @@ class FeedRequestOptions(BaseModel):
                 if self.category_to_result_size[_key]:
                     _field_dict[_key] = self.category_to_result_size[_key].to_dict()
             _dict['categoryToResultSize'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each item in auth_tokens (list)
-        _items = []
-        if self.auth_tokens:
-            for _item in self.auth_tokens:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['authTokens'] = _items
         return _dict
 
     @classmethod
@@ -109,8 +100,7 @@ class FeedRequestOptions(BaseModel):
             )
             if obj.get("categoryToResultSize") is not None
             else None,
-            "datasourceFilter": obj.get("datasourceFilter"),
-            "authTokens": [AuthToken.from_dict(_item) for _item in obj["authTokens"]] if obj.get("authTokens") is not None else None
+            "datasourceFilter": obj.get("datasourceFilter")
         })
         return _obj
 

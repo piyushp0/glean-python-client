@@ -28,7 +28,7 @@ class TestClientConfig(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ClientConfig:
         """Test ClientConfig
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ClientConfig`
@@ -56,6 +56,7 @@ class TestClientConfig(unittest.TestCase):
                         ''
                         ], 
                     gpt_agent_enabled = True, 
+                    file_upload_enabled = True, 
                     chat_history_enabled = True, 
                     chat_guide_url = '', ),
                 tools = openapi_client.models.tools_config.ToolsConfig(
@@ -84,7 +85,13 @@ class TestClientConfig(unittest.TestCase):
                                 scopes = [
                                     ''
                                     ], 
-                                authorization_url = '', ), )
+                                authorization_url = '', ), 
+                            permissions = openapi_client.models.object_permissions.ObjectPermissions(
+                                write = openapi_client.models.write_permission.WritePermission(
+                                    scope_type = 'GLOBAL', 
+                                    create = True, 
+                                    update = True, 
+                                    delete = True, ), ), )
                         ], ),
                 shortcuts = openapi_client.models.shortcuts_config.ShortcutsConfig(
                     shortcuts_prefix = '', 

@@ -28,7 +28,7 @@ class TestFeedback(unittest.TestCase):
 
     def make_instance(self, include_optional) -> Feedback:
         """Test Feedback
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `Feedback`
@@ -63,6 +63,9 @@ class TestFeedback(unittest.TestCase):
                     email = '', 
                     source = 'AUTOCOMPLETE', 
                     issue = '', 
+                    image_urls = [
+                        ''
+                        ], 
                     query = '', 
                     obscured_query = '', 
                     active_tab = '', 

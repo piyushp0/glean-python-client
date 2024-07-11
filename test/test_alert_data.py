@@ -28,7 +28,7 @@ class TestAlertData(unittest.TestCase):
 
     def make_instance(self, include_optional) -> AlertData:
         """Test AlertData
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AlertData`
@@ -40,7 +40,20 @@ class TestAlertData(unittest.TestCase):
                 triggered_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 project_name = '',
                 help_link = '',
-                datasource = ''
+                datasource = '',
+                banner_type = 'ACTION_REQUIRED',
+                banner_text = '',
+                alert_description = '',
+                relevance_description = '',
+                resolution_steps_description = '',
+                resolution_steps = [
+                    openapi_client.models.resolution_step.ResolutionStep(
+                        step_text = '', 
+                        link = '', )
+                    ],
+                instance_display_name = '',
+                instance_name = '',
+                email_subject_description = ''
             )
         else:
             return AlertData(

@@ -29,11 +29,13 @@ class WriteActionParameter(BaseModel):
     WriteActionParameter
     """ # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="The type of the value (e.g., integer, string, etc.)")
+    display_name: Optional[StrictStr] = Field(default=None, description="Human readable display name for the key.", alias="displayName")
     value: Optional[StrictStr] = Field(default=None, description="The value of the field.")
+    label: Optional[StrictStr] = Field(default=None, description="User-friendly label associated with the value.")
     is_required: Optional[StrictBool] = Field(default=None, description="Is the parameter a required field.", alias="isRequired")
     description: Optional[StrictStr] = Field(default=None, description="Description of the parameter.")
     possible_values: Optional[List[PossibleValue]] = Field(default=None, description="Possible values that the parameter can take.", alias="possibleValues")
-    __properties: ClassVar[List[str]] = ["type", "value", "isRequired", "description", "possibleValues"]
+    __properties: ClassVar[List[str]] = ["type", "displayName", "value", "label", "isRequired", "description", "possibleValues"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -104,7 +106,9 @@ class WriteActionParameter(BaseModel):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
+            "displayName": obj.get("displayName"),
             "value": obj.get("value"),
+            "label": obj.get("label"),
             "isRequired": obj.get("isRequired"),
             "description": obj.get("description"),
             "possibleValues": [PossibleValue.from_dict(_item) for _item in obj["possibleValues"]] if obj.get("possibleValues") is not None else None

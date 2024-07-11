@@ -27,12 +27,15 @@ class EmailRequestFeedbackPayload(BaseModel):
     """
     Optional payload for feedback reporting.
     """ # noqa: E501
-    issue_type: Optional[StrictStr] = Field(default=None, description="The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback.", alias="issueType")
     comments: Optional[StrictStr] = Field(default=None, description="Additional freeform comments provided by the reporter.")
-    url: Optional[StrictStr] = Field(default=None, description="The URL the reporter was on when feedback was sent.")
-    query: Optional[StrictStr] = Field(default=None, description="The query the reporter tried when feedback was sent.")
     custom_json: Optional[StrictStr] = Field(default=None, description="Arbitrary email param payloads from 3P-customer widgets. Prefer the structured fields when possible.", alias="customJson")
-    __properties: ClassVar[List[str]] = ["issueType", "comments", "url", "query", "customJson"]
+    image_urls: Optional[List[StrictStr]] = Field(default=None, description="Images uploaded by the user when submitting feedback", alias="imageUrls")
+    issue_type: Optional[StrictStr] = Field(default=None, description="The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback.", alias="issueType")
+    query: Optional[StrictStr] = Field(default=None, description="The query the reporter tried when feedback was sent.")
+    tracking_token: Optional[StrictStr] = Field(default=None, description="The tracking token of the feedback that admins can provide Glean Support to debug", alias="trackingToken")
+    url: Optional[StrictStr] = Field(default=None, description="The URL the reporter was on when feedback was sent.")
+    rating_key: Optional[StrictStr] = Field(default=None, description="The label of the rating that was selected when feedback was sent.", alias="ratingKey")
+    __properties: ClassVar[List[str]] = ["comments", "customJson", "imageUrls", "issueType", "query", "trackingToken", "url", "ratingKey"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,11 +88,14 @@ class EmailRequestFeedbackPayload(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "issueType": obj.get("issueType"),
             "comments": obj.get("comments"),
-            "url": obj.get("url"),
+            "customJson": obj.get("customJson"),
+            "imageUrls": obj.get("imageUrls"),
+            "issueType": obj.get("issueType"),
             "query": obj.get("query"),
-            "customJson": obj.get("customJson")
+            "trackingToken": obj.get("trackingToken"),
+            "url": obj.get("url"),
+            "ratingKey": obj.get("ratingKey")
         })
         return _obj
 

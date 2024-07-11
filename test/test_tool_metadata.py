@@ -28,7 +28,7 @@ class TestToolMetadata(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ToolMetadata:
         """Test ToolMetadata
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ToolMetadata`
@@ -59,7 +59,13 @@ class TestToolMetadata(unittest.TestCase):
                     scopes = [
                         ''
                         ], 
-                    authorization_url = '', )
+                    authorization_url = '', ),
+                permissions = openapi_client.models.object_permissions.ObjectPermissions(
+                    write = openapi_client.models.write_permission.WritePermission(
+                        scope_type = 'GLOBAL', 
+                        create = True, 
+                        update = True, 
+                        delete = True, ), )
             )
         else:
             return ToolMetadata(

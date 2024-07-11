@@ -56,8 +56,8 @@ class SearchRequestOptions(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['RESULTS', 'QUERY_METADATA']):
-                raise ValueError("each list item must be one of ('RESULTS', 'QUERY_METADATA')")
+            if i not in set(['FACET_RESULTS', 'RESULTS', 'QUERY_METADATA']):
+                raise ValueError("each list item must be one of ('FACET_RESULTS', 'RESULTS', 'QUERY_METADATA')")
         return value
 
     model_config = ConfigDict(

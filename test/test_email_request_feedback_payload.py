@@ -28,7 +28,7 @@ class TestEmailRequestFeedbackPayload(unittest.TestCase):
 
     def make_instance(self, include_optional) -> EmailRequestFeedbackPayload:
         """Test EmailRequestFeedbackPayload
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EmailRequestFeedbackPayload`
@@ -36,11 +36,16 @@ class TestEmailRequestFeedbackPayload(unittest.TestCase):
         model = EmailRequestFeedbackPayload()
         if include_optional:
             return EmailRequestFeedbackPayload(
-                issue_type = '',
                 comments = '',
-                url = '',
+                custom_json = '{"comment": "glean is awesome!", "sender": "happycustomer@customer.com"}',
+                image_urls = [
+                    ''
+                    ],
+                issue_type = '',
                 query = '',
-                custom_json = '{"comment": "glean is awesome!", "sender": "happycustomer@customer.com"}'
+                tracking_token = '',
+                url = '',
+                rating_key = ''
             )
         else:
             return EmailRequestFeedbackPayload(

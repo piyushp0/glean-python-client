@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **timezone_offset** | **int** | The offset of the client&#39;s timezone in minutes from UTC. e.g. PDT is -420 because it&#39;s 7 hours behind UTC. | [optional] 
 **category_to_result_size** | [**Dict[str, FeedRequestOptionsCategoryToResultSizeValue]**](FeedRequestOptionsCategoryToResultSizeValue.md) | Mapping from category to number of results asked for the category. | [optional] 
 **datasource_filter** | **List[str]** | Datasources for which content should be included. Empty is for all. | [optional] 
-**auth_tokens** | [**List[AuthToken]**](AuthToken.md) | Auth tokens which may be used for federated retrieval of Feed entries. | [optional] 
 
 ## Example
 

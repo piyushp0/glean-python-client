@@ -74,8 +74,8 @@ class ClientConfig(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['gsuite', 'iap', 'okta', 'ping', 'azure', 'onelogin', 'onelogin_saml']):
-            raise ValueError("must be one of enum values ('gsuite', 'iap', 'okta', 'ping', 'azure', 'onelogin', 'onelogin_saml')")
+        if value not in set(['gsuite', 'iap', 'okta', 'okta_saml', 'ping', 'azure', 'onelogin', 'onelogin_saml']):
+            raise ValueError("must be one of enum values ('gsuite', 'iap', 'okta', 'okta_saml', 'ping', 'azure', 'onelogin', 'onelogin_saml')")
         return value
 
     model_config = ConfigDict(

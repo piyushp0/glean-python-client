@@ -28,7 +28,7 @@ class TestFeedEntry(unittest.TestCase):
 
     def make_instance(self, include_optional) -> FeedEntry:
         """Test FeedEntry
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FeedEntry`
@@ -43,10 +43,10 @@ class TestFeedEntry(unittest.TestCase):
                     url = '', ),
                 created_by = {"name":"George Clooney","obfuscatedId":"abc123"},
                 ui_config = None,
-                snippet = '',
                 justification_type = 'FREQUENTLY_ACCESSED',
                 justification = '',
                 tracking_token = '',
+                view_url = '',
                 document = openapi_client.models.document.Document(
                     id = '', 
                     datasource = '', 
@@ -117,22 +117,7 @@ class TestFeedEntry(unittest.TestCase):
                         end = openapi_client.models.time_point.TimePoint(
                             epoch_seconds = 56, 
                             days_from_now = 56, ), ), 
-                    org = '', ),
-                view_url = '',
-                additional_client_actions = [
-                    openapi_client.models.client_action.ClientAction(
-                        type = 'GO_TO_HOME', 
-                        quicklink = openapi_client.models.quicklink.Quicklink(
-                            name = '', 
-                            short_name = '', 
-                            url = '', 
-                            icon_config = {"color":"#343CED","key":"person_icon","iconType":"GLYPH","name":"user"}, 
-                            id = '', 
-                            scopes = [
-                                'APP_CARD'
-                                ], ), 
-                        destination_url = '', )
-                    ]
+                    org = '', )
             )
         else:
             return FeedEntry(

@@ -1799,6 +1799,38 @@ paths:
           description: Documents does not exist, or user cannot access documents.
         '429':
           description: Too Many Requests
+  /getdocumentsbyfacets:
+    post:
+      tags:
+        - Documents
+      summary: Read documents by facets
+      description: Read the documents including metadata (does not include enhanced metadata via `/documentmetadata`) macthing the given facet conditions.
+      operationId: getdocumentsbyfacets
+      x-visibility: Preview
+      x-codegen-request-body-name: payload
+      parameters:
+        - $ref: '#/components/parameters/xScioActAsHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentsByFacetsRequest'
+        description: Information about facet conditions for documents to be retrieved.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentsByFacetsResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Not Authorized
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
   /getdocumentanalytics:
     post:
       tags:
@@ -2406,44 +2438,12 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
         '429':
           description: Too Many Requests
-  /customentities:
-    post:
-      tags:
-        - Entities
-      summary: Read custom entities
-      description: Read the details of the custom entities with the given IDs.
-      operationId: customentities
-      x-visibility: Preview
-      x-codegen-request-body-name: payload
-      parameters:
-        - $ref: '#/components/parameters/xScioActAsHeader'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CustomEntitiesRequest'
-        description: Custom entities request
-        required: true
-        x-exportParamName: Request
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomEntitiesResponse'
-        '400':
-          description: Invalid request
-        '401':
-          description: Not Authorized
-        '429':
-          description: Too Many Requests
   /listentities:
     post:
       tags:
         - Entities
       summary: List entities
-      description: List some set of details for all entities that fit the given criteria and return in the requested order. Does not support negation in filters, assumes relation type EQUALS.
+      description: List some set of details for all entities that fit the given criteria and return in the requested order. Does not support negation in filters, assumes relation type EQUALS. There is a limit of 10000 entities that can be retrieved via this endpoint.
       operationId: listentities
       x-visibility: Public
       x-codegen-request-body-name: payload
@@ -2464,97 +2464,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListEntitiesResponse'
-        '400':
-          description: Invalid request
-        '401':
-          description: Not Authorized
-        '429':
-          description: Too Many Requests
-  /downloadentities:
-    get:
-      tags:
-        - Entities
-      summary: Download entities
-      description: Download a list of all entities of the specified type. Currently only supports people.
-      operationId: downloadentities
-      x-visibility: Preview
-      parameters:
-        - $ref: '#/components/parameters/xScioActAsHeader'
-        - in: query
-          name: entityType
-          schema:
-            $ref: '#/components/schemas/EntitiesTypeEnum'
-          required: true
-          description: Entity type the requested CSV should be populated with
-      responses:
-        '200':
-          description: OK
-          content:
-            text/csv:
-              schema:
-                type: string
-        '403':
-          description: Forbidden
-        '429':
-          description: Too Many Requests
-  /createteams:
-    post:
-      tags:
-        - Entities
-      summary: Create teams
-      description: Create the given teams.
-      operationId: createteams
-      x-visibility: Preview
-      x-codegen-request-body-name: payload
-      parameters:
-        - $ref: '#/components/parameters/xScioActAsHeader'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTeamsRequest'
-        description: Teams to be created
-        required: true
-        x-exportParamName: Request
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateTeamsResponse'
-        '400':
-          description: Invalid request
-        '401':
-          description: Not Authorized
-        '429':
-          description: Too Many Requests
-  /deleteteams:
-    post:
-      tags:
-        - Entities
-      summary: Delete teams
-      description: Delete the given teams.
-      operationId: deleteteams
-      x-visibility: Preview
-      x-codegen-request-body-name: payload
-      parameters:
-        - $ref: '#/components/parameters/xScioActAsHeader'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeleteTeamsRequest'
-        description: Teams to be deleted
-        required: true
-        x-exportParamName: Request
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteTeamsResponse'
         '400':
           description: Invalid request
         '401':
@@ -3362,6 +3271,11 @@ components:
         issue:
           type: string
           description: The issue the user indicated in the feedback.
+        imageUrls:
+          type: array
+          items:
+            type: string
+          description: URLs of images uploaded by user when providing feedback
         query:
           type: string
           description: The query associated with the Feedback.event.MANUAL_FEEDBACK event.
@@ -3737,6 +3651,7 @@ components:
           items:
             type: string
             enum:
+              - FACET_RESULTS
               - RESULTS
               - QUERY_METADATA
         timezoneOffset:
@@ -5828,6 +5743,9 @@ components:
         documentId:
           type: string
           description: The index-wide unique identifier.
+        loggingId:
+          type: string
+          description: A unique identifier used to represent the document in any logging or feedback requests in place of documentId.
         documentIdHash:
           type: string
           description: Hash of the Glean Document ID.
@@ -6650,54 +6568,6 @@ components:
           description: The action for the activity
         aggregateVisitCount:
           $ref: '#/components/schemas/CountInfo'
-    Quicklink:
-      description: An action for a specific datasource that will show up in autocomplete and app card, e.g. "Create new issue" for jira.
-      properties:
-        name:
-          type: string
-          description: Full action name. Used in autocomplete.
-        shortName:
-          type: string
-          description: Shortened name. Used in app cards.
-        url:
-          type: string
-          description: The URL of the action.
-        iconConfig:
-          $ref: '#/components/schemas/IconConfig'
-          description: The config for the icon for this quicklink
-        id:
-          type: string
-          description: Unique identifier of this quicklink
-        scopes:
-          type: array
-          description: The scopes for which this quicklink is applicable
-          items:
-            type: string
-            enum:
-              - APP_CARD
-              - AUTOCOMPLETE_EXACT_MATCH
-              - AUTOCOMPLETE_FUZZY_MATCH
-              - AUTOCOMPLETE_ZERO_QUERY
-              - NEW_TAB_PAGE
-    ClientAction:
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - GO_TO_HOME
-            - CREATE
-            - EMAIL
-            - MESSAGE
-            - SHARE
-          description: Type of the client action.
-        quicklink:
-          $ref: '#/components/schemas/Quicklink'
-          description: If action can be executed via quick link.
-        destinationUrl:
-          type: string
-          description: Specific URL if action requires a destination URL to complete. Has precedence over action context.
     FeedEntry:
       required:
         - title
@@ -6719,9 +6589,6 @@ components:
               properties:
                 additionalFlags:
                   $ref: '#/components/schemas/DisplayableListItemUIConfig'
-        snippet:
-          type: string
-          description: A textual snippet representing this entry, dependent on type. For example, for USER_MENTION, it may contain the sentence in which the mention occurred.
         justificationType:
           type: string
           enum:
@@ -6761,6 +6628,9 @@ components:
         trackingToken:
           type: string
           description: An opaque token that represents this particular feed entry in this particular response. To be used for /feedback reporting.
+        viewUrl:
+          type: string
+          description: View URL for the entry if based on links that are not documents in Glean.
         document:
           $ref: '#/components/schemas/Document'
         event:
@@ -6782,68 +6652,6 @@ components:
           description: List of activity where each activity has user, action, timestamp.
         documentVisitorCount:
           $ref: '#/components/schemas/CountInfo'
-        viewUrl:
-          type: string
-          description: View URL for the entry if based on links that are not documents in Glean.
-        additionalClientActions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClientAction'
-          description: List of client actions suggested by the backend to be included for entry.
-    FacetValue:
-      properties:
-        stringValue:
-          type: string
-          example: engineering
-          description: The value that should be set in the FacetFilter when applying this filter to a search request.
-        integerValue:
-          type: integer
-          example: 5
-        displayLabel:
-          type: string
-          example: engineering
-          description: An optional user-friendly label to display in place of the facet value.
-        iconConfig:
-          $ref: '#/components/schemas/IconConfig'
-    FacetBucket:
-      properties:
-        count:
-          type: integer
-          description: Estimated number of results in this facet.
-          example: 1
-        datasource:
-          type: string
-          example: jira
-          description: The datasource the value belongs to. This will be used by the all tab to show types across all datasources.
-        percentage:
-          type: integer
-          description: Estimated percentage of results in this facet.
-          example: 5
-        value:
-          $ref: '#/components/schemas/FacetValue'
-    FacetResult:
-      properties:
-        sourceName:
-          type: string
-          description: The source of this facet (e.g. container_name, type, last_updated_at).
-          example: container_name
-        operatorName:
-          type: string
-          description: How to display this facet. Currently supportes 'SelectSingle' and 'SelectMultiple'.
-          example: SelectMultiple
-        buckets:
-          type: array
-          description: A list of unique buckets that exist within this result set.
-          items:
-            $ref: '#/components/schemas/FacetBucket'
-        hasMoreBuckets:
-          type: boolean
-          description: Returns true if more buckets exist than those returned. Additional buckets can be retrieve by requesting again with a higher facetBucketSize.
-          example: false
-        groupName:
-          type: string
-          description: For most facets this will be the empty string, meaning the facet is high-level and applies to all documents for the datasource. When non-empty, this is used to group facets together (i.e. group facets for each doctype for a certain datasource)
-          example: Service Cloud
     FeedResult:
       required:
         - category
@@ -6881,12 +6689,6 @@ components:
         rank:
           type: integer
           description: Rank of the result. Rank is suggested by server. Client side rank may differ.
-        facetResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacetResult'
-          description: DEPRECATED - List of facets that can be used to filter the entry's content.
-          deprecated: true
     GetEventsResponse:
       properties:
         events:
@@ -7132,6 +6934,7 @@ components:
             - PUNCTUATION_ONLY
             - COPYPASTED_QUOTES
             - INVALID_OPERATOR
+            - MAYBE_INVALID_FACET_QUERY
           description: The type of the warning.
         lastUsedTerm:
           type: string
@@ -7182,6 +6985,60 @@ components:
         triggeredExpertDetection:
           type: boolean
           description: Whether the query triggered expert detection results in the People tab.
+    FacetValue:
+      properties:
+        stringValue:
+          type: string
+          example: engineering
+          description: The value that should be set in the FacetFilter when applying this filter to a search request.
+        integerValue:
+          type: integer
+          example: 5
+        displayLabel:
+          type: string
+          example: engineering
+          description: An optional user-friendly label to display in place of the facet value.
+        iconConfig:
+          $ref: '#/components/schemas/IconConfig'
+    FacetBucket:
+      properties:
+        count:
+          type: integer
+          description: Estimated number of results in this facet.
+          example: 1
+        datasource:
+          type: string
+          example: jira
+          description: The datasource the value belongs to. This will be used by the all tab to show types across all datasources.
+        percentage:
+          type: integer
+          description: Estimated percentage of results in this facet.
+          example: 5
+        value:
+          $ref: '#/components/schemas/FacetValue'
+    FacetResult:
+      properties:
+        sourceName:
+          type: string
+          description: The source of this facet (e.g. container_name, type, last_updated_at).
+          example: container_name
+        operatorName:
+          type: string
+          description: How to display this facet. Currently supportes 'SelectSingle' and 'SelectMultiple'.
+          example: SelectMultiple
+        buckets:
+          type: array
+          description: A list of unique buckets that exist within this result set.
+          items:
+            $ref: '#/components/schemas/FacetBucket'
+        hasMoreBuckets:
+          type: boolean
+          description: Returns true if more buckets exist than those returned. Additional buckets can be retrieve by requesting again with a higher facetBucketSize.
+          example: false
+        groupName:
+          type: string
+          description: For most facets this will be the empty string, meaning the facet is high-level and applies to all documents for the datasource. When non-empty, this is used to group facets together (i.e. group facets for each doctype for a certain datasource)
+          example: Service Cloud
     ResultTab:
       properties:
         id:
@@ -7337,16 +7194,68 @@ components:
       properties:
         agent:
           type: string
-          description: Name of the agent. DEFAULT - Integrates with your company's knowledge. GPT - Communicates directly with the LLM.
+          description: Name of the agent.
+          x-enumDescriptions:
+            DEFAULT: Integrates with your company's knowledge.
+            GPT: Communicates directly with the LLM.
           enum:
             - DEFAULT
             - GPT
         mode:
           type: string
-          description: Top level modes to run GleanChat in. DEFAULT - Used if no mode supplied. QUICK - Trades accuracy and precision for speed.
+          description: Top level modes to run GleanChat in.
+          x-enumDescriptions:
+            DEFAULT: Used if no mode supplied.
+            QUICK: Trades accuracy and precision for speed.
           enum:
             - DEFAULT
             - QUICK
+    ChatFileStatus:
+      type: string
+      description: Current status of the file.
+      x-include-enum-class-prefix: true
+      enum:
+        - PROCESSING
+        - PROCESSED
+        - FAILED
+        - DELETED
+    ChatFileFailureReason:
+      type: string
+      description: Reason for failed status.
+      x-include-enum-class-prefix: true
+      enum:
+        - PARSE_FAILED
+        - AV_SCAN_FAILED
+    ChatFileMetadata:
+      type: object
+      description: Metadata of a file uploaded by a user for Chat.
+      properties:
+        status:
+          $ref: '#/components/schemas/ChatFileStatus'
+        uploadTime:
+          type: integer
+          format: int64
+          description: Upload time, in epoch seconds.
+        processedSize:
+          type: integer
+          format: int64
+          description: Size of the processed file in bytes.
+        failureReason:
+          $ref: '#/components/schemas/ChatFileFailureReason'
+    ChatFile:
+      type: object
+      description: Structure for file uploaded by a user for Chat.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the file.
+          example: FILE_1234
+        name:
+          type: string
+          description: Name of the uploaded file.
+          example: sample.pdf
+        metadata:
+          $ref: '#/components/schemas/ChatFileMetadata'
     ReferenceRange:
       description: Each text range from the response can correspond to an array of snippets from the citation source.
       required:
@@ -7366,6 +7275,8 @@ components:
           description: An opaque token that represents this particular result in this particular ChatMessage. To be used for /feedback reporting.
         sourceDocument:
           $ref: '#/components/schemas/Document'
+        sourceFile:
+          $ref: '#/components/schemas/ChatFile'
         sourcePerson:
           $ref: '#/components/schemas/Person'
         referenceRanges:
@@ -7421,9 +7332,15 @@ components:
             - UNKNOWN
             - INTEGER
             - STRING
+        displayName:
+          type: string
+          description: Human readable display name for the key.
         value:
           type: string
           description: The value of the field.
+        label:
+          type: string
+          description: User-friendly label associated with the value.
         isRequired:
           type: boolean
           description: Is the parameter a required field.
@@ -7451,52 +7368,6 @@ components:
           description: The parameters to be passed to the redirect URL for actions.
           additionalProperties:
             $ref: '#/components/schemas/WriteActionParameter'
-    ChatFileStatus:
-      type: string
-      description: Current status of the file.
-      x-include-enum-class-prefix: true
-      enum:
-        - PROCESSING
-        - PROCESSED
-        - FAILED
-        - DELETED
-    ChatFileFailureReason:
-      type: string
-      description: Reason for failed status.
-      x-include-enum-class-prefix: true
-      enum:
-        - PARSE_FAILED
-        - AV_SCAN_FAILED
-    ChatFileMetadata:
-      type: object
-      description: Metadata of a file uploaded by a user for Chat.
-      properties:
-        status:
-          $ref: '#/components/schemas/ChatFileStatus'
-        uploadTime:
-          type: integer
-          format: int64
-          description: Upload time, in epoch seconds.
-        processedSize:
-          type: integer
-          format: int64
-          description: Size of the processed file in bytes.
-        failureReason:
-          $ref: '#/components/schemas/ChatFileFailureReason'
-    ChatFile:
-      type: object
-      description: Structure for file uploaded by a user for Chat.
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the file.
-          example: FILE_1234
-        name:
-          type: string
-          description: Name of the uploaded file.
-          example: sample.pdf
-        metadata:
-          $ref: '#/components/schemas/ChatFileMetadata'
     ChatMessageFragment:
       description: One fragment of a message.
       allOf:
@@ -7510,7 +7381,7 @@ components:
             writeAction:
               $ref: '#/components/schemas/WriteAction'
             file:
-              description: File uploaded by user to be referenced for answering.
+              description: Files referenced in the message fragment. This is used to construct rich-text messages with file references.
               $ref: '#/components/schemas/ChatFile'
     ChatMessage:
       description: A message that is rendered as one coherent unit with one given sender.
@@ -7528,6 +7399,11 @@ components:
           items:
             $ref: '#/components/schemas/ChatMessageCitation'
           description: A list of Citations used to generate the message.
+        uploadedFileIds:
+          type: array
+          items:
+            type: string
+          description: IDs of files uploaded in the message that are referenced to generate the answer.
         fragments:
           type: array
           description: A list of chat results.
@@ -7547,12 +7423,20 @@ components:
           description: Opaque tracking token generated server-side.
         messageType:
           type: string
-          description: Used to determine the type of UI treatment to apply to this message. UPDATE - intermediate state message for progress updates before content responses. CONTENT - contains content relevant to the user query. CONTEXT - contains additional context relevant to the user query. DEBUG - contains debug information of ChatBot behavior. ERROR - an error happened on server side.
+          description: Used to determine the type of UI treatment to apply to this message.
+          x-enumDescriptions:
+            UPDATE: intermediate state message for progress updates before content responses.
+            CONTENT: contains content relevant to the user query.
+            CONTEXT: contains additional context relevant to the user query.
+            DEBUG: contains debug information of ChatBot behavior.
+            DEBUG_EXTERNAL: contains debug information related to the query to be shown to the user.
+            ERROR: an error happened on server side.
           enum:
             - UPDATE
             - CONTENT
             - CONTEXT
             - DEBUG
+            - DEBUG_EXTERNAL
             - ERROR
         hasMoreFragments:
           type: boolean
@@ -7616,10 +7500,6 @@ components:
           items:
             type: string
           description: Follow-up prompts for the user to potentially use
-        agentConfig:
-          $ref: '#/components/schemas/AgentConfig'
-          deprecated: true
-          description: Describes the agent config that executed the request.
         backendTimeMillis:
           type: integer
           format: int64
@@ -8110,6 +7990,36 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/DocumentOrError'
           description: The document details or the error if document is not found.
+    GetDocumentsByFacetsRequest:
+      required:
+        - filterSets
+      properties:
+        datasourcesFilter:
+          type: array
+          items:
+            type: string
+          description: Filter results to one or more datasources (e.g. gmail, slack). All results are returned if missing.
+        filterSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetFilterSet'
+          description: A list of facet filter sets that will be OR'ed together. An AND is assumed between different filters in each set.
+        cursor:
+          type: string
+          description: Pagination cursor. A previously received opaque token representing the position in the overall results at which to start.
+    GetDocumentsByFacetsResponse:
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          description: The document details, ordered by score.
+        hasMoreResults:
+          type: boolean
+          description: Whether more results are available. Use cursor to retrieve them.
+        cursor:
+          type: string
+          description: Cursor that indicates the start of the next page of results. To be passed in "more" requests for this query.
     GetDocumentAnalyticsRequest:
       required:
         - documentSpecs
@@ -8702,6 +8612,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OperatorScope'
+        value:
+          type: string
+          description: Raw/canonical value of the operator. Only applies when result is an operator value.
+        displayValue:
+          type: string
+          description: Human readable value of the operator that can be shown to the user. Only applies when result is an operator value.
       example:
         name: Last Updated
         operatorType: DATE
@@ -8709,6 +8625,35 @@ components:
           - datasource: GDRIVE
             docType: Document
           - datasource: ZENDESK
+    Quicklink:
+      description: An action for a specific datasource that will show up in autocomplete and app card, e.g. "Create new issue" for jira.
+      properties:
+        name:
+          type: string
+          description: Full action name. Used in autocomplete.
+        shortName:
+          type: string
+          description: Shortened name. Used in app cards.
+        url:
+          type: string
+          description: The URL of the action.
+        iconConfig:
+          $ref: '#/components/schemas/IconConfig'
+          description: The config for the icon for this quicklink
+        id:
+          type: string
+          description: Unique identifier of this quicklink
+        scopes:
+          type: array
+          description: The scopes for which this quicklink is applicable
+          items:
+            type: string
+            enum:
+              - APP_CARD
+              - AUTOCOMPLETE_EXACT_MATCH
+              - AUTOCOMPLETE_FUZZY_MATCH
+              - AUTOCOMPLETE_ZERO_QUERY
+              - NEW_TAB_PAGE
     AutocompleteResult:
       required:
         - result
@@ -8830,27 +8775,10 @@ components:
           items:
             type: string
           description: Datasources for which content should be included. Empty is for all.
-        authTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthToken'
-          description: Auth tokens which may be used for federated retrieval of Feed entries.
-    ClientData:
-      properties:
-        lastRefreshTimestamp:
-          type: integer
-          description: Server unix timestamp of the last refresh/request (in seconds since epoch UTC).
     FeedRequest:
       required:
         - refreshType
       properties:
-        refreshType:
-          type: string
-          enum:
-            - MANUAL
-            - ON_OPEN
-            - BACKGROUND
-          description: Type of refresh requested. Intended for logging and future optimizations.
         categories:
           type: array
           items:
@@ -8876,8 +8804,6 @@ components:
           description: Categories of content requested. An allowlist gives flexibility to request content separately or together.
         requestOptions:
           $ref: '#/components/schemas/FeedRequestOptions'
-        clientData:
-          $ref: '#/components/schemas/ClientData'
         timeoutMillis:
           type: integer
           description: Timeout in milliseconds for the request. A `408` error will be returned if handling the request takes longer.
@@ -8901,20 +8827,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/FeedResult'
-            backendTimeMillis:
-              type: integer
-              format: int64
-              description: Time in milliseconds the backend took to respond to the request.
-            datasourceAffinity:
-              type: object
-              description: A mapping from datasources to affinity of the user to each with scores.
-              additionalProperties:
-                type: number
-                format: float
-                description: Score for the datasource affinity. Between [0,1].
-            companyResourcesCollectionId:
-              type: integer
-              description: The unique ID of the collection for company resources.
             facetResults:
               type: object
               additionalProperties:
@@ -8972,6 +8884,11 @@ components:
           items:
             type: string
           description: Filter results to only those relevant to one or more datasources (e.g. jira, gdrive). All results are returned if missing.
+        facetFilterSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetFilterSet'
+          description: A list of facet filter sets that will be OR'ed together.
         context:
           $ref: '#/components/schemas/Document'
           description: Content for either a new or unindexed document, or additional content for an indexed document, which may be used to generate recommendations.
@@ -8994,30 +8911,6 @@ components:
     RecommendationsResponse:
       allOf:
         - $ref: '#/components/schemas/ResultsResponse'
-    CustomEntitiesRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of the custom entities to retrieve.
-      example:
-        ids:
-          - ce123
-    CustomEntitiesResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomEntity'
-          description: A custom entity object
-        errors:
-          type: array
-          items:
-            type: string
-          description: A list of IDs that could not be found.
     SortOptions:
       type: object
       properties:
@@ -9127,48 +9020,6 @@ components:
           description: list of Person attributes that are custom setup by deployment
           items:
             type: string
-    EntitiesTypeEnum:
-      type: string
-      enum:
-        - PEOPLE_ENTITY_TYPE
-    TeamCreationData:
-      properties:
-        id:
-          type: string
-          description: For people field teams, the field value, e.g. ENGINEERING. Otherwise, a Glean Document ID used to identify the team.
-        peopleField:
-          type: string
-          description: if the data source is people fields, then this is the field name (otherwise it's ignored)
-        datasource:
-          type: string
-          description: what data source this team comes from, e.g. GDRIVE
-        createdFrom:
-          type: string
-          description: If the team is from a doc (i.e. not from a people field), this is the doc title, e.g. for Slack channels, the channel name. Otherwise, it's ignored.
-    CreateTeamsRequest:
-      properties:
-        teams:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamCreationData'
-          description: List of all teams from data sources to create
-    CreateTeamsResponse:
-      properties:
-        numErrors:
-          type: integer
-          description: Number of teams that failed to be created
-    DeleteTeamsRequest:
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: List of all team IDs to be deleted
-    DeleteTeamsResponse:
-      properties:
-        numErrors:
-          type: integer
-          description: Number of teams that failed to be deleted
     PeopleRequest:
       type: object
       properties:
@@ -9529,6 +9380,7 @@ components:
       type: string
       enum:
         - ADMIN_ALERT
+        - ADMIN_ALERT_V2
         - ADMIN_INVITE
         - ASSISTANT_ACCESS
         - AUTO_INVITE
@@ -9546,6 +9398,7 @@ components:
         - ONBOARDING_TIPS_EXTENSION_PROMO
         - ONBOARDING_SURVEY
         - RECRAWL_DATASOURCE
+        - REPORT_ISSUE_FEEDBACK
         - SEARCH_FEEDBACK
         - TEAMMATE_INVITE
         - VERIFICATION_REQUEST
@@ -9640,6 +9493,9 @@ components:
         gptAgentEnabled:
           type: boolean
           description: Whether the GPT agent (general mode) for Chat is enabled
+        fileUploadEnabled:
+          type: boolean
+          description: Whether file upload for Chat is enabled for the deployment
         chatHistoryEnabled:
           type: boolean
           description: Whether the chat history for Chat is enabled for the deployment
@@ -9670,6 +9526,8 @@ components:
             - NONE
             - OAUTH_USER
             - OAUTH_ADMIN
+            - API_KEY
+            - BASIC_AUTH
           description: The type of authentication being used. Use 'OAUTH_*' when Glean calls an external API (e.g., Jira) on behalf of a user to obtain an OAuth token. 'OAUTH_ADMIN' utilizes an admin token for external API calls on behalf all users. 'OAUTH_USER' uses individual user tokens for external API calls.
         status:
           type: string
@@ -9733,7 +9591,10 @@ components:
           description: The time the tool was last updated in ISO format (ISO 8601)
         auth:
           $ref: '#/components/schemas/AuthConfig'
+        permissions:
+          $ref: '#/components/schemas/ObjectPermissions'
     ToolsConfig:
+      deprecated: true
       description: Configuration settings related to Tools.
       type: object
       properties:
@@ -9965,6 +9826,7 @@ components:
             - gsuite
             - iap
             - okta
+            - okta_saml
             - ping
             - azure
             - onelogin
@@ -9985,6 +9847,15 @@ components:
         user:
           type: string
           description: the user info (email or username for example) for the credential
+    ResolutionStep:
+      description: A step to take to resolve an alert
+      properties:
+        stepText:
+          type: string
+          description: text for what step to take
+        link:
+          type: string
+          description: optional link url for instructions
     AlertData:
       description: Admin alert related information that is used to construct the admin alert email
       properties:
@@ -10003,6 +9874,38 @@ components:
           type: string
         datasource:
           description: Datasource that the alert is related to (possibly null)
+          type: string
+        bannerType:
+          description: Banner type to display for this alert
+          type: string
+          enum:
+            - ACTION_REQUIRED
+            - REVIEW_REQUIRED
+        bannerText:
+          description: Text to display for the alert banner
+          type: string
+        alertDescription:
+          description: Text for what happened section of an admin alert.
+          type: string
+        relevanceDescription:
+          description: Text for why this matters section of an admin alert.
+          type: string
+        resolutionStepsDescription:
+          description: Text for to do section before actual steps.
+          type: string
+        resolutionSteps:
+          description: Steps to take to resolve an alert which are optionally mapped to a link for instructions (e.g. help doc)
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolutionStep'
+        instanceDisplayName:
+          description: datasource instance's user set display name
+          type: string
+        instanceName:
+          description: datasource instance's name e.g. confluence_0a0odwv
+          type: string
+        emailSubjectDescription:
+          description: custom text in subject line
           type: string
     EmailRequest:
       description: A request to send email[s] to the specified users
@@ -10069,22 +9972,33 @@ components:
           type: object
           description: Optional payload for feedback reporting.
           properties:
-            issueType:
-              type: string
-              description: The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback.
             comments:
               type: string
               description: Additional freeform comments provided by the reporter.
-            url:
-              type: string
-              description: The URL the reporter was on when feedback was sent.
-            query:
-              type: string
-              description: The query the reporter tried when feedback was sent.
             customJson:
               type: string
               description: Arbitrary email param payloads from 3P-customer widgets. Prefer the structured fields when possible.
               example: '{"comment": "glean is awesome!", "sender": "happycustomer@customer.com"}'
+            imageUrls:
+              type: array
+              items:
+                type: string
+              description: Images uploaded by the user when submitting feedback
+            issueType:
+              type: string
+              description: The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback.
+            query:
+              type: string
+              description: The query the reporter tried when feedback was sent.
+            trackingToken:
+              type: string
+              description: The tracking token of the feedback that admins can provide Glean Support to debug
+            url:
+              type: string
+              description: The URL the reporter was on when feedback was sent.
+            ratingKey:
+              type: string
+              description: The label of the rating that was selected when feedback was sent.
         chatFeedbackPayload:
           type: object
           description: Payload for chat feedback reporting. Required when template is `CHAT_FEEDBACK`.

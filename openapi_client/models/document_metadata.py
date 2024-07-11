@@ -44,6 +44,7 @@ class DocumentMetadata(BaseModel):
     parent_id: Optional[StrictStr] = Field(default=None, description="The id of the direct parent of the result. Interpretation is specific to each datasource (e.g. parent issue for Jira). cf. container", alias="parentId")
     mime_type: Optional[StrictStr] = Field(default=None, alias="mimeType")
     document_id: Optional[StrictStr] = Field(default=None, description="The index-wide unique identifier.", alias="documentId")
+    logging_id: Optional[StrictStr] = Field(default=None, description="A unique identifier used to represent the document in any logging or feedback requests in place of documentId.", alias="loggingId")
     document_id_hash: Optional[StrictStr] = Field(default=None, description="Hash of the Glean Document ID.", alias="documentIdHash")
     create_time: Optional[datetime] = Field(default=None, alias="createTime")
     update_time: Optional[datetime] = Field(default=None, alias="updateTime")
@@ -73,7 +74,7 @@ class DocumentMetadata(BaseModel):
     thumbnail: Optional[Thumbnail] = None
     index_status: Optional[IndexStatus] = Field(default=None, alias="indexStatus")
     ancestors: Optional[List[Document]] = Field(default=None, description="A list of documents that are ancestors of this document in the hierarchy of the document's datasource, for example parent folders or containers. Ancestors can be of different types and some may not be indexed. Higher level ancestors appear earlier in the list.")
-    __properties: ClassVar[List[str]] = ["datasource", "datasourceInstance", "objectType", "container", "containerId", "superContainerId", "parentId", "mimeType", "documentId", "documentIdHash", "createTime", "updateTime", "author", "owner", "visibility", "components", "status", "statusCategory", "pins", "priority", "assignedTo", "updatedBy", "labels", "collections", "datasourceId", "interactions", "verification", "viewerInfo", "permissions", "visitCount", "shortcuts", "path", "customData", "documentCategory", "contactPerson", "thumbnail", "indexStatus", "ancestors"]
+    __properties: ClassVar[List[str]] = ["datasource", "datasourceInstance", "objectType", "container", "containerId", "superContainerId", "parentId", "mimeType", "documentId", "loggingId", "documentIdHash", "createTime", "updateTime", "author", "owner", "visibility", "components", "status", "statusCategory", "pins", "priority", "assignedTo", "updatedBy", "labels", "collections", "datasourceId", "interactions", "verification", "viewerInfo", "permissions", "visitCount", "shortcuts", "path", "customData", "documentCategory", "contactPerson", "thumbnail", "indexStatus", "ancestors"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -206,6 +207,7 @@ class DocumentMetadata(BaseModel):
             "parentId": obj.get("parentId"),
             "mimeType": obj.get("mimeType"),
             "documentId": obj.get("documentId"),
+            "loggingId": obj.get("loggingId"),
             "documentIdHash": obj.get("documentIdHash"),
             "createTime": obj.get("createTime"),
             "updateTime": obj.get("updateTime"),

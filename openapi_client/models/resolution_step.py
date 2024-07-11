@@ -18,27 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.quicklink import Quicklink
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ClientAction(BaseModel):
+class ResolutionStep(BaseModel):
     """
-    ClientAction
+    A step to take to resolve an alert
     """ # noqa: E501
-    type: StrictStr = Field(description="Type of the client action.")
-    quicklink: Optional[Quicklink] = None
-    destination_url: Optional[StrictStr] = Field(default=None, description="Specific URL if action requires a destination URL to complete. Has precedence over action context.", alias="destinationUrl")
-    __properties: ClassVar[List[str]] = ["type", "quicklink", "destinationUrl"]
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['GO_TO_HOME', 'CREATE', 'EMAIL', 'MESSAGE', 'SHARE']):
-            raise ValueError("must be one of enum values ('GO_TO_HOME', 'CREATE', 'EMAIL', 'MESSAGE', 'SHARE')")
-        return value
+    step_text: Optional[StrictStr] = Field(default=None, description="text for what step to take", alias="stepText")
+    link: Optional[StrictStr] = Field(default=None, description="optional link url for instructions")
+    __properties: ClassVar[List[str]] = ["stepText", "link"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +49,7 @@ class ClientAction(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ClientAction from a JSON string"""
+        """Create an instance of ResolutionStep from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -79,14 +70,11 @@ class ClientAction(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of quicklink
-        if self.quicklink:
-            _dict['quicklink'] = self.quicklink.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ClientAction from a dict"""
+        """Create an instance of ResolutionStep from a dict"""
         if obj is None:
             return None
 
@@ -94,9 +82,8 @@ class ClientAction(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "quicklink": Quicklink.from_dict(obj["quicklink"]) if obj.get("quicklink") is not None else None,
-            "destinationUrl": obj.get("destinationUrl")
+            "stepText": obj.get("stepText"),
+            "link": obj.get("link")
         })
         return _obj
 

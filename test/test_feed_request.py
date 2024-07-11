@@ -28,7 +28,7 @@ class TestFeedRequest(unittest.TestCase):
 
     def make_instance(self, include_optional) -> FeedRequest:
         """Test FeedRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FeedRequest`
@@ -36,7 +36,6 @@ class TestFeedRequest(unittest.TestCase):
         model = FeedRequest()
         if include_optional:
             return FeedRequest(
-                refresh_type = 'MANUAL',
                 categories = [
                     'DOCUMENT_SUGGESTION'
                     ],
@@ -49,12 +48,7 @@ class TestFeedRequest(unittest.TestCase):
                         }, 
                     datasource_filter = [
                         ''
-                        ], 
-                    auth_tokens = [
-                        {"accessToken":"123abc","datasource":"gmail","scope":"email profile https://www.googleapis.com/auth/gmail.readonly","tokenType":"Bearer","authUser":"1"}
                         ], ),
-                client_data = openapi_client.models.client_data.ClientData(
-                    last_refresh_timestamp = 56, ),
                 timeout_millis = 5000,
                 session_info = openapi_client.models.session_info.SessionInfo(
                     session_tracking_token = '', 
@@ -64,7 +58,6 @@ class TestFeedRequest(unittest.TestCase):
             )
         else:
             return FeedRequest(
-                refresh_type = 'MANUAL',
         )
         """
 

@@ -28,7 +28,7 @@ class TestEmailRequest(unittest.TestCase):
 
     def make_instance(self, include_optional) -> EmailRequest:
         """Test EmailRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EmailRequest`
@@ -42,7 +42,20 @@ class TestEmailRequest(unittest.TestCase):
                     triggered_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     project_name = '', 
                     help_link = '', 
-                    datasource = '', ),
+                    datasource = '', 
+                    banner_type = 'ACTION_REQUIRED', 
+                    banner_text = '', 
+                    alert_description = '', 
+                    relevance_description = '', 
+                    resolution_steps_description = '', 
+                    resolution_steps = [
+                        openapi_client.models.resolution_step.ResolutionStep(
+                            step_text = '', 
+                            link = '', )
+                        ], 
+                    instance_display_name = '', 
+                    instance_name = '', 
+                    email_subject_description = '', ),
                 recipients = [
                     {"name":"George Clooney","obfuscatedId":"abc123"}
                     ],
@@ -104,11 +117,16 @@ class TestEmailRequest(unittest.TestCase):
                     'key' : ''
                     },
                 feedback_payload = openapi_client.models.email_request_feedback_payload.EmailRequest_feedbackPayload(
-                    issue_type = '', 
                     comments = '', 
-                    url = '', 
+                    custom_json = '{"comment": "glean is awesome!", "sender": "happycustomer@customer.com"}', 
+                    image_urls = [
+                        ''
+                        ], 
+                    issue_type = '', 
                     query = '', 
-                    custom_json = '{"comment": "glean is awesome!", "sender": "happycustomer@customer.com"}', ),
+                    tracking_token = '', 
+                    url = '', 
+                    rating_key = '', ),
                 chat_feedback_payload = openapi_client.models.email_request_chat_feedback_payload.EmailRequest_chatFeedbackPayload(
                     rating = '', 
                     comments = '', 

@@ -28,7 +28,7 @@ class TestFeedRequestOptions(unittest.TestCase):
 
     def make_instance(self, include_optional) -> FeedRequestOptions:
         """Test FeedRequestOptions
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FeedRequestOptions`
@@ -44,9 +44,6 @@ class TestFeedRequestOptions(unittest.TestCase):
                     },
                 datasource_filter = [
                     ''
-                    ],
-                auth_tokens = [
-                    {"accessToken":"123abc","datasource":"gmail","scope":"email profile https://www.googleapis.com/auth/gmail.readonly","tokenType":"Bearer","authUser":"1"}
                     ]
             )
         else:

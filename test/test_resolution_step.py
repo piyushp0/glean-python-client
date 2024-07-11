@@ -15,10 +15,10 @@
 
 import unittest
 
-from openapi_client.models.entities_type_enum import EntitiesTypeEnum
+from openapi_client.models.resolution_step import ResolutionStep
 
-class TestEntitiesTypeEnum(unittest.TestCase):
-    """EntitiesTypeEnum unit test stubs"""
+class TestResolutionStep(unittest.TestCase):
+    """ResolutionStep unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,9 +26,28 @@ class TestEntitiesTypeEnum(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testEntitiesTypeEnum(self):
-        """Test EntitiesTypeEnum"""
-        # inst = EntitiesTypeEnum()
+    def make_instance(self, include_optional) -> ResolutionStep:
+        """Test ResolutionStep
+            include_optional is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # uncomment below to create an instance of `ResolutionStep`
+        """
+        model = ResolutionStep()
+        if include_optional:
+            return ResolutionStep(
+                step_text = '',
+                link = ''
+            )
+        else:
+            return ResolutionStep(
+        )
+        """
+
+    def testResolutionStep(self):
+        """Test ResolutionStep"""
+        # inst_req_only = self.make_instance(include_optional=False)
+        # inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

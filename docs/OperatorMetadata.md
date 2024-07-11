@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **operator_type** | **str** |  | [optional] 
 **help_text** | **str** |  | [optional] 
 **scopes** | [**List[OperatorScope]**](OperatorScope.md) |  | [optional] 
+**value** | **str** | Raw/canonical value of the operator. Only applies when result is an operator value. | [optional] 
+**display_value** | **str** | Human readable value of the operator that can be shown to the user. Only applies when result is an operator value. | [optional] 
 
 ## Example
 

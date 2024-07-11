@@ -18,17 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.facet_filter_set import FacetFilterSet
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeleteTeamsResponse(BaseModel):
+class GetDocumentsByFacetsRequest(BaseModel):
     """
-    DeleteTeamsResponse
+    GetDocumentsByFacetsRequest
     """ # noqa: E501
-    num_errors: Optional[StrictInt] = Field(default=None, description="Number of teams that failed to be deleted", alias="numErrors")
-    __properties: ClassVar[List[str]] = ["numErrors"]
+    datasources_filter: Optional[List[StrictStr]] = Field(default=None, description="Filter results to one or more datasources (e.g. gmail, slack). All results are returned if missing.", alias="datasourcesFilter")
+    filter_sets: List[FacetFilterSet] = Field(description="A list of facet filter sets that will be OR'ed together. An AND is assumed between different filters in each set.", alias="filterSets")
+    cursor: Optional[StrictStr] = Field(default=None, description="Pagination cursor. A previously received opaque token representing the position in the overall results at which to start.")
+    __properties: ClassVar[List[str]] = ["datasourcesFilter", "filterSets", "cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +51,7 @@ class DeleteTeamsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeleteTeamsResponse from a JSON string"""
+        """Create an instance of GetDocumentsByFacetsRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +72,18 @@ class DeleteTeamsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in filter_sets (list)
+        _items = []
+        if self.filter_sets:
+            for _item in self.filter_sets:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['filterSets'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeleteTeamsResponse from a dict"""
+        """Create an instance of GetDocumentsByFacetsRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +91,9 @@ class DeleteTeamsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "numErrors": obj.get("numErrors")
+            "datasourcesFilter": obj.get("datasourcesFilter"),
+            "filterSets": [FacetFilterSet.from_dict(_item) for _item in obj["filterSets"]] if obj.get("filterSets") is not None else None,
+            "cursor": obj.get("cursor")
         })
         return _obj
 

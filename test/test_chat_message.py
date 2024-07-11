@@ -28,7 +28,7 @@ class TestChatMessage(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ChatMessage:
         """Test ChatMessage
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ChatMessage`
@@ -74,6 +74,9 @@ class TestChatMessage(unittest.TestCase):
                                     title = '', 
                                     url = '', )
                                 ], ), 
+                        source_file = openapi_client.models.chat_file.ChatFile(
+                            id = 'FILE_1234', 
+                            name = 'sample.pdf', ), 
                         source_person = {"name":"George Clooney","obfuscatedId":"abc123"}, 
                         reference_ranges = [
                             openapi_client.models.reference_range.ReferenceRange(
@@ -87,6 +90,9 @@ class TestChatMessage(unittest.TestCase):
                                     {"snippet":"snippet","mimeType":"mimeType"}
                                     ], )
                             ], )
+                    ],
+                uploaded_file_ids = [
+                    ''
                     ],
                 fragments = [
                     null

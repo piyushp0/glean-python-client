@@ -6,11 +6,14 @@ Optional payload for feedback reporting.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**issue_type** | **str** | The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback. | [optional] 
 **comments** | **str** | Additional freeform comments provided by the reporter. | [optional] 
-**url** | **str** | The URL the reporter was on when feedback was sent. | [optional] 
-**query** | **str** | The query the reporter tried when feedback was sent. | [optional] 
 **custom_json** | **str** | Arbitrary email param payloads from 3P-customer widgets. Prefer the structured fields when possible. | [optional] 
+**image_urls** | **List[str]** | Images uploaded by the user when submitting feedback | [optional] 
+**issue_type** | **str** | The type of issue being reported, e.g. RESULT_MISSING or OTHER for search feedback. | [optional] 
+**query** | **str** | The query the reporter tried when feedback was sent. | [optional] 
+**tracking_token** | **str** | The tracking token of the feedback that admins can provide Glean Support to debug | [optional] 
+**url** | **str** | The URL the reporter was on when feedback was sent. | [optional] 
+**rating_key** | **str** | The label of the rating that was selected when feedback was sent. | [optional] 
 
 ## Example
 

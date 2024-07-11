@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **primary_entry** | [**FeedEntry**](FeedEntry.md) |  | 
 **secondary_entries** | [**List[FeedEntry]**](FeedEntry.md) | Secondary entries for the result e.g. suggested docs for the calendar, carousel. | [optional] 
 **rank** | **int** | Rank of the result. Rank is suggested by server. Client side rank may differ. | [optional] 
-**facet_results** | [**List[FacetResult]**](FacetResult.md) | DEPRECATED - List of facets that can be used to filter the entry&#39;s content. | [optional] 
 
 ## Example
 

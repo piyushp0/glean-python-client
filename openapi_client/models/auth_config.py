@@ -41,8 +41,8 @@ class AuthConfig(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['NONE', 'OAUTH_USER', 'OAUTH_ADMIN']):
-            raise ValueError("must be one of enum values ('NONE', 'OAUTH_USER', 'OAUTH_ADMIN')")
+        if value not in set(['NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH']):
+            raise ValueError("must be one of enum values ('NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH')")
         return value
 
     @field_validator('status')

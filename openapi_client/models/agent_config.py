@@ -27,8 +27,8 @@ class AgentConfig(BaseModel):
     """
     Describes the agent that executes the request.
     """ # noqa: E501
-    agent: Optional[StrictStr] = Field(default=None, description="Name of the agent. DEFAULT - Integrates with your company's knowledge. GPT - Communicates directly with the LLM.")
-    mode: Optional[StrictStr] = Field(default=None, description="Top level modes to run GleanChat in. DEFAULT - Used if no mode supplied. QUICK - Trades accuracy and precision for speed.")
+    agent: Optional[StrictStr] = Field(default=None, description="Name of the agent.")
+    mode: Optional[StrictStr] = Field(default=None, description="Top level modes to run GleanChat in.")
     __properties: ClassVar[List[str]] = ["agent", "mode"]
 
     @field_validator('agent')

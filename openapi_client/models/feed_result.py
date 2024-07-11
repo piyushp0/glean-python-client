@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.facet_result import FacetResult
 from openapi_client.models.feed_entry import FeedEntry
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,8 +32,7 @@ class FeedResult(BaseModel):
     primary_entry: FeedEntry = Field(alias="primaryEntry")
     secondary_entries: Optional[List[FeedEntry]] = Field(default=None, description="Secondary entries for the result e.g. suggested docs for the calendar, carousel.", alias="secondaryEntries")
     rank: Optional[StrictInt] = Field(default=None, description="Rank of the result. Rank is suggested by server. Client side rank may differ.")
-    facet_results: Optional[List[FacetResult]] = Field(default=None, description="DEPRECATED - List of facets that can be used to filter the entry's content.", alias="facetResults")
-    __properties: ClassVar[List[str]] = ["category", "primaryEntry", "secondaryEntries", "rank", "facetResults"]
+    __properties: ClassVar[List[str]] = ["category", "primaryEntry", "secondaryEntries", "rank"]
 
     @field_validator('category')
     def category_validate_enum(cls, value):
@@ -92,13 +90,6 @@ class FeedResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['secondaryEntries'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in facet_results (list)
-        _items = []
-        if self.facet_results:
-            for _item in self.facet_results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['facetResults'] = _items
         return _dict
 
     @classmethod
@@ -114,8 +105,7 @@ class FeedResult(BaseModel):
             "category": obj.get("category"),
             "primaryEntry": FeedEntry.from_dict(obj["primaryEntry"]) if obj.get("primaryEntry") is not None else None,
             "secondaryEntries": [FeedEntry.from_dict(_item) for _item in obj["secondaryEntries"]] if obj.get("secondaryEntries") is not None else None,
-            "rank": obj.get("rank"),
-            "facetResults": [FacetResult.from_dict(_item) for _item in obj["facetResults"]] if obj.get("facetResults") is not None else None
+            "rank": obj.get("rank")
         })
         return _obj
 

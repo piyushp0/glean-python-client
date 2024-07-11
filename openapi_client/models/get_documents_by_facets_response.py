@@ -18,19 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.custom_entity import CustomEntity
+from openapi_client.models.document import Document
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomEntitiesResponse(BaseModel):
+class GetDocumentsByFacetsResponse(BaseModel):
     """
-    CustomEntitiesResponse
+    GetDocumentsByFacetsResponse
     """ # noqa: E501
-    results: Optional[List[CustomEntity]] = Field(default=None, description="A custom entity object")
-    errors: Optional[List[StrictStr]] = Field(default=None, description="A list of IDs that could not be found.")
-    __properties: ClassVar[List[str]] = ["results", "errors"]
+    documents: Optional[List[Document]] = Field(default=None, description="The document details, ordered by score.")
+    has_more_results: Optional[StrictBool] = Field(default=None, description="Whether more results are available. Use cursor to retrieve them.", alias="hasMoreResults")
+    cursor: Optional[StrictStr] = Field(default=None, description="Cursor that indicates the start of the next page of results. To be passed in \"more\" requests for this query.")
+    __properties: ClassVar[List[str]] = ["documents", "hasMoreResults", "cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class CustomEntitiesResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomEntitiesResponse from a JSON string"""
+        """Create an instance of GetDocumentsByFacetsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,18 +72,18 @@ class CustomEntitiesResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in documents (list)
         _items = []
-        if self.results:
-            for _item in self.results:
+        if self.documents:
+            for _item in self.documents:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['results'] = _items
+            _dict['documents'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomEntitiesResponse from a dict"""
+        """Create an instance of GetDocumentsByFacetsResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,8 +91,9 @@ class CustomEntitiesResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [CustomEntity.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "errors": obj.get("errors")
+            "documents": [Document.from_dict(_item) for _item in obj["documents"]] if obj.get("documents") is not None else None,
+            "hasMoreResults": obj.get("hasMoreResults"),
+            "cursor": obj.get("cursor")
         })
         return _obj
 

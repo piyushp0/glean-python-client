@@ -19,8 +19,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.resolution_step import ResolutionStep
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,26 @@ class AlertData(BaseModel):
     project_name: Optional[StrictStr] = Field(default=None, description="Human readable name of the project instance", alias="projectName")
     help_link: Optional[StrictStr] = Field(default=None, description="Help link for the alert that the admin can reference", alias="helpLink")
     datasource: Optional[StrictStr] = Field(default=None, description="Datasource that the alert is related to (possibly null)")
-    __properties: ClassVar[List[str]] = ["name", "triggeredTime", "projectName", "helpLink", "datasource"]
+    banner_type: Optional[StrictStr] = Field(default=None, description="Banner type to display for this alert", alias="bannerType")
+    banner_text: Optional[StrictStr] = Field(default=None, description="Text to display for the alert banner", alias="bannerText")
+    alert_description: Optional[StrictStr] = Field(default=None, description="Text for what happened section of an admin alert.", alias="alertDescription")
+    relevance_description: Optional[StrictStr] = Field(default=None, description="Text for why this matters section of an admin alert.", alias="relevanceDescription")
+    resolution_steps_description: Optional[StrictStr] = Field(default=None, description="Text for to do section before actual steps.", alias="resolutionStepsDescription")
+    resolution_steps: Optional[List[ResolutionStep]] = Field(default=None, description="Steps to take to resolve an alert which are optionally mapped to a link for instructions (e.g. help doc)", alias="resolutionSteps")
+    instance_display_name: Optional[StrictStr] = Field(default=None, description="datasource instance's user set display name", alias="instanceDisplayName")
+    instance_name: Optional[StrictStr] = Field(default=None, description="datasource instance's name e.g. confluence_0a0odwv", alias="instanceName")
+    email_subject_description: Optional[StrictStr] = Field(default=None, description="custom text in subject line", alias="emailSubjectDescription")
+    __properties: ClassVar[List[str]] = ["name", "triggeredTime", "projectName", "helpLink", "datasource", "bannerType", "bannerText", "alertDescription", "relevanceDescription", "resolutionStepsDescription", "resolutionSteps", "instanceDisplayName", "instanceName", "emailSubjectDescription"]
+
+    @field_validator('banner_type')
+    def banner_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTION_REQUIRED', 'REVIEW_REQUIRED']):
+            raise ValueError("must be one of enum values ('ACTION_REQUIRED', 'REVIEW_REQUIRED')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +94,13 @@ class AlertData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in resolution_steps (list)
+        _items = []
+        if self.resolution_steps:
+            for _item in self.resolution_steps:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['resolutionSteps'] = _items
         return _dict
 
     @classmethod
@@ -90,7 +117,16 @@ class AlertData(BaseModel):
             "triggeredTime": obj.get("triggeredTime"),
             "projectName": obj.get("projectName"),
             "helpLink": obj.get("helpLink"),
-            "datasource": obj.get("datasource")
+            "datasource": obj.get("datasource"),
+            "bannerType": obj.get("bannerType"),
+            "bannerText": obj.get("bannerText"),
+            "alertDescription": obj.get("alertDescription"),
+            "relevanceDescription": obj.get("relevanceDescription"),
+            "resolutionStepsDescription": obj.get("resolutionStepsDescription"),
+            "resolutionSteps": [ResolutionStep.from_dict(_item) for _item in obj["resolutionSteps"]] if obj.get("resolutionSteps") is not None else None,
+            "instanceDisplayName": obj.get("instanceDisplayName"),
+            "instanceName": obj.get("instanceName"),
+            "emailSubjectDescription": obj.get("emailSubjectDescription")
         })
         return _obj
 

@@ -23,7 +23,6 @@ from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.announcement import Announcement
 from openapi_client.models.app_result import AppResult
 from openapi_client.models.calendar_event import CalendarEvent
-from openapi_client.models.client_action import ClientAction
 from openapi_client.models.collection import Collection
 from openapi_client.models.collection_item import CollectionItem
 from openapi_client.models.count_info import CountInfo
@@ -44,10 +43,10 @@ class FeedEntry(BaseModel):
     thumbnail: Optional[Thumbnail] = None
     created_by: Optional[Person] = Field(default=None, alias="createdBy")
     ui_config: Optional[FeedEntryUiConfig] = Field(default=None, alias="uiConfig")
-    snippet: Optional[StrictStr] = Field(default=None, description="A textual snippet representing this entry, dependent on type. For example, for USER_MENTION, it may contain the sentence in which the mention occurred.")
     justification_type: Optional[StrictStr] = Field(default=None, description="Type of the justification.", alias="justificationType")
     justification: Optional[StrictStr] = Field(default=None, description="Server side generated justification string if server provides one.")
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular feed entry in this particular response. To be used for /feedback reporting.", alias="trackingToken")
+    view_url: Optional[StrictStr] = Field(default=None, description="View URL for the entry if based on links that are not documents in Glean.", alias="viewUrl")
     document: Optional[Document] = None
     event: Optional[CalendarEvent] = None
     announcement: Optional[Announcement] = None
@@ -57,9 +56,7 @@ class FeedEntry(BaseModel):
     app: Optional[AppResult] = None
     activities: Optional[List[UserActivity]] = Field(default=None, description="List of activity where each activity has user, action, timestamp.")
     document_visitor_count: Optional[CountInfo] = Field(default=None, alias="documentVisitorCount")
-    view_url: Optional[StrictStr] = Field(default=None, description="View URL for the entry if based on links that are not documents in Glean.", alias="viewUrl")
-    additional_client_actions: Optional[List[ClientAction]] = Field(default=None, description="List of client actions suggested by the backend to be included for entry.", alias="additionalClientActions")
-    __properties: ClassVar[List[str]] = ["entryId", "title", "thumbnail", "createdBy", "uiConfig", "snippet", "justificationType", "justification", "trackingToken", "document", "event", "announcement", "collection", "collectionItem", "person", "app", "activities", "documentVisitorCount", "viewUrl", "additionalClientActions"]
+    __properties: ClassVar[List[str]] = ["entryId", "title", "thumbnail", "createdBy", "uiConfig", "justificationType", "justification", "trackingToken", "viewUrl", "document", "event", "announcement", "collection", "collectionItem", "person", "app", "activities", "documentVisitorCount"]
 
     @field_validator('justification_type')
     def justification_type_validate_enum(cls, value):
@@ -150,13 +147,6 @@ class FeedEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of document_visitor_count
         if self.document_visitor_count:
             _dict['documentVisitorCount'] = self.document_visitor_count.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in additional_client_actions (list)
-        _items = []
-        if self.additional_client_actions:
-            for _item in self.additional_client_actions:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['additionalClientActions'] = _items
         return _dict
 
     @classmethod
@@ -174,10 +164,10 @@ class FeedEntry(BaseModel):
             "thumbnail": Thumbnail.from_dict(obj["thumbnail"]) if obj.get("thumbnail") is not None else None,
             "createdBy": Person.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
             "uiConfig": FeedEntryUiConfig.from_dict(obj["uiConfig"]) if obj.get("uiConfig") is not None else None,
-            "snippet": obj.get("snippet"),
             "justificationType": obj.get("justificationType"),
             "justification": obj.get("justification"),
             "trackingToken": obj.get("trackingToken"),
+            "viewUrl": obj.get("viewUrl"),
             "document": Document.from_dict(obj["document"]) if obj.get("document") is not None else None,
             "event": CalendarEvent.from_dict(obj["event"]) if obj.get("event") is not None else None,
             "announcement": Announcement.from_dict(obj["announcement"]) if obj.get("announcement") is not None else None,
@@ -186,9 +176,7 @@ class FeedEntry(BaseModel):
             "person": Person.from_dict(obj["person"]) if obj.get("person") is not None else None,
             "app": AppResult.from_dict(obj["app"]) if obj.get("app") is not None else None,
             "activities": [UserActivity.from_dict(_item) for _item in obj["activities"]] if obj.get("activities") is not None else None,
-            "documentVisitorCount": CountInfo.from_dict(obj["documentVisitorCount"]) if obj.get("documentVisitorCount") is not None else None,
-            "viewUrl": obj.get("viewUrl"),
-            "additionalClientActions": [ClientAction.from_dict(_item) for _item in obj["additionalClientActions"]] if obj.get("additionalClientActions") is not None else None
+            "documentVisitorCount": CountInfo.from_dict(obj["documentVisitorCount"]) if obj.get("documentVisitorCount") is not None else None
         })
         return _obj
 

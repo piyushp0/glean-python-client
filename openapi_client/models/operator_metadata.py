@@ -33,7 +33,9 @@ class OperatorMetadata(BaseModel):
     operator_type: Optional[StrictStr] = Field(default=None, alias="operatorType")
     help_text: Optional[StrictStr] = Field(default=None, alias="helpText")
     scopes: Optional[List[OperatorScope]] = None
-    __properties: ClassVar[List[str]] = ["name", "isCustom", "operatorType", "helpText", "scopes"]
+    value: Optional[StrictStr] = Field(default=None, description="Raw/canonical value of the operator. Only applies when result is an operator value.")
+    display_value: Optional[StrictStr] = Field(default=None, description="Human readable value of the operator that can be shown to the user. Only applies when result is an operator value.", alias="displayValue")
+    __properties: ClassVar[List[str]] = ["name", "isCustom", "operatorType", "helpText", "scopes", "value", "displayValue"]
 
     @field_validator('operator_type')
     def operator_type_validate_enum(cls, value):
@@ -107,7 +109,9 @@ class OperatorMetadata(BaseModel):
             "isCustom": obj.get("isCustom"),
             "operatorType": obj.get("operatorType"),
             "helpText": obj.get("helpText"),
-            "scopes": [OperatorScope.from_dict(_item) for _item in obj["scopes"]] if obj.get("scopes") is not None else None
+            "scopes": [OperatorScope.from_dict(_item) for _item in obj["scopes"]] if obj.get("scopes") is not None else None,
+            "value": obj.get("value"),
+            "displayValue": obj.get("displayValue")
         })
         return _obj
 

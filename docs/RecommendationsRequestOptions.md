@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **datasource_filter** | **str** | Filter results to a single datasource name (e.g. gmail, slack). All results are returned if missing. | [optional] 
 **datasources_filter** | **List[str]** | Filter results to only those relevant to one or more datasources (e.g. jira, gdrive). All results are returned if missing. | [optional] 
+**facet_filter_sets** | [**List[FacetFilterSet]**](FacetFilterSet.md) | A list of facet filter sets that will be OR&#39;ed together. | [optional] 
 **context** | [**Document**](Document.md) |  | [optional] 
 **result_prominence** | [**List[SearchResultProminenceEnum]**](SearchResultProminenceEnum.md) | The types of prominence wanted in results returned. Default is any type. | [optional] 
 

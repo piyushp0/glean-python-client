@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.client_data import ClientData
 from openapi_client.models.feed_request_options import FeedRequestOptions
 from openapi_client.models.session_info import SessionInfo
 from typing import Optional, Set
@@ -30,20 +29,11 @@ class FeedRequest(BaseModel):
     """
     FeedRequest
     """ # noqa: E501
-    refresh_type: StrictStr = Field(description="Type of refresh requested. Intended for logging and future optimizations.", alias="refreshType")
     categories: Optional[List[StrictStr]] = Field(default=None, description="Categories of content requested. An allowlist gives flexibility to request content separately or together.")
     request_options: Optional[FeedRequestOptions] = Field(default=None, alias="requestOptions")
-    client_data: Optional[ClientData] = Field(default=None, alias="clientData")
     timeout_millis: Optional[StrictInt] = Field(default=None, description="Timeout in milliseconds for the request. A `408` error will be returned if handling the request takes longer.", alias="timeoutMillis")
     session_info: Optional[SessionInfo] = Field(default=None, alias="sessionInfo")
-    __properties: ClassVar[List[str]] = ["refreshType", "categories", "requestOptions", "clientData", "timeoutMillis", "sessionInfo"]
-
-    @field_validator('refresh_type')
-    def refresh_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['MANUAL', 'ON_OPEN', 'BACKGROUND']):
-            raise ValueError("must be one of enum values ('MANUAL', 'ON_OPEN', 'BACKGROUND')")
-        return value
+    __properties: ClassVar[List[str]] = ["categories", "requestOptions", "timeoutMillis", "sessionInfo"]
 
     @field_validator('categories')
     def categories_validate_enum(cls, value):
@@ -98,9 +88,6 @@ class FeedRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of request_options
         if self.request_options:
             _dict['requestOptions'] = self.request_options.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of client_data
-        if self.client_data:
-            _dict['clientData'] = self.client_data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of session_info
         if self.session_info:
             _dict['sessionInfo'] = self.session_info.to_dict()
@@ -116,10 +103,8 @@ class FeedRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "refreshType": obj.get("refreshType"),
             "categories": obj.get("categories"),
             "requestOptions": FeedRequestOptions.from_dict(obj["requestOptions"]) if obj.get("requestOptions") is not None else None,
-            "clientData": ClientData.from_dict(obj["clientData"]) if obj.get("clientData") is not None else None,
             "timeoutMillis": obj.get("timeoutMillis"),
             "sessionInfo": SessionInfo.from_dict(obj["sessionInfo"]) if obj.get("sessionInfo") is not None else None
         })

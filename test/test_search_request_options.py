@@ -28,7 +28,7 @@ class TestSearchRequestOptions(unittest.TestCase):
 
     def make_instance(self, include_optional) -> SearchRequestOptions:
         """Test SearchRequestOptions
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SearchRequestOptions`
@@ -62,7 +62,7 @@ class TestSearchRequestOptions(unittest.TestCase):
                     ],
                 fetch_all_datasource_counts = True,
                 response_hints = [
-                    'RESULTS'
+                    'FACET_RESULTS'
                     ],
                 timezone_offset = 56,
                 force_negation = True,

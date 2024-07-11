@@ -28,7 +28,7 @@ class TestDocumentMetadata(unittest.TestCase):
 
     def make_instance(self, include_optional) -> DocumentMetadata:
         """Test DocumentMetadata
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `DocumentMetadata`
@@ -45,6 +45,7 @@ class TestDocumentMetadata(unittest.TestCase):
                 parent_id = '',
                 mime_type = '',
                 document_id = '',
+                logging_id = '',
                 document_id_hash = '',
                 create_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 update_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

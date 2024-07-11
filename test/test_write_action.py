@@ -28,7 +28,7 @@ class TestWriteAction(unittest.TestCase):
 
     def make_instance(self, include_optional) -> WriteAction:
         """Test WriteAction
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `WriteAction`
@@ -46,7 +46,9 @@ class TestWriteAction(unittest.TestCase):
                 parameters = {
                     'key' : openapi_client.models.write_action_parameter.WriteActionParameter(
                         type = 'UNKNOWN', 
+                        display_name = '', 
                         value = '', 
+                        label = '', 
                         is_required = True, 
                         description = '', 
                         possible_values = [

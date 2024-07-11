@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.auth_config import AuthConfig
+from openapi_client.models.object_permissions import ObjectPermissions
 from openapi_client.models.person_object import PersonObject
 from typing import Optional, Set
 from typing_extensions import Self
@@ -42,7 +43,8 @@ class ToolMetadata(BaseModel):
     created_at: Optional[datetime] = Field(default=None, description="The time the tool was created in ISO format (ISO 8601)", alias="createdAt")
     last_updated_at: Optional[datetime] = Field(default=None, description="The time the tool was last updated in ISO format (ISO 8601)", alias="lastUpdatedAt")
     auth: Optional[AuthConfig] = None
-    __properties: ClassVar[List[str]] = ["type", "name", "displayName", "toolId", "displayDescription", "logoUrl", "objectName", "createdBy", "lastUpdatedBy", "createdAt", "lastUpdatedAt", "auth"]
+    permissions: Optional[ObjectPermissions] = None
+    __properties: ClassVar[List[str]] = ["type", "name", "displayName", "toolId", "displayDescription", "logoUrl", "objectName", "createdBy", "lastUpdatedBy", "createdAt", "lastUpdatedAt", "auth", "permissions"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -99,6 +101,9 @@ class ToolMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of auth
         if self.auth:
             _dict['auth'] = self.auth.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of permissions
+        if self.permissions:
+            _dict['permissions'] = self.permissions.to_dict()
         return _dict
 
     @classmethod
@@ -122,7 +127,8 @@ class ToolMetadata(BaseModel):
             "lastUpdatedBy": PersonObject.from_dict(obj["lastUpdatedBy"]) if obj.get("lastUpdatedBy") is not None else None,
             "createdAt": obj.get("createdAt"),
             "lastUpdatedAt": obj.get("lastUpdatedAt"),
-            "auth": AuthConfig.from_dict(obj["auth"]) if obj.get("auth") is not None else None
+            "auth": AuthConfig.from_dict(obj["auth"]) if obj.get("auth") is not None else None,
+            "permissions": ObjectPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
 

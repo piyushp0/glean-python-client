@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.chat_file import ChatFile
 from openapi_client.models.document import Document
 from openapi_client.models.person import Person
 from openapi_client.models.reference_range import ReferenceRange
@@ -32,9 +33,10 @@ class ChatMessageCitation(BaseModel):
     """ # noqa: E501
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular result in this particular ChatMessage. To be used for /feedback reporting.", alias="trackingToken")
     source_document: Optional[Document] = Field(default=None, alias="sourceDocument")
+    source_file: Optional[ChatFile] = Field(default=None, alias="sourceFile")
     source_person: Optional[Person] = Field(default=None, alias="sourcePerson")
     reference_ranges: Optional[List[ReferenceRange]] = Field(default=None, description="Each reference range and its corresponding snippets", alias="referenceRanges")
-    __properties: ClassVar[List[str]] = ["trackingToken", "sourceDocument", "sourcePerson", "referenceRanges"]
+    __properties: ClassVar[List[str]] = ["trackingToken", "sourceDocument", "sourceFile", "sourcePerson", "referenceRanges"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,9 @@ class ChatMessageCitation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of source_document
         if self.source_document:
             _dict['sourceDocument'] = self.source_document.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of source_file
+        if self.source_file:
+            _dict['sourceFile'] = self.source_file.to_dict()
         # override the default output from pydantic by calling `to_dict()` of source_person
         if self.source_person:
             _dict['sourcePerson'] = self.source_person.to_dict()
@@ -102,6 +107,7 @@ class ChatMessageCitation(BaseModel):
         _obj = cls.model_validate({
             "trackingToken": obj.get("trackingToken"),
             "sourceDocument": Document.from_dict(obj["sourceDocument"]) if obj.get("sourceDocument") is not None else None,
+            "sourceFile": ChatFile.from_dict(obj["sourceFile"]) if obj.get("sourceFile") is not None else None,
             "sourcePerson": Person.from_dict(obj["sourcePerson"]) if obj.get("sourcePerson") is not None else None,
             "referenceRanges": [ReferenceRange.from_dict(_item) for _item in obj["referenceRanges"]] if obj.get("referenceRanges") is not None else None
         })

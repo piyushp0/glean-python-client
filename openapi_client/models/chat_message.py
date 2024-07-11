@@ -33,14 +33,15 @@ class ChatMessage(BaseModel):
     agent_config: Optional[AgentConfig] = Field(default=None, alias="agentConfig")
     author: Optional[StrictStr] = 'USER'
     citations: Optional[List[ChatMessageCitation]] = Field(default=None, description="A list of Citations used to generate the message.")
+    uploaded_file_ids: Optional[List[StrictStr]] = Field(default=None, description="IDs of files uploaded in the message that are referenced to generate the answer.", alias="uploadedFileIds")
     fragments: Optional[List[ChatMessageFragment]] = Field(default=None, description="A list of chat results.")
     metadata: Optional[StrictStr] = Field(default=None, description="Metadata associated with the message (not displayed to the user but stored in the app).")
     ts: Optional[StrictStr] = Field(default=None, description="Timestamp of the message.")
     message_id: Optional[StrictStr] = Field(default=None, description="Unique ID of the message.", alias="messageId")
     message_tracking_token: Optional[StrictStr] = Field(default=None, description="Opaque tracking token generated server-side.", alias="messageTrackingToken")
-    message_type: Optional[StrictStr] = Field(default=None, description="Used to determine the type of UI treatment to apply to this message. UPDATE - intermediate state message for progress updates before content responses. CONTENT - contains content relevant to the user query. CONTEXT - contains additional context relevant to the user query. DEBUG - contains debug information of ChatBot behavior. ERROR - an error happened on server side.", alias="messageType")
+    message_type: Optional[StrictStr] = Field(default=None, description="Used to determine the type of UI treatment to apply to this message.", alias="messageType")
     has_more_fragments: Optional[StrictBool] = Field(default=None, description="Signals there are more fragments incoming.", alias="hasMoreFragments")
-    __properties: ClassVar[List[str]] = ["agentConfig", "author", "citations", "fragments", "metadata", "ts", "messageId", "messageTrackingToken", "messageType", "hasMoreFragments"]
+    __properties: ClassVar[List[str]] = ["agentConfig", "author", "citations", "uploadedFileIds", "fragments", "metadata", "ts", "messageId", "messageTrackingToken", "messageType", "hasMoreFragments"]
 
     @field_validator('author')
     def author_validate_enum(cls, value):
@@ -58,8 +59,8 @@ class ChatMessage(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'ERROR']):
-            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'ERROR')")
+        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR']):
+            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR')")
         return value
 
     model_config = ConfigDict(
@@ -133,6 +134,7 @@ class ChatMessage(BaseModel):
             "agentConfig": AgentConfig.from_dict(obj["agentConfig"]) if obj.get("agentConfig") is not None else None,
             "author": obj.get("author") if obj.get("author") is not None else 'USER',
             "citations": [ChatMessageCitation.from_dict(_item) for _item in obj["citations"]] if obj.get("citations") is not None else None,
+            "uploadedFileIds": obj.get("uploadedFileIds"),
             "fragments": [ChatMessageFragment.from_dict(_item) for _item in obj["fragments"]] if obj.get("fragments") is not None else None,
             "metadata": obj.get("metadata"),
             "ts": obj.get("ts"),

@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.document import Document
+from openapi_client.models.facet_filter_set import FacetFilterSet
 from openapi_client.models.search_result_prominence_enum import SearchResultProminenceEnum
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +32,10 @@ class RecommendationsRequestOptions(BaseModel):
     """ # noqa: E501
     datasource_filter: Optional[StrictStr] = Field(default=None, description="Filter results to a single datasource name (e.g. gmail, slack). All results are returned if missing.", alias="datasourceFilter")
     datasources_filter: Optional[List[StrictStr]] = Field(default=None, description="Filter results to only those relevant to one or more datasources (e.g. jira, gdrive). All results are returned if missing.", alias="datasourcesFilter")
+    facet_filter_sets: Optional[List[FacetFilterSet]] = Field(default=None, description="A list of facet filter sets that will be OR'ed together.", alias="facetFilterSets")
     context: Optional[Document] = None
     result_prominence: Optional[List[SearchResultProminenceEnum]] = Field(default=None, description="The types of prominence wanted in results returned. Default is any type.", alias="resultProminence")
-    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "context", "resultProminence"]
+    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "facetFilterSets", "context", "resultProminence"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +76,13 @@ class RecommendationsRequestOptions(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in facet_filter_sets (list)
+        _items = []
+        if self.facet_filter_sets:
+            for _item in self.facet_filter_sets:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['facetFilterSets'] = _items
         # override the default output from pydantic by calling `to_dict()` of context
         if self.context:
             _dict['context'] = self.context.to_dict()
@@ -91,6 +100,7 @@ class RecommendationsRequestOptions(BaseModel):
         _obj = cls.model_validate({
             "datasourceFilter": obj.get("datasourceFilter"),
             "datasourcesFilter": obj.get("datasourcesFilter"),
+            "facetFilterSets": [FacetFilterSet.from_dict(_item) for _item in obj["facetFilterSets"]] if obj.get("facetFilterSets") is not None else None,
             "context": Document.from_dict(obj["context"]) if obj.get("context") is not None else None,
             "resultProminence": obj.get("resultProminence")
         })

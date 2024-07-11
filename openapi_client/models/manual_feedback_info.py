@@ -30,6 +30,7 @@ class ManualFeedbackInfo(BaseModel):
     email: Optional[StrictStr] = Field(default=None, description="The email address of the user who submitted the Feedback.event.MANUAL_FEEDBACK event.")
     source: Optional[StrictStr] = Field(default=None, description="The source associated with the Feedback.event.MANUAL_FEEDBACK event.")
     issue: Optional[StrictStr] = Field(default=None, description="The issue the user indicated in the feedback.")
+    image_urls: Optional[List[StrictStr]] = Field(default=None, description="URLs of images uploaded by user when providing feedback", alias="imageUrls")
     query: Optional[StrictStr] = Field(default=None, description="The query associated with the Feedback.event.MANUAL_FEEDBACK event.")
     obscured_query: Optional[StrictStr] = Field(default=None, description="The query associated with the Feedback.event.MANUAL_FEEDBACK event, but obscured such that the vowels are replaced with special characters. For search feedback events only.", alias="obscuredQuery")
     active_tab: Optional[StrictStr] = Field(default=None, description="Which tabs the user had chosen at the time of the Feedback.event.MANUAL_FEEDBACK event. For search feedback events only.", alias="activeTab")
@@ -41,7 +42,7 @@ class ManualFeedbackInfo(BaseModel):
     rating: Optional[StrictInt] = Field(default=None, description="A rating associated with the user feedback. The value will be between one and the maximum given by ratingScale, inclusive.")
     rating_key: Optional[StrictStr] = Field(default=None, description="A description of the rating that contextualizes how it appeared to the user, e.g. \"satisfied\".", alias="ratingKey")
     rating_scale: Optional[StrictInt] = Field(default=None, description="The scale of comparison for a rating associated with the feedback. Rating values start from one and go up to the maximum specified by ratingScale. For example, a five-option satisfaction rating will have a ratingScale of 5 and a thumbs-up/thumbs-down rating will have a ratingScale of 2.", alias="ratingScale")
-    __properties: ClassVar[List[str]] = ["email", "source", "issue", "query", "obscuredQuery", "activeTab", "comments", "searchResults", "previousMessages", "numQueriesFromFirstRun", "vote", "rating", "ratingKey", "ratingScale"]
+    __properties: ClassVar[List[str]] = ["email", "source", "issue", "imageUrls", "query", "obscuredQuery", "activeTab", "comments", "searchResults", "previousMessages", "numQueriesFromFirstRun", "vote", "rating", "ratingKey", "ratingScale"]
 
     @field_validator('source')
     def source_validate_enum(cls, value):
@@ -117,6 +118,7 @@ class ManualFeedbackInfo(BaseModel):
             "email": obj.get("email"),
             "source": obj.get("source"),
             "issue": obj.get("issue"),
+            "imageUrls": obj.get("imageUrls"),
             "query": obj.get("query"),
             "obscuredQuery": obj.get("obscuredQuery"),
             "activeTab": obj.get("activeTab"),

@@ -48,6 +48,13 @@ class TestDocumentsApi(unittest.TestCase):
         """
         pass
 
+    def test_getdocumentsbyfacets(self) -> None:
+        """Test case for getdocumentsbyfacets
+
+        Read documents by facets
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

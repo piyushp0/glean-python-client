@@ -6,8 +6,8 @@ Describes the agent that executes the request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**agent** | **str** | Name of the agent. DEFAULT - Integrates with your company&#39;s knowledge. GPT - Communicates directly with the LLM. | [optional] 
-**mode** | **str** | Top level modes to run GleanChat in. DEFAULT - Used if no mode supplied. QUICK - Trades accuracy and precision for speed. | [optional] 
+**agent** | **str** | Name of the agent. | [optional] 
+**mode** | **str** | Top level modes to run GleanChat in. | [optional] 
 
 ## Example
 

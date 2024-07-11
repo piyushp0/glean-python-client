@@ -1,7 +1,6 @@
 .github/workflows/python.yml
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/Activity.md
@@ -73,10 +72,8 @@ docs/ChatMetadataResult.md
 docs/ChatRequest.md
 docs/ChatResponse.md
 docs/ChatResult.md
-docs/ClientAction.md
 docs/ClientConfig.md
 docs/ClientConfigBrandings.md
-docs/ClientData.md
 docs/ClusterGroup.md
 docs/ClusterTypeEnum.md
 docs/Code.md
@@ -113,11 +110,7 @@ docs/CreateDisplayableListsResponse.md
 docs/CreateDraftAnnouncementRequest.md
 docs/CreateShortcutRequest.md
 docs/CreateShortcutResponse.md
-docs/CreateTeamsRequest.md
-docs/CreateTeamsResponse.md
 docs/CustomDataValue.md
-docs/CustomEntitiesRequest.md
-docs/CustomEntitiesResponse.md
 docs/CustomEntity.md
 docs/CustomEntityMetadata.md
 docs/CustomFieldData.md
@@ -141,8 +134,6 @@ docs/DeleteQueryHistoryError.md
 docs/DeleteQueryHistoryRequest.md
 docs/DeleteQueryHistoryResponse.md
 docs/DeleteShortcutRequest.md
-docs/DeleteTeamsRequest.md
-docs/DeleteTeamsResponse.md
 docs/DisplayableList.md
 docs/DisplayableListConfig.md
 docs/DisplayableListFormat.md
@@ -183,7 +174,6 @@ docs/EmailRequestChatFeedbackPayload.md
 docs/EmailRequestFeedbackPayload.md
 docs/EntitiesApi.md
 docs/EntitiesSortOrder.md
-docs/EntitiesTypeEnum.md
 docs/ErrorInfo.md
 docs/ErrorMessage.md
 docs/EventClassification.md
@@ -232,6 +222,8 @@ docs/GetDocPermissionsRequest.md
 docs/GetDocPermissionsResponse.md
 docs/GetDocumentAnalyticsRequest.md
 docs/GetDocumentAnalyticsResponse.md
+docs/GetDocumentsByFacetsRequest.md
+docs/GetDocumentsByFacetsResponse.md
 docs/GetDocumentsRequest.md
 docs/GetDocumentsResponse.md
 docs/GetDraftAnnouncementResponse.md
@@ -335,6 +327,7 @@ docs/Reminder.md
 docs/ReminderRequest.md
 docs/RemoveCredentialRequest.md
 docs/RemovedCollections.md
+docs/ResolutionStep.md
 docs/RestrictionFilters.md
 docs/Result.md
 docs/ResultTab.md
@@ -378,7 +371,6 @@ docs/SummarizeResponse.md
 docs/SummarizeResponseError.md
 docs/Summary.md
 docs/Team.md
-docs/TeamCreationData.md
 docs/TeamEmail.md
 docs/TeamsRequest.md
 docs/TeamsResponse.md
@@ -514,10 +506,8 @@ openapi_client/models/chat_metadata_result.py
 openapi_client/models/chat_request.py
 openapi_client/models/chat_response.py
 openapi_client/models/chat_result.py
-openapi_client/models/client_action.py
 openapi_client/models/client_config.py
 openapi_client/models/client_config_brandings.py
-openapi_client/models/client_data.py
 openapi_client/models/cluster_group.py
 openapi_client/models/cluster_type_enum.py
 openapi_client/models/code.py
@@ -553,11 +543,7 @@ openapi_client/models/create_displayable_lists_response.py
 openapi_client/models/create_draft_announcement_request.py
 openapi_client/models/create_shortcut_request.py
 openapi_client/models/create_shortcut_response.py
-openapi_client/models/create_teams_request.py
-openapi_client/models/create_teams_response.py
 openapi_client/models/custom_data_value.py
-openapi_client/models/custom_entities_request.py
-openapi_client/models/custom_entities_response.py
 openapi_client/models/custom_entity.py
 openapi_client/models/custom_entity_metadata.py
 openapi_client/models/custom_field_data.py
@@ -581,8 +567,6 @@ openapi_client/models/delete_query_history_error.py
 openapi_client/models/delete_query_history_request.py
 openapi_client/models/delete_query_history_response.py
 openapi_client/models/delete_shortcut_request.py
-openapi_client/models/delete_teams_request.py
-openapi_client/models/delete_teams_response.py
 openapi_client/models/displayable_list.py
 openapi_client/models/displayable_list_config.py
 openapi_client/models/displayable_list_format.py
@@ -620,7 +604,6 @@ openapi_client/models/email_request.py
 openapi_client/models/email_request_chat_feedback_payload.py
 openapi_client/models/email_request_feedback_payload.py
 openapi_client/models/entities_sort_order.py
-openapi_client/models/entities_type_enum.py
 openapi_client/models/error_info.py
 openapi_client/models/error_message.py
 openapi_client/models/event_classification.py
@@ -669,6 +652,8 @@ openapi_client/models/get_doc_permissions_request.py
 openapi_client/models/get_doc_permissions_response.py
 openapi_client/models/get_document_analytics_request.py
 openapi_client/models/get_document_analytics_response.py
+openapi_client/models/get_documents_by_facets_request.py
+openapi_client/models/get_documents_by_facets_response.py
 openapi_client/models/get_documents_request.py
 openapi_client/models/get_documents_response.py
 openapi_client/models/get_draft_announcement_response.py
@@ -768,6 +753,7 @@ openapi_client/models/reminder.py
 openapi_client/models/reminder_request.py
 openapi_client/models/remove_credential_request.py
 openapi_client/models/removed_collections.py
+openapi_client/models/resolution_step.py
 openapi_client/models/restriction_filters.py
 openapi_client/models/result.py
 openapi_client/models/result_tab.py
@@ -808,7 +794,6 @@ openapi_client/models/summarize_response.py
 openapi_client/models/summarize_response_error.py
 openapi_client/models/summary.py
 openapi_client/models/team.py
-openapi_client/models/team_creation_data.py
 openapi_client/models/team_email.py
 openapi_client/models/teams_request.py
 openapi_client/models/teams_response.py
@@ -927,10 +912,8 @@ test/test_chat_metadata_result.py
 test/test_chat_request.py
 test/test_chat_response.py
 test/test_chat_result.py
-test/test_client_action.py
 test/test_client_config.py
 test/test_client_config_brandings.py
-test/test_client_data.py
 test/test_cluster_group.py
 test/test_cluster_type_enum.py
 test/test_code.py
@@ -967,11 +950,7 @@ test/test_create_displayable_lists_response.py
 test/test_create_draft_announcement_request.py
 test/test_create_shortcut_request.py
 test/test_create_shortcut_response.py
-test/test_create_teams_request.py
-test/test_create_teams_response.py
 test/test_custom_data_value.py
-test/test_custom_entities_request.py
-test/test_custom_entities_response.py
 test/test_custom_entity.py
 test/test_custom_entity_metadata.py
 test/test_custom_field_data.py
@@ -995,8 +974,6 @@ test/test_delete_query_history_error.py
 test/test_delete_query_history_request.py
 test/test_delete_query_history_response.py
 test/test_delete_shortcut_request.py
-test/test_delete_teams_request.py
-test/test_delete_teams_response.py
 test/test_displayable_list.py
 test/test_displayable_list_config.py
 test/test_displayable_list_format.py
@@ -1037,7 +1014,6 @@ test/test_email_request_chat_feedback_payload.py
 test/test_email_request_feedback_payload.py
 test/test_entities_api.py
 test/test_entities_sort_order.py
-test/test_entities_type_enum.py
 test/test_error_info.py
 test/test_error_message.py
 test/test_event_classification.py
@@ -1086,6 +1062,8 @@ test/test_get_doc_permissions_request.py
 test/test_get_doc_permissions_response.py
 test/test_get_document_analytics_request.py
 test/test_get_document_analytics_response.py
+test/test_get_documents_by_facets_request.py
+test/test_get_documents_by_facets_response.py
 test/test_get_documents_request.py
 test/test_get_documents_response.py
 test/test_get_draft_announcement_response.py
@@ -1189,6 +1167,7 @@ test/test_reminder.py
 test/test_reminder_request.py
 test/test_remove_credential_request.py
 test/test_removed_collections.py
+test/test_resolution_step.py
 test/test_restriction_filters.py
 test/test_result.py
 test/test_result_tab.py
@@ -1232,7 +1211,6 @@ test/test_summarize_response.py
 test/test_summarize_response_error.py
 test/test_summary.py
 test/test_team.py
-test/test_team_creation_data.py
 test/test_team_email.py
 test/test_teams_request.py
 test/test_teams_response.py

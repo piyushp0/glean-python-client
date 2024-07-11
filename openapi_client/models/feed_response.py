@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.facet_result import FacetResult
 from openapi_client.models.feed_result import FeedResult
 from typing import Optional, Set
@@ -33,12 +33,9 @@ class FeedResponse(BaseModel):
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular feed response.", alias="trackingToken")
     server_timestamp: StrictInt = Field(description="Server unix timestamp (in seconds since epoch UTC).", alias="serverTimestamp")
     results: Optional[List[FeedResult]] = None
-    backend_time_millis: Optional[StrictInt] = Field(default=None, description="Time in milliseconds the backend took to respond to the request.", alias="backendTimeMillis")
-    datasource_affinity: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="A mapping from datasources to affinity of the user to each with scores.", alias="datasourceAffinity")
-    company_resources_collection_id: Optional[StrictInt] = Field(default=None, description="The unique ID of the collection for company resources.", alias="companyResourcesCollectionId")
     facet_results: Optional[Dict[str, List[FacetResult]]] = Field(default=None, description="Map from category to the list of facets that can be used to filter the entry's content.", alias="facetResults")
     mentions_time_window_in_hours: Optional[StrictInt] = Field(default=None, description="The time window (in hours) used for generating user mentions.", alias="mentionsTimeWindowInHours")
-    __properties: ClassVar[List[str]] = ["experimentIds", "trackingToken", "serverTimestamp", "results", "backendTimeMillis", "datasourceAffinity", "companyResourcesCollectionId", "facetResults", "mentionsTimeWindowInHours"]
+    __properties: ClassVar[List[str]] = ["experimentIds", "trackingToken", "serverTimestamp", "results", "facetResults", "mentionsTimeWindowInHours"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,9 +108,6 @@ class FeedResponse(BaseModel):
             "trackingToken": obj.get("trackingToken"),
             "serverTimestamp": obj.get("serverTimestamp"),
             "results": [FeedResult.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "backendTimeMillis": obj.get("backendTimeMillis"),
-            "datasourceAffinity": obj.get("datasourceAffinity"),
-            "companyResourcesCollectionId": obj.get("companyResourcesCollectionId"),
             "facetResults": dict(
                 (_k,
                         [FacetResult.from_dict(_item) for _item in _v]

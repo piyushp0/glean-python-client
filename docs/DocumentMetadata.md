@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **parent_id** | **str** | The id of the direct parent of the result. Interpretation is specific to each datasource (e.g. parent issue for Jira). cf. container | [optional] 
 **mime_type** | **str** |  | [optional] 
 **document_id** | **str** | The index-wide unique identifier. | [optional] 
+**logging_id** | **str** | A unique identifier used to represent the document in any logging or feedback requests in place of documentId. | [optional] 
 **document_id_hash** | **str** | Hash of the Glean Document ID. | [optional] 
 **create_time** | **datetime** |  | [optional] 
 **update_time** | **datetime** |  | [optional] 

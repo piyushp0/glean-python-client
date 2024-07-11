@@ -2,10 +2,15 @@
 
 Current status of the file.
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `PROCESSING` (value: `'PROCESSING'`)
+
+* `PROCESSED` (value: `'PROCESSED'`)
+
+* `FAILED` (value: `'FAILED'`)
+
+* `DELETED` (value: `'DELETED'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **messages** | [**List[ChatMessage]**](ChatMessage.md) |  | [optional] 
 **chat_id** | **str** | The id of the associated Chat the messages belong to, if one exists. | [optional] 
 **follow_up_prompts** | **List[str]** | Follow-up prompts for the user to potentially use | [optional] 
-**agent_config** | [**AgentConfig**](AgentConfig.md) |  | [optional] 
 **backend_time_millis** | **int** | Time in milliseconds the backend took to respond to the request. | [optional] 
 **chat_session_tracking_token** | **str** | A token that is used to track the session. | [optional] 
 

@@ -114,10 +114,8 @@ from openapi_client.models.chat_metadata_result import ChatMetadataResult
 from openapi_client.models.chat_request import ChatRequest
 from openapi_client.models.chat_response import ChatResponse
 from openapi_client.models.chat_result import ChatResult
-from openapi_client.models.client_action import ClientAction
 from openapi_client.models.client_config import ClientConfig
 from openapi_client.models.client_config_brandings import ClientConfigBrandings
-from openapi_client.models.client_data import ClientData
 from openapi_client.models.cluster_group import ClusterGroup
 from openapi_client.models.cluster_type_enum import ClusterTypeEnum
 from openapi_client.models.code import Code
@@ -153,11 +151,7 @@ from openapi_client.models.create_displayable_lists_response import CreateDispla
 from openapi_client.models.create_draft_announcement_request import CreateDraftAnnouncementRequest
 from openapi_client.models.create_shortcut_request import CreateShortcutRequest
 from openapi_client.models.create_shortcut_response import CreateShortcutResponse
-from openapi_client.models.create_teams_request import CreateTeamsRequest
-from openapi_client.models.create_teams_response import CreateTeamsResponse
 from openapi_client.models.custom_data_value import CustomDataValue
-from openapi_client.models.custom_entities_request import CustomEntitiesRequest
-from openapi_client.models.custom_entities_response import CustomEntitiesResponse
 from openapi_client.models.custom_entity import CustomEntity
 from openapi_client.models.custom_entity_metadata import CustomEntityMetadata
 from openapi_client.models.custom_field_data import CustomFieldData
@@ -181,8 +175,6 @@ from openapi_client.models.delete_query_history_error import DeleteQueryHistoryE
 from openapi_client.models.delete_query_history_request import DeleteQueryHistoryRequest
 from openapi_client.models.delete_query_history_response import DeleteQueryHistoryResponse
 from openapi_client.models.delete_shortcut_request import DeleteShortcutRequest
-from openapi_client.models.delete_teams_request import DeleteTeamsRequest
-from openapi_client.models.delete_teams_response import DeleteTeamsResponse
 from openapi_client.models.displayable_list import DisplayableList
 from openapi_client.models.displayable_list_config import DisplayableListConfig
 from openapi_client.models.displayable_list_format import DisplayableListFormat
@@ -220,7 +212,6 @@ from openapi_client.models.email_request import EmailRequest
 from openapi_client.models.email_request_chat_feedback_payload import EmailRequestChatFeedbackPayload
 from openapi_client.models.email_request_feedback_payload import EmailRequestFeedbackPayload
 from openapi_client.models.entities_sort_order import EntitiesSortOrder
-from openapi_client.models.entities_type_enum import EntitiesTypeEnum
 from openapi_client.models.error_info import ErrorInfo
 from openapi_client.models.error_message import ErrorMessage
 from openapi_client.models.event_classification import EventClassification
@@ -269,6 +260,8 @@ from openapi_client.models.get_doc_permissions_request import GetDocPermissionsR
 from openapi_client.models.get_doc_permissions_response import GetDocPermissionsResponse
 from openapi_client.models.get_document_analytics_request import GetDocumentAnalyticsRequest
 from openapi_client.models.get_document_analytics_response import GetDocumentAnalyticsResponse
+from openapi_client.models.get_documents_by_facets_request import GetDocumentsByFacetsRequest
+from openapi_client.models.get_documents_by_facets_response import GetDocumentsByFacetsResponse
 from openapi_client.models.get_documents_request import GetDocumentsRequest
 from openapi_client.models.get_documents_response import GetDocumentsResponse
 from openapi_client.models.get_draft_announcement_response import GetDraftAnnouncementResponse
@@ -368,6 +361,7 @@ from openapi_client.models.reminder import Reminder
 from openapi_client.models.reminder_request import ReminderRequest
 from openapi_client.models.remove_credential_request import RemoveCredentialRequest
 from openapi_client.models.removed_collections import RemovedCollections
+from openapi_client.models.resolution_step import ResolutionStep
 from openapi_client.models.restriction_filters import RestrictionFilters
 from openapi_client.models.result import Result
 from openapi_client.models.result_tab import ResultTab
@@ -408,7 +402,6 @@ from openapi_client.models.summarize_response import SummarizeResponse
 from openapi_client.models.summarize_response_error import SummarizeResponseError
 from openapi_client.models.summary import Summary
 from openapi_client.models.team import Team
-from openapi_client.models.team_creation_data import TeamCreationData
 from openapi_client.models.team_email import TeamEmail
 from openapi_client.models.teams_request import TeamsRequest
 from openapi_client.models.teams_response import TeamsResponse

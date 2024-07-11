@@ -28,7 +28,7 @@ class TestAssistantConfig(unittest.TestCase):
 
     def make_instance(self, include_optional) -> AssistantConfig:
         """Test AssistantConfig
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AssistantConfig`
@@ -55,6 +55,7 @@ class TestAssistantConfig(unittest.TestCase):
                     ''
                     ],
                 gpt_agent_enabled = True,
+                file_upload_enabled = True,
                 chat_history_enabled = True,
                 chat_guide_url = ''
             )

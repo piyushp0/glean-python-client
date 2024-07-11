@@ -28,7 +28,7 @@ class TestFeedResponse(unittest.TestCase):
 
     def make_instance(self, include_optional) -> FeedResponse:
         """Test FeedResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FeedResponse`
@@ -52,10 +52,10 @@ class TestFeedResponse(unittest.TestCase):
                                 url = '', ), 
                             created_by = {"name":"George Clooney","obfuscatedId":"abc123"}, 
                             ui_config = null, 
-                            snippet = '', 
                             justification_type = 'FREQUENTLY_ACCESSED', 
                             justification = '', 
                             tracking_token = '', 
+                            view_url = '', 
                             document = openapi_client.models.document.Document(
                                 id = '', 
                                 datasource = '', 
@@ -117,56 +117,18 @@ class TestFeedResponse(unittest.TestCase):
                                 ], 
                             document_visitor_count = openapi_client.models.count_info.CountInfo(
                                 count = 56, 
-                                org = '', ), 
-                            view_url = '', 
-                            additional_client_actions = [
-                                openapi_client.models.client_action.ClientAction(
-                                    type = 'GO_TO_HOME', 
-                                    quicklink = openapi_client.models.quicklink.Quicklink(
-                                        name = '', 
-                                        short_name = '', 
-                                        url = '', 
-                                        icon_config = {"color":"#343CED","key":"person_icon","iconType":"GLYPH","name":"user"}, 
-                                        id = '', 
-                                        scopes = [
-                                            'APP_CARD'
-                                            ], ), 
-                                    destination_url = '', )
-                                ], ), 
+                                org = '', ), ), 
                         secondary_entries = [
                             openapi_client.models.feed_entry.FeedEntry(
                                 entry_id = '', 
                                 title = '', 
-                                snippet = '', 
                                 justification_type = 'FREQUENTLY_ACCESSED', 
                                 justification = '', 
                                 tracking_token = '', 
                                 view_url = '', )
                             ], 
-                        rank = 56, 
-                        facet_results = [
-                            openapi_client.models.facet_result.FacetResult(
-                                source_name = 'container_name', 
-                                operator_name = 'SelectMultiple', 
-                                buckets = [
-                                    openapi_client.models.facet_bucket.FacetBucket(
-                                        count = 1, 
-                                        datasource = 'jira', 
-                                        percentage = 5, 
-                                        value = openapi_client.models.facet_value.FacetValue(
-                                            string_value = 'engineering', 
-                                            integer_value = 5, 
-                                            display_label = 'engineering', ), )
-                                    ], 
-                                has_more_buckets = False, 
-                                group_name = 'Service Cloud', )
-                            ], )
+                        rank = 56, )
                     ],
-                backend_time_millis = 56,
-                datasource_affinity = {
-                    'key' : 1.337
-                    },
-                company_resources_collection_id = 56,
                 facet_results = {
                     'key' : [
                         openapi_client.models.facet_result.FacetResult(

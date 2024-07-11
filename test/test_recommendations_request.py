@@ -28,7 +28,7 @@ class TestRecommendationsRequest(unittest.TestCase):
 
     def make_instance(self, include_optional) -> RecommendationsRequest:
         """Test RecommendationsRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `RecommendationsRequest`
@@ -81,6 +81,12 @@ class TestRecommendationsRequest(unittest.TestCase):
                     datasource_filter = '', 
                     datasources_filter = [
                         ''
+                        ], 
+                    facet_filter_sets = [
+                        openapi_client.models.facet_filter_set.FacetFilterSet(
+                            filters = [
+                                {"fieldName":"type","values":[{"value":"Spreadsheet","relationType":"EQUALS"},{"value":"Presentation","relationType":"EQUALS"}]}
+                                ], )
                         ], 
                     context = openapi_client.models.document.Document(
                         id = '', 

@@ -28,7 +28,7 @@ class TestToolsConfig(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ToolsConfig:
         """Test ToolsConfig
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ToolsConfig`
@@ -61,7 +61,13 @@ class TestToolsConfig(unittest.TestCase):
                             scopes = [
                                 ''
                                 ], 
-                            authorization_url = '', ), )
+                            authorization_url = '', ), 
+                        permissions = openapi_client.models.object_permissions.ObjectPermissions(
+                            write = openapi_client.models.write_permission.WritePermission(
+                                scope_type = 'GLOBAL', 
+                                create = True, 
+                                update = True, 
+                                delete = True, ), ), )
                     ]
             )
         else:

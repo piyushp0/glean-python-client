@@ -5,10 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**refresh_type** | **str** | Type of refresh requested. Intended for logging and future optimizations. | 
 **categories** | **List[str]** | Categories of content requested. An allowlist gives flexibility to request content separately or together. | [optional] 
 **request_options** | [**FeedRequestOptions**](FeedRequestOptions.md) |  | [optional] 
-**client_data** | [**ClientData**](ClientData.md) |  | [optional] 
 **timeout_millis** | **int** | Timeout in milliseconds for the request. A &#x60;408&#x60; error will be returned if handling the request takes longer. | [optional] 
 **session_info** | [**SessionInfo**](SessionInfo.md) |  | [optional] 
 

@@ -27,34 +27,6 @@ class TestEntitiesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_createteams(self) -> None:
-        """Test case for createteams
-
-        Create teams
-        """
-        pass
-
-    def test_customentities(self) -> None:
-        """Test case for customentities
-
-        Read custom entities
-        """
-        pass
-
-    def test_deleteteams(self) -> None:
-        """Test case for deleteteams
-
-        Delete teams
-        """
-        pass
-
-    def test_downloadentities(self) -> None:
-        """Test case for downloadentities
-
-        Download entities
-        """
-        pass
-
     def test_listentities(self) -> None:
         """Test case for listentities
 

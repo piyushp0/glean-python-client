@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tracking_token** | **str** | An opaque token that represents this particular result in this particular ChatMessage. To be used for /feedback reporting. | [optional] 
 **source_document** | [**Document**](Document.md) |  | [optional] 
+**source_file** | [**ChatFile**](ChatFile.md) |  | [optional] 
 **source_person** | [**Person**](Person.md) |  | [optional] 
 **reference_ranges** | [**List[ReferenceRange]**](ReferenceRange.md) | Each reference range and its corresponding snippets | [optional] 
 

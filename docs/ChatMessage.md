@@ -9,12 +9,13 @@ Name | Type | Description | Notes
 **agent_config** | [**AgentConfig**](AgentConfig.md) |  | [optional] 
 **author** | **str** |  | [optional] [default to 'USER']
 **citations** | [**List[ChatMessageCitation]**](ChatMessageCitation.md) | A list of Citations used to generate the message. | [optional] 
+**uploaded_file_ids** | **List[str]** | IDs of files uploaded in the message that are referenced to generate the answer. | [optional] 
 **fragments** | [**List[ChatMessageFragment]**](ChatMessageFragment.md) | A list of chat results. | [optional] 
 **metadata** | **str** | Metadata associated with the message (not displayed to the user but stored in the app). | [optional] 
 **ts** | **str** | Timestamp of the message. | [optional] 
 **message_id** | **str** | Unique ID of the message. | [optional] 
 **message_tracking_token** | **str** | Opaque tracking token generated server-side. | [optional] 
-**message_type** | **str** | Used to determine the type of UI treatment to apply to this message. UPDATE - intermediate state message for progress updates before content responses. CONTENT - contains content relevant to the user query. CONTEXT - contains additional context relevant to the user query. DEBUG - contains debug information of ChatBot behavior. ERROR - an error happened on server side. | [optional] 
+**message_type** | **str** | Used to determine the type of UI treatment to apply to this message. | [optional] 
 **has_more_fragments** | **bool** | Signals there are more fragments incoming. | [optional] 
 
 ## Example

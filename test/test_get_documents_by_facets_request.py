@@ -15,10 +15,10 @@
 
 import unittest
 
-from openapi_client.models.delete_teams_response import DeleteTeamsResponse
+from openapi_client.models.get_documents_by_facets_request import GetDocumentsByFacetsRequest
 
-class TestDeleteTeamsResponse(unittest.TestCase):
-    """DeleteTeamsResponse unit test stubs"""
+class TestGetDocumentsByFacetsRequest(unittest.TestCase):
+    """GetDocumentsByFacetsRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,25 +26,40 @@ class TestDeleteTeamsResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeleteTeamsResponse:
-        """Test DeleteTeamsResponse
-            include_option is a boolean, when False only required
+    def make_instance(self, include_optional) -> GetDocumentsByFacetsRequest:
+        """Test GetDocumentsByFacetsRequest
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeleteTeamsResponse`
+        # uncomment below to create an instance of `GetDocumentsByFacetsRequest`
         """
-        model = DeleteTeamsResponse()
+        model = GetDocumentsByFacetsRequest()
         if include_optional:
-            return DeleteTeamsResponse(
-                num_errors = 56
+            return GetDocumentsByFacetsRequest(
+                datasources_filter = [
+                    ''
+                    ],
+                filter_sets = [
+                    openapi_client.models.facet_filter_set.FacetFilterSet(
+                        filters = [
+                            {"fieldName":"type","values":[{"value":"Spreadsheet","relationType":"EQUALS"},{"value":"Presentation","relationType":"EQUALS"}]}
+                            ], )
+                    ],
+                cursor = ''
             )
         else:
-            return DeleteTeamsResponse(
+            return GetDocumentsByFacetsRequest(
+                filter_sets = [
+                    openapi_client.models.facet_filter_set.FacetFilterSet(
+                        filters = [
+                            {"fieldName":"type","values":[{"value":"Spreadsheet","relationType":"EQUALS"},{"value":"Presentation","relationType":"EQUALS"}]}
+                            ], )
+                    ],
         )
         """
 
-    def testDeleteTeamsResponse(self):
-        """Test DeleteTeamsResponse"""
+    def testGetDocumentsByFacetsRequest(self):
+        """Test GetDocumentsByFacetsRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

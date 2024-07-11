@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **email** | **str** | The email address of the user who submitted the Feedback.event.MANUAL_FEEDBACK event. | [optional] 
 **source** | **str** | The source associated with the Feedback.event.MANUAL_FEEDBACK event. | [optional] 
 **issue** | **str** | The issue the user indicated in the feedback. | [optional] 
+**image_urls** | **List[str]** | URLs of images uploaded by user when providing feedback | [optional] 
 **query** | **str** | The query associated with the Feedback.event.MANUAL_FEEDBACK event. | [optional] 
 **obscured_query** | **str** | The query associated with the Feedback.event.MANUAL_FEEDBACK event, but obscured such that the vowels are replaced with special characters. For search feedback events only. | [optional] 
 **active_tab** | **str** | Which tabs the user had chosen at the time of the Feedback.event.MANUAL_FEEDBACK event. For search feedback events only. | [optional] 

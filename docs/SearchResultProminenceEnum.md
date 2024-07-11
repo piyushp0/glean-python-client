@@ -2,10 +2,13 @@
 
 The level of visual distinction that should be given to a result. 
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `HERO` (value: `'HERO'`)
+
+* `PROMOTED` (value: `'PROMOTED'`)
+
+* `STANDARD` (value: `'STANDARD'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

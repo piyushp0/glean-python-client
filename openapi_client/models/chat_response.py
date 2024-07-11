@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.agent_config import AgentConfig
 from openapi_client.models.chat_message import ChatMessage
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,10 +31,9 @@ class ChatResponse(BaseModel):
     messages: Optional[List[ChatMessage]] = None
     chat_id: Optional[StrictStr] = Field(default=None, description="The id of the associated Chat the messages belong to, if one exists.", alias="chatId")
     follow_up_prompts: Optional[List[StrictStr]] = Field(default=None, description="Follow-up prompts for the user to potentially use", alias="followUpPrompts")
-    agent_config: Optional[AgentConfig] = Field(default=None, alias="agentConfig")
     backend_time_millis: Optional[StrictInt] = Field(default=None, description="Time in milliseconds the backend took to respond to the request.", alias="backendTimeMillis")
     chat_session_tracking_token: Optional[StrictStr] = Field(default=None, description="A token that is used to track the session.", alias="chatSessionTrackingToken")
-    __properties: ClassVar[List[str]] = ["messages", "chatId", "followUpPrompts", "agentConfig", "backendTimeMillis", "chatSessionTrackingToken"]
+    __properties: ClassVar[List[str]] = ["messages", "chatId", "followUpPrompts", "backendTimeMillis", "chatSessionTrackingToken"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +81,6 @@ class ChatResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['messages'] = _items
-        # override the default output from pydantic by calling `to_dict()` of agent_config
-        if self.agent_config:
-            _dict['agentConfig'] = self.agent_config.to_dict()
         return _dict
 
     @classmethod
@@ -101,7 +96,6 @@ class ChatResponse(BaseModel):
             "messages": [ChatMessage.from_dict(_item) for _item in obj["messages"]] if obj.get("messages") is not None else None,
             "chatId": obj.get("chatId"),
             "followUpPrompts": obj.get("followUpPrompts"),
-            "agentConfig": AgentConfig.from_dict(obj["agentConfig"]) if obj.get("agentConfig") is not None else None,
             "backendTimeMillis": obj.get("backendTimeMillis"),
             "chatSessionTrackingToken": obj.get("chatSessionTrackingToken")
         })
