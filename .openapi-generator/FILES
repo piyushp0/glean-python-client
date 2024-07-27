@@ -849,8 +849,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_chat_restriction_filters.py
-test/test_dlp_report_data.py
-test/test_dlp_simple_result.py
-test/test_product_term_localizations_value.py
 tox.ini
