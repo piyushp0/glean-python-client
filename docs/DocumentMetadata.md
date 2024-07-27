@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **update_time** | **datetime** |  | [optional] 
 **author** | [**Person**](Person.md) |  | [optional] 
 **owner** | [**Person**](Person.md) |  | [optional] 
+**mentioned_people** | [**List[Person]**](Person.md) | A list of people mentioned in the document. | [optional] 
 **visibility** | [**DocumentVisibility**](DocumentVisibility.md) |  | [optional] 
 **components** | **List[str]** | A list of components this result is associated with. Interpretation is specific to each datasource. (e.g. for Jira issues, these are [components](https://confluence.atlassian.com/jirasoftwarecloud/organizing-work-with-components-764478279.html).) | [optional] 
 **status** | **str** | The status or disposition of the result. Interpretation is specific to each datasource. (e.g. for Jira issues, this is the issue status such as Done, In Progress or Will Not Fix). | [optional] 

@@ -30,7 +30,8 @@ class ProductTerms(BaseModel):
     """ # noqa: E501
     assistant: Optional[ProductTerm] = Field(default=None, alias="Assistant")
     glean_assistant: Optional[ProductTerm] = Field(default=None, alias="GleanAssistant")
-    __properties: ClassVar[List[str]] = ["Assistant", "GleanAssistant"]
+    public_knowledge: Optional[ProductTerm] = Field(default=None, alias="PublicKnowledge")
+    __properties: ClassVar[List[str]] = ["Assistant", "GleanAssistant", "PublicKnowledge"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +78,9 @@ class ProductTerms(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of glean_assistant
         if self.glean_assistant:
             _dict['GleanAssistant'] = self.glean_assistant.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of public_knowledge
+        if self.public_knowledge:
+            _dict['PublicKnowledge'] = self.public_knowledge.to_dict()
         return _dict
 
     @classmethod
@@ -90,7 +94,8 @@ class ProductTerms(BaseModel):
 
         _obj = cls.model_validate({
             "Assistant": ProductTerm.from_dict(obj["Assistant"]) if obj.get("Assistant") is not None else None,
-            "GleanAssistant": ProductTerm.from_dict(obj["GleanAssistant"]) if obj.get("GleanAssistant") is not None else None
+            "GleanAssistant": ProductTerm.from_dict(obj["GleanAssistant"]) if obj.get("GleanAssistant") is not None else None,
+            "PublicKnowledge": ProductTerm.from_dict(obj["PublicKnowledge"]) if obj.get("PublicKnowledge") is not None else None
         })
         return _obj
 

@@ -31,6 +31,8 @@ class UgcType(str, Enum):
     ANSWERS_TYPE = 'ANSWERS_TYPE'
     COLLECTIONS_TYPE = 'COLLECTIONS_TYPE'
     SHORTCUTS_TYPE = 'SHORTCUTS_TYPE'
+    WORKFLOWS_TYPE = 'WORKFLOWS_TYPE'
+    PROMPT_TEMPLATES_TYPE = 'PROMPT_TEMPLATES_TYPE'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

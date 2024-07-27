@@ -77,6 +77,7 @@ from openapi_client.models.chat_metadata import ChatMetadata
 from openapi_client.models.chat_metadata_result import ChatMetadataResult
 from openapi_client.models.chat_request import ChatRequest
 from openapi_client.models.chat_response import ChatResponse
+from openapi_client.models.chat_restriction_filters import ChatRestrictionFilters
 from openapi_client.models.chat_result import ChatResult
 from openapi_client.models.client_config import ClientConfig
 from openapi_client.models.client_config_brandings import ClientConfigBrandings
@@ -144,6 +145,8 @@ from openapi_client.models.displayable_list_config import DisplayableListConfig
 from openapi_client.models.displayable_list_format import DisplayableListFormat
 from openapi_client.models.displayable_list_item_ui_config import DisplayableListItemUIConfig
 from openapi_client.models.displayable_list_source import DisplayableListSource
+from openapi_client.models.dlp_report_data import DlpReportData
+from openapi_client.models.dlp_simple_result import DlpSimpleResult
 from openapi_client.models.document import Document
 from openapi_client.models.document_analytics import DocumentAnalytics
 from openapi_client.models.document_content import DocumentContent
@@ -301,6 +304,7 @@ from openapi_client.models.preview_structured_text_response import PreviewStruct
 from openapi_client.models.preview_ugc_request import PreviewUgcRequest
 from openapi_client.models.preview_ugc_response import PreviewUgcResponse
 from openapi_client.models.product_term import ProductTerm
+from openapi_client.models.product_term_localizations_value import ProductTermLocalizationsValue
 from openapi_client.models.product_terms import ProductTerms
 from openapi_client.models.public_config_request import PublicConfigRequest
 from openapi_client.models.publish_draft_announcement_request import PublishDraftAnnouncementRequest
@@ -326,7 +330,6 @@ from openapi_client.models.reminder_request import ReminderRequest
 from openapi_client.models.remove_credential_request import RemoveCredentialRequest
 from openapi_client.models.removed_collections import RemovedCollections
 from openapi_client.models.resolution_step import ResolutionStep
-from openapi_client.models.restriction_filters import RestrictionFilters
 from openapi_client.models.result import Result
 from openapi_client.models.result_tab import ResultTab
 from openapi_client.models.results_description import ResultsDescription

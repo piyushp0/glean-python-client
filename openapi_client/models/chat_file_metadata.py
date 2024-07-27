@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.chat_file_failure_reason import ChatFileFailureReason
 from openapi_client.models.chat_file_status import ChatFileStatus
@@ -33,7 +33,8 @@ class ChatFileMetadata(BaseModel):
     upload_time: Optional[StrictInt] = Field(default=None, description="Upload time, in epoch seconds.", alias="uploadTime")
     processed_size: Optional[StrictInt] = Field(default=None, description="Size of the processed file in bytes.", alias="processedSize")
     failure_reason: Optional[ChatFileFailureReason] = Field(default=None, alias="failureReason")
-    __properties: ClassVar[List[str]] = ["status", "uploadTime", "processedSize", "failureReason"]
+    mime_type: Optional[StrictStr] = Field(default=None, description="MIME type of the file.", alias="mimeType")
+    __properties: ClassVar[List[str]] = ["status", "uploadTime", "processedSize", "failureReason", "mimeType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +90,8 @@ class ChatFileMetadata(BaseModel):
             "status": obj.get("status"),
             "uploadTime": obj.get("uploadTime"),
             "processedSize": obj.get("processedSize"),
-            "failureReason": obj.get("failureReason")
+            "failureReason": obj.get("failureReason"),
+            "mimeType": obj.get("mimeType")
         })
         return _obj
 

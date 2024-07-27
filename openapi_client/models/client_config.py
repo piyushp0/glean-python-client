@@ -63,10 +63,11 @@ class ClientConfig(BaseModel):
     greeting_format: Optional[StrictStr] = Field(default=None, description="Describes how to format the web app greeting. Possible format options include \\%t - timely greeting \\%n - the user's first name", alias="greetingFormat")
     task_see_all_label: Optional[StrictStr] = Field(default=None, description="Label for the external link at the end of the Task card in order to guide user to the source.", alias="taskSeeAllLabel")
     task_see_all_link: Optional[StrictStr] = Field(default=None, description="Link used in conjunction with taskSeeAllLabel to redirect user to the task's source.", alias="taskSeeAllLink")
+    search_placeholder: Optional[StrictStr] = Field(default=None, description="Custom autocomplete box placeholder to replace rotating prompts", alias="searchPlaceholder")
     shortcuts_prefix: Optional[StrictStr] = Field(default=None, description="Company-wide custom prefix for Go Links.", alias="shortcutsPrefix")
     sso_company_provider: Optional[StrictStr] = Field(default=None, description="SSO provider used by the company", alias="ssoCompanyProvider")
     feedback_customizations: Optional[FeedbackCustomizations] = Field(default=None, alias="feedbackCustomizations")
-    __properties: ClassVar[List[str]] = ["assistant", "tools", "shortcuts", "badVersions", "feedPeopleCelebrationsEnabled", "feedSuggestedEnabled", "feedTrendingEnabled", "feedRecentsEnabled", "feedMentionsEnabled", "gptAgentEnabled", "chatHistoryEnabled", "boolValues", "integerValues", "companyDisplayName", "customSerpMarkdown", "onboardingQuery", "isOrgChartLinkVisible", "isOrgChartAccessible", "isPeopleSetup", "isPilotMode", "webAppUrl", "userOutreach", "searchLinkUrlTemplate", "chatLinkUrlTemplate", "themes", "brandings", "greetingFormat", "taskSeeAllLabel", "taskSeeAllLink", "shortcutsPrefix", "ssoCompanyProvider", "feedbackCustomizations"]
+    __properties: ClassVar[List[str]] = ["assistant", "tools", "shortcuts", "badVersions", "feedPeopleCelebrationsEnabled", "feedSuggestedEnabled", "feedTrendingEnabled", "feedRecentsEnabled", "feedMentionsEnabled", "gptAgentEnabled", "chatHistoryEnabled", "boolValues", "integerValues", "companyDisplayName", "customSerpMarkdown", "onboardingQuery", "isOrgChartLinkVisible", "isOrgChartAccessible", "isPeopleSetup", "isPilotMode", "webAppUrl", "userOutreach", "searchLinkUrlTemplate", "chatLinkUrlTemplate", "themes", "brandings", "greetingFormat", "taskSeeAllLabel", "taskSeeAllLink", "searchPlaceholder", "shortcutsPrefix", "ssoCompanyProvider", "feedbackCustomizations"]
 
     @field_validator('sso_company_provider')
     def sso_company_provider_validate_enum(cls, value):
@@ -179,6 +180,7 @@ class ClientConfig(BaseModel):
             "greetingFormat": obj.get("greetingFormat"),
             "taskSeeAllLabel": obj.get("taskSeeAllLabel"),
             "taskSeeAllLink": obj.get("taskSeeAllLink"),
+            "searchPlaceholder": obj.get("searchPlaceholder"),
             "shortcutsPrefix": obj.get("shortcutsPrefix"),
             "ssoCompanyProvider": obj.get("ssoCompanyProvider"),
             "feedbackCustomizations": FeedbackCustomizations.from_dict(obj["feedbackCustomizations"]) if obj.get("feedbackCustomizations") is not None else None

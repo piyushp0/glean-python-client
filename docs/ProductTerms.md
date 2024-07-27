@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **assistant** | [**ProductTerm**](ProductTerm.md) |  | [optional] 
 **glean_assistant** | [**ProductTerm**](ProductTerm.md) |  | [optional] 
+**public_knowledge** | [**ProductTerm**](ProductTerm.md) |  | [optional] 
 
 ## Example
 

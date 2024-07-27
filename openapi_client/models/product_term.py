@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.product_term_localizations_value import ProductTermLocalizationsValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,8 @@ class ProductTerm(BaseModel):
     ProductTerm
     """ # noqa: E501
     display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    __properties: ClassVar[List[str]] = ["displayName"]
+    localizations: Optional[Dict[str, ProductTermLocalizationsValue]] = Field(default=None, description="Mapping of locale to the display name of the product term.")
+    __properties: ClassVar[List[str]] = ["displayName", "localizations"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +71,13 @@ class ProductTerm(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in localizations (dict)
+        _field_dict = {}
+        if self.localizations:
+            for _key in self.localizations:
+                if self.localizations[_key]:
+                    _field_dict[_key] = self.localizations[_key].to_dict()
+            _dict['localizations'] = _field_dict
         return _dict
 
     @classmethod
@@ -81,7 +90,13 @@ class ProductTerm(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "displayName": obj.get("displayName")
+            "displayName": obj.get("displayName"),
+            "localizations": dict(
+                (_k, ProductTermLocalizationsValue.from_dict(_v))
+                for _k, _v in obj["localizations"].items()
+            )
+            if obj.get("localizations") is not None
+            else None
         })
         return _obj
 

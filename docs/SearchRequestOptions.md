@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **fetch_all_datasource_counts** | **bool** | Hints that the QE should return result counts (via the datasource facet result) for all supported datasources, rather than just those specified in the datasource[s]Filter | [optional] 
 **response_hints** | **List[str]** | Array of hints containing which fields should be populated in the response. | [optional] 
 **timezone_offset** | **int** | The offset of the client&#39;s timezone in minutes from UTC. e.g. PDT is -420 because it&#39;s 7 hours behind UTC. | [optional] 
-**force_negation** | **bool** | Whether or not to force not ignoring of negation, i.e. force negated terms to be negated. | [optional] 
 **disable_spellcheck** | **bool** | Whether or not to disable spellcheck. | [optional] 
 **disable_query_autocorrect** | **bool** | Disables automatic adjustment of the input query for spelling corrections or other reasons. | [optional] 
 **return_llm_content_over_snippets** | **bool** | [beta] Enables expanded content to be returned for LLM usage. The size of content per result returned should be modified using maxSnippetSize. Server may return less or more than what is specified in maxSnippetSize. For more details, https://docs.google.com/document/d/1CTOLSxWWT9WDEnHVLoCUaxbGYyXYP8kctPRF-RluSQY/edit. Requires sufficient permissions. | [optional] 

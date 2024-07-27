@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **email_template** | [**CommunicationTemplate**](CommunicationTemplate.md) |  | 
 **alert_data** | [**AlertData**](AlertData.md) |  | [optional] 
 **recipients** | [**List[Person]**](Person.md) | The people to send emails to | [optional] 
+**cc_recipients** | [**List[Person]**](Person.md) | The people to CC for each email | [optional] 
 **recipient_filters** | [**PeopleFilters**](PeopleFilters.md) |  | [optional] 
 **company_name** | **str** | Name of the company. | [optional] 
 **datasource_instance** | **str** | The instance ID of the datasource (if any) | [optional] 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **subjects** | **Dict[str, str]** | Mapping of recipientIds to the email subject they are to receive. Optional and only meant for templates with Sendgrid subject set to {{subject}} | [optional] 
 **feedback_payload** | [**EmailRequestFeedbackPayload**](EmailRequestFeedbackPayload.md) |  | [optional] 
 **chat_feedback_payload** | [**EmailRequestChatFeedbackPayload**](EmailRequestChatFeedbackPayload.md) |  | [optional] 
+**dlp_report_data** | [**DlpReportData**](DlpReportData.md) |  | [optional] 
 
 ## Example
 

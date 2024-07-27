@@ -59,8 +59,8 @@ class ChatMessage(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR']):
-            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR')")
+        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'WARNING']):
+            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'WARNING')")
         return value
 
     model_config = ConfigDict(

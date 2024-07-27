@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **upload_time** | **int** | Upload time, in epoch seconds. | [optional] 
 **processed_size** | **int** | Size of the processed file in bytes. | [optional] 
 **failure_reason** | [**ChatFileFailureReason**](ChatFileFailureReason.md) |  | [optional] 
+**mime_type** | **str** | MIME type of the file. | [optional] 
 
 ## Example
 

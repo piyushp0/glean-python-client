@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** |  | [optional] 
+**localizations** | [**Dict[str, ProductTermLocalizationsValue]**](ProductTermLocalizationsValue.md) | Mapping of locale to the display name of the product term. | [optional] 
 
 ## Example
 

@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **greeting_format** | **str** | Describes how to format the web app greeting. Possible format options include \\%t - timely greeting \\%n - the user&#39;s first name | [optional] 
 **task_see_all_label** | **str** | Label for the external link at the end of the Task card in order to guide user to the source. | [optional] 
 **task_see_all_link** | **str** | Link used in conjunction with taskSeeAllLabel to redirect user to the task&#39;s source. | [optional] 
+**search_placeholder** | **str** | Custom autocomplete box placeholder to replace rotating prompts | [optional] 
 **shortcuts_prefix** | **str** | Company-wide custom prefix for Go Links. | [optional] 
 **sso_company_provider** | **str** | SSO provider used by the company | [optional] 
 **feedback_customizations** | [**FeedbackCustomizations**](FeedbackCustomizations.md) |  | [optional] 

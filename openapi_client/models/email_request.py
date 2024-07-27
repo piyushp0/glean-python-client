@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.alert_data import AlertData
 from openapi_client.models.communication_template import CommunicationTemplate
+from openapi_client.models.dlp_report_data import DlpReportData
 from openapi_client.models.document import Document
 from openapi_client.models.email_request_chat_feedback_payload import EmailRequestChatFeedbackPayload
 from openapi_client.models.email_request_feedback_payload import EmailRequestFeedbackPayload
@@ -37,6 +38,7 @@ class EmailRequest(BaseModel):
     email_template: CommunicationTemplate = Field(alias="emailTemplate")
     alert_data: Optional[AlertData] = Field(default=None, alias="alertData")
     recipients: Optional[List[Person]] = Field(default=None, description="The people to send emails to")
+    cc_recipients: Optional[List[Person]] = Field(default=None, description="The people to CC for each email", alias="ccRecipients")
     recipient_filters: Optional[PeopleFilters] = Field(default=None, alias="recipientFilters")
     company_name: Optional[StrictStr] = Field(default=None, description="Name of the company.", alias="companyName")
     datasource_instance: Optional[StrictStr] = Field(default=None, description="The instance ID of the datasource (if any)", alias="datasourceInstance")
@@ -50,7 +52,8 @@ class EmailRequest(BaseModel):
     subjects: Optional[Dict[str, StrictStr]] = Field(default=None, description="Mapping of recipientIds to the email subject they are to receive. Optional and only meant for templates with Sendgrid subject set to {{subject}}")
     feedback_payload: Optional[EmailRequestFeedbackPayload] = Field(default=None, alias="feedbackPayload")
     chat_feedback_payload: Optional[EmailRequestChatFeedbackPayload] = Field(default=None, alias="chatFeedbackPayload")
-    __properties: ClassVar[List[str]] = ["emailTemplate", "alertData", "recipients", "recipientFilters", "companyName", "datasourceInstance", "senders", "webAppUrl", "serverUrl", "unsubscribeUrl", "documents", "reasons", "blocks", "subjects", "feedbackPayload", "chatFeedbackPayload"]
+    dlp_report_data: Optional[DlpReportData] = Field(default=None, alias="dlpReportData")
+    __properties: ClassVar[List[str]] = ["emailTemplate", "alertData", "recipients", "ccRecipients", "recipientFilters", "companyName", "datasourceInstance", "senders", "webAppUrl", "serverUrl", "unsubscribeUrl", "documents", "reasons", "blocks", "subjects", "feedbackPayload", "chatFeedbackPayload", "dlpReportData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +104,13 @@ class EmailRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['recipients'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cc_recipients (list)
+        _items = []
+        if self.cc_recipients:
+            for _item in self.cc_recipients:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['ccRecipients'] = _items
         # override the default output from pydantic by calling `to_dict()` of recipient_filters
         if self.recipient_filters:
             _dict['recipientFilters'] = self.recipient_filters.to_dict()
@@ -124,6 +134,9 @@ class EmailRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of chat_feedback_payload
         if self.chat_feedback_payload:
             _dict['chatFeedbackPayload'] = self.chat_feedback_payload.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dlp_report_data
+        if self.dlp_report_data:
+            _dict['dlpReportData'] = self.dlp_report_data.to_dict()
         return _dict
 
     @classmethod
@@ -139,6 +152,7 @@ class EmailRequest(BaseModel):
             "emailTemplate": obj.get("emailTemplate"),
             "alertData": AlertData.from_dict(obj["alertData"]) if obj.get("alertData") is not None else None,
             "recipients": [Person.from_dict(_item) for _item in obj["recipients"]] if obj.get("recipients") is not None else None,
+            "ccRecipients": [Person.from_dict(_item) for _item in obj["ccRecipients"]] if obj.get("ccRecipients") is not None else None,
             "recipientFilters": PeopleFilters.from_dict(obj["recipientFilters"]) if obj.get("recipientFilters") is not None else None,
             "companyName": obj.get("companyName"),
             "datasourceInstance": obj.get("datasourceInstance"),
@@ -151,7 +165,8 @@ class EmailRequest(BaseModel):
             "blocks": obj.get("blocks"),
             "subjects": obj.get("subjects"),
             "feedbackPayload": EmailRequestFeedbackPayload.from_dict(obj["feedbackPayload"]) if obj.get("feedbackPayload") is not None else None,
-            "chatFeedbackPayload": EmailRequestChatFeedbackPayload.from_dict(obj["chatFeedbackPayload"]) if obj.get("chatFeedbackPayload") is not None else None
+            "chatFeedbackPayload": EmailRequestChatFeedbackPayload.from_dict(obj["chatFeedbackPayload"]) if obj.get("chatFeedbackPayload") is not None else None,
+            "dlpReportData": DlpReportData.from_dict(obj["dlpReportData"]) if obj.get("dlpReportData") is not None else None
         })
         return _obj
 

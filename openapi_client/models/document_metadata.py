@@ -50,6 +50,7 @@ class DocumentMetadata(BaseModel):
     update_time: Optional[datetime] = Field(default=None, alias="updateTime")
     author: Optional[Person] = None
     owner: Optional[Person] = None
+    mentioned_people: Optional[List[Person]] = Field(default=None, description="A list of people mentioned in the document.", alias="mentionedPeople")
     visibility: Optional[DocumentVisibility] = None
     components: Optional[List[StrictStr]] = Field(default=None, description="A list of components this result is associated with. Interpretation is specific to each datasource. (e.g. for Jira issues, these are [components](https://confluence.atlassian.com/jirasoftwarecloud/organizing-work-with-components-764478279.html).)")
     status: Optional[StrictStr] = Field(default=None, description="The status or disposition of the result. Interpretation is specific to each datasource. (e.g. for Jira issues, this is the issue status such as Done, In Progress or Will Not Fix).")
@@ -74,7 +75,7 @@ class DocumentMetadata(BaseModel):
     thumbnail: Optional[Thumbnail] = None
     index_status: Optional[IndexStatus] = Field(default=None, alias="indexStatus")
     ancestors: Optional[List[Document]] = Field(default=None, description="A list of documents that are ancestors of this document in the hierarchy of the document's datasource, for example parent folders or containers. Ancestors can be of different types and some may not be indexed. Higher level ancestors appear earlier in the list.")
-    __properties: ClassVar[List[str]] = ["datasource", "datasourceInstance", "objectType", "container", "containerId", "superContainerId", "parentId", "mimeType", "documentId", "loggingId", "documentIdHash", "createTime", "updateTime", "author", "owner", "visibility", "components", "status", "statusCategory", "pins", "priority", "assignedTo", "updatedBy", "labels", "collections", "datasourceId", "interactions", "verification", "viewerInfo", "permissions", "visitCount", "shortcuts", "path", "customData", "documentCategory", "contactPerson", "thumbnail", "indexStatus", "ancestors"]
+    __properties: ClassVar[List[str]] = ["datasource", "datasourceInstance", "objectType", "container", "containerId", "superContainerId", "parentId", "mimeType", "documentId", "loggingId", "documentIdHash", "createTime", "updateTime", "author", "owner", "mentionedPeople", "visibility", "components", "status", "statusCategory", "pins", "priority", "assignedTo", "updatedBy", "labels", "collections", "datasourceId", "interactions", "verification", "viewerInfo", "permissions", "visitCount", "shortcuts", "path", "customData", "documentCategory", "contactPerson", "thumbnail", "indexStatus", "ancestors"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,6 +122,13 @@ class DocumentMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of owner
         if self.owner:
             _dict['owner'] = self.owner.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in mentioned_people (list)
+        _items = []
+        if self.mentioned_people:
+            for _item in self.mentioned_people:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['mentionedPeople'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in pins (list)
         _items = []
         if self.pins:
@@ -213,6 +221,7 @@ class DocumentMetadata(BaseModel):
             "updateTime": obj.get("updateTime"),
             "author": Person.from_dict(obj["author"]) if obj.get("author") is not None else None,
             "owner": Person.from_dict(obj["owner"]) if obj.get("owner") is not None else None,
+            "mentionedPeople": [Person.from_dict(_item) for _item in obj["mentionedPeople"]] if obj.get("mentionedPeople") is not None else None,
             "visibility": obj.get("visibility"),
             "components": obj.get("components"),
             "status": obj.get("status"),

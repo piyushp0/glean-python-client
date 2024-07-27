@@ -43,11 +43,10 @@ class SearchRequestOptions(BaseModel):
     fetch_all_datasource_counts: Optional[StrictBool] = Field(default=None, description="Hints that the QE should return result counts (via the datasource facet result) for all supported datasources, rather than just those specified in the datasource[s]Filter", alias="fetchAllDatasourceCounts")
     response_hints: Optional[List[StrictStr]] = Field(default=None, description="Array of hints containing which fields should be populated in the response.", alias="responseHints")
     timezone_offset: Optional[StrictInt] = Field(default=None, description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.", alias="timezoneOffset")
-    force_negation: Optional[StrictBool] = Field(default=None, description="Whether or not to force not ignoring of negation, i.e. force negated terms to be negated.", alias="forceNegation")
     disable_spellcheck: Optional[StrictBool] = Field(default=None, description="Whether or not to disable spellcheck.", alias="disableSpellcheck")
     disable_query_autocorrect: Optional[StrictBool] = Field(default=None, description="Disables automatic adjustment of the input query for spelling corrections or other reasons.", alias="disableQueryAutocorrect")
     return_llm_content_over_snippets: Optional[StrictBool] = Field(default=None, description="[beta] Enables expanded content to be returned for LLM usage. The size of content per result returned should be modified using maxSnippetSize. Server may return less or more than what is specified in maxSnippetSize. For more details, https://docs.google.com/document/d/1CTOLSxWWT9WDEnHVLoCUaxbGYyXYP8kctPRF-RluSQY/edit. Requires sufficient permissions.", alias="returnLlmContentOverSnippets")
-    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "queryOverridesFacetFilters", "facetFilters", "facetFilterSets", "facetBucketFilter", "facetBucketSize", "defaultFacets", "authTokens", "fetchAllDatasourceCounts", "responseHints", "timezoneOffset", "forceNegation", "disableSpellcheck", "disableQueryAutocorrect", "returnLlmContentOverSnippets"]
+    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "queryOverridesFacetFilters", "facetFilters", "facetFilterSets", "facetBucketFilter", "facetBucketSize", "defaultFacets", "authTokens", "fetchAllDatasourceCounts", "responseHints", "timezoneOffset", "disableSpellcheck", "disableQueryAutocorrect", "returnLlmContentOverSnippets"]
 
     @field_validator('response_hints')
     def response_hints_validate_enum(cls, value):
@@ -147,7 +146,6 @@ class SearchRequestOptions(BaseModel):
             "fetchAllDatasourceCounts": obj.get("fetchAllDatasourceCounts"),
             "responseHints": obj.get("responseHints"),
             "timezoneOffset": obj.get("timezoneOffset"),
-            "forceNegation": obj.get("forceNegation"),
             "disableSpellcheck": obj.get("disableSpellcheck"),
             "disableQueryAutocorrect": obj.get("disableQueryAutocorrect"),
             "returnLlmContentOverSnippets": obj.get("returnLlmContentOverSnippets")
