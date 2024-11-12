@@ -75,9 +75,9 @@ class Reaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in reactors (list)
         _items = []
         if self.reactors:
-            for _item_reactors in self.reactors:
-                if _item_reactors:
-                    _items.append(_item_reactors.to_dict())
+            for _item in self.reactors:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['reactors'] = _items
         return _dict
 

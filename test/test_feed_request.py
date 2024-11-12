@@ -48,9 +48,7 @@ class TestFeedRequest(unittest.TestCase):
                         }, 
                     datasource_filter = [
                         ''
-                        ], 
-                    chat_zero_state_suggestion_options = openapi_client.models.chat_zero_state_suggestion_options.ChatZeroStateSuggestionOptions(
-                        application_id = '', ), ),
+                        ], ),
                 timeout_millis = 5000,
                 session_info = openapi_client.models.session_info.SessionInfo(
                     session_tracking_token = '', 

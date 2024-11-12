@@ -27,6 +27,13 @@ class TestAuthenticationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_createanonymoustoken(self) -> None:
+        """Test case for createanonymoustoken
+
+        Create anonymous token
+        """
+        pass
+
     def test_createauthtoken(self) -> None:
         """Test case for createauthtoken
 

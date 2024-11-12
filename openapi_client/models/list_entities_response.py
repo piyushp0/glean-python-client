@@ -85,30 +85,30 @@ class ListEntitiesResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in team_results (list)
         _items = []
         if self.team_results:
-            for _item_team_results in self.team_results:
-                if _item_team_results:
-                    _items.append(_item_team_results.to_dict())
+            for _item in self.team_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['teamResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in custom_entity_results (list)
         _items = []
         if self.custom_entity_results:
-            for _item_custom_entity_results in self.custom_entity_results:
-                if _item_custom_entity_results:
-                    _items.append(_item_custom_entity_results.to_dict())
+            for _item in self.custom_entity_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['customEntityResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in facet_results (list)
         _items = []
         if self.facet_results:
-            for _item_facet_results in self.facet_results:
-                if _item_facet_results:
-                    _items.append(_item_facet_results.to_dict())
+            for _item in self.facet_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['facetResults'] = _items
         return _dict
 

@@ -86,9 +86,9 @@ class SearchResponseMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in searched_query_ranges (list)
         _items = []
         if self.searched_query_ranges:
-            for _item_searched_query_ranges in self.searched_query_ranges:
-                if _item_searched_query_ranges:
-                    _items.append(_item_searched_query_ranges.to_dict())
+            for _item in self.searched_query_ranges:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['searchedQueryRanges'] = _items
         # override the default output from pydantic by calling `to_dict()` of query_suggestion
         if self.query_suggestion:

@@ -36,9 +36,6 @@ class TestChatRestrictionFilters(unittest.TestCase):
         model = ChatRestrictionFilters()
         if include_optional:
             return ChatRestrictionFilters(
-                container_specs = [
-                    null
-                    ],
                 document_specs = [
                     null
                     ],

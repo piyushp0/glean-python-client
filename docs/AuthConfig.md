@@ -7,15 +7,11 @@ Config for tool's authentication method.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **is_on_prem** | **bool** | Whether or not this tool is hosted on-premise. | [optional] 
-**uses_central_auth** | **bool** | Whether or not this uses central auth. | [optional] 
-**type** | **str** | The type of authentication being used. Use &#39;OAUTH_*&#39; when Glean calls an external API (e.g., Jira) on behalf of a user to obtain an OAuth token. &#39;OAUTH_ADMIN&#39; utilizes an admin token for external API calls on behalf all users. &#39;OAUTH_USER&#39; uses individual user tokens for external API calls. &#39;DWD&#39; refers to domain wide delegation.  | [optional] 
-**grant_type** | **str** | The type of grant type being used. | [optional] 
+**type** | **str** | The type of authentication being used. Use &#39;OAUTH_*&#39; when Glean calls an external API (e.g., Jira) on behalf of a user to obtain an OAuth token. &#39;OAUTH_ADMIN&#39; utilizes an admin token for external API calls on behalf all users. &#39;OAUTH_USER&#39; uses individual user tokens for external API calls. | [optional] 
 **status** | **str** | Auth status of the tool. | [optional] 
 **client_url** | **str** | The URL where users will be directed to start the OAuth flow. | [optional] 
 **scopes** | **List[str]** | A list of strings denoting the different scopes or access levels required by the tool. | [optional] 
-**audiences** | **List[str]** | A list of strings denoting the different audience which can access the tool. | [optional] 
 **authorization_url** | **str** | The OAuth provider&#39;s endpoint, where access tokens are requested. | [optional] 
-**last_authorized_at** | **datetime** | The time the tool was last authorized in ISO format (ISO 8601). | [optional] 
 
 ## Example
 

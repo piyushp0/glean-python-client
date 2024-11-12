@@ -18,7 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -29,16 +28,12 @@ class AuthConfig(BaseModel):
     Config for tool's authentication method.
     """ # noqa: E501
     is_on_prem: Optional[StrictBool] = Field(default=None, description="Whether or not this tool is hosted on-premise.", alias="isOnPrem")
-    uses_central_auth: Optional[StrictBool] = Field(default=None, description="Whether or not this uses central auth.", alias="usesCentralAuth")
-    type: Optional[StrictStr] = Field(default=None, description="The type of authentication being used. Use 'OAUTH_*' when Glean calls an external API (e.g., Jira) on behalf of a user to obtain an OAuth token. 'OAUTH_ADMIN' utilizes an admin token for external API calls on behalf all users. 'OAUTH_USER' uses individual user tokens for external API calls. 'DWD' refers to domain wide delegation. ")
-    grant_type: Optional[StrictStr] = Field(default=None, description="The type of grant type being used.", alias="grantType")
+    type: Optional[StrictStr] = Field(default=None, description="The type of authentication being used. Use 'OAUTH_*' when Glean calls an external API (e.g., Jira) on behalf of a user to obtain an OAuth token. 'OAUTH_ADMIN' utilizes an admin token for external API calls on behalf all users. 'OAUTH_USER' uses individual user tokens for external API calls.")
     status: Optional[StrictStr] = Field(default=None, description="Auth status of the tool.")
     client_url: Optional[StrictStr] = Field(default=None, description="The URL where users will be directed to start the OAuth flow.")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="A list of strings denoting the different scopes or access levels required by the tool.")
-    audiences: Optional[List[StrictStr]] = Field(default=None, description="A list of strings denoting the different audience which can access the tool.")
     authorization_url: Optional[StrictStr] = Field(default=None, description="The OAuth provider's endpoint, where access tokens are requested.")
-    last_authorized_at: Optional[datetime] = Field(default=None, description="The time the tool was last authorized in ISO format (ISO 8601).", alias="lastAuthorizedAt")
-    __properties: ClassVar[List[str]] = ["isOnPrem", "usesCentralAuth", "type", "grantType", "status", "client_url", "scopes", "audiences", "authorization_url", "lastAuthorizedAt"]
+    __properties: ClassVar[List[str]] = ["isOnPrem", "type", "status", "client_url", "scopes", "authorization_url"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -46,18 +41,8 @@ class AuthConfig(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH', 'DWD']):
-            raise ValueError("must be one of enum values ('NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH', 'DWD')")
-        return value
-
-    @field_validator('grant_type')
-    def grant_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['AUTH_CODE', 'CLIENT_CREDENTIALS']):
-            raise ValueError("must be one of enum values ('AUTH_CODE', 'CLIENT_CREDENTIALS')")
+        if value not in set(['NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH']):
+            raise ValueError("must be one of enum values ('NONE', 'OAUTH_USER', 'OAUTH_ADMIN', 'API_KEY', 'BASIC_AUTH')")
         return value
 
     @field_validator('status')
@@ -122,15 +107,11 @@ class AuthConfig(BaseModel):
 
         _obj = cls.model_validate({
             "isOnPrem": obj.get("isOnPrem"),
-            "usesCentralAuth": obj.get("usesCentralAuth"),
             "type": obj.get("type"),
-            "grantType": obj.get("grantType"),
             "status": obj.get("status"),
             "client_url": obj.get("client_url"),
             "scopes": obj.get("scopes"),
-            "audiences": obj.get("audiences"),
-            "authorization_url": obj.get("authorization_url"),
-            "lastAuthorizedAt": obj.get("lastAuthorizedAt")
+            "authorization_url": obj.get("authorization_url")
         })
         return _obj
 

@@ -34,8 +34,6 @@ class ClusterTypeEnum(str, Enum):
     NONE = 'NONE'
     THREAD_REPLY = 'THREAD_REPLY'
     THREAD_ROOT = 'THREAD_ROOT'
-    PREFIX = 'PREFIX'
-    SUFFIX = 'SUFFIX'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

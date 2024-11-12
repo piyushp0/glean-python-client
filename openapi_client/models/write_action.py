@@ -30,13 +30,10 @@ class WriteAction(BaseModel):
     A single action that can be executed.
     """ # noqa: E501
     tool_name: Optional[StrictStr] = Field(default=None, description="The name of the tool.", alias="toolName")
-    action_instance_id: Optional[StrictStr] = Field(default=None, description="Identifier of the action instance.", alias="actionInstanceId")
-    action_id: Optional[StrictStr] = Field(default=None, description="Identifier of the action.", alias="actionId")
-    action_pack_id: Optional[StrictStr] = Field(default=None, description="Identifier of the action pack.", alias="actionPackId")
     tool_config: Optional[ToolConfig] = Field(default=None, alias="toolConfig")
     redirect_url: Optional[StrictStr] = Field(default=None, description="If a `REDIRECT` action, the URL to visit to execute the action.", alias="redirectUrl")
     parameters: Optional[Dict[str, WriteActionParameter]] = Field(default=None, description="The parameters to be passed to the redirect URL for actions.")
-    __properties: ClassVar[List[str]] = ["toolName", "actionInstanceId", "actionId", "actionPackId", "toolConfig", "redirectUrl", "parameters"]
+    __properties: ClassVar[List[str]] = ["toolName", "toolConfig", "redirectUrl", "parameters"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +80,9 @@ class WriteAction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in parameters (dict)
         _field_dict = {}
         if self.parameters:
-            for _key_parameters in self.parameters:
-                if self.parameters[_key_parameters]:
-                    _field_dict[_key_parameters] = self.parameters[_key_parameters].to_dict()
+            for _key in self.parameters:
+                if self.parameters[_key]:
+                    _field_dict[_key] = self.parameters[_key].to_dict()
             _dict['parameters'] = _field_dict
         return _dict
 
@@ -100,9 +97,6 @@ class WriteAction(BaseModel):
 
         _obj = cls.model_validate({
             "toolName": obj.get("toolName"),
-            "actionInstanceId": obj.get("actionInstanceId"),
-            "actionId": obj.get("actionId"),
-            "actionPackId": obj.get("actionPackId"),
             "toolConfig": ToolConfig.from_dict(obj["toolConfig"]) if obj.get("toolConfig") is not None else None,
             "redirectUrl": obj.get("redirectUrl"),
             "parameters": dict(

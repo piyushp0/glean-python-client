@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,8 +31,7 @@ class CustomDataValue(BaseModel):
     string_value: Optional[StrictStr] = Field(default=None, alias="stringValue")
     string_list_value: Optional[List[StrictStr]] = Field(default=None, description="list of strings for multi-value properties", alias="stringListValue")
     number_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="numberValue")
-    boolean_value: Optional[StrictBool] = Field(default=None, alias="booleanValue")
-    __properties: ClassVar[List[str]] = ["displayLabel", "stringValue", "stringListValue", "numberValue", "booleanValue"]
+    __properties: ClassVar[List[str]] = ["displayLabel", "stringValue", "stringListValue", "numberValue"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,8 +87,7 @@ class CustomDataValue(BaseModel):
             "displayLabel": obj.get("displayLabel"),
             "stringValue": obj.get("stringValue"),
             "stringListValue": obj.get("stringListValue"),
-            "numberValue": obj.get("numberValue"),
-            "booleanValue": obj.get("booleanValue")
+            "numberValue": obj.get("numberValue")
         })
         return _obj
 

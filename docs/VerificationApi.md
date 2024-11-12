@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **addverificationreminder**
-> Verification addverificationreminder(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+> Verification addverificationreminder(payload, x_scio_actas=x_scio_actas)
 
 Create verification
 
@@ -49,11 +49,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.VerificationApi(api_client)
     payload = openapi_client.ReminderRequest() # ReminderRequest | Details about the reminder.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create verification
-        api_response = api_instance.addverificationreminder(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+        api_response = api_instance.addverificationreminder(payload, x_scio_actas=x_scio_actas)
         print("The response of VerificationApi->addverificationreminder:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,7 +68,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ReminderRequest**](ReminderRequest.md)| Details about the reminder. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
- **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -97,7 +95,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listverifications**
-> VerificationFeed listverifications(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, count=count)
+> VerificationFeed listverifications(x_scio_actas=x_scio_actas, count=count)
 
 List verifications
 
@@ -134,12 +132,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.VerificationApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     count = 56 # int | Maximum number of documents to return (optional)
 
     try:
         # List verifications
-        api_response = api_instance.listverifications(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, count=count)
+        api_response = api_instance.listverifications(x_scio_actas=x_scio_actas, count=count)
         print("The response of VerificationApi->listverifications:\n")
         pprint(api_response)
     except Exception as e:
@@ -154,7 +151,6 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
- **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **count** | **int**| Maximum number of documents to return | [optional] 
 
 ### Return type
@@ -182,7 +178,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **verify**
-> Verification verify(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+> Verification verify(payload, x_scio_actas=x_scio_actas)
 
 Update verification
 
@@ -221,11 +217,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.VerificationApi(api_client)
     payload = openapi_client.VerifyRequest() # VerifyRequest | Details about the verification request.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update verification
-        api_response = api_instance.verify(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+        api_response = api_instance.verify(payload, x_scio_actas=x_scio_actas)
         print("The response of VerificationApi->verify:\n")
         pprint(api_response)
     except Exception as e:
@@ -241,7 +236,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**VerifyRequest**](VerifyRequest.md)| Details about the verification request. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
- **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

@@ -77,9 +77,9 @@ class ContentInsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in document_insights (list)
         _items = []
         if self.document_insights:
-            for _item_document_insights in self.document_insights:
-                if _item_document_insights:
-                    _items.append(_item_document_insights.to_dict())
+            for _item in self.document_insights:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['documentInsights'] = _items
         return _dict
 

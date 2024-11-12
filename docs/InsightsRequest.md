@@ -6,11 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **categories** | **List[str]** | Categories of data requested. Request can include single or multiple types. | 
-**departments** | **List[str]** | Departments that the data is requested for. If this is empty, corresponds to whole company. | [optional] 
+**departments** | **List[str]** | Departments that the data is requested for. If the empty, corresponds to whole company. | [optional] 
+**assistant_activity_types** | **List[str]** | Types of activity that should count in the definition of an Assistant Active User. Affects only insights for AI category. | [optional] 
 **day_range** | [**Period**](Period.md) |  | [optional] 
 **ai_app_request_options** | [**InsightsAiAppRequestOptions**](InsightsAiAppRequestOptions.md) |  | [optional] 
-**assistant_activity_types** | **List[str]** | Types of activity that should count in the definition of an Assistant Active User. Affects only insights for AI category. | [optional] 
-**disable_per_user_insights** | **bool** | If true, suppresses the generation of per-user Insights in the response. Default is false. | [optional] 
 
 ## Example
 

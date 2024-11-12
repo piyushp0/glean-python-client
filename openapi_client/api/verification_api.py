@@ -48,7 +48,6 @@ class VerificationApi:
         self,
         payload: Annotated[ReminderRequest, Field(description="Details about the reminder.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,8 +69,6 @@ class VerificationApi:
         :type payload: ReminderRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -97,7 +94,6 @@ class VerificationApi:
         _param = self._addverificationreminder_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -127,7 +123,6 @@ class VerificationApi:
         self,
         payload: Annotated[ReminderRequest, Field(description="Details about the reminder.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -149,8 +144,6 @@ class VerificationApi:
         :type payload: ReminderRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -176,7 +169,6 @@ class VerificationApi:
         _param = self._addverificationreminder_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -206,7 +198,6 @@ class VerificationApi:
         self,
         payload: Annotated[ReminderRequest, Field(description="Details about the reminder.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -228,8 +219,6 @@ class VerificationApi:
         :type payload: ReminderRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,7 +244,6 @@ class VerificationApi:
         _param = self._addverificationreminder_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -280,7 +268,6 @@ class VerificationApi:
         self,
         payload,
         x_scio_actas,
-        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -296,9 +283,7 @@ class VerificationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -306,8 +291,6 @@ class VerificationApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -363,7 +346,6 @@ class VerificationApi:
     def listverifications(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         count: Annotated[Optional[StrictInt], Field(description="Maximum number of documents to return")] = None,
         _request_timeout: Union[
             None,
@@ -384,8 +366,6 @@ class VerificationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param count: Maximum number of documents to return
         :type count: int
         :param _request_timeout: timeout setting for this request. If one
@@ -412,7 +392,6 @@ class VerificationApi:
 
         _param = self._listverifications_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -441,7 +420,6 @@ class VerificationApi:
     def listverifications_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         count: Annotated[Optional[StrictInt], Field(description="Maximum number of documents to return")] = None,
         _request_timeout: Union[
             None,
@@ -462,8 +440,6 @@ class VerificationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param count: Maximum number of documents to return
         :type count: int
         :param _request_timeout: timeout setting for this request. If one
@@ -490,7 +466,6 @@ class VerificationApi:
 
         _param = self._listverifications_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -519,7 +494,6 @@ class VerificationApi:
     def listverifications_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         count: Annotated[Optional[StrictInt], Field(description="Maximum number of documents to return")] = None,
         _request_timeout: Union[
             None,
@@ -540,8 +514,6 @@ class VerificationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param count: Maximum number of documents to return
         :type count: int
         :param _request_timeout: timeout setting for this request. If one
@@ -568,7 +540,6 @@ class VerificationApi:
 
         _param = self._listverifications_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -592,7 +563,6 @@ class VerificationApi:
     def _listverifications_serialize(
         self,
         x_scio_actas,
-        x_glean_auth_type,
         count,
         _request_auth,
         _content_type,
@@ -609,9 +579,7 @@ class VerificationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -623,8 +591,6 @@ class VerificationApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
 
@@ -666,7 +632,6 @@ class VerificationApi:
         self,
         payload: Annotated[VerifyRequest, Field(description="Details about the verification request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -688,8 +653,6 @@ class VerificationApi:
         :type payload: VerifyRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -715,7 +678,6 @@ class VerificationApi:
         _param = self._verify_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -745,7 +707,6 @@ class VerificationApi:
         self,
         payload: Annotated[VerifyRequest, Field(description="Details about the verification request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -767,8 +728,6 @@ class VerificationApi:
         :type payload: VerifyRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -794,7 +753,6 @@ class VerificationApi:
         _param = self._verify_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -824,7 +782,6 @@ class VerificationApi:
         self,
         payload: Annotated[VerifyRequest, Field(description="Details about the verification request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -846,8 +803,6 @@ class VerificationApi:
         :type payload: VerifyRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -873,7 +828,6 @@ class VerificationApi:
         _param = self._verify_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -898,7 +852,6 @@ class VerificationApi:
         self,
         payload,
         x_scio_actas,
-        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -914,9 +867,7 @@ class VerificationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -924,8 +875,6 @@ class VerificationApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:

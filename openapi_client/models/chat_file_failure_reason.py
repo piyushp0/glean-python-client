@@ -29,9 +29,6 @@ class ChatFileFailureReason(str, Enum):
     """
     PARSE_FAILED = 'PARSE_FAILED'
     AV_SCAN_FAILED = 'AV_SCAN_FAILED'
-    FILE_TOO_SMALL = 'FILE_TOO_SMALL'
-    FILE_EXTENSION_UNSUPPORTED = 'FILE_EXTENSION_UNSUPPORTED'
-    FILE_METADATA_VALIDATION_FAIL = 'FILE_METADATA_VALIDATION_FAIL'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

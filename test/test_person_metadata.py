@@ -175,7 +175,7 @@ class TestPersonMetadata(unittest.TestCase):
                     'key' : True
                     },
                 badges = [
-                    {"key":"deployment_name_new_hire","displayName":"New hire","iconConfig":{"color":"#343CED","key":"person_icon","iconType":"GLYPH","name":"user"}}
+                    {"key":"deployment_name_new_hire","displayName":"New hire","iconConfig":[{"$ref":"../../shared/common.yaml#/components/schemas/IconConfig/example"}]}
                     ],
                 is_org_root = True
             )

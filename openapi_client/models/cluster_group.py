@@ -75,9 +75,9 @@ class ClusterGroup(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in clustered_results (list)
         _items = []
         if self.clustered_results:
-            for _item_clustered_results in self.clustered_results:
-                if _item_clustered_results:
-                    _items.append(_item_clustered_results.to_dict())
+            for _item in self.clustered_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['clusteredResults'] = _items
         return _dict
 

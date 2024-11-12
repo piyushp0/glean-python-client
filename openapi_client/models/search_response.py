@@ -101,16 +101,16 @@ class SearchResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in structured_results (list)
         _items = []
         if self.structured_results:
-            for _item_structured_results in self.structured_results:
-                if _item_structured_results:
-                    _items.append(_item_structured_results.to_dict())
+            for _item in self.structured_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['structuredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of generated_qna_result
         if self.generated_qna_result:
@@ -124,16 +124,16 @@ class SearchResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in facet_results (list)
         _items = []
         if self.facet_results:
-            for _item_facet_results in self.facet_results:
-                if _item_facet_results:
-                    _items.append(_item_facet_results.to_dict())
+            for _item in self.facet_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['facetResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in result_tabs (list)
         _items = []
         if self.result_tabs:
-            for _item_result_tabs in self.result_tabs:
-                if _item_result_tabs:
-                    _items.append(_item_result_tabs.to_dict())
+            for _item in self.result_tabs:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['resultTabs'] = _items
         # override the default output from pydantic by calling `to_dict()` of results_description
         if self.results_description:
@@ -141,9 +141,9 @@ class SearchResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in rewritten_facet_filters (list)
         _items = []
         if self.rewritten_facet_filters:
-            for _item_rewritten_facet_filters in self.rewritten_facet_filters:
-                if _item_rewritten_facet_filters:
-                    _items.append(_item_rewritten_facet_filters.to_dict())
+            for _item in self.rewritten_facet_filters:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['rewrittenFacetFilters'] = _items
         return _dict
 

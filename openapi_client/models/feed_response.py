@@ -79,17 +79,17 @@ class FeedResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in facet_results (dict of array)
         _field_dict_of_array = {}
         if self.facet_results:
-            for _key_facet_results in self.facet_results:
-                if self.facet_results[_key_facet_results] is not None:
-                    _field_dict_of_array[_key_facet_results] = [
-                        _item.to_dict() for _item in self.facet_results[_key_facet_results]
+            for _key in self.facet_results:
+                if self.facet_results[_key] is not None:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.facet_results[_key]
                     ]
             _dict['facetResults'] = _field_dict_of_array
         return _dict

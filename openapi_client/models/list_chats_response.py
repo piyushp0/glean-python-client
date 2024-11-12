@@ -73,9 +73,9 @@ class ListChatsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in chat_results (list)
         _items = []
         if self.chat_results:
-            for _item_chat_results in self.chat_results:
-                if _item_chat_results:
-                    _items.append(_item_chat_results.to_dict())
+            for _item in self.chat_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['chatResults'] = _items
         return _dict
 

@@ -114,23 +114,23 @@ class EditCollectionResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in added_roles (list)
         _items = []
         if self.added_roles:
-            for _item_added_roles in self.added_roles:
-                if _item_added_roles:
-                    _items.append(_item_added_roles.to_dict())
+            for _item in self.added_roles:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['addedRoles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in removed_roles (list)
         _items = []
         if self.removed_roles:
-            for _item_removed_roles in self.removed_roles:
-                if _item_removed_roles:
-                    _items.append(_item_removed_roles.to_dict())
+            for _item in self.removed_roles:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['removedRoles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in audience_filters (list)
         _items = []
         if self.audience_filters:
-            for _item_audience_filters in self.audience_filters:
-                if _item_audience_filters:
-                    _items.append(_item_audience_filters.to_dict())
+            for _item in self.audience_filters:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['audienceFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of thumbnail
         if self.thumbnail:
@@ -147,9 +147,9 @@ class EditCollectionResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
-            for _item_items in self.items:
-                if _item_items:
-                    _items.append(_item_items.to_dict())
+            for _item in self.items:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['items'] = _items
         # override the default output from pydantic by calling `to_dict()` of pin_metadata
         if self.pin_metadata:
@@ -157,16 +157,16 @@ class EditCollectionResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in children (list)
         _items = []
         if self.children:
-            for _item_children in self.children:
-                if _item_children:
-                    _items.append(_item_children.to_dict())
+            for _item in self.children:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['children'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in roles (list)
         _items = []
         if self.roles:
-            for _item_roles in self.roles:
-                if _item_roles:
-                    _items.append(_item_roles.to_dict())
+            for _item in self.roles:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['roles'] = _items
         # override the default output from pydantic by calling `to_dict()` of collection
         if self.collection:

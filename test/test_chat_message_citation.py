@@ -70,14 +70,12 @@ class TestChatMessageCitation(unittest.TestCase):
                         ], ),
                 source_file = openapi_client.models.chat_file.ChatFile(
                     id = 'FILE_1234', 
-                    url = 'www.google.com', 
                     name = 'sample.pdf', 
                     metadata = openapi_client.models.chat_file_metadata.ChatFileMetadata(
                         status = 'PROCESSING', 
                         upload_time = 56, 
                         processed_size = 56, 
-                        failure_reason = 'PARSE_FAILED', 
-                        mime_type = '', ), ),
+                        failure_reason = 'PARSE_FAILED', ), ),
                 source_person = {"name":"George Clooney","obfuscatedId":"abc123"},
                 reference_ranges = [
                     openapi_client.models.reference_range.ReferenceRange(

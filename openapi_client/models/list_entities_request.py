@@ -103,16 +103,16 @@ class ListEntitiesRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in filter (list)
         _items = []
         if self.filter:
-            for _item_filter in self.filter:
-                if _item_filter:
-                    _items.append(_item_filter.to_dict())
+            for _item in self.filter:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['filter'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in sort (list)
         _items = []
         if self.sort:
-            for _item_sort in self.sort:
-                if _item_sort:
-                    _items.append(_item_sort.to_dict())
+            for _item in self.sort:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['sort'] = _items
         return _dict
 

@@ -161,10 +161,6 @@ class TestResult(unittest.TestCase):
                                     type = 'BOLD', 
                                     url = '', )
                                 ], ), 
-                        disambiguation = openapi_client.models.disambiguation.Disambiguation(
-                            name = '', 
-                            id = '', 
-                            type = 'PERSON', ), 
                         snippets = [
                             {"snippet":"snippet","mimeType":"mimeType"}
                             ], 

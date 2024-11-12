@@ -21,12 +21,12 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.feedback_debug_info import FeedbackDebugInfo
 from openapi_client.models.manual_feedback_info import ManualFeedbackInfo
 from openapi_client.models.seen_feedback_info import SeenFeedbackInfo
 from openapi_client.models.session_info import SessionInfo
 from openapi_client.models.user import User
 from openapi_client.models.user_view_info import UserViewInfo
-from openapi_client.models.workflow_feedback_info import WorkflowFeedbackInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -46,14 +46,13 @@ class Feedback(BaseModel):
     pathname: Optional[StrictStr] = Field(default=None, description="The path the client was at when the feedback event triggered.")
     channels: Optional[List[StrictStr]] = Field(default=None, description="Where the feedback will be sent, e.g. to Glean, the user's company, or both. If no channels are specified, feedback will go only to Glean.")
     url: Optional[StrictStr] = Field(default=None, description="The URL the client was at when the feedback event triggered.")
-    ui_tree: Optional[List[StrictStr]] = Field(default=None, description="The UI element tree associated with the event, if any.", alias="uiTree")
     ui_element: Optional[StrictStr] = Field(default=None, description="The UI element associated with the event, if any.", alias="uiElement")
     manual_feedback_info: Optional[ManualFeedbackInfo] = Field(default=None, alias="manualFeedbackInfo")
     seen_feedback_info: Optional[SeenFeedbackInfo] = Field(default=None, alias="seenFeedbackInfo")
     user_view_info: Optional[UserViewInfo] = Field(default=None, alias="userViewInfo")
-    workflow_feedback_info: Optional[WorkflowFeedbackInfo] = Field(default=None, alias="workflowFeedbackInfo")
+    debug_info: Optional[FeedbackDebugInfo] = Field(default=None, alias="debugInfo")
     application_id: Optional[StrictStr] = Field(default=None, description="The application ID of the client that sent the feedback event.", alias="applicationId")
-    __properties: ClassVar[List[str]] = ["id", "category", "trackingTokens", "event", "position", "payload", "sessionInfo", "timestamp", "user", "pathname", "channels", "url", "uiTree", "uiElement", "manualFeedbackInfo", "seenFeedbackInfo", "userViewInfo", "workflowFeedbackInfo", "applicationId"]
+    __properties: ClassVar[List[str]] = ["id", "category", "trackingTokens", "event", "position", "payload", "sessionInfo", "timestamp", "user", "pathname", "channels", "url", "uiElement", "manualFeedbackInfo", "seenFeedbackInfo", "userViewInfo", "debugInfo", "applicationId"]
 
     @field_validator('category')
     def category_validate_enum(cls, value):
@@ -61,15 +60,15 @@ class Feedback(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ANNOUNCEMENT', 'AUTOCOMPLETE', 'COLLECTIONS', 'FEED', 'SEARCH', 'CHAT', 'NTP', 'WORKFLOWS', 'SUMMARY', 'PROMPTS']):
-            raise ValueError("must be one of enum values ('ANNOUNCEMENT', 'AUTOCOMPLETE', 'COLLECTIONS', 'FEED', 'SEARCH', 'CHAT', 'NTP', 'WORKFLOWS', 'SUMMARY', 'PROMPTS')")
+        if value not in set(['ANNOUNCEMENT', 'AUTOCOMPLETE', 'COLLECTIONS', 'FEED', 'SEARCH', 'CHAT', 'NTP', 'SUMMARY']):
+            raise ValueError("must be one of enum values ('ANNOUNCEMENT', 'AUTOCOMPLETE', 'COLLECTIONS', 'FEED', 'SEARCH', 'CHAT', 'NTP', 'SUMMARY')")
         return value
 
     @field_validator('event')
     def event_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['CLICK', 'CONTAINER_CLICK', 'COPY_LINK', 'CREATE', 'DISMISS', 'DOWNVOTE', 'EMAIL', 'EXECUTE', 'FILTER', 'FIRST_TOKEN', 'FOCUS_IN', 'LAST_TOKEN', 'MANUAL_FEEDBACK', 'MARK_AS_READ', 'MESSAGE', 'MIDDLE_CLICK', 'PAGE_BLUR', 'PAGE_FOCUS', 'PAGE_LEAVE', 'PREVIEW', 'RELATED_CLICK', 'RIGHT_CLICK', 'SECTION_CLICK', 'SEEN', 'SHARE', 'SHOW_MORE', 'UPVOTE', 'VIEW', 'VISIBLE']):
-            raise ValueError("must be one of enum values ('CLICK', 'CONTAINER_CLICK', 'COPY_LINK', 'CREATE', 'DISMISS', 'DOWNVOTE', 'EMAIL', 'EXECUTE', 'FILTER', 'FIRST_TOKEN', 'FOCUS_IN', 'LAST_TOKEN', 'MANUAL_FEEDBACK', 'MARK_AS_READ', 'MESSAGE', 'MIDDLE_CLICK', 'PAGE_BLUR', 'PAGE_FOCUS', 'PAGE_LEAVE', 'PREVIEW', 'RELATED_CLICK', 'RIGHT_CLICK', 'SECTION_CLICK', 'SEEN', 'SHARE', 'SHOW_MORE', 'UPVOTE', 'VIEW', 'VISIBLE')")
+        if value not in set(['CLICK', 'CONTAINER_CLICK', 'COPY_LINK', 'CREATE', 'DISMISS', 'DOWNVOTE', 'EMAIL', 'FIRST_TOKEN', 'FOCUS_IN', 'LAST_TOKEN', 'MANUAL_FEEDBACK', 'MARK_AS_READ', 'MESSAGE', 'MIDDLE_CLICK', 'PAGE_BLUR', 'PAGE_FOCUS', 'PAGE_LEAVE', 'PREVIEW', 'RELATED_CLICK', 'RIGHT_CLICK', 'SECTION_CLICK', 'SEEN', 'SHARE', 'SHOW_MORE', 'UPVOTE', 'VIEW', 'VISIBLE']):
+            raise ValueError("must be one of enum values ('CLICK', 'CONTAINER_CLICK', 'COPY_LINK', 'CREATE', 'DISMISS', 'DOWNVOTE', 'EMAIL', 'FIRST_TOKEN', 'FOCUS_IN', 'LAST_TOKEN', 'MANUAL_FEEDBACK', 'MARK_AS_READ', 'MESSAGE', 'MIDDLE_CLICK', 'PAGE_BLUR', 'PAGE_FOCUS', 'PAGE_LEAVE', 'PREVIEW', 'RELATED_CLICK', 'RIGHT_CLICK', 'SECTION_CLICK', 'SEEN', 'SHARE', 'SHOW_MORE', 'UPVOTE', 'VIEW', 'VISIBLE')")
         return value
 
     @field_validator('channels')
@@ -137,9 +136,9 @@ class Feedback(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user_view_info
         if self.user_view_info:
             _dict['userViewInfo'] = self.user_view_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workflow_feedback_info
-        if self.workflow_feedback_info:
-            _dict['workflowFeedbackInfo'] = self.workflow_feedback_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of debug_info
+        if self.debug_info:
+            _dict['debugInfo'] = self.debug_info.to_dict()
         return _dict
 
     @classmethod
@@ -164,12 +163,11 @@ class Feedback(BaseModel):
             "pathname": obj.get("pathname"),
             "channels": obj.get("channels"),
             "url": obj.get("url"),
-            "uiTree": obj.get("uiTree"),
             "uiElement": obj.get("uiElement"),
             "manualFeedbackInfo": ManualFeedbackInfo.from_dict(obj["manualFeedbackInfo"]) if obj.get("manualFeedbackInfo") is not None else None,
             "seenFeedbackInfo": SeenFeedbackInfo.from_dict(obj["seenFeedbackInfo"]) if obj.get("seenFeedbackInfo") is not None else None,
             "userViewInfo": UserViewInfo.from_dict(obj["userViewInfo"]) if obj.get("userViewInfo") is not None else None,
-            "workflowFeedbackInfo": WorkflowFeedbackInfo.from_dict(obj["workflowFeedbackInfo"]) if obj.get("workflowFeedbackInfo") is not None else None,
+            "debugInfo": FeedbackDebugInfo.from_dict(obj["debugInfo"]) if obj.get("debugInfo") is not None else None,
             "applicationId": obj.get("applicationId")
         })
         return _obj

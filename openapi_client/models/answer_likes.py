@@ -74,9 +74,9 @@ class AnswerLikes(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in liked_by (list)
         _items = []
         if self.liked_by:
-            for _item_liked_by in self.liked_by:
-                if _item_liked_by:
-                    _items.append(_item_liked_by.to_dict())
+            for _item in self.liked_by:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['likedBy'] = _items
         return _dict
 

@@ -74,9 +74,9 @@ class AddCollectionItemsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in added_collection_item_descriptors (list)
         _items = []
         if self.added_collection_item_descriptors:
-            for _item_added_collection_item_descriptors in self.added_collection_item_descriptors:
-                if _item_added_collection_item_descriptors:
-                    _items.append(_item_added_collection_item_descriptors.to_dict())
+            for _item in self.added_collection_item_descriptors:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['addedCollectionItemDescriptors'] = _items
         return _dict
 

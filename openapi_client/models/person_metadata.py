@@ -134,9 +134,9 @@ class PersonMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in teams (list)
         _items = []
         if self.teams:
-            for _item_teams in self.teams:
-                if _item_teams:
-                    _items.append(_item_teams.to_dict())
+            for _item in self.teams:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['teams'] = _items
         # override the default output from pydantic by calling `to_dict()` of structured_location
         if self.structured_location:
@@ -147,30 +147,30 @@ class PersonMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in management_chain (list)
         _items = []
         if self.management_chain:
-            for _item_management_chain in self.management_chain:
-                if _item_management_chain:
-                    _items.append(_item_management_chain.to_dict())
+            for _item in self.management_chain:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['managementChain'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in reports (list)
         _items = []
         if self.reports:
-            for _item_reports in self.reports:
-                if _item_reports:
-                    _items.append(_item_reports.to_dict())
+            for _item in self.reports:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['reports'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in social_network (list)
         _items = []
         if self.social_network:
-            for _item_social_network in self.social_network:
-                if _item_social_network:
-                    _items.append(_item_social_network.to_dict())
+            for _item in self.social_network:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['socialNetwork'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in datasource_profile (list)
         _items = []
         if self.datasource_profile:
-            for _item_datasource_profile in self.datasource_profile:
-                if _item_datasource_profile:
-                    _items.append(_item_datasource_profile.to_dict())
+            for _item in self.datasource_profile:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['datasourceProfile'] = _items
         # override the default output from pydantic by calling `to_dict()` of query_suggestions
         if self.query_suggestions:
@@ -178,9 +178,9 @@ class PersonMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in people_distance (list)
         _items = []
         if self.people_distance:
-            for _item_people_distance in self.people_distance:
-                if _item_people_distance:
-                    _items.append(_item_people_distance.to_dict())
+            for _item in self.people_distance:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['peopleDistance'] = _items
         # override the default output from pydantic by calling `to_dict()` of invite_info
         if self.invite_info:
@@ -191,23 +191,23 @@ class PersonMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in custom_fields (list)
         _items = []
         if self.custom_fields:
-            for _item_custom_fields in self.custom_fields:
-                if _item_custom_fields:
-                    _items.append(_item_custom_fields.to_dict())
+            for _item in self.custom_fields:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['customFields'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in busy_events (list)
         _items = []
         if self.busy_events:
-            for _item_busy_events in self.busy_events:
-                if _item_busy_events:
-                    _items.append(_item_busy_events.to_dict())
+            for _item in self.busy_events:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['busyEvents'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in badges (list)
         _items = []
         if self.badges:
-            for _item_badges in self.badges:
-                if _item_badges:
-                    _items.append(_item_badges.to_dict())
+            for _item in self.badges:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['badges'] = _items
         return _dict
 

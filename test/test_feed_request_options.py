@@ -44,9 +44,7 @@ class TestFeedRequestOptions(unittest.TestCase):
                     },
                 datasource_filter = [
                     ''
-                    ],
-                chat_zero_state_suggestion_options = openapi_client.models.chat_zero_state_suggestion_options.ChatZeroStateSuggestionOptions(
-                    application_id = '', )
+                    ]
             )
         else:
             return FeedRequestOptions(

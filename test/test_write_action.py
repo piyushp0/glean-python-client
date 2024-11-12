@@ -37,9 +37,6 @@ class TestWriteAction(unittest.TestCase):
         if include_optional:
             return WriteAction(
                 tool_name = '',
-                action_instance_id = '',
-                action_id = '',
-                action_pack_id = '',
                 tool_config = openapi_client.models.tool_config.ToolConfig(
                     display_name = '', 
                     object_name = '["HR ticket","Email","Chat message"]', 

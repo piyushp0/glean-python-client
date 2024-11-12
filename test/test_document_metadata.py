@@ -51,9 +51,6 @@ class TestDocumentMetadata(unittest.TestCase):
                 update_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 author = {"name":"George Clooney","obfuscatedId":"abc123"},
                 owner = {"name":"George Clooney","obfuscatedId":"abc123"},
-                mentioned_people = [
-                    {"name":"George Clooney","obfuscatedId":"abc123"}
-                    ],
                 visibility = 'PRIVATE',
                 components = [
                     ''
@@ -233,8 +230,7 @@ class TestDocumentMetadata(unittest.TestCase):
                         string_list_value = [
                             ''
                             ], 
-                        number_value = 1.337, 
-                        boolean_value = True, )
+                        number_value = 1.337, )
                     },
                 document_category = '',
                 contact_person = {"name":"George Clooney","obfuscatedId":"abc123"},

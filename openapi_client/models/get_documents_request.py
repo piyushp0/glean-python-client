@@ -85,9 +85,9 @@ class GetDocumentsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in document_specs (list)
         _items = []
         if self.document_specs:
-            for _item_document_specs in self.document_specs:
-                if _item_document_specs:
-                    _items.append(_item_document_specs.to_dict())
+            for _item in self.document_specs:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['documentSpecs'] = _items
         return _dict
 

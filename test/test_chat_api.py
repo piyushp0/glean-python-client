@@ -27,6 +27,13 @@ class TestChatApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_ask(self) -> None:
+        """Test case for ask
+
+        Detect and answer questions
+        """
+        pass
+
     def test_chat(self) -> None:
         """Test case for chat
 
@@ -38,13 +45,6 @@ class TestChatApi(unittest.TestCase):
         """Test case for deleteallchats
 
         Deletes all saved Chats owned by a user
-        """
-        pass
-
-    def test_deletechatfiles(self) -> None:
-        """Test case for deletechatfiles
-
-        Delete files uploaded by a user for chat.
         """
         pass
 
@@ -62,10 +62,10 @@ class TestChatApi(unittest.TestCase):
         """
         pass
 
-    def test_getchatfiles(self) -> None:
-        """Test case for getchatfiles
+    def test_getchatapplication(self) -> None:
+        """Test case for getchatapplication
 
-        Get files uploaded by a user for Chat.
+        Gets the metadata for a custom Chat application
         """
         pass
 
@@ -73,13 +73,6 @@ class TestChatApi(unittest.TestCase):
         """Test case for listchats
 
         Retrieves all saved Chats
-        """
-        pass
-
-    def test_uploadchatfiles(self) -> None:
-        """Test case for uploadchatfiles
-
-        Upload files for Chat.
         """
         pass
 

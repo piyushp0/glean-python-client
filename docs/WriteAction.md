@@ -7,9 +7,6 @@ A single action that can be executed.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tool_name** | **str** | The name of the tool. | [optional] 
-**action_instance_id** | **str** | Identifier of the action instance. | [optional] 
-**action_id** | **str** | Identifier of the action. | [optional] 
-**action_pack_id** | **str** | Identifier of the action pack. | [optional] 
 **tool_config** | [**ToolConfig**](ToolConfig.md) |  | [optional] 
 **redirect_url** | **str** | If a &#x60;REDIRECT&#x60; action, the URL to visit to execute the action. | [optional] 
 **parameters** | [**Dict[str, WriteActionParameter]**](WriteActionParameter.md) | The parameters to be passed to the redirect URL for actions. | [optional] 

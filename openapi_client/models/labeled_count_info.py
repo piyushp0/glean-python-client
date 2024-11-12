@@ -74,9 +74,9 @@ class LabeledCountInfo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in count_info (list)
         _items = []
         if self.count_info:
-            for _item_count_info in self.count_info:
-                if _item_count_info:
-                    _items.append(_item_count_info.to_dict())
+            for _item in self.count_info:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['countInfo'] = _items
         return _dict
 

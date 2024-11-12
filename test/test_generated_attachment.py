@@ -107,8 +107,7 @@ class TestGeneratedAttachment(unittest.TestCase):
                                 string_list_value = [
                                     ''
                                     ], 
-                                number_value = 1.337, 
-                                boolean_value = True, )
+                                number_value = 1.337, )
                             }, ), 
                     merged_customers = [
                         openapi_client.models.customer.Customer(

@@ -89,9 +89,9 @@ class OperatorMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in scopes (list)
         _items = []
         if self.scopes:
-            for _item_scopes in self.scopes:
-                if _item_scopes:
-                    _items.append(_item_scopes.to_dict())
+            for _item in self.scopes:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['scopes'] = _items
         return _dict
 

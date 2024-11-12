@@ -23,14 +23,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.chat_file import ChatFile
 from openapi_client.models.query_suggestion import QuerySuggestion
 from openapi_client.models.structured_result import StructuredResult
-from openapi_client.models.tool_info import ToolInfo
 from openapi_client.models.write_action import WriteAction
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ChatMessageFragment(BaseModel):
     """
-    Represents a part of a ChatMessage that originates from a single action/tool. It is designed to support rich data formats beyond simple text, allowing for a more dynamic and interactive chat experience. Each fragment can include various types of content, such as text, search queries, action information, and more. Also, each ChatMessageFragment should only have one of structuredResults, querySuggestion, writeAction, or file.
+    One fragment of a message.
     """ # noqa: E501
     structured_results: Optional[List[StructuredResult]] = Field(default=None, description="An array of entities in the work graph retrieved via a data request.", alias="structuredResults")
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular result in this particular query. To be used for /feedback reporting.", alias="trackingToken")
@@ -38,8 +37,7 @@ class ChatMessageFragment(BaseModel):
     query_suggestion: Optional[QuerySuggestion] = Field(default=None, alias="querySuggestion")
     write_action: Optional[WriteAction] = Field(default=None, alias="writeAction")
     file: Optional[ChatFile] = None
-    action: Optional[ToolInfo] = None
-    __properties: ClassVar[List[str]] = ["structuredResults", "trackingToken", "text", "querySuggestion", "writeAction", "file", "action"]
+    __properties: ClassVar[List[str]] = ["structuredResults", "trackingToken", "text", "querySuggestion", "writeAction", "file"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +81,9 @@ class ChatMessageFragment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in structured_results (list)
         _items = []
         if self.structured_results:
-            for _item_structured_results in self.structured_results:
-                if _item_structured_results:
-                    _items.append(_item_structured_results.to_dict())
+            for _item in self.structured_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['structuredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of query_suggestion
         if self.query_suggestion:
@@ -96,9 +94,6 @@ class ChatMessageFragment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of file
         if self.file:
             _dict['file'] = self.file.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of action
-        if self.action:
-            _dict['action'] = self.action.to_dict()
         return _dict
 
     @classmethod
@@ -116,8 +111,7 @@ class ChatMessageFragment(BaseModel):
             "text": obj.get("text"),
             "querySuggestion": QuerySuggestion.from_dict(obj["querySuggestion"]) if obj.get("querySuggestion") is not None else None,
             "writeAction": WriteAction.from_dict(obj["writeAction"]) if obj.get("writeAction") is not None else None,
-            "file": ChatFile.from_dict(obj["file"]) if obj.get("file") is not None else None,
-            "action": ToolInfo.from_dict(obj["action"]) if obj.get("action") is not None else None
+            "file": ChatFile.from_dict(obj["file"]) if obj.get("file") is not None else None
         })
         return _obj
 

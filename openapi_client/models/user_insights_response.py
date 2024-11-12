@@ -78,16 +78,16 @@ class UserInsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in activity_insights (list)
         _items = []
         if self.activity_insights:
-            for _item_activity_insights in self.activity_insights:
-                if _item_activity_insights:
-                    _items.append(_item_activity_insights.to_dict())
+            for _item in self.activity_insights:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['activityInsights'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in inactive_insights (list)
         _items = []
         if self.inactive_insights:
-            for _item_inactive_insights in self.inactive_insights:
-                if _item_inactive_insights:
-                    _items.append(_item_inactive_insights.to_dict())
+            for _item in self.inactive_insights:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['inactiveInsights'] = _items
         return _dict
 

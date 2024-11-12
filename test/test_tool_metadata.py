@@ -43,7 +43,6 @@ class TestToolMetadata(unittest.TestCase):
                 display_description = '',
                 logo_url = '',
                 object_name = '["HR ticket","Email","Chat message"]',
-                knowledge_type = 'NEUTRAL_KNOWLEDGE',
                 created_by = openapi_client.models.person_object.PersonObject(
                     name = '', 
                     obfuscated_id = '', ),
@@ -52,22 +51,15 @@ class TestToolMetadata(unittest.TestCase):
                     obfuscated_id = '', ),
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 last_updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                write_action_type = 'REDIRECT',
                 auth = openapi_client.models.auth_config.AuthConfig(
                     is_on_prem = True, 
-                    uses_central_auth = True, 
                     type = 'NONE', 
-                    grant_type = 'AUTH_CODE', 
                     status = 'AWAITING_AUTH', 
                     client_url = '', 
                     scopes = [
                         ''
                         ], 
-                    audiences = [
-                        ''
-                        ], 
-                    authorization_url = '', 
-                    last_authorized_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
+                    authorization_url = '', ),
                 permissions = openapi_client.models.object_permissions.ObjectPermissions(
                     write = openapi_client.models.write_permission.WritePermission(
                         scope_type = 'GLOBAL', 

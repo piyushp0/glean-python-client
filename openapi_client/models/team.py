@@ -106,9 +106,9 @@ class Team(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in related_objects (dict)
         _field_dict = {}
         if self.related_objects:
-            for _key_related_objects in self.related_objects:
-                if self.related_objects[_key_related_objects]:
-                    _field_dict[_key_related_objects] = self.related_objects[_key_related_objects].to_dict()
+            for _key in self.related_objects:
+                if self.related_objects[_key]:
+                    _field_dict[_key] = self.related_objects[_key].to_dict()
             _dict['relatedObjects'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of permissions
         if self.permissions:
@@ -116,23 +116,23 @@ class Team(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in members (list)
         _items = []
         if self.members:
-            for _item_members in self.members:
-                if _item_members:
-                    _items.append(_item_members.to_dict())
+            for _item in self.members:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['members'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in emails (list)
         _items = []
         if self.emails:
-            for _item_emails in self.emails:
-                if _item_emails:
-                    _items.append(_item_emails.to_dict())
+            for _item in self.emails:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['emails'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in datasource_profiles (list)
         _items = []
         if self.datasource_profiles:
-            for _item_datasource_profiles in self.datasource_profiles:
-                if _item_datasource_profiles:
-                    _items.append(_item_datasource_profiles.to_dict())
+            for _item in self.datasource_profiles:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['datasourceProfiles'] = _items
         return _dict
 

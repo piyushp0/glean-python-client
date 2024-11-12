@@ -29,10 +29,8 @@ from openapi_client.models.count_info import CountInfo
 from openapi_client.models.document import Document
 from openapi_client.models.feed_entry_ui_config import FeedEntryUiConfig
 from openapi_client.models.person import Person
-from openapi_client.models.prompt_template_result import PromptTemplateResult
 from openapi_client.models.thumbnail import Thumbnail
 from openapi_client.models.user_activity import UserActivity
-from openapi_client.models.workflow_result import WorkflowResult
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -56,11 +54,9 @@ class FeedEntry(BaseModel):
     collection_item: Optional[CollectionItem] = Field(default=None, alias="collectionItem")
     person: Optional[Person] = None
     app: Optional[AppResult] = None
-    prompt_template: Optional[PromptTemplateResult] = Field(default=None, alias="promptTemplate")
-    workflow: Optional[WorkflowResult] = None
     activities: Optional[List[UserActivity]] = Field(default=None, description="List of activity where each activity has user, action, timestamp.")
     document_visitor_count: Optional[CountInfo] = Field(default=None, alias="documentVisitorCount")
-    __properties: ClassVar[List[str]] = ["entryId", "title", "thumbnail", "createdBy", "uiConfig", "justificationType", "justification", "trackingToken", "viewUrl", "document", "event", "announcement", "collection", "collectionItem", "person", "app", "promptTemplate", "workflow", "activities", "documentVisitorCount"]
+    __properties: ClassVar[List[str]] = ["entryId", "title", "thumbnail", "createdBy", "uiConfig", "justificationType", "justification", "trackingToken", "viewUrl", "document", "event", "announcement", "collection", "collectionItem", "person", "app", "activities", "documentVisitorCount"]
 
     @field_validator('justification_type')
     def justification_type_validate_enum(cls, value):
@@ -68,8 +64,8 @@ class FeedEntry(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['FREQUENTLY_ACCESSED', 'RECENTLY_ACCESSED', 'TRENDING_DOCUMENT', 'VERIFICATION_REMINDER', 'SUGGESTED_DOCUMENT', 'EMPTY_STATE_SUGGESTION', 'FRECENCY_SCORED', 'SERVER_GENERATED', 'USE_CASE', 'UPDATE_SINCE_LAST_VIEW', 'RECENTLY_STARTED', 'EVENT', 'USER_MENTION', 'ANNOUNCEMENT', 'EXTERNAL_ANNOUNCEMENT', 'POPULARITY_BASED_TRENDING', 'COMPANY_RESOURCE', 'EVENT_DOCUMENT_FROM_CONTENT', 'EVENT_DOCUMENT_FROM_SEARCH', 'VISIT_AFFINITY_SCORED', 'SUGGESTED_APP', 'SUGGESTED_PERSON', 'ACTIVITY_HIGHLIGHT', 'SAVED_SEARCH', 'SUGGESTED_CHANNEL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION', 'ZERO_STATE_PROMPT_TEMPLATE_SUGGESTION', 'ZERO_STATE_STATIC_WORKFLOW_SUGGESTION']):
-            raise ValueError("must be one of enum values ('FREQUENTLY_ACCESSED', 'RECENTLY_ACCESSED', 'TRENDING_DOCUMENT', 'VERIFICATION_REMINDER', 'SUGGESTED_DOCUMENT', 'EMPTY_STATE_SUGGESTION', 'FRECENCY_SCORED', 'SERVER_GENERATED', 'USE_CASE', 'UPDATE_SINCE_LAST_VIEW', 'RECENTLY_STARTED', 'EVENT', 'USER_MENTION', 'ANNOUNCEMENT', 'EXTERNAL_ANNOUNCEMENT', 'POPULARITY_BASED_TRENDING', 'COMPANY_RESOURCE', 'EVENT_DOCUMENT_FROM_CONTENT', 'EVENT_DOCUMENT_FROM_SEARCH', 'VISIT_AFFINITY_SCORED', 'SUGGESTED_APP', 'SUGGESTED_PERSON', 'ACTIVITY_HIGHLIGHT', 'SAVED_SEARCH', 'SUGGESTED_CHANNEL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION', 'ZERO_STATE_PROMPT_TEMPLATE_SUGGESTION', 'ZERO_STATE_STATIC_WORKFLOW_SUGGESTION')")
+        if value not in set(['FREQUENTLY_ACCESSED', 'RECENTLY_ACCESSED', 'TRENDING_DOCUMENT', 'VERIFICATION_REMINDER', 'SUGGESTED_DOCUMENT', 'EMPTY_STATE_SUGGESTION', 'FRECENCY_SCORED', 'SERVER_GENERATED', 'USE_CASE', 'UPDATE_SINCE_LAST_VIEW', 'RECENTLY_STARTED', 'EVENT', 'USER_MENTION', 'ANNOUNCEMENT', 'EXTERNAL_ANNOUNCEMENT', 'POPULARITY_BASED_TRENDING', 'COMPANY_RESOURCE', 'EVENT_DOCUMENT_FROM_CONTENT', 'EVENT_DOCUMENT_FROM_SEARCH', 'VISIT_AFFINITY_SCORED', 'SUGGESTED_APP', 'SUGGESTED_PERSON', 'ACTIVITY_HIGHLIGHT', 'SAVED_SEARCH', 'SUGGESTED_CHANNEL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION']):
+            raise ValueError("must be one of enum values ('FREQUENTLY_ACCESSED', 'RECENTLY_ACCESSED', 'TRENDING_DOCUMENT', 'VERIFICATION_REMINDER', 'SUGGESTED_DOCUMENT', 'EMPTY_STATE_SUGGESTION', 'FRECENCY_SCORED', 'SERVER_GENERATED', 'USE_CASE', 'UPDATE_SINCE_LAST_VIEW', 'RECENTLY_STARTED', 'EVENT', 'USER_MENTION', 'ANNOUNCEMENT', 'EXTERNAL_ANNOUNCEMENT', 'POPULARITY_BASED_TRENDING', 'COMPANY_RESOURCE', 'EVENT_DOCUMENT_FROM_CONTENT', 'EVENT_DOCUMENT_FROM_SEARCH', 'VISIT_AFFINITY_SCORED', 'SUGGESTED_APP', 'SUGGESTED_PERSON', 'ACTIVITY_HIGHLIGHT', 'SAVED_SEARCH', 'SUGGESTED_CHANNEL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION')")
         return value
 
     model_config = ConfigDict(
@@ -141,18 +137,12 @@ class FeedEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of app
         if self.app:
             _dict['app'] = self.app.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of prompt_template
-        if self.prompt_template:
-            _dict['promptTemplate'] = self.prompt_template.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workflow
-        if self.workflow:
-            _dict['workflow'] = self.workflow.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in activities (list)
         _items = []
         if self.activities:
-            for _item_activities in self.activities:
-                if _item_activities:
-                    _items.append(_item_activities.to_dict())
+            for _item in self.activities:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['activities'] = _items
         # override the default output from pydantic by calling `to_dict()` of document_visitor_count
         if self.document_visitor_count:
@@ -185,8 +175,6 @@ class FeedEntry(BaseModel):
             "collectionItem": CollectionItem.from_dict(obj["collectionItem"]) if obj.get("collectionItem") is not None else None,
             "person": Person.from_dict(obj["person"]) if obj.get("person") is not None else None,
             "app": AppResult.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "promptTemplate": PromptTemplateResult.from_dict(obj["promptTemplate"]) if obj.get("promptTemplate") is not None else None,
-            "workflow": WorkflowResult.from_dict(obj["workflow"]) if obj.get("workflow") is not None else None,
             "activities": [UserActivity.from_dict(_item) for _item in obj["activities"]] if obj.get("activities") is not None else None,
             "documentVisitorCount": CountInfo.from_dict(obj["documentVisitorCount"]) if obj.get("documentVisitorCount") is not None else None
         })

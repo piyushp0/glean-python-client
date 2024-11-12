@@ -37,19 +37,13 @@ class TestAuthConfig(unittest.TestCase):
         if include_optional:
             return AuthConfig(
                 is_on_prem = True,
-                uses_central_auth = True,
                 type = 'NONE',
-                grant_type = 'AUTH_CODE',
                 status = 'AWAITING_AUTH',
                 client_url = '',
                 scopes = [
                     ''
                     ],
-                audiences = [
-                    ''
-                    ],
-                authorization_url = '',
-                last_authorized_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                authorization_url = ''
             )
         else:
             return AuthConfig(

@@ -42,6 +42,9 @@ class TestInsightsRequest(unittest.TestCase):
                 departments = [
                     ''
                     ],
+                assistant_activity_types = [
+                    'GLEAN_CHAT'
+                    ],
                 day_range = openapi_client.models.period.Period(
                     min_days_from_now = 56, 
                     max_days_from_now = 56, 
@@ -54,11 +57,7 @@ class TestInsightsRequest(unittest.TestCase):
                 ai_app_request_options = openapi_client.models.insights_ai_app_request_options.InsightsAiAppRequestOptions(
                     ai_app_ids = [
                         ''
-                        ], ),
-                assistant_activity_types = [
-                    'GLEAN_CHAT'
-                    ],
-                disable_per_user_insights = True
+                        ], )
             )
         else:
             return InsightsRequest(

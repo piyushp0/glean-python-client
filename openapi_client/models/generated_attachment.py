@@ -83,9 +83,9 @@ class GeneratedAttachment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in documents (list)
         _items = []
         if self.documents:
-            for _item_documents in self.documents:
-                if _item_documents:
-                    _items.append(_item_documents.to_dict())
+            for _item in self.documents:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['documents'] = _items
         # override the default output from pydantic by calling `to_dict()` of person
         if self.person:
@@ -96,16 +96,16 @@ class GeneratedAttachment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in external_links (list)
         _items = []
         if self.external_links:
-            for _item_external_links in self.external_links:
-                if _item_external_links:
-                    _items.append(_item_external_links.to_dict())
+            for _item in self.external_links:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['externalLinks'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in content (list)
         _items = []
         if self.content:
-            for _item_content in self.content:
-                if _item_content:
-                    _items.append(_item_content.to_dict())
+            for _item in self.content:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['content'] = _items
         return _dict
 

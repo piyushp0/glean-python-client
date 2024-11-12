@@ -80,7 +80,6 @@ class TestGetChatResponse(unittest.TestCase):
                                                 ], ), 
                                         source_file = openapi_client.models.chat_file.ChatFile(
                                             id = 'FILE_1234', 
-                                            url = 'www.google.com', 
                                             name = 'sample.pdf', ), 
                                         source_person = {"name":"George Clooney","obfuscatedId":"abc123"}, 
                                         reference_ranges = [
@@ -102,10 +101,11 @@ class TestGetChatResponse(unittest.TestCase):
                                 fragments = [
                                     null
                                     ], 
+                                metadata = '', 
                                 ts = '', 
                                 message_id = '', 
                                 message_tracking_token = '', 
-                                message_type = 'CONTENT', 
+                                message_type = 'UPDATE', 
                                 has_more_fragments = True, )
                             ], ), 
                     tracking_token = '', )

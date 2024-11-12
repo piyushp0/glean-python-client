@@ -492,33 +492,6 @@ class TestInsightsResponse(unittest.TestCase):
                     departments = [
                         ''
                         ], ),
-                glean_assist = openapi_client.models.glean_assist_insights_response.GleanAssistInsightsResponse(
-                    last_log_timestamp = 56, 
-                    activity_insights = [
-                        openapi_client.models.user_activity_insight.UserActivityInsight(
-                            user = {"name":"George Clooney","obfuscatedId":"abc123"}, 
-                            activity = 'ALL', 
-                            last_activity_timestamp = 56, 
-                            activity_count = openapi_client.models.count_info.CountInfo(
-                                count = 56, 
-                                period = openapi_client.models.period.Period(
-                                    min_days_from_now = 56, 
-                                    max_days_from_now = 56, 
-                                    start = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), 
-                                    end = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), ), 
-                                org = '', ), 
-                            active_day_count = openapi_client.models.count_info.CountInfo(
-                                count = 56, 
-                                org = '', ), )
-                        ], 
-                    total_active_users = 56, 
-                    datasource_instances = [
-                        ''
-                        ], ),
                 departments = [
                     ''
                     ]

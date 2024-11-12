@@ -73,9 +73,9 @@ class ListAnswersResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in answer_results (list)
         _items = []
         if self.answer_results:
-            for _item_answer_results in self.answer_results:
-                if _item_answer_results:
-                    _items.append(_item_answer_results.to_dict())
+            for _item in self.answer_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['answerResults'] = _items
         return _dict
 

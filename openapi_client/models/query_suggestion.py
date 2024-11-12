@@ -28,10 +28,10 @@ class QuerySuggestion(BaseModel):
     """
     QuerySuggestion
     """ # noqa: E501
-    missing_term: Optional[StrictStr] = Field(default=None, description="A query term missing from the original query on which this suggestion is based.", alias="missingTerm")
-    query: StrictStr = Field(description="The query being suggested (e.g. enforcing the missing term from the original query).")
-    label: Optional[StrictStr] = Field(default=None, description="A user-facing description to display for the suggestion.")
-    datasource: Optional[StrictStr] = Field(default=None, description="The datasource associated with the suggestion.")
+    missing_term: Optional[StrictStr] = Field(default=None, description="A query term missing from the original query on which this suggestion is based", alias="missingTerm")
+    query: StrictStr = Field(description="The query being suggested (e.g. enforcing the missing term from the original query)")
+    label: Optional[StrictStr] = Field(default=None, description="A user-facing description to display for the suggestion")
+    datasource: Optional[StrictStr] = Field(default=None, description="The datasource associated with the suggestion")
     request_options: Optional[SearchRequestOptions] = Field(default=None, alias="requestOptions")
     ranges: Optional[List[TextRange]] = Field(default=None, description="The bolded ranges within the query of the QuerySuggestion.")
     __properties: ClassVar[List[str]] = ["missingTerm", "query", "label", "datasource", "requestOptions", "ranges"]
@@ -81,9 +81,9 @@ class QuerySuggestion(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in ranges (list)
         _items = []
         if self.ranges:
-            for _item_ranges in self.ranges:
-                if _item_ranges:
-                    _items.append(_item_ranges.to_dict())
+            for _item in self.ranges:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['ranges'] = _items
         return _dict
 

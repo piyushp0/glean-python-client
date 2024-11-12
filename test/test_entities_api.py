@@ -41,6 +41,13 @@ class TestEntitiesApi(unittest.TestCase):
         """
         pass
 
+    def test_teams(self) -> None:
+        """Test case for teams
+
+        Read teams
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

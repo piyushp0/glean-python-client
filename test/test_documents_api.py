@@ -27,10 +27,31 @@ class TestDocumentsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_getdocpermissions(self) -> None:
+        """Test case for getdocpermissions
+
+        Read document permissions
+        """
+        pass
+
+    def test_getdocumentanalytics(self) -> None:
+        """Test case for getdocumentanalytics
+
+        Read document analytics
+        """
+        pass
+
     def test_getdocuments(self) -> None:
         """Test case for getdocuments
 
         Read documents
+        """
+        pass
+
+    def test_getdocumentsbyfacets(self) -> None:
+        """Test case for getdocumentsbyfacets
+
+        Read documents by facets
         """
         pass
 

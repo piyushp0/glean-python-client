@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **summarize**
-> SummarizeResponse summarize(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+> SummarizeResponse summarize(payload, x_scio_actas=x_scio_actas)
 
 Summarize documents
 
@@ -47,11 +47,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.SummarizeApi(api_client)
     payload = openapi_client.SummarizeRequest() # SummarizeRequest | Includes request params such as the query and specs of the documents to summarize.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Summarize documents
-        api_response = api_instance.summarize(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
+        api_response = api_instance.summarize(payload, x_scio_actas=x_scio_actas)
         print("The response of SummarizeApi->summarize:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,7 +66,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**SummarizeRequest**](SummarizeRequest.md)| Includes request params such as the query and specs of the documents to summarize. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
- **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

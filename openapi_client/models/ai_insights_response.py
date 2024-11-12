@@ -84,9 +84,9 @@ class AiInsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in assistant_insights (list)
         _items = []
         if self.assistant_insights:
-            for _item_assistant_insights in self.assistant_insights:
-                if _item_assistant_insights:
-                    _items.append(_item_assistant_insights.to_dict())
+            for _item in self.assistant_insights:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['assistantInsights'] = _items
         return _dict
 

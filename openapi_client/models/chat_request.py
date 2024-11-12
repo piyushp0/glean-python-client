@@ -30,15 +30,15 @@ class ChatRequest(BaseModel):
     """
     ChatRequest
     """ # noqa: E501
-    save_chat: Optional[StrictBool] = Field(default=None, description="Save the current interaction as a Chat for the user to access and potentially continue later.", alias="saveChat")
-    chat_id: Optional[StrictStr] = Field(default=None, description="The id of the Chat that context should be retrieved from and messages added to. An empty id starts a new Chat, and the Chat is saved if saveChat is true.", alias="chatId")
+    save_chat: Optional[StrictBool] = Field(default=None, description="Save the current interaction as a Chat for the user to access later.", alias="saveChat")
+    chat_id: Optional[StrictStr] = Field(default=None, description="The id of the Chat that this message should be added to. An empty id signifies creating a new Chat if saveChat is true.", alias="chatId")
     messages: List[ChatMessage] = Field(description="A list of chat messages, from most recent to least recent. It can be assumed that the first chat message in the list is the user's most recent query.")
     agent_config: Optional[AgentConfig] = Field(default=None, alias="agentConfig")
     inclusions: Optional[ChatRestrictionFilters] = None
     exclusions: Optional[ChatRestrictionFilters] = None
     timeout_millis: Optional[StrictInt] = Field(default=None, description="Timeout in milliseconds for the request. A `408` error will be returned if handling the request takes longer.", alias="timeoutMillis")
     application_id: Optional[StrictStr] = Field(default=None, description="The ID of the application this request originates from, used to determine the configuration of underlying chat processes. This should correspond to the ID set during admin setup. If not specified, the default chat experience will be used.", alias="applicationId")
-    stream: Optional[StrictBool] = Field(default=None, description="If set, response lines will be streamed one-by-one as they become available. Each will be a ChatResponse, formatted as JSON, and separated by a new line. If false, the entire response will be returned at once. Note that if this is set and the model being used does not support streaming, the model's response will not be streamed, but other messages from the endpoint still will be.")
+    stream: Optional[StrictBool] = Field(default=None, description="Whether to stream responses as they become available. If false, the entire response will be returned at once. Note if true and the model being used does not support streaming, the model's response will not be streamed but other messages from the endpoint still will.")
     __properties: ClassVar[List[str]] = ["saveChat", "chatId", "messages", "agentConfig", "inclusions", "exclusions", "timeoutMillis", "applicationId", "stream"]
 
     model_config = ConfigDict(
@@ -83,9 +83,9 @@ class ChatRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in messages (list)
         _items = []
         if self.messages:
-            for _item_messages in self.messages:
-                if _item_messages:
-                    _items.append(_item_messages.to_dict())
+            for _item in self.messages:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['messages'] = _items
         # override the default output from pydantic by calling `to_dict()` of agent_config
         if self.agent_config:

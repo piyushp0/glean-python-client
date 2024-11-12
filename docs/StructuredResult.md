@@ -21,7 +21,6 @@ Name | Type | Description | Notes
 **query_suggestions** | [**QuerySuggestionList**](QuerySuggestionList.md) |  | [optional] 
 **related_documents** | [**List[RelatedDocuments]**](RelatedDocuments.md) | A list of documents related to this structured result. | [optional] 
 **related_question** | [**RelatedQuestion**](RelatedQuestion.md) |  | [optional] 
-**disambiguation** | [**Disambiguation**](Disambiguation.md) |  | [optional] 
 **snippets** | [**List[SearchResultSnippet]**](SearchResultSnippet.md) | Any snippets associated to the populated object. | [optional] 
 **tracking_token** | **str** | An opaque token that represents this particular result in this particular query. To be used for /feedback reporting. | [optional] 
 **prominence** | **str** | The level of visual distinction that should be given to a result. | [optional] 

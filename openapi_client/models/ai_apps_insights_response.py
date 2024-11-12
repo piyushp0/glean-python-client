@@ -78,9 +78,9 @@ class AiAppsInsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in ai_app_insights (list)
         _items = []
         if self.ai_app_insights:
-            for _item_ai_app_insights in self.ai_app_insights:
-                if _item_ai_app_insights:
-                    _items.append(_item_ai_app_insights.to_dict())
+            for _item in self.ai_app_insights:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['aiAppInsights'] = _items
         # override the default output from pydantic by calling `to_dict()` of action_counts
         if self.action_counts:

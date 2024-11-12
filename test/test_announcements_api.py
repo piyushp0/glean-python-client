@@ -34,6 +34,13 @@ class TestAnnouncementsApi(unittest.TestCase):
         """
         pass
 
+    def test_createdraftannouncement(self) -> None:
+        """Test case for createdraftannouncement
+
+        Create draft Announcement
+        """
+        pass
+
     def test_deleteannouncement(self) -> None:
         """Test case for deleteannouncement
 
@@ -41,10 +48,73 @@ class TestAnnouncementsApi(unittest.TestCase):
         """
         pass
 
+    def test_deletedraftannouncement(self) -> None:
+        """Test case for deletedraftannouncement
+
+        Delete draft Announcement
+        """
+        pass
+
+    def test_getannouncement(self) -> None:
+        """Test case for getannouncement
+
+        Read Announcement
+        """
+        pass
+
+    def test_getdraftannouncement(self) -> None:
+        """Test case for getdraftannouncement
+
+        Read draft Announcement
+        """
+        pass
+
+    def test_listannouncements(self) -> None:
+        """Test case for listannouncements
+
+        List Announcements
+        """
+        pass
+
+    def test_previewannouncement(self) -> None:
+        """Test case for previewannouncement
+
+        Preview Announcement
+        """
+        pass
+
+    def test_previewannouncementdraft(self) -> None:
+        """Test case for previewannouncementdraft
+
+        Preview draft Announcement
+        """
+        pass
+
+    def test_publishdraftannouncement(self) -> None:
+        """Test case for publishdraftannouncement
+
+        Publish draft Announcement
+        """
+        pass
+
+    def test_unpublishannouncement(self) -> None:
+        """Test case for unpublishannouncement
+
+        Unpublish Announcement
+        """
+        pass
+
     def test_updateannouncement(self) -> None:
         """Test case for updateannouncement
 
         Update Announcement
+        """
+        pass
+
+    def test_updatedraftannouncement(self) -> None:
+        """Test case for updatedraftannouncement
+
+        Update draft Announcement
         """
         pass
 

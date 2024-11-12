@@ -104,8 +104,7 @@ class TestStructuredResult(unittest.TestCase):
                                 string_list_value = [
                                     ''
                                     ], 
-                                number_value = 1.337, 
-                                boolean_value = True, )
+                                number_value = 1.337, )
                             }, ), 
                     merged_customers = [
                         openapi_client.models.customer.Customer(
@@ -234,10 +233,6 @@ class TestStructuredResult(unittest.TestCase):
                                         url = '', )
                                     ], ), )
                         ], ),
-                disambiguation = openapi_client.models.disambiguation.Disambiguation(
-                    name = '', 
-                    id = '', 
-                    type = 'PERSON', ),
                 snippets = [
                     {"snippet":"snippet","mimeType":"mimeType"}
                     ],

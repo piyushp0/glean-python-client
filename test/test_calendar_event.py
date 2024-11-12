@@ -70,7 +70,6 @@ class TestCalendarEvent(unittest.TestCase):
                     source = 'NATIVE_CONFERENCE', ),
                 description = '',
                 datasource = '',
-                has_transcript = True,
                 classifications = [
                     openapi_client.models.event_classification.EventClassification(
                         name = 'External Event', 

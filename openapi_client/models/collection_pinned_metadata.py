@@ -75,16 +75,16 @@ class CollectionPinnedMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in existing_pins (list)
         _items = []
         if self.existing_pins:
-            for _item_existing_pins in self.existing_pins:
-                if _item_existing_pins:
-                    _items.append(_item_existing_pins.to_dict())
+            for _item in self.existing_pins:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['existingPins'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in eligible_pins (list)
         _items = []
         if self.eligible_pins:
-            for _item_eligible_pins in self.eligible_pins:
-                if _item_eligible_pins:
-                    _items.append(_item_eligible_pins.to_dict())
+            for _item in self.eligible_pins:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['eligiblePins'] = _items
         return _dict
 

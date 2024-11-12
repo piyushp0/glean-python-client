@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.chat_zero_state_suggestion_options import ChatZeroStateSuggestionOptions
 from openapi_client.models.feed_request_options_category_to_result_size_value import FeedRequestOptionsCategoryToResultSizeValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,8 +32,7 @@ class FeedRequestOptions(BaseModel):
     timezone_offset: Optional[StrictInt] = Field(default=None, description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.", alias="timezoneOffset")
     category_to_result_size: Optional[Dict[str, FeedRequestOptionsCategoryToResultSizeValue]] = Field(default=None, description="Mapping from category to number of results asked for the category.", alias="categoryToResultSize")
     datasource_filter: Optional[List[StrictStr]] = Field(default=None, description="Datasources for which content should be included. Empty is for all.", alias="datasourceFilter")
-    chat_zero_state_suggestion_options: Optional[ChatZeroStateSuggestionOptions] = Field(default=None, alias="chatZeroStateSuggestionOptions")
-    __properties: ClassVar[List[str]] = ["resultSize", "timezoneOffset", "categoryToResultSize", "datasourceFilter", "chatZeroStateSuggestionOptions"]
+    __properties: ClassVar[List[str]] = ["resultSize", "timezoneOffset", "categoryToResultSize", "datasourceFilter"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,13 +76,10 @@ class FeedRequestOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in category_to_result_size (dict)
         _field_dict = {}
         if self.category_to_result_size:
-            for _key_category_to_result_size in self.category_to_result_size:
-                if self.category_to_result_size[_key_category_to_result_size]:
-                    _field_dict[_key_category_to_result_size] = self.category_to_result_size[_key_category_to_result_size].to_dict()
+            for _key in self.category_to_result_size:
+                if self.category_to_result_size[_key]:
+                    _field_dict[_key] = self.category_to_result_size[_key].to_dict()
             _dict['categoryToResultSize'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of chat_zero_state_suggestion_options
-        if self.chat_zero_state_suggestion_options:
-            _dict['chatZeroStateSuggestionOptions'] = self.chat_zero_state_suggestion_options.to_dict()
         return _dict
 
     @classmethod
@@ -105,8 +100,7 @@ class FeedRequestOptions(BaseModel):
             )
             if obj.get("categoryToResultSize") is not None
             else None,
-            "datasourceFilter": obj.get("datasourceFilter"),
-            "chatZeroStateSuggestionOptions": ChatZeroStateSuggestionOptions.from_dict(obj["chatZeroStateSuggestionOptions"]) if obj.get("chatZeroStateSuggestionOptions") is not None else None
+            "datasourceFilter": obj.get("datasourceFilter")
         })
         return _obj
 

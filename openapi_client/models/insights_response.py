@@ -23,7 +23,6 @@ from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.ai_apps_insights_response import AiAppsInsightsResponse
 from openapi_client.models.ai_insights_response import AiInsightsResponse
 from openapi_client.models.content_insights_response import ContentInsightsResponse
-from openapi_client.models.glean_assist_insights_response import GleanAssistInsightsResponse
 from openapi_client.models.labeled_count_info import LabeledCountInfo
 from openapi_client.models.query_insights_response import QueryInsightsResponse
 from openapi_client.models.shortcut_insights_response import ShortcutInsightsResponse
@@ -46,9 +45,8 @@ class InsightsResponse(BaseModel):
     answers: Optional[ContentInsightsResponse] = None
     ai: Optional[AiInsightsResponse] = None
     ai_apps: Optional[AiAppsInsightsResponse] = Field(default=None, alias="aiApps")
-    glean_assist: Optional[GleanAssistInsightsResponse] = Field(default=None, alias="gleanAssist")
     departments: Optional[List[StrictStr]] = Field(default=None, description="list of all departments.")
-    __properties: ClassVar[List[str]] = ["timeseries", "users", "content", "queries", "collections", "collectionsV2", "shortcuts", "announcements", "answers", "ai", "aiApps", "gleanAssist", "departments"]
+    __properties: ClassVar[List[str]] = ["timeseries", "users", "content", "queries", "collections", "collectionsV2", "shortcuts", "announcements", "answers", "ai", "aiApps", "departments"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,9 +90,9 @@ class InsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in timeseries (list)
         _items = []
         if self.timeseries:
-            for _item_timeseries in self.timeseries:
-                if _item_timeseries:
-                    _items.append(_item_timeseries.to_dict())
+            for _item in self.timeseries:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['timeseries'] = _items
         # override the default output from pydantic by calling `to_dict()` of users
         if self.users:
@@ -126,9 +124,6 @@ class InsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ai_apps
         if self.ai_apps:
             _dict['aiApps'] = self.ai_apps.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of glean_assist
-        if self.glean_assist:
-            _dict['gleanAssist'] = self.glean_assist.to_dict()
         return _dict
 
     @classmethod
@@ -152,7 +147,6 @@ class InsightsResponse(BaseModel):
             "answers": ContentInsightsResponse.from_dict(obj["answers"]) if obj.get("answers") is not None else None,
             "ai": AiInsightsResponse.from_dict(obj["ai"]) if obj.get("ai") is not None else None,
             "aiApps": AiAppsInsightsResponse.from_dict(obj["aiApps"]) if obj.get("aiApps") is not None else None,
-            "gleanAssist": GleanAssistInsightsResponse.from_dict(obj["gleanAssist"]) if obj.get("gleanAssist") is not None else None,
             "departments": obj.get("departments")
         })
         return _obj

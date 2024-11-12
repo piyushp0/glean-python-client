@@ -73,9 +73,9 @@ class GetDocumentsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in documents (dict)
         _field_dict = {}
         if self.documents:
-            for _key_documents in self.documents:
-                if self.documents[_key_documents]:
-                    _field_dict[_key_documents] = self.documents[_key_documents].to_dict()
+            for _key in self.documents:
+                if self.documents[_key]:
+                    _field_dict[_key] = self.documents[_key].to_dict()
             _dict['documents'] = _field_dict
         return _dict
 

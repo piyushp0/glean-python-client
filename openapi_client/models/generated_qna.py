@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.followup_action import FollowupAction
 from openapi_client.models.text_range import TextRange
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,12 +31,11 @@ class GeneratedQna(BaseModel):
     question: Optional[StrictStr] = Field(default=None, description="Search query rephrased into a question.")
     answer: Optional[StrictStr] = Field(default=None, description="Answer generated for the given query or the generated question.")
     follow_up_prompts: Optional[List[StrictStr]] = Field(default=None, description="List of all follow-up prompts generated for the given query or the generated question.", alias="followUpPrompts")
-    followup_actions: Optional[List[FollowupAction]] = Field(default=None, description="List of follow-up actions generated for the given query or the generated question.", alias="followupActions")
     ranges: Optional[List[TextRange]] = Field(default=None, description="Answer subsections to mark with special formatting (citations, bolding etc)")
     status: Optional[StrictStr] = Field(default=None, description="Status of backend generating the answer")
     cursor: Optional[StrictStr] = Field(default=None, description="An opaque cursor representing the search request")
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular result in this particular query. To be used for /feedback reporting.", alias="trackingToken")
-    __properties: ClassVar[List[str]] = ["question", "answer", "followUpPrompts", "followupActions", "ranges", "status", "cursor", "trackingToken"]
+    __properties: ClassVar[List[str]] = ["question", "answer", "followUpPrompts", "ranges", "status", "cursor", "trackingToken"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -88,19 +86,12 @@ class GeneratedQna(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in followup_actions (list)
-        _items = []
-        if self.followup_actions:
-            for _item_followup_actions in self.followup_actions:
-                if _item_followup_actions:
-                    _items.append(_item_followup_actions.to_dict())
-            _dict['followupActions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in ranges (list)
         _items = []
         if self.ranges:
-            for _item_ranges in self.ranges:
-                if _item_ranges:
-                    _items.append(_item_ranges.to_dict())
+            for _item in self.ranges:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['ranges'] = _items
         return _dict
 
@@ -117,7 +108,6 @@ class GeneratedQna(BaseModel):
             "question": obj.get("question"),
             "answer": obj.get("answer"),
             "followUpPrompts": obj.get("followUpPrompts"),
-            "followupActions": [FollowupAction.from_dict(_item) for _item in obj["followupActions"]] if obj.get("followupActions") is not None else None,
             "ranges": [TextRange.from_dict(_item) for _item in obj["ranges"]] if obj.get("ranges") is not None else None,
             "status": obj.get("status"),
             "cursor": obj.get("cursor"),

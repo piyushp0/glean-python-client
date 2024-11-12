@@ -77,16 +77,16 @@ class ListShortcutsPaginatedResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in shortcuts (list)
         _items = []
         if self.shortcuts:
-            for _item_shortcuts in self.shortcuts:
-                if _item_shortcuts:
-                    _items.append(_item_shortcuts.to_dict())
+            for _item in self.shortcuts:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['shortcuts'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in facet_results (list)
         _items = []
         if self.facet_results:
-            for _item_facet_results in self.facet_results:
-                if _item_facet_results:
-                    _items.append(_item_facet_results.to_dict())
+            for _item in self.facet_results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['facetResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of meta
         if self.meta:

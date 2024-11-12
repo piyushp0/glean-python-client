@@ -170,10 +170,6 @@ class TestResultsResponse(unittest.TestCase):
                                     type = 'BOLD', 
                                     url = '', )
                                 ], ), 
-                        disambiguation = openapi_client.models.disambiguation.Disambiguation(
-                            name = '', 
-                            id = '', 
-                            type = 'PERSON', ), 
                         snippets = [
                             {"snippet":"snippet","mimeType":"mimeType"}
                             ], 
@@ -186,10 +182,6 @@ class TestResultsResponse(unittest.TestCase):
                     answer = '', 
                     follow_up_prompts = [
                         ''
-                        ], 
-                    followup_actions = [
-                        openapi_client.models.followup_action.FollowupAction(
-                            action_instance_id = '', )
                         ], 
                     ranges = [
                         openapi_client.models.text_range.TextRange(

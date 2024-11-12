@@ -78,16 +78,16 @@ class DocumentInteractions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in reacts (list)
         _items = []
         if self.reacts:
-            for _item_reacts in self.reacts:
-                if _item_reacts:
-                    _items.append(_item_reacts.to_dict())
+            for _item in self.reacts:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['reacts'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in shares (list)
         _items = []
         if self.shares:
-            for _item_shares in self.shares:
-                if _item_shares:
-                    _items.append(_item_shares.to_dict())
+            for _item in self.shares:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['shares'] = _items
         # override the default output from pydantic by calling `to_dict()` of visitor_count
         if self.visitor_count:

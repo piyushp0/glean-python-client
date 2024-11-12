@@ -62,20 +62,13 @@ class TestSearchRequestOptions(unittest.TestCase):
                     ],
                 fetch_all_datasource_counts = True,
                 response_hints = [
-                    'ALL_RESULT_COUNTS'
+                    'FACET_RESULTS'
                     ],
                 timezone_offset = 56,
+                force_negation = True,
                 disable_spellcheck = True,
                 disable_query_autocorrect = True,
-                return_llm_content_over_snippets = True,
-                inclusions = openapi_client.models.restriction_filters.RestrictionFilters(
-                    container_specs = [
-                        null
-                        ], ),
-                exclusions = openapi_client.models.restriction_filters.RestrictionFilters(
-                    container_specs = [
-                        null
-                        ], )
+                return_llm_content_over_snippets = True
             )
         else:
             return SearchRequestOptions(

@@ -17,19 +17,19 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictInt, StrictStr
-from typing import List, Optional, Tuple, Union
+from pydantic import Field, StrictInt, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
+from openapi_client.models.ask_request import AskRequest
+from openapi_client.models.ask_response import AskResponse
 from openapi_client.models.chat_request import ChatRequest
 from openapi_client.models.chat_response import ChatResponse
-from openapi_client.models.delete_chat_files_request import DeleteChatFilesRequest
 from openapi_client.models.delete_chats_request import DeleteChatsRequest
-from openapi_client.models.get_chat_files_request import GetChatFilesRequest
-from openapi_client.models.get_chat_files_response import GetChatFilesResponse
+from openapi_client.models.get_chat_application_request import GetChatApplicationRequest
+from openapi_client.models.get_chat_application_response import GetChatApplicationResponse
 from openapi_client.models.get_chat_request import GetChatRequest
 from openapi_client.models.get_chat_response import GetChatResponse
 from openapi_client.models.list_chats_response import ListChatsResponse
-from openapi_client.models.upload_chat_files_response import UploadChatFilesResponse
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -50,11 +50,312 @@ class ChatApi:
 
 
     @validate_call
+    def ask(
+        self,
+        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        payload: Annotated[Optional[AskRequest], Field(description="Ask request")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AskResponse:
+        """Detect and answer questions
+
+        Classify a query as information seeking or not. If so, generate an AI answer and/or provide relevant documents. Useful for integrating into existing chat interfaces.
+
+        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
+        :type x_scio_actas: str
+        :param payload: Ask request
+        :type payload: AskRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ask_serialize(
+            x_scio_actas=x_scio_actas,
+            payload=payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AskResponse",
+            '400': None,
+            '401': None,
+            '403': "ErrorInfo",
+            '422': "ErrorInfo",
+            '429': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def ask_with_http_info(
+        self,
+        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        payload: Annotated[Optional[AskRequest], Field(description="Ask request")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AskResponse]:
+        """Detect and answer questions
+
+        Classify a query as information seeking or not. If so, generate an AI answer and/or provide relevant documents. Useful for integrating into existing chat interfaces.
+
+        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
+        :type x_scio_actas: str
+        :param payload: Ask request
+        :type payload: AskRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ask_serialize(
+            x_scio_actas=x_scio_actas,
+            payload=payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AskResponse",
+            '400': None,
+            '401': None,
+            '403': "ErrorInfo",
+            '422': "ErrorInfo",
+            '429': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def ask_without_preload_content(
+        self,
+        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        payload: Annotated[Optional[AskRequest], Field(description="Ask request")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Detect and answer questions
+
+        Classify a query as information seeking or not. If so, generate an AI answer and/or provide relevant documents. Useful for integrating into existing chat interfaces.
+
+        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
+        :type x_scio_actas: str
+        :param payload: Ask request
+        :type payload: AskRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ask_serialize(
+            x_scio_actas=x_scio_actas,
+            payload=payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AskResponse",
+            '400': None,
+            '401': None,
+            '403': "ErrorInfo",
+            '422': "ErrorInfo",
+            '429': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _ask_serialize(
+        self,
+        x_scio_actas,
+        payload,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if x_scio_actas is not None:
+            _header_params['X-Scio-Actas'] = x_scio_actas
+        # process the form parameters
+        # process the body parameter
+        if payload is not None:
+            _body_params = payload
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/ask',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def chat(
         self,
         payload: Annotated[ChatRequest, Field(description="Includes chat history for Glean AI to respond to.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -71,14 +372,12 @@ class ChatApi:
     ) -> ChatResponse:
         """Chat
 
-        Have a conversation with Glean AI.
+        Have a conversation with Glean AI. Responses will be sent as data-only server-sent events as they become available line by line. Each line will be a ChatResponse. Please reach out to the Glean support team for access to this API.
 
         :param payload: Includes chat history for Glean AI to respond to. (required)
         :type payload: ChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -106,7 +405,6 @@ class ChatApi:
         _param = self._chat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -137,7 +435,6 @@ class ChatApi:
         self,
         payload: Annotated[ChatRequest, Field(description="Includes chat history for Glean AI to respond to.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -154,14 +451,12 @@ class ChatApi:
     ) -> ApiResponse[ChatResponse]:
         """Chat
 
-        Have a conversation with Glean AI.
+        Have a conversation with Glean AI. Responses will be sent as data-only server-sent events as they become available line by line. Each line will be a ChatResponse. Please reach out to the Glean support team for access to this API.
 
         :param payload: Includes chat history for Glean AI to respond to. (required)
         :type payload: ChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -189,7 +484,6 @@ class ChatApi:
         _param = self._chat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -220,7 +514,6 @@ class ChatApi:
         self,
         payload: Annotated[ChatRequest, Field(description="Includes chat history for Glean AI to respond to.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -237,14 +530,12 @@ class ChatApi:
     ) -> RESTResponseType:
         """Chat
 
-        Have a conversation with Glean AI.
+        Have a conversation with Glean AI. Responses will be sent as data-only server-sent events as they become available line by line. Each line will be a ChatResponse. Please reach out to the Glean support team for access to this API.
 
         :param payload: Includes chat history for Glean AI to respond to. (required)
         :type payload: ChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -272,7 +563,6 @@ class ChatApi:
         _param = self._chat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -298,7 +588,6 @@ class ChatApi:
         self,
         payload,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -315,9 +604,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -329,8 +616,6 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -341,7 +626,7 @@ class ChatApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'text/plain'
+                    'application/json'
                 ]
             )
 
@@ -386,7 +671,6 @@ class ChatApi:
     def deleteallchats(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -407,8 +691,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -435,7 +717,6 @@ class ChatApi:
 
         _param = self._deleteallchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -464,7 +745,6 @@ class ChatApi:
     def deleteallchats_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -485,8 +765,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -513,7 +791,6 @@ class ChatApi:
 
         _param = self._deleteallchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -542,7 +819,6 @@ class ChatApi:
     def deleteallchats_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -563,8 +839,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -591,7 +865,6 @@ class ChatApi:
 
         _param = self._deleteallchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -615,7 +888,6 @@ class ChatApi:
     def _deleteallchats_serialize(
         self,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -632,9 +904,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -646,8 +916,6 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
 
@@ -678,337 +946,10 @@ class ChatApi:
 
 
     @validate_call
-    def deletechatfiles(
-        self,
-        delete_chat_files_request: DeleteChatFilesRequest,
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete files uploaded by a user for chat.
-
-        Delete files uploaded by a user for Chat.
-
-        :param delete_chat_files_request: (required)
-        :type delete_chat_files_request: DeleteChatFilesRequest
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._deletechatfiles_serialize(
-            delete_chat_files_request=delete_chat_files_request,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def deletechatfiles_with_http_info(
-        self,
-        delete_chat_files_request: DeleteChatFilesRequest,
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Delete files uploaded by a user for chat.
-
-        Delete files uploaded by a user for Chat.
-
-        :param delete_chat_files_request: (required)
-        :type delete_chat_files_request: DeleteChatFilesRequest
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._deletechatfiles_serialize(
-            delete_chat_files_request=delete_chat_files_request,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def deletechatfiles_without_preload_content(
-        self,
-        delete_chat_files_request: DeleteChatFilesRequest,
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete files uploaded by a user for chat.
-
-        Delete files uploaded by a user for Chat.
-
-        :param delete_chat_files_request: (required)
-        :type delete_chat_files_request: DeleteChatFilesRequest
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._deletechatfiles_serialize(
-            delete_chat_files_request=delete_chat_files_request,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _deletechatfiles_serialize(
-        self,
-        delete_chat_files_request,
-        x_scio_actas,
-        x_glean_auth_type,
-        timezone_offset,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if timezone_offset is not None:
-            
-            _query_params.append(('timezoneOffset', timezone_offset))
-            
-        # process the header parameters
-        if x_scio_actas is not None:
-            _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
-        # process the form parameters
-        # process the body parameter
-        if delete_chat_files_request is not None:
-            _body_params = delete_chat_files_request
-
-
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'BearerAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/deletechatfiles',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def deletechats(
         self,
         payload: DeleteChatsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1031,8 +972,6 @@ class ChatApi:
         :type payload: DeleteChatsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1060,7 +999,6 @@ class ChatApi:
         _param = self._deletechats_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1091,7 +1029,6 @@ class ChatApi:
         self,
         payload: DeleteChatsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1114,8 +1051,6 @@ class ChatApi:
         :type payload: DeleteChatsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1143,7 +1078,6 @@ class ChatApi:
         _param = self._deletechats_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1174,7 +1108,6 @@ class ChatApi:
         self,
         payload: DeleteChatsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1197,8 +1130,6 @@ class ChatApi:
         :type payload: DeleteChatsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1226,7 +1157,6 @@ class ChatApi:
         _param = self._deletechats_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1252,7 +1182,6 @@ class ChatApi:
         self,
         payload,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -1269,9 +1198,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1283,8 +1210,6 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1334,7 +1259,6 @@ class ChatApi:
         self,
         payload: GetChatRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1357,8 +1281,6 @@ class ChatApi:
         :type payload: GetChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1386,7 +1308,6 @@ class ChatApi:
         _param = self._getchat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1417,7 +1338,6 @@ class ChatApi:
         self,
         payload: GetChatRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1440,8 +1360,6 @@ class ChatApi:
         :type payload: GetChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1469,7 +1387,6 @@ class ChatApi:
         _param = self._getchat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1500,7 +1417,6 @@ class ChatApi:
         self,
         payload: GetChatRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1523,8 +1439,6 @@ class ChatApi:
         :type payload: GetChatRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1552,7 +1466,6 @@ class ChatApi:
         _param = self._getchat_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1578,7 +1491,6 @@ class ChatApi:
         self,
         payload,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -1595,9 +1507,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1609,8 +1519,6 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1663,11 +1571,10 @@ class ChatApi:
 
 
     @validate_call
-    def getchatfiles(
+    def getchatapplication(
         self,
-        get_chat_files_request: GetChatFilesRequest,
+        payload: GetChatApplicationRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1681,17 +1588,15 @@ class ChatApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetChatFilesResponse:
-        """Get files uploaded by a user for Chat.
+    ) -> GetChatApplicationResponse:
+        """Gets the metadata for a custom Chat application
 
-        Get files uploaded by a user for Chat.
+        Gets the Chat application details for the specified application ID.
 
-        :param get_chat_files_request: (required)
-        :type get_chat_files_request: GetChatFilesRequest
+        :param payload: (required)
+        :type payload: GetChatApplicationRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1716,10 +1621,9 @@ class ChatApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._getchatfiles_serialize(
-            get_chat_files_request=get_chat_files_request,
+        _param = self._getchatapplication_serialize(
+            payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1728,11 +1632,10 @@ class ChatApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetChatFilesResponse",
+            '200': "GetChatApplicationResponse",
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1746,11 +1649,10 @@ class ChatApi:
 
 
     @validate_call
-    def getchatfiles_with_http_info(
+    def getchatapplication_with_http_info(
         self,
-        get_chat_files_request: GetChatFilesRequest,
+        payload: GetChatApplicationRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1764,17 +1666,15 @@ class ChatApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetChatFilesResponse]:
-        """Get files uploaded by a user for Chat.
+    ) -> ApiResponse[GetChatApplicationResponse]:
+        """Gets the metadata for a custom Chat application
 
-        Get files uploaded by a user for Chat.
+        Gets the Chat application details for the specified application ID.
 
-        :param get_chat_files_request: (required)
-        :type get_chat_files_request: GetChatFilesRequest
+        :param payload: (required)
+        :type payload: GetChatApplicationRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1799,10 +1699,9 @@ class ChatApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._getchatfiles_serialize(
-            get_chat_files_request=get_chat_files_request,
+        _param = self._getchatapplication_serialize(
+            payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1811,11 +1710,10 @@ class ChatApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetChatFilesResponse",
+            '200': "GetChatApplicationResponse",
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1829,11 +1727,10 @@ class ChatApi:
 
 
     @validate_call
-    def getchatfiles_without_preload_content(
+    def getchatapplication_without_preload_content(
         self,
-        get_chat_files_request: GetChatFilesRequest,
+        payload: GetChatApplicationRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -1848,16 +1745,14 @@ class ChatApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get files uploaded by a user for Chat.
+        """Gets the metadata for a custom Chat application
 
-        Get files uploaded by a user for Chat.
+        Gets the Chat application details for the specified application ID.
 
-        :param get_chat_files_request: (required)
-        :type get_chat_files_request: GetChatFilesRequest
+        :param payload: (required)
+        :type payload: GetChatApplicationRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1882,10 +1777,9 @@ class ChatApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._getchatfiles_serialize(
-            get_chat_files_request=get_chat_files_request,
+        _param = self._getchatapplication_serialize(
+            payload=payload,
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1894,11 +1788,10 @@ class ChatApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetChatFilesResponse",
+            '200': "GetChatApplicationResponse",
             '400': None,
             '401': None,
             '403': None,
-            '429': None,
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1907,11 +1800,10 @@ class ChatApi:
         return response_data.response
 
 
-    def _getchatfiles_serialize(
+    def _getchatapplication_serialize(
         self,
-        get_chat_files_request,
+        payload,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -1928,9 +1820,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1942,12 +1832,10 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
-        if get_chat_files_request is not None:
-            _body_params = get_chat_files_request
+        if payload is not None:
+            _body_params = payload
 
 
         # set the HTTP header `Accept`
@@ -1979,7 +1867,7 @@ class ChatApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/getchatfiles',
+            resource_path='/getchatapplication',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1999,7 +1887,6 @@ class ChatApi:
     def listchats(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -2020,8 +1907,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -2048,7 +1933,6 @@ class ChatApi:
 
         _param = self._listchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2077,7 +1961,6 @@ class ChatApi:
     def listchats_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -2098,8 +1981,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -2126,7 +2007,6 @@ class ChatApi:
 
         _param = self._listchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2155,7 +2035,6 @@ class ChatApi:
     def listchats_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
         _request_timeout: Union[
             None,
@@ -2176,8 +2055,6 @@ class ChatApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
         :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
         :type timezone_offset: int
         :param _request_timeout: timeout setting for this request. If one
@@ -2204,7 +2081,6 @@ class ChatApi:
 
         _param = self._listchats_serialize(
             x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
             timezone_offset=timezone_offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2228,7 +2104,6 @@ class ChatApi:
     def _listchats_serialize(
         self,
         x_scio_actas,
-        x_glean_auth_type,
         timezone_offset,
         _request_auth,
         _content_type,
@@ -2245,9 +2120,7 @@ class ChatApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2259,8 +2132,6 @@ class ChatApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
 
@@ -2282,340 +2153,6 @@ class ChatApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/listchats',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def uploadchatfiles(
-        self,
-        files: Annotated[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Raw files to be uploaded for chat in binary format.")],
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UploadChatFilesResponse:
-        """Upload files for Chat.
-
-        Upload files for Chat.
-
-        :param files: Raw files to be uploaded for chat in binary format. (required)
-        :type files: List[bytearray]
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._uploadchatfiles_serialize(
-            files=files,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UploadChatFilesResponse",
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def uploadchatfiles_with_http_info(
-        self,
-        files: Annotated[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Raw files to be uploaded for chat in binary format.")],
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UploadChatFilesResponse]:
-        """Upload files for Chat.
-
-        Upload files for Chat.
-
-        :param files: Raw files to be uploaded for chat in binary format. (required)
-        :type files: List[bytearray]
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._uploadchatfiles_serialize(
-            files=files,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UploadChatFilesResponse",
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def uploadchatfiles_without_preload_content(
-        self,
-        files: Annotated[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Raw files to be uploaded for chat in binary format.")],
-        x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
-        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
-        timezone_offset: Annotated[Optional[StrictInt], Field(description="The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Upload files for Chat.
-
-        Upload files for Chat.
-
-        :param files: Raw files to be uploaded for chat in binary format. (required)
-        :type files: List[bytearray]
-        :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
-        :type x_scio_actas: str
-        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
-        :type x_glean_auth_type: str
-        :param timezone_offset: The offset of the client's timezone in minutes from UTC. e.g. PDT is -420 because it's 7 hours behind UTC.
-        :type timezone_offset: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._uploadchatfiles_serialize(
-            files=files,
-            x_scio_actas=x_scio_actas,
-            x_glean_auth_type=x_glean_auth_type,
-            timezone_offset=timezone_offset,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UploadChatFilesResponse",
-            '400': None,
-            '401': None,
-            '403': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _uploadchatfiles_serialize(
-        self,
-        files,
-        x_scio_actas,
-        x_glean_auth_type,
-        timezone_offset,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            'files': 'csv',
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if timezone_offset is not None:
-            
-            _query_params.append(('timezoneOffset', timezone_offset))
-            
-        # process the header parameters
-        if x_scio_actas is not None:
-            _header_params['X-Scio-Actas'] = x_scio_actas
-        if x_glean_auth_type is not None:
-            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
-        # process the form parameters
-        if files is not None:
-            _files['files'] = files
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'BearerAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/uploadchatfiles',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

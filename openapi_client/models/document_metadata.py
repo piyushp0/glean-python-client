@@ -125,16 +125,16 @@ class DocumentMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in mentioned_people (list)
         _items = []
         if self.mentioned_people:
-            for _item_mentioned_people in self.mentioned_people:
-                if _item_mentioned_people:
-                    _items.append(_item_mentioned_people.to_dict())
+            for _item in self.mentioned_people:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['mentionedPeople'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in pins (list)
         _items = []
         if self.pins:
-            for _item_pins in self.pins:
-                if _item_pins:
-                    _items.append(_item_pins.to_dict())
+            for _item in self.pins:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['pins'] = _items
         # override the default output from pydantic by calling `to_dict()` of assigned_to
         if self.assigned_to:
@@ -145,9 +145,9 @@ class DocumentMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in collections (list)
         _items = []
         if self.collections:
-            for _item_collections in self.collections:
-                if _item_collections:
-                    _items.append(_item_collections.to_dict())
+            for _item in self.collections:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['collections'] = _items
         # override the default output from pydantic by calling `to_dict()` of interactions
         if self.interactions:
@@ -167,16 +167,16 @@ class DocumentMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in shortcuts (list)
         _items = []
         if self.shortcuts:
-            for _item_shortcuts in self.shortcuts:
-                if _item_shortcuts:
-                    _items.append(_item_shortcuts.to_dict())
+            for _item in self.shortcuts:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['shortcuts'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in custom_data (dict)
         _field_dict = {}
         if self.custom_data:
-            for _key_custom_data in self.custom_data:
-                if self.custom_data[_key_custom_data]:
-                    _field_dict[_key_custom_data] = self.custom_data[_key_custom_data].to_dict()
+            for _key in self.custom_data:
+                if self.custom_data[_key]:
+                    _field_dict[_key] = self.custom_data[_key].to_dict()
             _dict['customData'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of contact_person
         if self.contact_person:
@@ -190,9 +190,9 @@ class DocumentMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in ancestors (list)
         _items = []
         if self.ancestors:
-            for _item_ancestors in self.ancestors:
-                if _item_ancestors:
-                    _items.append(_item_ancestors.to_dict())
+            for _item in self.ancestors:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['ancestors'] = _items
         return _dict
 

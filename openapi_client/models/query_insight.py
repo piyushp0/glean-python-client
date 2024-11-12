@@ -90,9 +90,9 @@ class QueryInsight(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in similar_queries (list)
         _items = []
         if self.similar_queries:
-            for _item_similar_queries in self.similar_queries:
-                if _item_similar_queries:
-                    _items.append(_item_similar_queries.to_dict())
+            for _item in self.similar_queries:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['similarQueries'] = _items
         return _dict
 

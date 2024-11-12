@@ -37,14 +37,12 @@ class TestChatFile(unittest.TestCase):
         if include_optional:
             return ChatFile(
                 id = 'FILE_1234',
-                url = 'www.google.com',
                 name = 'sample.pdf',
                 metadata = openapi_client.models.chat_file_metadata.ChatFileMetadata(
                     status = 'PROCESSING', 
                     upload_time = 56, 
                     processed_size = 56, 
-                    failure_reason = 'PARSE_FAILED', 
-                    mime_type = '', )
+                    failure_reason = 'PARSE_FAILED', )
             )
         else:
             return ChatFile(

@@ -76,16 +76,16 @@ class PeopleResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in related_documents (list)
         _items = []
         if self.related_documents:
-            for _item_related_documents in self.related_documents:
-                if _item_related_documents:
-                    _items.append(_item_related_documents.to_dict())
+            for _item in self.related_documents:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['relatedDocuments'] = _items
         return _dict
 

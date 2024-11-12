@@ -76,9 +76,9 @@ class Code(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in lines (list)
         _items = []
         if self.lines:
-            for _item_lines in self.lines:
-                if _item_lines:
-                    _items.append(_item_lines.to_dict())
+            for _item in self.lines:
+                if _item:
+                    _items.append(_item.to_dict())
             _dict['lines'] = _items
         return _dict
 
