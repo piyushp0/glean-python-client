@@ -28,7 +28,7 @@ class WriteActionParameter(BaseModel):
     """
     WriteActionParameter
     """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The type of the value (e.g., integer, string, etc.)")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the value (e.g., integer, string, boolean, etc.)")
     display_name: Optional[StrictStr] = Field(default=None, description="Human readable display name for the key.", alias="displayName")
     value: Optional[StrictStr] = Field(default=None, description="The value of the field.")
     label: Optional[StrictStr] = Field(default=None, description="User-friendly label associated with the value.")
@@ -43,8 +43,8 @@ class WriteActionParameter(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UNKNOWN', 'INTEGER', 'STRING']):
-            raise ValueError("must be one of enum values ('UNKNOWN', 'INTEGER', 'STRING')")
+        if value not in set(['UNKNOWN', 'INTEGER', 'STRING', 'BOOLEAN']):
+            raise ValueError("must be one of enum values ('UNKNOWN', 'INTEGER', 'STRING', 'BOOLEAN')")
         return value
 
     model_config = ConfigDict(
@@ -89,9 +89,9 @@ class WriteActionParameter(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in possible_values (list)
         _items = []
         if self.possible_values:
-            for _item in self.possible_values:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_possible_values in self.possible_values:
+                if _item_possible_values:
+                    _items.append(_item_possible_values.to_dict())
             _dict['possibleValues'] = _items
         return _dict
 

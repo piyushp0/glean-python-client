@@ -89,16 +89,16 @@ class RelatedDocuments(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in documents (list)
         _items = []
         if self.documents:
-            for _item in self.documents:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_documents in self.documents:
+                if _item_documents:
+                    _items.append(_item_documents.to_dict())
             _dict['documents'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
             _dict['results'] = _items
         return _dict
 

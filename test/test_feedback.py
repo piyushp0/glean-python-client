@@ -58,6 +58,9 @@ class TestFeedback(unittest.TestCase):
                     'COMPANY'
                     ],
                 url = '',
+                ui_tree = [
+                    ''
+                    ],
                 ui_element = '',
                 manual_feedback_info = openapi_client.models.manual_feedback_info.ManualFeedbackInfo(
                     email = '', 
@@ -87,8 +90,8 @@ class TestFeedback(unittest.TestCase):
                     doc_id = '', 
                     doc_title = '', 
                     doc_url = '', ),
-                debug_info = openapi_client.models.feedback_debug_info.FeedbackDebugInfo(
-                    desktop_app_version = '', ),
+                workflow_feedback_info = openapi_client.models.workflow_feedback_info.WorkflowFeedbackInfo(
+                    source = 'ZERO_STATE', ),
                 application_id = ''
             )
         else:

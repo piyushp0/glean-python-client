@@ -87,16 +87,16 @@ class ResultsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
         if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
             _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in structured_results (list)
         _items = []
         if self.structured_results:
-            for _item in self.structured_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_structured_results in self.structured_results:
+                if _item_structured_results:
+                    _items.append(_item_structured_results.to_dict())
             _dict['structuredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of generated_qna_result
         if self.generated_qna_result:

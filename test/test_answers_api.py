@@ -34,24 +34,10 @@ class TestAnswersApi(unittest.TestCase):
         """
         pass
 
-    def test_createanswerboard(self) -> None:
-        """Test case for createanswerboard
-
-        Create Answer Board
-        """
-        pass
-
     def test_deleteanswer(self) -> None:
         """Test case for deleteanswer
 
         Delete Answer
-        """
-        pass
-
-    def test_deleteanswerboards(self) -> None:
-        """Test case for deleteanswerboards
-
-        Delete Answer Board
         """
         pass
 
@@ -62,13 +48,6 @@ class TestAnswersApi(unittest.TestCase):
         """
         pass
 
-    def test_editanswerboard(self) -> None:
-        """Test case for editanswerboard
-
-        Update Answer Board
-        """
-        pass
-
     def test_getanswer(self) -> None:
         """Test case for getanswer
 
@@ -76,45 +55,10 @@ class TestAnswersApi(unittest.TestCase):
         """
         pass
 
-    def test_getanswerboard(self) -> None:
-        """Test case for getanswerboard
-
-        Read Answer Board
-        """
-        pass
-
-    def test_listanswerboards(self) -> None:
-        """Test case for listanswerboards
-
-        List Answer Boards
-        """
-        pass
-
     def test_listanswers(self) -> None:
         """Test case for listanswers
 
         List Answers
-        """
-        pass
-
-    def test_previewanswer(self) -> None:
-        """Test case for previewanswer
-
-        Preview Answer
-        """
-        pass
-
-    def test_previewanswerdraft(self) -> None:
-        """Test case for previewanswerdraft
-
-        Preview draft Answer
-        """
-        pass
-
-    def test_updateanswerlikes(self) -> None:
-        """Test case for updateanswerlikes
-
-        Update Answer likes
         """
         pass
 

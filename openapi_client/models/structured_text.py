@@ -73,9 +73,9 @@ class StructuredText(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in structured_list (list)
         _items = []
         if self.structured_list:
-            for _item in self.structured_list:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_structured_list in self.structured_list:
+                if _item_structured_list:
+                    _items.append(_item_structured_list.to_dict())
             _dict['structuredList'] = _items
         return _dict
 

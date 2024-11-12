@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**missing_term** | **str** | A query term missing from the original query on which this suggestion is based | [optional] 
-**query** | **str** | The query being suggested (e.g. enforcing the missing term from the original query) | 
-**label** | **str** | A user-facing description to display for the suggestion | [optional] 
-**datasource** | **str** | The datasource associated with the suggestion | [optional] 
+**missing_term** | **str** | A query term missing from the original query on which this suggestion is based. | [optional] 
+**query** | **str** | The query being suggested (e.g. enforcing the missing term from the original query). | 
+**label** | **str** | A user-facing description to display for the suggestion. | [optional] 
+**datasource** | **str** | The datasource associated with the suggestion. | [optional] 
 **request_options** | [**SearchRequestOptions**](SearchRequestOptions.md) |  | [optional] 
 **ranges** | [**List[TextRange]**](TextRange.md) | The bolded ranges within the query of the QuerySuggestion. | [optional] 
 

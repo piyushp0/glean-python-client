@@ -90,6 +90,30 @@ class TestFeedResult(unittest.TestCase):
                         doc_type = '', 
                         mime_type = '', 
                         icon_url = '', ), 
+                    prompt_template = openapi_client.models.prompt_template_result.PromptTemplateResult(
+                        tracking_token = '', 
+                        favorite_info = openapi_client.models.favorite_info.FavoriteInfo(
+                            ugc_type = 'ANNOUNCEMENTS_TYPE', 
+                            id = '', 
+                            count = 56, 
+                            favorited_by_user = True, ), 
+                        run_count = openapi_client.models.count_info.CountInfo(
+                            count = 56, 
+                            period = openapi_client.models.period.Period(
+                                min_days_from_now = 56, 
+                                max_days_from_now = 56, 
+                                start = openapi_client.models.time_point.TimePoint(
+                                    epoch_seconds = 56, 
+                                    days_from_now = 56, ), 
+                                end = openapi_client.models.time_point.TimePoint(
+                                    epoch_seconds = 56, 
+                                    days_from_now = 56, ), ), 
+                            org = '', ), ), 
+                    workflow = openapi_client.models.workflow_result.WorkflowResult(
+                        workflow = null, 
+                        tags = [
+                            'RECOMMENDED'
+                            ], ), 
                     activities = [
                         openapi_client.models.user_activity.UserActivity(
                             actor = {"name":"George Clooney","obfuscatedId":"abc123"}, 
@@ -97,20 +121,9 @@ class TestFeedResult(unittest.TestCase):
                             action = 'ADD', 
                             aggregate_visit_count = openapi_client.models.count_info.CountInfo(
                                 count = 56, 
-                                period = openapi_client.models.period.Period(
-                                    min_days_from_now = 56, 
-                                    max_days_from_now = 56, 
-                                    start = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), 
-                                    end = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), ), 
                                 org = '', ), )
                         ], 
-                    document_visitor_count = openapi_client.models.count_info.CountInfo(
-                        count = 56, 
-                        org = '', ), ),
+                    document_visitor_count = , ),
                 secondary_entries = [
                     openapi_client.models.feed_entry.FeedEntry(
                         entry_id = '', 
@@ -165,6 +178,30 @@ class TestFeedResult(unittest.TestCase):
                             doc_type = '', 
                             mime_type = '', 
                             icon_url = '', ), 
+                        prompt_template = openapi_client.models.prompt_template_result.PromptTemplateResult(
+                            tracking_token = '', 
+                            favorite_info = openapi_client.models.favorite_info.FavoriteInfo(
+                                ugc_type = 'ANNOUNCEMENTS_TYPE', 
+                                id = '', 
+                                count = 56, 
+                                favorited_by_user = True, ), 
+                            run_count = openapi_client.models.count_info.CountInfo(
+                                count = 56, 
+                                period = openapi_client.models.period.Period(
+                                    min_days_from_now = 56, 
+                                    max_days_from_now = 56, 
+                                    start = openapi_client.models.time_point.TimePoint(
+                                        epoch_seconds = 56, 
+                                        days_from_now = 56, ), 
+                                    end = openapi_client.models.time_point.TimePoint(
+                                        epoch_seconds = 56, 
+                                        days_from_now = 56, ), ), 
+                                org = '', ), ), 
+                        workflow = openapi_client.models.workflow_result.WorkflowResult(
+                            workflow = null, 
+                            tags = [
+                                'RECOMMENDED'
+                                ], ), 
                         activities = [
                             openapi_client.models.user_activity.UserActivity(
                                 actor = {"name":"George Clooney","obfuscatedId":"abc123"}, 
@@ -172,20 +209,9 @@ class TestFeedResult(unittest.TestCase):
                                 action = 'ADD', 
                                 aggregate_visit_count = openapi_client.models.count_info.CountInfo(
                                     count = 56, 
-                                    period = openapi_client.models.period.Period(
-                                        min_days_from_now = 56, 
-                                        max_days_from_now = 56, 
-                                        start = openapi_client.models.time_point.TimePoint(
-                                            epoch_seconds = 56, 
-                                            days_from_now = 56, ), 
-                                        end = openapi_client.models.time_point.TimePoint(
-                                            epoch_seconds = 56, 
-                                            days_from_now = 56, ), ), 
                                     org = '', ), )
                             ], 
-                        document_visitor_count = openapi_client.models.count_info.CountInfo(
-                            count = 56, 
-                            org = '', ), )
+                        document_visitor_count = , )
                     ],
                 rank = 56
             )
@@ -245,6 +271,30 @@ class TestFeedResult(unittest.TestCase):
                         doc_type = '', 
                         mime_type = '', 
                         icon_url = '', ), 
+                    prompt_template = openapi_client.models.prompt_template_result.PromptTemplateResult(
+                        tracking_token = '', 
+                        favorite_info = openapi_client.models.favorite_info.FavoriteInfo(
+                            ugc_type = 'ANNOUNCEMENTS_TYPE', 
+                            id = '', 
+                            count = 56, 
+                            favorited_by_user = True, ), 
+                        run_count = openapi_client.models.count_info.CountInfo(
+                            count = 56, 
+                            period = openapi_client.models.period.Period(
+                                min_days_from_now = 56, 
+                                max_days_from_now = 56, 
+                                start = openapi_client.models.time_point.TimePoint(
+                                    epoch_seconds = 56, 
+                                    days_from_now = 56, ), 
+                                end = openapi_client.models.time_point.TimePoint(
+                                    epoch_seconds = 56, 
+                                    days_from_now = 56, ), ), 
+                            org = '', ), ), 
+                    workflow = openapi_client.models.workflow_result.WorkflowResult(
+                        workflow = null, 
+                        tags = [
+                            'RECOMMENDED'
+                            ], ), 
                     activities = [
                         openapi_client.models.user_activity.UserActivity(
                             actor = {"name":"George Clooney","obfuscatedId":"abc123"}, 
@@ -252,20 +302,9 @@ class TestFeedResult(unittest.TestCase):
                             action = 'ADD', 
                             aggregate_visit_count = openapi_client.models.count_info.CountInfo(
                                 count = 56, 
-                                period = openapi_client.models.period.Period(
-                                    min_days_from_now = 56, 
-                                    max_days_from_now = 56, 
-                                    start = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), 
-                                    end = openapi_client.models.time_point.TimePoint(
-                                        epoch_seconds = 56, 
-                                        days_from_now = 56, ), ), 
                                 org = '', ), )
                         ], 
-                    document_visitor_count = openapi_client.models.count_info.CountInfo(
-                        count = 56, 
-                        org = '', ), ),
+                    document_visitor_count = , ),
         )
         """
 

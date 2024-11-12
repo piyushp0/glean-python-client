@@ -41,6 +41,10 @@ class TestGeneratedQna(unittest.TestCase):
                 follow_up_prompts = [
                     ''
                     ],
+                followup_actions = [
+                    openapi_client.models.followup_action.FollowupAction(
+                        action_instance_id = '', )
+                    ],
                 ranges = [
                     openapi_client.models.text_range.TextRange(
                         start_index = 56, 

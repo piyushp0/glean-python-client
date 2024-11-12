@@ -97,9 +97,9 @@ class Document(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in sections (list)
         _items = []
         if self.sections:
-            for _item in self.sections:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_sections in self.sections:
+                if _item_sections:
+                    _items.append(_item_sections.to_dict())
             _dict['sections'] = _items
         return _dict
 

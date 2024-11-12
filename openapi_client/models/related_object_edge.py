@@ -73,9 +73,9 @@ class RelatedObjectEdge(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in objects (list)
         _items = []
         if self.objects:
-            for _item in self.objects:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_objects in self.objects:
+                if _item_objects:
+                    _items.append(_item_objects.to_dict())
             _dict['objects'] = _items
         return _dict
 

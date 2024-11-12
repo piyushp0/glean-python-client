@@ -28,9 +28,10 @@ class ChatRestrictionFilters(BaseModel):
     """
     ChatRestrictionFilters
     """ # noqa: E501
+    container_specs: Optional[List[DocumentSpec]] = Field(default=None, description="Specifications for containers that should be used as part of the restriction (include/exclude). Memberships are recursively defined for a subset of datasources (currently: SharePoint, OneDrive, Google Drive, and Confluence). Please contact the Glean team to enable this for more datasources. Recursive memberships do not apply for Collections.", alias="containerSpecs")
     document_specs: Optional[List[DocumentSpec]] = Field(default=None, alias="documentSpecs")
     datasource_instances: Optional[List[StrictStr]] = Field(default=None, alias="datasourceInstances")
-    __properties: ClassVar[List[str]] = ["documentSpecs", "datasourceInstances"]
+    __properties: ClassVar[List[str]] = ["containerSpecs", "documentSpecs", "datasourceInstances"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,12 +72,19 @@ class ChatRestrictionFilters(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in container_specs (list)
+        _items = []
+        if self.container_specs:
+            for _item_container_specs in self.container_specs:
+                if _item_container_specs:
+                    _items.append(_item_container_specs.to_dict())
+            _dict['containerSpecs'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in document_specs (list)
         _items = []
         if self.document_specs:
-            for _item in self.document_specs:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_document_specs in self.document_specs:
+                if _item_document_specs:
+                    _items.append(_item_document_specs.to_dict())
             _dict['documentSpecs'] = _items
         return _dict
 
@@ -90,6 +98,7 @@ class ChatRestrictionFilters(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "containerSpecs": [DocumentSpec.from_dict(_item) for _item in obj["containerSpecs"]] if obj.get("containerSpecs") is not None else None,
             "documentSpecs": [DocumentSpec.from_dict(_item) for _item in obj["documentSpecs"]] if obj.get("documentSpecs") is not None else None,
             "datasourceInstances": obj.get("datasourceInstances")
         })

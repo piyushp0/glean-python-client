@@ -87,23 +87,23 @@ class AnswerBoard(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in added_roles (list)
         _items = []
         if self.added_roles:
-            for _item in self.added_roles:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_added_roles in self.added_roles:
+                if _item_added_roles:
+                    _items.append(_item_added_roles.to_dict())
             _dict['addedRoles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in removed_roles (list)
         _items = []
         if self.removed_roles:
-            for _item in self.removed_roles:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_removed_roles in self.removed_roles:
+                if _item_removed_roles:
+                    _items.append(_item_removed_roles.to_dict())
             _dict['removedRoles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in audience_filters (list)
         _items = []
         if self.audience_filters:
-            for _item in self.audience_filters:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_audience_filters in self.audience_filters:
+                if _item_audience_filters:
+                    _items.append(_item_audience_filters.to_dict())
             _dict['audienceFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of permissions
         if self.permissions:
@@ -117,9 +117,9 @@ class AnswerBoard(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in roles (list)
         _items = []
         if self.roles:
-            for _item in self.roles:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_roles in self.roles:
+                if _item_roles:
+                    _items.append(_item_roles.to_dict())
             _dict['roles'] = _items
         return _dict
 

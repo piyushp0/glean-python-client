@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **question** | **str** | Search query rephrased into a question. | [optional] 
 **answer** | **str** | Answer generated for the given query or the generated question. | [optional] 
 **follow_up_prompts** | **List[str]** | List of all follow-up prompts generated for the given query or the generated question. | [optional] 
+**followup_actions** | [**List[FollowupAction]**](FollowupAction.md) | List of follow-up actions generated for the given query or the generated question. | [optional] 
 **ranges** | [**List[TextRange]**](TextRange.md) | Answer subsections to mark with special formatting (citations, bolding etc) | [optional] 
 **status** | **str** | Status of backend generating the answer | [optional] 
 **cursor** | **str** | An opaque cursor representing the search request | [optional] 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **string_value** | **str** |  | [optional] 
 **string_list_value** | **List[str]** | list of strings for multi-value properties | [optional] 
 **number_value** | **float** |  | [optional] 
+**boolean_value** | **bool** |  | [optional] 
 
 ## Example
 

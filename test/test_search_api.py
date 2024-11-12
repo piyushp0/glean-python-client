@@ -27,13 +27,6 @@ class TestSearchApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_adminsearch(self) -> None:
-        """Test case for adminsearch
-
-        Search the index (admin)
-        """
-        pass
-
     def test_autocomplete(self) -> None:
         """Test case for autocomplete
 
@@ -44,28 +37,7 @@ class TestSearchApi(unittest.TestCase):
     def test_feed(self) -> None:
         """Test case for feed
 
-        Suggest a feed of documents and events
-        """
-        pass
-
-    def test_peoplesuggest(self) -> None:
-        """Test case for peoplesuggest
-
-        Suggest people
-        """
-        pass
-
-    def test_peoplesuggestadmin(self) -> None:
-        """Test case for peoplesuggestadmin
-
-        Suggest people (admin)
-        """
-        pass
-
-    def test_recommendations(self) -> None:
-        """Test case for recommendations
-
-        Recommend documents
+        Feed of documents and events
         """
         pass
 

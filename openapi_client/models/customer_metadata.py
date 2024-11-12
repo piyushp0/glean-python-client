@@ -74,9 +74,9 @@ class CustomerMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in custom_data (dict)
         _field_dict = {}
         if self.custom_data:
-            for _key in self.custom_data:
-                if self.custom_data[_key]:
-                    _field_dict[_key] = self.custom_data[_key].to_dict()
+            for _key_custom_data in self.custom_data:
+                if self.custom_data[_key_custom_data]:
+                    _field_dict[_key_custom_data] = self.custom_data[_key_custom_data].to_dict()
             _dict['customData'] = _field_dict
         return _dict
 

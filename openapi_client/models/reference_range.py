@@ -78,9 +78,9 @@ class ReferenceRange(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in snippets (list)
         _items = []
         if self.snippets:
-            for _item in self.snippets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_snippets in self.snippets:
+                if _item_snippets:
+                    _items.append(_item_snippets.to_dict())
             _dict['snippets'] = _items
         return _dict
 

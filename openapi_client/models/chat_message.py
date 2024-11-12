@@ -32,16 +32,15 @@ class ChatMessage(BaseModel):
     """ # noqa: E501
     agent_config: Optional[AgentConfig] = Field(default=None, alias="agentConfig")
     author: Optional[StrictStr] = 'USER'
-    citations: Optional[List[ChatMessageCitation]] = Field(default=None, description="A list of Citations used to generate the message.")
+    citations: Optional[List[ChatMessageCitation]] = Field(default=None, description="A list of Citations that were used to generate the response.")
     uploaded_file_ids: Optional[List[StrictStr]] = Field(default=None, description="IDs of files uploaded in the message that are referenced to generate the answer.", alias="uploadedFileIds")
-    fragments: Optional[List[ChatMessageFragment]] = Field(default=None, description="A list of chat results.")
-    metadata: Optional[StrictStr] = Field(default=None, description="Metadata associated with the message (not displayed to the user but stored in the app).")
-    ts: Optional[StrictStr] = Field(default=None, description="Timestamp of the message.")
-    message_id: Optional[StrictStr] = Field(default=None, description="Unique ID of the message.", alias="messageId")
+    fragments: Optional[List[ChatMessageFragment]] = Field(default=None, description="A list of rich data used to represent the response or formulate a request. These are linearly stitched together to support richer data formats beyond simple text.")
+    ts: Optional[StrictStr] = Field(default=None, description="Response timestamp of the message.")
+    message_id: Optional[StrictStr] = Field(default=None, description="A unique server-side generated ID used to identify a message, automatically populated for any USER authored messages.", alias="messageId")
     message_tracking_token: Optional[StrictStr] = Field(default=None, description="Opaque tracking token generated server-side.", alias="messageTrackingToken")
-    message_type: Optional[StrictStr] = Field(default=None, description="Used to determine the type of UI treatment to apply to this message.", alias="messageType")
-    has_more_fragments: Optional[StrictBool] = Field(default=None, description="Signals there are more fragments incoming.", alias="hasMoreFragments")
-    __properties: ClassVar[List[str]] = ["agentConfig", "author", "citations", "uploadedFileIds", "fragments", "metadata", "ts", "messageId", "messageTrackingToken", "messageType", "hasMoreFragments"]
+    message_type: Optional[StrictStr] = Field(default='CONTENT', description="Semantically groups content of a certain type. It can be used for purposes such as differential UI treatment. USER authored messages should be of type CONTENT and do not need `messageType` specified.", alias="messageType")
+    has_more_fragments: Optional[StrictBool] = Field(default=None, description="Signals there are additional response fragments incoming.", alias="hasMoreFragments")
+    __properties: ClassVar[List[str]] = ["agentConfig", "author", "citations", "uploadedFileIds", "fragments", "ts", "messageId", "messageTrackingToken", "messageType", "hasMoreFragments"]
 
     @field_validator('author')
     def author_validate_enum(cls, value):
@@ -59,8 +58,8 @@ class ChatMessage(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'WARNING']):
-            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'WARNING')")
+        if value not in set(['UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'HEADING', 'WARNING']):
+            raise ValueError("must be one of enum values ('UPDATE', 'CONTENT', 'CONTEXT', 'DEBUG', 'DEBUG_EXTERNAL', 'ERROR', 'HEADING', 'WARNING')")
         return value
 
     model_config = ConfigDict(
@@ -108,16 +107,16 @@ class ChatMessage(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in citations (list)
         _items = []
         if self.citations:
-            for _item in self.citations:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_citations in self.citations:
+                if _item_citations:
+                    _items.append(_item_citations.to_dict())
             _dict['citations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in fragments (list)
         _items = []
         if self.fragments:
-            for _item in self.fragments:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_fragments in self.fragments:
+                if _item_fragments:
+                    _items.append(_item_fragments.to_dict())
             _dict['fragments'] = _items
         return _dict
 
@@ -136,11 +135,10 @@ class ChatMessage(BaseModel):
             "citations": [ChatMessageCitation.from_dict(_item) for _item in obj["citations"]] if obj.get("citations") is not None else None,
             "uploadedFileIds": obj.get("uploadedFileIds"),
             "fragments": [ChatMessageFragment.from_dict(_item) for _item in obj["fragments"]] if obj.get("fragments") is not None else None,
-            "metadata": obj.get("metadata"),
             "ts": obj.get("ts"),
             "messageId": obj.get("messageId"),
             "messageTrackingToken": obj.get("messageTrackingToken"),
-            "messageType": obj.get("messageType"),
+            "messageType": obj.get("messageType") if obj.get("messageType") is not None else 'CONTENT',
             "hasMoreFragments": obj.get("hasMoreFragments")
         })
         return _obj

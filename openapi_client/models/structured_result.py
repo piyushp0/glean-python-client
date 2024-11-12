@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.app_result import AppResult
+from openapi_client.models.disambiguation import Disambiguation
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,11 +44,12 @@ class StructuredResult(BaseModel):
     query_suggestions: Optional[QuerySuggestionList] = Field(default=None, alias="querySuggestions")
     related_documents: Optional[List[RelatedDocuments]] = Field(default=None, description="A list of documents related to this structured result.", alias="relatedDocuments")
     related_question: Optional[RelatedQuestion] = Field(default=None, alias="relatedQuestion")
+    disambiguation: Optional[Disambiguation] = None
     snippets: Optional[List[SearchResultSnippet]] = Field(default=None, description="Any snippets associated to the populated object.")
     tracking_token: Optional[StrictStr] = Field(default=None, description="An opaque token that represents this particular result in this particular query. To be used for /feedback reporting.", alias="trackingToken")
     prominence: Optional[StrictStr] = Field(default=None, description="The level of visual distinction that should be given to a result.")
     source: Optional[StrictStr] = Field(default=None, description="Source context for this result. Possible values depend on the result type.")
-    __properties: ClassVar[List[str]] = ["document", "person", "customer", "team", "customEntity", "answer", "extractedQnA", "app", "collection", "answerBoard", "code", "shortcut", "querySuggestions", "relatedDocuments", "relatedQuestion", "snippets", "trackingToken", "prominence", "source"]
+    __properties: ClassVar[List[str]] = ["document", "person", "customer", "team", "customEntity", "answer", "extractedQnA", "app", "collection", "answerBoard", "code", "shortcut", "querySuggestions", "relatedDocuments", "relatedQuestion", "disambiguation", "snippets", "trackingToken", "prominence", "source"]
 
     @field_validator('prominence')
     def prominence_validate_enum(cls, value):
@@ -150,19 +152,22 @@ class StructuredResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in related_documents (list)
         _items = []
         if self.related_documents:
-            for _item in self.related_documents:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_related_documents in self.related_documents:
+                if _item_related_documents:
+                    _items.append(_item_related_documents.to_dict())
             _dict['relatedDocuments'] = _items
         # override the default output from pydantic by calling `to_dict()` of related_question
         if self.related_question:
             _dict['relatedQuestion'] = self.related_question.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of disambiguation
+        if self.disambiguation:
+            _dict['disambiguation'] = self.disambiguation.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in snippets (list)
         _items = []
         if self.snippets:
-            for _item in self.snippets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_snippets in self.snippets:
+                if _item_snippets:
+                    _items.append(_item_snippets.to_dict())
             _dict['snippets'] = _items
         return _dict
 
@@ -191,6 +196,7 @@ class StructuredResult(BaseModel):
             "querySuggestions": QuerySuggestionList.from_dict(obj["querySuggestions"]) if obj.get("querySuggestions") is not None else None,
             "relatedDocuments": [RelatedDocuments.from_dict(_item) for _item in obj["relatedDocuments"]] if obj.get("relatedDocuments") is not None else None,
             "relatedQuestion": RelatedQuestion.from_dict(obj["relatedQuestion"]) if obj.get("relatedQuestion") is not None else None,
+            "disambiguation": Disambiguation.from_dict(obj["disambiguation"]) if obj.get("disambiguation") is not None else None,
             "snippets": [SearchResultSnippet.from_dict(_item) for _item in obj["snippets"]] if obj.get("snippets") is not None else None,
             "trackingToken": obj.get("trackingToken"),
             "prominence": obj.get("prominence"),

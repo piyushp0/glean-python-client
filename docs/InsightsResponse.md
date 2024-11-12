@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **answers** | [**ContentInsightsResponse**](ContentInsightsResponse.md) |  | [optional] 
 **ai** | [**AiInsightsResponse**](AiInsightsResponse.md) |  | [optional] 
 **ai_apps** | [**AiAppsInsightsResponse**](AiAppsInsightsResponse.md) |  | [optional] 
+**glean_assist** | [**GleanAssistInsightsResponse**](GleanAssistInsightsResponse.md) |  | [optional] 
 **departments** | **List[str]** | list of all departments. | [optional] 
 
 ## Example

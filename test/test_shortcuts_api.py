@@ -48,31 +48,10 @@ class TestShortcutsApi(unittest.TestCase):
         """
         pass
 
-    def test_getsimilarshortcuts(self) -> None:
-        """Test case for getsimilarshortcuts
-
-        Get similar shortcuts
-        """
-        pass
-
     def test_listshortcuts(self) -> None:
         """Test case for listshortcuts
 
         List shortcuts
-        """
-        pass
-
-    def test_previewshortcut(self) -> None:
-        """Test case for previewshortcut
-
-        Preview shortcut
-        """
-        pass
-
-    def test_updateshortcut(self) -> None:
-        """Test case for updateshortcut
-
-        Update shortcut
         """
         pass
 

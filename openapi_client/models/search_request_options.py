@@ -24,6 +24,7 @@ from openapi_client.models.auth_token import AuthToken
 from openapi_client.models.facet_bucket_filter import FacetBucketFilter
 from openapi_client.models.facet_filter import FacetFilter
 from openapi_client.models.facet_filter_set import FacetFilterSet
+from openapi_client.models.restriction_filters import RestrictionFilters
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -46,7 +47,9 @@ class SearchRequestOptions(BaseModel):
     disable_spellcheck: Optional[StrictBool] = Field(default=None, description="Whether or not to disable spellcheck.", alias="disableSpellcheck")
     disable_query_autocorrect: Optional[StrictBool] = Field(default=None, description="Disables automatic adjustment of the input query for spelling corrections or other reasons.", alias="disableQueryAutocorrect")
     return_llm_content_over_snippets: Optional[StrictBool] = Field(default=None, description="[beta] Enables expanded content to be returned for LLM usage. The size of content per result returned should be modified using maxSnippetSize. Server may return less or more than what is specified in maxSnippetSize. For more details, https://docs.google.com/document/d/1CTOLSxWWT9WDEnHVLoCUaxbGYyXYP8kctPRF-RluSQY/edit. Requires sufficient permissions.", alias="returnLlmContentOverSnippets")
-    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "queryOverridesFacetFilters", "facetFilters", "facetFilterSets", "facetBucketFilter", "facetBucketSize", "defaultFacets", "authTokens", "fetchAllDatasourceCounts", "responseHints", "timezoneOffset", "disableSpellcheck", "disableQueryAutocorrect", "returnLlmContentOverSnippets"]
+    inclusions: Optional[RestrictionFilters] = None
+    exclusions: Optional[RestrictionFilters] = None
+    __properties: ClassVar[List[str]] = ["datasourceFilter", "datasourcesFilter", "queryOverridesFacetFilters", "facetFilters", "facetFilterSets", "facetBucketFilter", "facetBucketSize", "defaultFacets", "authTokens", "fetchAllDatasourceCounts", "responseHints", "timezoneOffset", "disableSpellcheck", "disableQueryAutocorrect", "returnLlmContentOverSnippets", "inclusions", "exclusions"]
 
     @field_validator('response_hints')
     def response_hints_validate_enum(cls, value):
@@ -55,8 +58,8 @@ class SearchRequestOptions(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['FACET_RESULTS', 'RESULTS', 'QUERY_METADATA']):
-                raise ValueError("each list item must be one of ('FACET_RESULTS', 'RESULTS', 'QUERY_METADATA')")
+            if i not in set(['ALL_RESULT_COUNTS', 'FACET_RESULTS', 'QUERY_METADATA', 'RESULTS', 'SPELLCHECK_METADATA']):
+                raise ValueError("each list item must be one of ('ALL_RESULT_COUNTS', 'FACET_RESULTS', 'QUERY_METADATA', 'RESULTS', 'SPELLCHECK_METADATA')")
         return value
 
     model_config = ConfigDict(
@@ -101,16 +104,16 @@ class SearchRequestOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in facet_filters (list)
         _items = []
         if self.facet_filters:
-            for _item in self.facet_filters:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_facet_filters in self.facet_filters:
+                if _item_facet_filters:
+                    _items.append(_item_facet_filters.to_dict())
             _dict['facetFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in facet_filter_sets (list)
         _items = []
         if self.facet_filter_sets:
-            for _item in self.facet_filter_sets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_facet_filter_sets in self.facet_filter_sets:
+                if _item_facet_filter_sets:
+                    _items.append(_item_facet_filter_sets.to_dict())
             _dict['facetFilterSets'] = _items
         # override the default output from pydantic by calling `to_dict()` of facet_bucket_filter
         if self.facet_bucket_filter:
@@ -118,10 +121,16 @@ class SearchRequestOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in auth_tokens (list)
         _items = []
         if self.auth_tokens:
-            for _item in self.auth_tokens:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_auth_tokens in self.auth_tokens:
+                if _item_auth_tokens:
+                    _items.append(_item_auth_tokens.to_dict())
             _dict['authTokens'] = _items
+        # override the default output from pydantic by calling `to_dict()` of inclusions
+        if self.inclusions:
+            _dict['inclusions'] = self.inclusions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of exclusions
+        if self.exclusions:
+            _dict['exclusions'] = self.exclusions.to_dict()
         return _dict
 
     @classmethod
@@ -148,7 +157,9 @@ class SearchRequestOptions(BaseModel):
             "timezoneOffset": obj.get("timezoneOffset"),
             "disableSpellcheck": obj.get("disableSpellcheck"),
             "disableQueryAutocorrect": obj.get("disableQueryAutocorrect"),
-            "returnLlmContentOverSnippets": obj.get("returnLlmContentOverSnippets")
+            "returnLlmContentOverSnippets": obj.get("returnLlmContentOverSnippets"),
+            "inclusions": RestrictionFilters.from_dict(obj["inclusions"]) if obj.get("inclusions") is not None else None,
+            "exclusions": RestrictionFilters.from_dict(obj["exclusions"]) if obj.get("exclusions") is not None else None
         })
         return _obj
 

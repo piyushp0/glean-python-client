@@ -69,38 +69,10 @@ class TestCollectionsApi(unittest.TestCase):
         """
         pass
 
-    def test_editdocumentcollections(self) -> None:
-        """Test case for editdocumentcollections
-
-        Update document Collections
-        """
-        pass
-
-    def test_getcollection(self) -> None:
-        """Test case for getcollection
-
-        Read Collection
-        """
-        pass
-
     def test_listcollections(self) -> None:
         """Test case for listcollections
 
         List Collections
-        """
-        pass
-
-    def test_movecollectionitem(self) -> None:
-        """Test case for movecollectionitem
-
-        Move Collection item
-        """
-        pass
-
-    def test_pincollection(self) -> None:
-        """Test case for pincollection
-
-        Pin Collection
         """
         pass
 

@@ -161,6 +161,10 @@ class TestChatMessageFragment(unittest.TestCase):
                                     type = 'BOLD', 
                                     url = '', )
                                 ], ), 
+                        disambiguation = openapi_client.models.disambiguation.Disambiguation(
+                            name = '', 
+                            id = '', 
+                            type = 'PERSON', ), 
                         snippets = [
                             {"snippet":"snippet","mimeType":"mimeType"}
                             ], 
@@ -173,6 +177,9 @@ class TestChatMessageFragment(unittest.TestCase):
                 query_suggestion = {"query":"app:github type:pull author:mortimer","label":"Mortimer's PRs","datasource":"github"},
                 write_action = openapi_client.models.write_action.WriteAction(
                     tool_name = '', 
+                    action_instance_id = '', 
+                    action_id = '', 
+                    action_pack_id = '', 
                     tool_config = openapi_client.models.tool_config.ToolConfig(
                         display_name = '', 
                         object_name = '["HR ticket","Email","Chat message"]', 
@@ -195,12 +202,68 @@ class TestChatMessageFragment(unittest.TestCase):
                         }, ),
                 file = openapi_client.models.chat_file.ChatFile(
                     id = 'FILE_1234', 
+                    url = 'www.google.com', 
                     name = 'sample.pdf', 
                     metadata = openapi_client.models.chat_file_metadata.ChatFileMetadata(
                         status = 'PROCESSING', 
                         upload_time = 56, 
                         processed_size = 56, 
-                        failure_reason = 'PARSE_FAILED', ), )
+                        failure_reason = 'PARSE_FAILED', 
+                        mime_type = '', ), ),
+                action = openapi_client.models.tool_info.ToolInfo(
+                    metadata = openapi_client.models.tool_metadata.ToolMetadata(
+                        type = 'RETRIEVAL', 
+                        name = '', 
+                        display_name = '', 
+                        tool_id = '', 
+                        display_description = '', 
+                        logo_url = '', 
+                        object_name = '["HR ticket","Email","Chat message"]', 
+                        knowledge_type = 'NEUTRAL_KNOWLEDGE', 
+                        created_by = openapi_client.models.person_object.PersonObject(
+                            name = '', 
+                            obfuscated_id = '', ), 
+                        last_updated_by = openapi_client.models.person_object.PersonObject(
+                            name = '', 
+                            obfuscated_id = '', ), 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        last_updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        write_action_type = 'REDIRECT', 
+                        auth = openapi_client.models.auth_config.AuthConfig(
+                            is_on_prem = True, 
+                            uses_central_auth = True, 
+                            type = 'NONE', 
+                            grant_type = 'AUTH_CODE', 
+                            status = 'AWAITING_AUTH', 
+                            client_url = '', 
+                            scopes = [
+                                ''
+                                ], 
+                            audiences = [
+                                ''
+                                ], 
+                            authorization_url = '', 
+                            last_authorized_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
+                        permissions = openapi_client.models.object_permissions.ObjectPermissions(
+                            write = openapi_client.models.write_permission.WritePermission(
+                                scope_type = 'GLOBAL', 
+                                create = True, 
+                                update = True, 
+                                delete = True, ), ), ), 
+                    parameters = {
+                        'key' : openapi_client.models.write_action_parameter.WriteActionParameter(
+                            type = 'UNKNOWN', 
+                            display_name = '', 
+                            value = '', 
+                            label = '', 
+                            is_required = True, 
+                            description = '', 
+                            possible_values = [
+                                openapi_client.models.possible_value.PossibleValue(
+                                    value = '', 
+                                    label = '', )
+                                ], )
+                        }, )
             )
         else:
             return ChatMessageFragment(

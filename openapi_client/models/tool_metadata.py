@@ -38,19 +38,41 @@ class ToolMetadata(BaseModel):
     display_description: StrictStr = Field(description="Description of the tool meant for a human.", alias="displayDescription")
     logo_url: Optional[StrictStr] = Field(default=None, description="URL used to fetch the logo.", alias="logoUrl")
     object_name: Optional[StrictStr] = Field(default=None, description="Name of the generated object. This will be used to indicate to the end user what the generated object contains.", alias="objectName")
+    knowledge_type: Optional[StrictStr] = Field(default=None, description="Indicates the kind of knowledge a tool would access or modify.", alias="knowledgeType")
     created_by: Optional[PersonObject] = Field(default=None, alias="createdBy")
     last_updated_by: Optional[PersonObject] = Field(default=None, alias="lastUpdatedBy")
     created_at: Optional[datetime] = Field(default=None, description="The time the tool was created in ISO format (ISO 8601)", alias="createdAt")
     last_updated_at: Optional[datetime] = Field(default=None, description="The time the tool was last updated in ISO format (ISO 8601)", alias="lastUpdatedAt")
+    write_action_type: Optional[StrictStr] = Field(default=None, description="Valid only for write actions. Represents the type of write action. REDIRECT - The client renders the URL which contains information for carrying out the action. EXECUTION - Send a request to an external server and execute the action.", alias="writeActionType")
     auth: Optional[AuthConfig] = None
     permissions: Optional[ObjectPermissions] = None
-    __properties: ClassVar[List[str]] = ["type", "name", "displayName", "toolId", "displayDescription", "logoUrl", "objectName", "createdBy", "lastUpdatedBy", "createdAt", "lastUpdatedAt", "auth", "permissions"]
+    __properties: ClassVar[List[str]] = ["type", "name", "displayName", "toolId", "displayDescription", "logoUrl", "objectName", "knowledgeType", "createdBy", "lastUpdatedBy", "createdAt", "lastUpdatedAt", "writeActionType", "auth", "permissions"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['RETRIEVAL', 'ACTION']):
             raise ValueError("must be one of enum values ('RETRIEVAL', 'ACTION')")
+        return value
+
+    @field_validator('knowledge_type')
+    def knowledge_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['NEUTRAL_KNOWLEDGE', 'COMPANY_KNOWLEDGE', 'WORLD_KNOWLEDGE']):
+            raise ValueError("must be one of enum values ('NEUTRAL_KNOWLEDGE', 'COMPANY_KNOWLEDGE', 'WORLD_KNOWLEDGE')")
+        return value
+
+    @field_validator('write_action_type')
+    def write_action_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['REDIRECT', 'EXECUTION']):
+            raise ValueError("must be one of enum values ('REDIRECT', 'EXECUTION')")
         return value
 
     model_config = ConfigDict(
@@ -123,10 +145,12 @@ class ToolMetadata(BaseModel):
             "displayDescription": obj.get("displayDescription"),
             "logoUrl": obj.get("logoUrl"),
             "objectName": obj.get("objectName"),
+            "knowledgeType": obj.get("knowledgeType"),
             "createdBy": PersonObject.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
             "lastUpdatedBy": PersonObject.from_dict(obj["lastUpdatedBy"]) if obj.get("lastUpdatedBy") is not None else None,
             "createdAt": obj.get("createdAt"),
             "lastUpdatedAt": obj.get("lastUpdatedAt"),
+            "writeActionType": obj.get("writeActionType"),
             "auth": AuthConfig.from_dict(obj["auth"]) if obj.get("auth") is not None else None,
             "permissions": ObjectPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })

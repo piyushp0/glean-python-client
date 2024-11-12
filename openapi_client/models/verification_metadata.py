@@ -86,9 +86,9 @@ class VerificationMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in reminders (list)
         _items = []
         if self.reminders:
-            for _item in self.reminders:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_reminders in self.reminders:
+                if _item_reminders:
+                    _items.append(_item_reminders.to_dict())
             _dict['reminders'] = _items
         # override the default output from pydantic by calling `to_dict()` of last_reminder
         if self.last_reminder:
@@ -96,16 +96,16 @@ class VerificationMetadata(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in visitor_count (list)
         _items = []
         if self.visitor_count:
-            for _item in self.visitor_count:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_visitor_count in self.visitor_count:
+                if _item_visitor_count:
+                    _items.append(_item_visitor_count.to_dict())
             _dict['visitorCount'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in candidate_verifiers (list)
         _items = []
         if self.candidate_verifiers:
-            for _item in self.candidate_verifiers:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_candidate_verifiers in self.candidate_verifiers:
+                if _item_candidate_verifiers:
+                    _items.append(_item_candidate_verifiers.to_dict())
             _dict['candidateVerifiers'] = _items
         return _dict
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | The type of the value (e.g., integer, string, etc.) | [optional] 
+**type** | **str** | The type of the value (e.g., integer, string, boolean, etc.) | [optional] 
 **display_name** | **str** | Human readable display name for the key. | [optional] 
 **value** | **str** | The value of the field. | [optional] 
 **label** | **str** | User-friendly label associated with the value. | [optional] 

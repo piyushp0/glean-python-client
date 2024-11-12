@@ -82,28 +82,28 @@ class Permissions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in read (dict of array)
         _field_dict_of_array = {}
         if self.read:
-            for _key in self.read:
-                if self.read[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.read[_key]
+            for _key_read in self.read:
+                if self.read[_key_read] is not None:
+                    _field_dict_of_array[_key_read] = [
+                        _item.to_dict() for _item in self.read[_key_read]
                     ]
             _dict['read'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each value in write (dict of array)
         _field_dict_of_array = {}
         if self.write:
-            for _key in self.write:
-                if self.write[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.write[_key]
+            for _key_write in self.write:
+                if self.write[_key_write] is not None:
+                    _field_dict_of_array[_key_write] = [
+                        _item.to_dict() for _item in self.write[_key_write]
                     ]
             _dict['write'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each value in grant (dict of array)
         _field_dict_of_array = {}
         if self.grant:
-            for _key in self.grant:
-                if self.grant[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.grant[_key]
+            for _key_grant in self.grant:
+                if self.grant[_key_grant] is not None:
+                    _field_dict_of_array[_key_grant] = [
+                        _item.to_dict() for _item in self.grant[_key_grant]
                     ]
             _dict['grant'] = _field_dict_of_array
         return _dict

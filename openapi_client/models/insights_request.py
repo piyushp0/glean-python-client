@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.insights_ai_app_request_options import InsightsAiAppRequestOptions
 from openapi_client.models.period import Period
@@ -30,18 +30,19 @@ class InsightsRequest(BaseModel):
     InsightsRequest
     """ # noqa: E501
     categories: List[StrictStr] = Field(description="Categories of data requested. Request can include single or multiple types.")
-    departments: Optional[List[StrictStr]] = Field(default=None, description="Departments that the data is requested for. If the empty, corresponds to whole company.")
-    assistant_activity_types: Optional[List[StrictStr]] = Field(default=None, description="Types of activity that should count in the definition of an Assistant Active User. Affects only insights for AI category.", alias="assistantActivityTypes")
+    departments: Optional[List[StrictStr]] = Field(default=None, description="Departments that the data is requested for. If this is empty, corresponds to whole company.")
     day_range: Optional[Period] = Field(default=None, alias="dayRange")
     ai_app_request_options: Optional[InsightsAiAppRequestOptions] = Field(default=None, alias="aiAppRequestOptions")
-    __properties: ClassVar[List[str]] = ["categories", "departments", "assistantActivityTypes", "dayRange", "aiAppRequestOptions"]
+    assistant_activity_types: Optional[List[StrictStr]] = Field(default=None, description="Types of activity that should count in the definition of an Assistant Active User. Affects only insights for AI category.", alias="assistantActivityTypes")
+    disable_per_user_insights: Optional[StrictBool] = Field(default=None, description="If true, suppresses the generation of per-user Insights in the response. Default is false.", alias="disablePerUserInsights")
+    __properties: ClassVar[List[str]] = ["categories", "departments", "dayRange", "aiAppRequestOptions", "assistantActivityTypes", "disablePerUserInsights"]
 
     @field_validator('categories')
     def categories_validate_enum(cls, value):
         """Validates the enum"""
         for i in value:
-            if i not in set(['AI', 'AI_APPS', 'ANNOUNCEMENTS', 'ANSWERS', 'COLLECTIONS', 'CONTENT', 'QUERIES', 'SHORTCUTS', 'USERS']):
-                raise ValueError("each list item must be one of ('AI', 'AI_APPS', 'ANNOUNCEMENTS', 'ANSWERS', 'COLLECTIONS', 'CONTENT', 'QUERIES', 'SHORTCUTS', 'USERS')")
+            if i not in set(['AI', 'AI_APPS', 'ANNOUNCEMENTS', 'ANSWERS', 'COLLECTIONS', 'CONTENT', 'GLEAN_ASSIST', 'QUERIES', 'SHORTCUTS', 'USERS']):
+                raise ValueError("each list item must be one of ('AI', 'AI_APPS', 'ANNOUNCEMENTS', 'ANSWERS', 'COLLECTIONS', 'CONTENT', 'GLEAN_ASSIST', 'QUERIES', 'SHORTCUTS', 'USERS')")
         return value
 
     @field_validator('assistant_activity_types')
@@ -114,9 +115,10 @@ class InsightsRequest(BaseModel):
         _obj = cls.model_validate({
             "categories": obj.get("categories"),
             "departments": obj.get("departments"),
-            "assistantActivityTypes": obj.get("assistantActivityTypes"),
             "dayRange": Period.from_dict(obj["dayRange"]) if obj.get("dayRange") is not None else None,
-            "aiAppRequestOptions": InsightsAiAppRequestOptions.from_dict(obj["aiAppRequestOptions"]) if obj.get("aiAppRequestOptions") is not None else None
+            "aiAppRequestOptions": InsightsAiAppRequestOptions.from_dict(obj["aiAppRequestOptions"]) if obj.get("aiAppRequestOptions") is not None else None,
+            "assistantActivityTypes": obj.get("assistantActivityTypes"),
+            "disablePerUserInsights": obj.get("disablePerUserInsights")
         })
         return _obj
 
