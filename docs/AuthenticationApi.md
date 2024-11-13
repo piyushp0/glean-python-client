@@ -86,7 +86,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createauthtoken**
-> CreateAuthTokenResponse createauthtoken(x_scio_actas=x_scio_actas)
+> CreateAuthTokenResponse createauthtoken(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create authentication token
 
@@ -123,10 +123,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.AuthenticationApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create authentication token
-        api_response = api_instance.createauthtoken(x_scio_actas=x_scio_actas)
+        api_response = api_instance.createauthtoken(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AuthenticationApi->createauthtoken:\n")
         pprint(api_response)
     except Exception as e:
@@ -141,6 +142,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.agent_client_config import AgentClientConfig
+from openapi_client.models.file_upload_config import FileUploadConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,10 +38,13 @@ class AssistantConfig(BaseModel):
     redlisted_datasources: Optional[List[StrictStr]] = Field(default=None, description="A list of datasources that are disabled in Chat", alias="redlistedDatasources")
     greenlisted_datasource_instances: Optional[List[StrictStr]] = Field(default=None, description="A list of datasources that are always visible in Chat", alias="greenlistedDatasourceInstances")
     gpt_agent_enabled: Optional[StrictBool] = Field(default=None, description="Whether the GPT agent (general mode) for Chat is enabled", alias="gptAgentEnabled")
-    file_upload_enabled: Optional[StrictBool] = Field(default=None, description="Whether file upload for Chat is enabled for the deployment", alias="fileUploadEnabled")
+    file_upload: Optional[FileUploadConfig] = Field(default=None, alias="fileUpload")
     chat_history_enabled: Optional[StrictBool] = Field(default=None, description="Whether the chat history for Chat is enabled for the deployment", alias="chatHistoryEnabled")
     chat_guide_url: Optional[StrictStr] = Field(default=None, description="Redirect URL for \"Chat guide\" in the default chat starter subheader", alias="chatGuideUrl")
-    __properties: ClassVar[List[str]] = ["chatBannerText", "chatBoxDisclaimer", "chatLinkUrlTemplate", "chatStarterHeader", "chatStarterSubheader", "agentClientConfigs", "redlistedDatasources", "greenlistedDatasourceInstances", "gptAgentEnabled", "fileUploadEnabled", "chatHistoryEnabled", "chatGuideUrl"]
+    prompts_enabled: Optional[StrictBool] = Field(default=None, description="Whether prompt templates feature are enabled for the deployment.", alias="promptsEnabled")
+    default_user_can_share_prompts: Optional[StrictBool] = Field(default=None, description="Whether a default user can share prompts to the prompt library.", alias="defaultUserCanSharePrompts")
+    file_upload_enabled: Optional[StrictBool] = Field(default=None, description="Whether file upload for Chat is enabled for the deployment", alias="fileUploadEnabled")
+    __properties: ClassVar[List[str]] = ["chatBannerText", "chatBoxDisclaimer", "chatLinkUrlTemplate", "chatStarterHeader", "chatStarterSubheader", "agentClientConfigs", "redlistedDatasources", "greenlistedDatasourceInstances", "gptAgentEnabled", "fileUpload", "chatHistoryEnabled", "chatGuideUrl", "promptsEnabled", "defaultUserCanSharePrompts", "fileUploadEnabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,10 +88,13 @@ class AssistantConfig(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in agent_client_configs (list)
         _items = []
         if self.agent_client_configs:
-            for _item in self.agent_client_configs:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_agent_client_configs in self.agent_client_configs:
+                if _item_agent_client_configs:
+                    _items.append(_item_agent_client_configs.to_dict())
             _dict['agentClientConfigs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of file_upload
+        if self.file_upload:
+            _dict['fileUpload'] = self.file_upload.to_dict()
         return _dict
 
     @classmethod
@@ -109,9 +116,12 @@ class AssistantConfig(BaseModel):
             "redlistedDatasources": obj.get("redlistedDatasources"),
             "greenlistedDatasourceInstances": obj.get("greenlistedDatasourceInstances"),
             "gptAgentEnabled": obj.get("gptAgentEnabled"),
-            "fileUploadEnabled": obj.get("fileUploadEnabled"),
+            "fileUpload": FileUploadConfig.from_dict(obj["fileUpload"]) if obj.get("fileUpload") is not None else None,
             "chatHistoryEnabled": obj.get("chatHistoryEnabled"),
-            "chatGuideUrl": obj.get("chatGuideUrl")
+            "chatGuideUrl": obj.get("chatGuideUrl"),
+            "promptsEnabled": obj.get("promptsEnabled"),
+            "defaultUserCanSharePrompts": obj.get("defaultUserCanSharePrompts"),
+            "fileUploadEnabled": obj.get("fileUploadEnabled")
         })
         return _obj
 

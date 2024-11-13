@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **messages**
-> MessagesResponse messages(payload, x_scio_actas=x_scio_actas)
+> MessagesResponse messages(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read messages
 
@@ -47,10 +47,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.MessagesApi(api_client)
     payload = openapi_client.MessagesRequest() # MessagesRequest | Includes request params such as the id for channel/message and direction.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read messages
-        api_response = api_instance.messages(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.messages(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of MessagesApi->messages:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**MessagesRequest**](MessagesRequest.md)| Includes request params such as the id for channel/message and direction. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

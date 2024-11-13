@@ -18,6 +18,8 @@ The type of email to send
 
 * `CUSTOM_JSON_REPORT` (value: `'CUSTOM_JSON_REPORT'`)
 
+* `DLP_REPORT_NOTIFICATION` (value: `'DLP_REPORT_NOTIFICATION'`)
+
 * `DOMAIN_VERIFICATION` (value: `'DOMAIN_VERIFICATION'`)
 
 * `GENERAL_FEEDBACK` (value: `'GENERAL_FEEDBACK'`)
@@ -55,6 +57,10 @@ The type of email to send
 * `WEEKLY_FEED` (value: `'WEEKLY_FEED'`)
 
 * `WORKSPACE_INITIALIZED` (value: `'WORKSPACE_INITIALIZED'`)
+
+* `CHANNELS_DIGEST_REMINDER` (value: `'CHANNELS_DIGEST_REMINDER'`)
+
+* `CHANNELS_DIGEST_SIGNUP_REMINDER` (value: `'CHANNELS_DIGEST_SIGNUP_REMINDER'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

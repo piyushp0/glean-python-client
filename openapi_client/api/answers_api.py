@@ -68,6 +68,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerRequest, Field(description="CreateAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -89,6 +90,8 @@ class AnswersApi:
         :type payload: CreateAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -114,6 +117,7 @@ class AnswersApi:
         _param = self._createanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -142,6 +146,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerRequest, Field(description="CreateAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -163,6 +168,8 @@ class AnswersApi:
         :type payload: CreateAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -188,6 +195,7 @@ class AnswersApi:
         _param = self._createanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -216,6 +224,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerRequest, Field(description="CreateAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -237,6 +246,8 @@ class AnswersApi:
         :type payload: CreateAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -262,6 +273,7 @@ class AnswersApi:
         _param = self._createanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -285,6 +297,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -300,7 +313,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -308,6 +323,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -364,6 +381,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -385,6 +403,8 @@ class AnswersApi:
         :type payload: CreateAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -411,6 +431,7 @@ class AnswersApi:
         _param = self._createanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -439,6 +460,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -460,6 +482,8 @@ class AnswersApi:
         :type payload: CreateAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -486,6 +510,7 @@ class AnswersApi:
         _param = self._createanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -514,6 +539,7 @@ class AnswersApi:
         self,
         payload: Annotated[CreateAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -535,6 +561,8 @@ class AnswersApi:
         :type payload: CreateAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -561,6 +589,7 @@ class AnswersApi:
         _param = self._createanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -584,6 +613,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -599,7 +629,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -607,6 +639,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -663,6 +697,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerRequest, Field(description="DeleteAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -684,6 +719,8 @@ class AnswersApi:
         :type payload: DeleteAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -709,6 +746,7 @@ class AnswersApi:
         _param = self._deleteanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -737,6 +775,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerRequest, Field(description="DeleteAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -758,6 +797,8 @@ class AnswersApi:
         :type payload: DeleteAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -783,6 +824,7 @@ class AnswersApi:
         _param = self._deleteanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -811,6 +853,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerRequest, Field(description="DeleteAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -832,6 +875,8 @@ class AnswersApi:
         :type payload: DeleteAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -857,6 +902,7 @@ class AnswersApi:
         _param = self._deleteanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -880,6 +926,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -895,7 +942,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -903,6 +952,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -952,6 +1003,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerBoardsRequest, Field(description="DeleteAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -973,6 +1025,8 @@ class AnswersApi:
         :type payload: DeleteAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -999,6 +1053,7 @@ class AnswersApi:
         _param = self._deleteanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1027,6 +1082,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerBoardsRequest, Field(description="DeleteAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1048,6 +1104,8 @@ class AnswersApi:
         :type payload: DeleteAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1074,6 +1132,7 @@ class AnswersApi:
         _param = self._deleteanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1102,6 +1161,7 @@ class AnswersApi:
         self,
         payload: Annotated[DeleteAnswerBoardsRequest, Field(description="DeleteAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1123,6 +1183,8 @@ class AnswersApi:
         :type payload: DeleteAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1149,6 +1211,7 @@ class AnswersApi:
         _param = self._deleteanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1172,6 +1235,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1187,7 +1251,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1195,6 +1261,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1251,6 +1319,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerRequest, Field(description="EditAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1272,6 +1341,8 @@ class AnswersApi:
         :type payload: EditAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1297,6 +1368,7 @@ class AnswersApi:
         _param = self._editanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1325,6 +1397,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerRequest, Field(description="EditAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1346,6 +1419,8 @@ class AnswersApi:
         :type payload: EditAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1371,6 +1446,7 @@ class AnswersApi:
         _param = self._editanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1399,6 +1475,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerRequest, Field(description="EditAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1420,6 +1497,8 @@ class AnswersApi:
         :type payload: EditAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1445,6 +1524,7 @@ class AnswersApi:
         _param = self._editanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1468,6 +1548,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1483,7 +1564,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1491,6 +1574,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1547,6 +1632,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1568,6 +1654,8 @@ class AnswersApi:
         :type payload: EditAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1594,6 +1682,7 @@ class AnswersApi:
         _param = self._editanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1622,6 +1711,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1643,6 +1733,8 @@ class AnswersApi:
         :type payload: EditAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1669,6 +1761,7 @@ class AnswersApi:
         _param = self._editanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1697,6 +1790,7 @@ class AnswersApi:
         self,
         payload: Annotated[EditAnswerBoardRequest, Field(description="Answer Board content plus any additional metadata for the request.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1718,6 +1812,8 @@ class AnswersApi:
         :type payload: EditAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1744,6 +1840,7 @@ class AnswersApi:
         _param = self._editanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1767,6 +1864,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1782,7 +1880,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1790,6 +1890,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1846,6 +1948,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerRequest, Field(description="GetAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1867,6 +1970,8 @@ class AnswersApi:
         :type payload: GetAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1892,6 +1997,7 @@ class AnswersApi:
         _param = self._getanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1920,6 +2026,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerRequest, Field(description="GetAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1941,6 +2048,8 @@ class AnswersApi:
         :type payload: GetAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1966,6 +2075,7 @@ class AnswersApi:
         _param = self._getanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1994,6 +2104,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerRequest, Field(description="GetAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2015,6 +2126,8 @@ class AnswersApi:
         :type payload: GetAnswerRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2040,6 +2153,7 @@ class AnswersApi:
         _param = self._getanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2063,6 +2177,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2078,7 +2193,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2086,6 +2203,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -2142,6 +2261,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerBoardRequest, Field(description="GetAnswerBoard request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2163,6 +2283,8 @@ class AnswersApi:
         :type payload: GetAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2189,6 +2311,7 @@ class AnswersApi:
         _param = self._getanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2217,6 +2340,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerBoardRequest, Field(description="GetAnswerBoard request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2238,6 +2362,8 @@ class AnswersApi:
         :type payload: GetAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2264,6 +2390,7 @@ class AnswersApi:
         _param = self._getanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2292,6 +2419,7 @@ class AnswersApi:
         self,
         payload: Annotated[GetAnswerBoardRequest, Field(description="GetAnswerBoard request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2313,6 +2441,8 @@ class AnswersApi:
         :type payload: GetAnswerBoardRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2339,6 +2469,7 @@ class AnswersApi:
         _param = self._getanswerboard_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2362,6 +2493,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2377,7 +2509,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2385,6 +2519,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -2441,6 +2577,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswerBoardsRequest, Field(description="ListAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2462,6 +2599,8 @@ class AnswersApi:
         :type payload: ListAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2488,6 +2627,7 @@ class AnswersApi:
         _param = self._listanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2516,6 +2656,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswerBoardsRequest, Field(description="ListAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2537,6 +2678,8 @@ class AnswersApi:
         :type payload: ListAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2563,6 +2706,7 @@ class AnswersApi:
         _param = self._listanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2591,6 +2735,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswerBoardsRequest, Field(description="ListAnswerBoards request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2612,6 +2757,8 @@ class AnswersApi:
         :type payload: ListAnswerBoardsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2638,6 +2785,7 @@ class AnswersApi:
         _param = self._listanswerboards_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2661,6 +2809,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2676,7 +2825,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2684,6 +2835,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -2740,6 +2893,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswersRequest, Field(description="ListAnswers request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2761,6 +2915,8 @@ class AnswersApi:
         :type payload: ListAnswersRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2786,6 +2942,7 @@ class AnswersApi:
         _param = self._listanswers_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2814,6 +2971,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswersRequest, Field(description="ListAnswers request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2835,6 +2993,8 @@ class AnswersApi:
         :type payload: ListAnswersRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2860,6 +3020,7 @@ class AnswersApi:
         _param = self._listanswers_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2888,6 +3049,7 @@ class AnswersApi:
         self,
         payload: Annotated[ListAnswersRequest, Field(description="ListAnswers request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2909,6 +3071,8 @@ class AnswersApi:
         :type payload: ListAnswersRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2934,6 +3098,7 @@ class AnswersApi:
         _param = self._listanswers_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2957,6 +3122,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2972,7 +3138,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2980,6 +3148,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -3036,6 +3206,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewStructuredTextRequest, Field(description="PreviewAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3057,6 +3228,8 @@ class AnswersApi:
         :type payload: PreviewStructuredTextRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3082,6 +3255,7 @@ class AnswersApi:
         _param = self._previewanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3110,6 +3284,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewStructuredTextRequest, Field(description="PreviewAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3131,6 +3306,8 @@ class AnswersApi:
         :type payload: PreviewStructuredTextRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3156,6 +3333,7 @@ class AnswersApi:
         _param = self._previewanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3184,6 +3362,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewStructuredTextRequest, Field(description="PreviewAnswer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3205,6 +3384,8 @@ class AnswersApi:
         :type payload: PreviewStructuredTextRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3230,6 +3411,7 @@ class AnswersApi:
         _param = self._previewanswer_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3253,6 +3435,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -3268,7 +3451,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3276,6 +3461,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -3332,6 +3519,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewUgcRequest, Field(description="preview answer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3353,6 +3541,8 @@ class AnswersApi:
         :type payload: PreviewUgcRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3378,6 +3568,7 @@ class AnswersApi:
         _param = self._previewanswerdraft_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3406,6 +3597,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewUgcRequest, Field(description="preview answer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3427,6 +3619,8 @@ class AnswersApi:
         :type payload: PreviewUgcRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3452,6 +3646,7 @@ class AnswersApi:
         _param = self._previewanswerdraft_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3480,6 +3675,7 @@ class AnswersApi:
         self,
         payload: Annotated[PreviewUgcRequest, Field(description="preview answer request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3501,6 +3697,8 @@ class AnswersApi:
         :type payload: PreviewUgcRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3526,6 +3724,7 @@ class AnswersApi:
         _param = self._previewanswerdraft_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3549,6 +3748,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -3564,7 +3764,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3572,6 +3774,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -3628,6 +3832,7 @@ class AnswersApi:
         self,
         payload: Annotated[UpdateAnswerLikesRequest, Field(description="UpdateAnswerLikes request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3649,6 +3854,8 @@ class AnswersApi:
         :type payload: UpdateAnswerLikesRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3674,6 +3881,7 @@ class AnswersApi:
         _param = self._updateanswerlikes_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3702,6 +3910,7 @@ class AnswersApi:
         self,
         payload: Annotated[UpdateAnswerLikesRequest, Field(description="UpdateAnswerLikes request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3723,6 +3932,8 @@ class AnswersApi:
         :type payload: UpdateAnswerLikesRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3748,6 +3959,7 @@ class AnswersApi:
         _param = self._updateanswerlikes_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3776,6 +3988,7 @@ class AnswersApi:
         self,
         payload: Annotated[UpdateAnswerLikesRequest, Field(description="UpdateAnswerLikes request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3797,6 +4010,8 @@ class AnswersApi:
         :type payload: UpdateAnswerLikesRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3822,6 +4037,7 @@ class AnswersApi:
         _param = self._updateanswerlikes_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3845,6 +4061,7 @@ class AnswersApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -3860,7 +4077,9 @@ class AnswersApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3868,6 +4087,8 @@ class AnswersApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:

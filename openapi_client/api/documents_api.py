@@ -52,6 +52,7 @@ class DocumentsApi:
         self,
         payload: Annotated[GetDocPermissionsRequest, Field(description="Document permissions request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -73,6 +74,8 @@ class DocumentsApi:
         :type payload: GetDocPermissionsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -98,6 +101,7 @@ class DocumentsApi:
         _param = self._getdocpermissions_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -127,6 +131,7 @@ class DocumentsApi:
         self,
         payload: Annotated[GetDocPermissionsRequest, Field(description="Document permissions request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -148,6 +153,8 @@ class DocumentsApi:
         :type payload: GetDocPermissionsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -173,6 +180,7 @@ class DocumentsApi:
         _param = self._getdocpermissions_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -202,6 +210,7 @@ class DocumentsApi:
         self,
         payload: Annotated[GetDocPermissionsRequest, Field(description="Document permissions request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -223,6 +232,8 @@ class DocumentsApi:
         :type payload: GetDocPermissionsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -248,6 +259,7 @@ class DocumentsApi:
         _param = self._getdocpermissions_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -272,6 +284,7 @@ class DocumentsApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -287,7 +300,9 @@ class DocumentsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -295,6 +310,8 @@ class DocumentsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -350,6 +367,7 @@ class DocumentsApi:
     def getdocumentanalytics(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentAnalyticsRequest], Field(description="Information about analytics requested.")] = None,
         _request_timeout: Union[
             None,
@@ -370,6 +388,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about analytics requested.
         :type payload: GetDocumentAnalyticsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -396,6 +416,7 @@ class DocumentsApi:
 
         _param = self._getdocumentanalytics_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -424,6 +445,7 @@ class DocumentsApi:
     def getdocumentanalytics_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentAnalyticsRequest], Field(description="Information about analytics requested.")] = None,
         _request_timeout: Union[
             None,
@@ -444,6 +466,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about analytics requested.
         :type payload: GetDocumentAnalyticsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -470,6 +494,7 @@ class DocumentsApi:
 
         _param = self._getdocumentanalytics_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -498,6 +523,7 @@ class DocumentsApi:
     def getdocumentanalytics_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentAnalyticsRequest], Field(description="Information about analytics requested.")] = None,
         _request_timeout: Union[
             None,
@@ -518,6 +544,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about analytics requested.
         :type payload: GetDocumentAnalyticsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -544,6 +572,7 @@ class DocumentsApi:
 
         _param = self._getdocumentanalytics_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -567,6 +596,7 @@ class DocumentsApi:
     def _getdocumentanalytics_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -583,7 +613,9 @@ class DocumentsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -591,6 +623,8 @@ class DocumentsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -646,6 +680,7 @@ class DocumentsApi:
     def getdocuments(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsRequest], Field(description="Information about documents requested.")] = None,
         _request_timeout: Union[
             None,
@@ -666,6 +701,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about documents requested.
         :type payload: GetDocumentsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -692,6 +729,7 @@ class DocumentsApi:
 
         _param = self._getdocuments_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -704,6 +742,7 @@ class DocumentsApi:
             '400': None,
             '401': None,
             '403': None,
+            '404': None,
             '429': None,
         }
         response_data = self.api_client.call_api(
@@ -721,6 +760,7 @@ class DocumentsApi:
     def getdocuments_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsRequest], Field(description="Information about documents requested.")] = None,
         _request_timeout: Union[
             None,
@@ -741,6 +781,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about documents requested.
         :type payload: GetDocumentsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -767,6 +809,7 @@ class DocumentsApi:
 
         _param = self._getdocuments_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -779,6 +822,7 @@ class DocumentsApi:
             '400': None,
             '401': None,
             '403': None,
+            '404': None,
             '429': None,
         }
         response_data = self.api_client.call_api(
@@ -796,6 +840,7 @@ class DocumentsApi:
     def getdocuments_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsRequest], Field(description="Information about documents requested.")] = None,
         _request_timeout: Union[
             None,
@@ -816,6 +861,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about documents requested.
         :type payload: GetDocumentsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -842,6 +889,7 @@ class DocumentsApi:
 
         _param = self._getdocuments_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -854,6 +902,7 @@ class DocumentsApi:
             '400': None,
             '401': None,
             '403': None,
+            '404': None,
             '429': None,
         }
         response_data = self.api_client.call_api(
@@ -866,6 +915,7 @@ class DocumentsApi:
     def _getdocuments_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -882,7 +932,9 @@ class DocumentsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -890,6 +942,8 @@ class DocumentsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -945,6 +999,7 @@ class DocumentsApi:
     def getdocumentsbyfacets(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsByFacetsRequest], Field(description="Information about facet conditions for documents to be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -965,6 +1020,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about facet conditions for documents to be retrieved.
         :type payload: GetDocumentsByFacetsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -991,6 +1048,7 @@ class DocumentsApi:
 
         _param = self._getdocumentsbyfacets_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1020,6 +1078,7 @@ class DocumentsApi:
     def getdocumentsbyfacets_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsByFacetsRequest], Field(description="Information about facet conditions for documents to be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -1040,6 +1099,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about facet conditions for documents to be retrieved.
         :type payload: GetDocumentsByFacetsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1066,6 +1127,7 @@ class DocumentsApi:
 
         _param = self._getdocumentsbyfacets_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1095,6 +1157,7 @@ class DocumentsApi:
     def getdocumentsbyfacets_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[GetDocumentsByFacetsRequest], Field(description="Information about facet conditions for documents to be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -1115,6 +1178,8 @@ class DocumentsApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Information about facet conditions for documents to be retrieved.
         :type payload: GetDocumentsByFacetsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1141,6 +1206,7 @@ class DocumentsApi:
 
         _param = self._getdocumentsbyfacets_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1165,6 +1231,7 @@ class DocumentsApi:
     def _getdocumentsbyfacets_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -1181,7 +1248,9 @@ class DocumentsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1189,6 +1258,8 @@ class DocumentsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:

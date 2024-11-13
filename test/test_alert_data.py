@@ -36,11 +36,6 @@ class TestAlertData(unittest.TestCase):
         model = AlertData()
         if include_optional:
             return AlertData(
-                name = '',
-                triggered_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                project_name = '',
-                help_link = '',
-                datasource = '',
                 banner_type = 'ACTION_REQUIRED',
                 banner_text = '',
                 alert_description = '',
@@ -49,8 +44,16 @@ class TestAlertData(unittest.TestCase):
                 resolution_steps = [
                     openapi_client.models.resolution_step.ResolutionStep(
                         step_text = '', 
-                        link = '', )
+                        link = '', 
+                        metadata = [
+                            ''
+                            ], )
                     ],
+                help_link = '',
+                name = '',
+                triggered_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                project_name = '',
+                datasource = '',
                 instance_display_name = '',
                 instance_name = '',
                 email_subject_description = ''

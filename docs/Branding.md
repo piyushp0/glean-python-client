@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **company_logo_url** | **str** | An image URL pointing to a custom logo that should be displayed to users. Must be square and recognizable down to 40x40px. SVG images with transparent background are preferred. | [optional] 
 **company_wide_logo_url** | **str** | An image URL pointing to a wide format custom logo that should be displayed to users. Should be rectangular and recognizable at 40px height, and aspect ratio should be between 2:1 and 4:1. SVG images with transparent background are preferred. | [optional] 
 **company_logo_background_color** | **str** | A hex RGB color to display behind custom logo (e.g. &#39;#ff4080&#39;). | [optional] 
+**company_mobile_background_image_name** | **str** | User facing company background image to be displayed to users on mobile devices on the home page. | [optional] 
 
 ## Example
 

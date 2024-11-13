@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **createshortcut**
-> CreateShortcutResponse createshortcut(payload, x_scio_actas=x_scio_actas)
+> CreateShortcutResponse createshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create shortcut
 
@@ -53,10 +53,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.CreateShortcutRequest() # CreateShortcutRequest | CreateShortcut request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create shortcut
-        api_response = api_instance.createshortcut(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.createshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->createshortcut:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,6 +73,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**CreateShortcutRequest**](CreateShortcutRequest.md)| CreateShortcut request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -98,7 +100,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteshortcut**
-> deleteshortcut(payload, x_scio_actas=x_scio_actas)
+> deleteshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete shortcut
 
@@ -136,10 +138,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.DeleteShortcutRequest() # DeleteShortcutRequest | DeleteShortcut request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete shortcut
-        api_instance.deleteshortcut(payload, x_scio_actas=x_scio_actas)
+        api_instance.deleteshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling ShortcutsApi->deleteshortcut: %s\n" % e)
 ```
@@ -153,6 +156,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteShortcutRequest**](DeleteShortcutRequest.md)| DeleteShortcut request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -179,7 +183,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getshortcut**
-> GetShortcutResponse getshortcut(payload, x_scio_actas=x_scio_actas)
+> GetShortcutResponse getshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read shortcut
 
@@ -218,10 +222,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.GetShortcutRequest() # GetShortcutRequest | GetShortcut request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read shortcut
-        api_response = api_instance.getshortcut(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->getshortcut:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +242,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetShortcutRequest**](GetShortcutRequest.md)| GetShortcut request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -263,7 +269,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getsimilarshortcuts**
-> GetSimilarShortcutsResponse getsimilarshortcuts(payload, x_scio_actas=x_scio_actas)
+> GetSimilarShortcutsResponse getsimilarshortcuts(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Get similar shortcuts
 
@@ -302,10 +308,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.GetSimilarShortcutsRequest() # GetSimilarShortcutsRequest | GetSimilarShortcuts request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Get similar shortcuts
-        api_response = api_instance.getsimilarshortcuts(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getsimilarshortcuts(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->getsimilarshortcuts:\n")
         pprint(api_response)
     except Exception as e:
@@ -321,6 +328,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetSimilarShortcutsRequest**](GetSimilarShortcutsRequest.md)| GetSimilarShortcuts request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -347,7 +355,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listshortcuts**
-> ListShortcutsPaginatedResponse listshortcuts(payload, x_scio_actas=x_scio_actas)
+> ListShortcutsPaginatedResponse listshortcuts(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 List shortcuts
 
@@ -386,10 +394,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.ListShortcutsPaginatedRequest() # ListShortcutsPaginatedRequest | Filters, sorters, paging params required for pagination
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # List shortcuts
-        api_response = api_instance.listshortcuts(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.listshortcuts(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->listshortcuts:\n")
         pprint(api_response)
     except Exception as e:
@@ -405,6 +414,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ListShortcutsPaginatedRequest**](ListShortcutsPaginatedRequest.md)| Filters, sorters, paging params required for pagination | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -431,7 +441,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **previewshortcut**
-> PreviewShortcutResponse previewshortcut(payload, x_scio_actas=x_scio_actas)
+> PreviewShortcutResponse previewshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Preview shortcut
 
@@ -470,10 +480,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.ShortcutMutableProperties() # ShortcutMutableProperties | CreateShortcut request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Preview shortcut
-        api_response = api_instance.previewshortcut(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.previewshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->previewshortcut:\n")
         pprint(api_response)
     except Exception as e:
@@ -489,6 +500,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ShortcutMutableProperties**](ShortcutMutableProperties.md)| CreateShortcut request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -515,7 +527,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateshortcut**
-> UpdateShortcutResponse updateshortcut(payload, x_scio_actas=x_scio_actas)
+> UpdateShortcutResponse updateshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update shortcut
 
@@ -554,10 +566,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ShortcutsApi(api_client)
     payload = openapi_client.UpdateShortcutRequest() # UpdateShortcutRequest | Shortcut content. Id need to be specified for the shortcut.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update shortcut
-        api_response = api_instance.updateshortcut(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.updateshortcut(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of ShortcutsApi->updateshortcut:\n")
         pprint(api_response)
     except Exception as e:
@@ -573,6 +586,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**UpdateShortcutRequest**](UpdateShortcutRequest.md)| Shortcut content. Id need to be specified for the shortcut. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

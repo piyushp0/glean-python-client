@@ -87,9 +87,9 @@ class Customer(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in poc (list)
         _items = []
         if self.poc:
-            for _item in self.poc:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_poc in self.poc:
+                if _item_poc:
+                    _items.append(_item_poc.to_dict())
             _dict['poc'] = _items
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:
@@ -97,9 +97,9 @@ class Customer(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in merged_customers (list)
         _items = []
         if self.merged_customers:
-            for _item in self.merged_customers:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_merged_customers in self.merged_customers:
+                if _item_merged_customers:
+                    _items.append(_item_merged_customers.to_dict())
             _dict['mergedCustomers'] = _items
         return _dict
 

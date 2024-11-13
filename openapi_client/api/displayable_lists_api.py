@@ -51,6 +51,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[CreateDisplayableListsRequest, Field(description="Create new displayable lists")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,6 +73,8 @@ class DisplayableListsApi:
         :type payload: CreateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -97,6 +100,7 @@ class DisplayableListsApi:
         _param = self._createdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -126,6 +130,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[CreateDisplayableListsRequest, Field(description="Create new displayable lists")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,6 +152,8 @@ class DisplayableListsApi:
         :type payload: CreateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -172,6 +179,7 @@ class DisplayableListsApi:
         _param = self._createdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -201,6 +209,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[CreateDisplayableListsRequest, Field(description="Create new displayable lists")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,6 +231,8 @@ class DisplayableListsApi:
         :type payload: CreateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -247,6 +258,7 @@ class DisplayableListsApi:
         _param = self._createdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -271,6 +283,7 @@ class DisplayableListsApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -286,7 +299,9 @@ class DisplayableListsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -294,6 +309,8 @@ class DisplayableListsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -350,6 +367,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[DeleteDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -371,6 +389,8 @@ class DisplayableListsApi:
         :type payload: DeleteDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -396,6 +416,7 @@ class DisplayableListsApi:
         _param = self._deletedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -425,6 +446,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[DeleteDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -446,6 +468,8 @@ class DisplayableListsApi:
         :type payload: DeleteDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -471,6 +495,7 @@ class DisplayableListsApi:
         _param = self._deletedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -500,6 +525,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[DeleteDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -521,6 +547,8 @@ class DisplayableListsApi:
         :type payload: DeleteDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -546,6 +574,7 @@ class DisplayableListsApi:
         _param = self._deletedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -570,6 +599,7 @@ class DisplayableListsApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -585,7 +615,9 @@ class DisplayableListsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -593,6 +625,8 @@ class DisplayableListsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -642,6 +676,7 @@ class DisplayableListsApi:
         self,
         payload: GetDisplayableListsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -663,6 +698,8 @@ class DisplayableListsApi:
         :type payload: GetDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -688,6 +725,7 @@ class DisplayableListsApi:
         _param = self._getdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -717,6 +755,7 @@ class DisplayableListsApi:
         self,
         payload: GetDisplayableListsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -738,6 +777,8 @@ class DisplayableListsApi:
         :type payload: GetDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -763,6 +804,7 @@ class DisplayableListsApi:
         _param = self._getdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -792,6 +834,7 @@ class DisplayableListsApi:
         self,
         payload: GetDisplayableListsRequest,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -813,6 +856,8 @@ class DisplayableListsApi:
         :type payload: GetDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -838,6 +883,7 @@ class DisplayableListsApi:
         _param = self._getdisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -862,6 +908,7 @@ class DisplayableListsApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -877,7 +924,9 @@ class DisplayableListsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -885,6 +934,8 @@ class DisplayableListsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -941,6 +992,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[UpdateDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,6 +1014,8 @@ class DisplayableListsApi:
         :type payload: UpdateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -987,6 +1041,7 @@ class DisplayableListsApi:
         _param = self._updatedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1016,6 +1071,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[UpdateDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1037,6 +1093,8 @@ class DisplayableListsApi:
         :type payload: UpdateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1062,6 +1120,7 @@ class DisplayableListsApi:
         _param = self._updatedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1091,6 +1150,7 @@ class DisplayableListsApi:
         self,
         payload: Annotated[UpdateDisplayableListsRequest, Field(description="Updated version of the displayable list configs.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1112,6 +1172,8 @@ class DisplayableListsApi:
         :type payload: UpdateDisplayableListsRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1137,6 +1199,7 @@ class DisplayableListsApi:
         _param = self._updatedisplayablelists_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1161,6 +1224,7 @@ class DisplayableListsApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1176,7 +1240,9 @@ class DisplayableListsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1184,6 +1250,8 @@ class DisplayableListsApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:

@@ -74,9 +74,9 @@ class ProductTerm(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in localizations (dict)
         _field_dict = {}
         if self.localizations:
-            for _key in self.localizations:
-                if self.localizations[_key]:
-                    _field_dict[_key] = self.localizations[_key].to_dict()
+            for _key_localizations in self.localizations:
+                if self.localizations[_key_localizations]:
+                    _field_dict[_key_localizations] = self.localizations[_key_localizations].to_dict()
             _dict['localizations'] = _field_dict
         return _dict
 

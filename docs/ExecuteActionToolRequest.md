@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The name of the tool. | 
+**action_instance_id** | **str** | Unique identifier of an action instance. | [optional] 
 **parameters** | [**Dict[str, WriteActionParameter]**](WriteActionParameter.md) | The parameters to be passed to the tool for action. | [optional] 
 
 ## Example

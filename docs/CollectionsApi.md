@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **addcollectionitems**
-> AddCollectionItemsResponse addcollectionitems(payload, x_scio_actas=x_scio_actas)
+> AddCollectionItemsResponse addcollectionitems(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Add Collection item
 
@@ -57,10 +57,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.AddCollectionItemsRequest() # AddCollectionItemsRequest | Data describing the add operation.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Add Collection item
-        api_response = api_instance.addcollectionitems(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.addcollectionitems(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->addcollectionitems:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,6 +77,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**AddCollectionItemsRequest**](AddCollectionItemsRequest.md)| Data describing the add operation. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -102,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createcollection**
-> CreateCollectionResponse createcollection(payload, x_scio_actas=x_scio_actas)
+> CreateCollectionResponse createcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create Collection
 
@@ -141,10 +143,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.CreateCollectionRequest() # CreateCollectionRequest | Collection content plus any additional metadata for the request.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create Collection
-        api_response = api_instance.createcollection(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.createcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->createcollection:\n")
         pprint(api_response)
     except Exception as e:
@@ -160,6 +163,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**CreateCollectionRequest**](CreateCollectionRequest.md)| Collection content plus any additional metadata for the request. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -187,7 +191,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deletecollection**
-> deletecollection(payload, x_scio_actas=x_scio_actas)
+> deletecollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete Collection
 
@@ -225,10 +229,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.DeleteCollectionRequest() # DeleteCollectionRequest | DeleteCollection request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete Collection
-        api_instance.deletecollection(payload, x_scio_actas=x_scio_actas)
+        api_instance.deletecollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling CollectionsApi->deletecollection: %s\n" % e)
 ```
@@ -242,6 +247,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteCollectionRequest**](DeleteCollectionRequest.md)| DeleteCollection request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -269,7 +275,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deletecollectionitem**
-> DeleteCollectionItemResponse deletecollectionitem(payload, x_scio_actas=x_scio_actas)
+> DeleteCollectionItemResponse deletecollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete Collection item
 
@@ -308,10 +314,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.DeleteCollectionItemRequest() # DeleteCollectionItemRequest | Data describing the delete operation.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete Collection item
-        api_response = api_instance.deletecollectionitem(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.deletecollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->deletecollectionitem:\n")
         pprint(api_response)
     except Exception as e:
@@ -327,6 +334,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteCollectionItemRequest**](DeleteCollectionItemRequest.md)| Data describing the delete operation. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -354,7 +362,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **editcollection**
-> EditCollectionResponse editcollection(payload, x_scio_actas=x_scio_actas)
+> EditCollectionResponse editcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update Collection
 
@@ -393,10 +401,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.EditCollectionRequest() # EditCollectionRequest | Collection content plus any additional metadata for the request.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update Collection
-        api_response = api_instance.editcollection(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.editcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->editcollection:\n")
         pprint(api_response)
     except Exception as e:
@@ -412,6 +421,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**EditCollectionRequest**](EditCollectionRequest.md)| Collection content plus any additional metadata for the request. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -439,7 +449,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **editcollectionitem**
-> EditCollectionItemResponse editcollectionitem(payload, x_scio_actas=x_scio_actas)
+> EditCollectionItemResponse editcollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update Collection item
 
@@ -478,10 +488,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.EditCollectionItemRequest() # EditCollectionItemRequest | Edit Collection Items request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update Collection item
-        api_response = api_instance.editcollectionitem(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.editcollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->editcollectionitem:\n")
         pprint(api_response)
     except Exception as e:
@@ -497,6 +508,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**EditCollectionItemRequest**](EditCollectionItemRequest.md)| Edit Collection Items request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -523,7 +535,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **editdocumentcollections**
-> EditDocumentCollectionsResponse editdocumentcollections(payload, x_scio_actas=x_scio_actas)
+> EditDocumentCollectionsResponse editdocumentcollections(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update document Collections
 
@@ -562,10 +574,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.EditDocumentCollectionsRequest() # EditDocumentCollectionsRequest | Data describing the edit operation.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update document Collections
-        api_response = api_instance.editdocumentcollections(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.editdocumentcollections(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->editdocumentcollections:\n")
         pprint(api_response)
     except Exception as e:
@@ -581,6 +594,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**EditDocumentCollectionsRequest**](EditDocumentCollectionsRequest.md)| Data describing the edit operation. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -607,7 +621,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getcollection**
-> GetCollectionResponse getcollection(payload, x_scio_actas=x_scio_actas)
+> GetCollectionResponse getcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read Collection
 
@@ -646,10 +660,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.GetCollectionRequest() # GetCollectionRequest | GetCollection request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read Collection
-        api_response = api_instance.getcollection(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getcollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->getcollection:\n")
         pprint(api_response)
     except Exception as e:
@@ -665,6 +680,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetCollectionRequest**](GetCollectionRequest.md)| GetCollection request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -691,7 +707,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listcollections**
-> ListCollectionsResponse listcollections(payload, x_scio_actas=x_scio_actas)
+> ListCollectionsResponse listcollections(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 List Collections
 
@@ -730,10 +746,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.ListCollectionsRequest() # ListCollectionsRequest | ListCollections request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # List Collections
-        api_response = api_instance.listcollections(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.listcollections(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->listcollections:\n")
         pprint(api_response)
     except Exception as e:
@@ -749,6 +766,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ListCollectionsRequest**](ListCollectionsRequest.md)| ListCollections request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -775,7 +793,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **movecollectionitem**
-> MoveCollectionItemResponse movecollectionitem(payload, x_scio_actas=x_scio_actas)
+> MoveCollectionItemResponse movecollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Move Collection item
 
@@ -814,10 +832,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.MoveCollectionItemRequest() # MoveCollectionItemRequest | MoveCollectionItems request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Move Collection item
-        api_response = api_instance.movecollectionitem(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.movecollectionitem(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->movecollectionitem:\n")
         pprint(api_response)
     except Exception as e:
@@ -833,6 +852,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**MoveCollectionItemRequest**](MoveCollectionItemRequest.md)| MoveCollectionItems request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -860,7 +880,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pincollection**
-> GetCollectionResponse pincollection(payload, x_scio_actas=x_scio_actas)
+> GetCollectionResponse pincollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Pin Collection
 
@@ -899,10 +919,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CollectionsApi(api_client)
     payload = openapi_client.PinCollectionRequest() # PinCollectionRequest | PinCollection request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Pin Collection
-        api_response = api_instance.pincollection(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.pincollection(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CollectionsApi->pincollection:\n")
         pprint(api_response)
     except Exception as e:
@@ -918,6 +939,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PinCollectionRequest**](PinCollectionRequest.md)| PinCollection request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

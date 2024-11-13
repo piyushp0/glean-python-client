@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBytes, StrictStr
-from typing import Optional, Union
+from typing import Optional, Tuple, Union
 from typing_extensions import Annotated
 from openapi_client.models.image_type import ImageType
 from openapi_client.models.upload_image_response import UploadImageResponse
@@ -45,6 +45,7 @@ class ImagesApi:
     def images(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         key: Annotated[Optional[StrictStr], Field(description="Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. for user, it is user id, for UGC, it is the id of the content, and so on.")] = None,
@@ -69,6 +70,8 @@ class ImagesApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param key: Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.
         :type key: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
@@ -103,6 +106,7 @@ class ImagesApi:
 
         _param = self._images_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             key=key,
             type=type,
             id=id,
@@ -135,6 +139,7 @@ class ImagesApi:
     def images_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         key: Annotated[Optional[StrictStr], Field(description="Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. for user, it is user id, for UGC, it is the id of the content, and so on.")] = None,
@@ -159,6 +164,8 @@ class ImagesApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param key: Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.
         :type key: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
@@ -193,6 +200,7 @@ class ImagesApi:
 
         _param = self._images_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             key=key,
             type=type,
             id=id,
@@ -225,6 +233,7 @@ class ImagesApi:
     def images_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         key: Annotated[Optional[StrictStr], Field(description="Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. for user, it is user id, for UGC, it is the id of the content, and so on.")] = None,
@@ -249,6 +258,8 @@ class ImagesApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param key: Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used.
         :type key: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
@@ -283,6 +294,7 @@ class ImagesApi:
 
         _param = self._images_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             key=key,
             type=type,
             id=id,
@@ -310,6 +322,7 @@ class ImagesApi:
     def _images_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         key,
         type,
         id,
@@ -330,7 +343,9 @@ class ImagesApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -358,6 +373,8 @@ class ImagesApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
 
@@ -397,8 +414,9 @@ class ImagesApi:
     @validate_call
     def uploadimage(
         self,
-        payload: Annotated[Union[StrictBytes, StrictStr], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
+        payload: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.")] = None,
         ds: Annotated[Optional[StrictStr], Field(description="A specific datasource for which an image is requested for. The ds may have different meaning for each type and can also be empty for some. For USER, it is empty or datasource the icon is asked for. For UGC, it is the UGC datasource. For ICON, it is datasource instance the icon is asked for.")] = None,
@@ -424,6 +442,8 @@ class ImagesApi:
         :type payload: bytearray
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
         :type type: ImageType
         :param id: ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.
@@ -457,6 +477,7 @@ class ImagesApi:
         _param = self._uploadimage_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             type=type,
             id=id,
             ds=ds,
@@ -487,8 +508,9 @@ class ImagesApi:
     @validate_call
     def uploadimage_with_http_info(
         self,
-        payload: Annotated[Union[StrictBytes, StrictStr], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
+        payload: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.")] = None,
         ds: Annotated[Optional[StrictStr], Field(description="A specific datasource for which an image is requested for. The ds may have different meaning for each type and can also be empty for some. For USER, it is empty or datasource the icon is asked for. For UGC, it is the UGC datasource. For ICON, it is datasource instance the icon is asked for.")] = None,
@@ -514,6 +536,8 @@ class ImagesApi:
         :type payload: bytearray
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
         :type type: ImageType
         :param id: ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.
@@ -547,6 +571,7 @@ class ImagesApi:
         _param = self._uploadimage_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             type=type,
             id=id,
             ds=ds,
@@ -577,8 +602,9 @@ class ImagesApi:
     @validate_call
     def uploadimage_without_preload_content(
         self,
-        payload: Annotated[Union[StrictBytes, StrictStr], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
+        payload: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Content and metadata for the image. Content is in the POST body, metadata is in the URL.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         type: Annotated[Optional[ImageType], Field(description="The type of image requested. Supported values are listed in ImageMetadata.type enum.")] = None,
         id: Annotated[Optional[StrictStr], Field(description="ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.")] = None,
         ds: Annotated[Optional[StrictStr], Field(description="A specific datasource for which an image is requested for. The ds may have different meaning for each type and can also be empty for some. For USER, it is empty or datasource the icon is asked for. For UGC, it is the UGC datasource. For ICON, it is datasource instance the icon is asked for.")] = None,
@@ -604,6 +630,8 @@ class ImagesApi:
         :type payload: bytearray
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param type: The type of image requested. Supported values are listed in ImageMetadata.type enum.
         :type type: ImageType
         :param id: ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype.
@@ -637,6 +665,7 @@ class ImagesApi:
         _param = self._uploadimage_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             type=type,
             id=id,
             ds=ds,
@@ -664,6 +693,7 @@ class ImagesApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         type,
         id,
         ds,
@@ -683,7 +713,9 @@ class ImagesApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -707,6 +739,8 @@ class ImagesApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -714,6 +748,9 @@ class ImagesApi:
             if isinstance(payload, str):
                 with open(payload, "rb") as _fp:
                     _body_params = _fp.read()
+            elif isinstance(payload, tuple):
+                # drop the filename from the tuple
+                _body_params = payload[1]
             else:
                 _body_params = payload
 

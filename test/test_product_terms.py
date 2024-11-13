@@ -37,9 +37,23 @@ class TestProductTerms(unittest.TestCase):
         if include_optional:
             return ProductTerms(
                 assistant = openapi_client.models.product_term.ProductTerm(
-                    display_name = '', ),
+                    display_name = '', 
+                    localizations = {
+                        'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                            display_name = '', )
+                        }, ),
                 glean_assistant = openapi_client.models.product_term.ProductTerm(
-                    display_name = '', )
+                    display_name = '', 
+                    localizations = {
+                        'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                            display_name = '', )
+                        }, ),
+                public_knowledge = openapi_client.models.product_term.ProductTerm(
+                    display_name = '', 
+                    localizations = {
+                        'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                            display_name = '', )
+                        }, )
             )
         else:
             return ProductTerms(

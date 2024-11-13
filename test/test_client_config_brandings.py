@@ -40,17 +40,24 @@ class TestClientConfigBrandings(unittest.TestCase):
                     company_background_image_name = '', 
                     company_logo_url = '', 
                     company_wide_logo_url = '', 
-                    company_logo_background_color = '', ),
+                    company_logo_background_color = '', 
+                    company_mobile_background_image_name = '', ),
                 dark = openapi_client.models.branding.Branding(
                     company_background_image_name = '', 
                     company_logo_url = '', 
                     company_wide_logo_url = '', 
-                    company_logo_background_color = '', ),
+                    company_logo_background_color = '', 
+                    company_mobile_background_image_name = '', ),
                 product_terms = openapi_client.models.product_terms.ProductTerms(
                     assistant = openapi_client.models.product_term.ProductTerm(
-                        display_name = '', ), 
+                        display_name = '', 
+                        localizations = {
+                            'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                                display_name = '', )
+                            }, ), 
                     glean_assistant = openapi_client.models.product_term.ProductTerm(
-                        display_name = '', ), )
+                        display_name = '', ), 
+                    public_knowledge = , )
             )
         else:
             return ClientConfigBrandings(

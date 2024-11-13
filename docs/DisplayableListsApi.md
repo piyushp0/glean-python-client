@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **createdisplayablelists**
-> CreateDisplayableListsResponse createdisplayablelists(payload, x_scio_actas=x_scio_actas)
+> CreateDisplayableListsResponse createdisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create displayable lists
 
@@ -50,10 +50,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DisplayableListsApi(api_client)
     payload = openapi_client.CreateDisplayableListsRequest() # CreateDisplayableListsRequest | Create new displayable lists
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create displayable lists
-        api_response = api_instance.createdisplayablelists(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.createdisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of DisplayableListsApi->createdisplayablelists:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**CreateDisplayableListsRequest**](CreateDisplayableListsRequest.md)| Create new displayable lists | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -96,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deletedisplayablelists**
-> deletedisplayablelists(payload, x_scio_actas=x_scio_actas)
+> deletedisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete displayable lists
 
@@ -134,10 +136,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DisplayableListsApi(api_client)
     payload = openapi_client.DeleteDisplayableListsRequest() # DeleteDisplayableListsRequest | Updated version of the displayable list configs.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete displayable lists
-        api_instance.deletedisplayablelists(payload, x_scio_actas=x_scio_actas)
+        api_instance.deletedisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling DisplayableListsApi->deletedisplayablelists: %s\n" % e)
 ```
@@ -151,6 +154,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteDisplayableListsRequest**](DeleteDisplayableListsRequest.md)| Updated version of the displayable list configs. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -178,7 +182,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getdisplayablelists**
-> GetDisplayableListsResponse getdisplayablelists(payload, x_scio_actas=x_scio_actas)
+> GetDisplayableListsResponse getdisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read displayable lists
 
@@ -217,10 +221,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DisplayableListsApi(api_client)
     payload = openapi_client.GetDisplayableListsRequest() # GetDisplayableListsRequest | 
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read displayable lists
-        api_response = api_instance.getdisplayablelists(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getdisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of DisplayableListsApi->getdisplayablelists:\n")
         pprint(api_response)
     except Exception as e:
@@ -236,6 +241,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetDisplayableListsRequest**](GetDisplayableListsRequest.md)|  | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -263,7 +269,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updatedisplayablelists**
-> UpdateDisplayableListsResponse updatedisplayablelists(payload, x_scio_actas=x_scio_actas)
+> UpdateDisplayableListsResponse updatedisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update displayable lists
 
@@ -302,10 +308,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DisplayableListsApi(api_client)
     payload = openapi_client.UpdateDisplayableListsRequest() # UpdateDisplayableListsRequest | Updated version of the displayable list configs.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update displayable lists
-        api_response = api_instance.updatedisplayablelists(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.updatedisplayablelists(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of DisplayableListsApi->updatedisplayablelists:\n")
         pprint(api_response)
     except Exception as e:
@@ -321,6 +328,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**UpdateDisplayableListsRequest**](UpdateDisplayableListsRequest.md)| Updated version of the displayable list configs. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

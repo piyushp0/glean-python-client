@@ -48,6 +48,13 @@ class TestChatApi(unittest.TestCase):
         """
         pass
 
+    def test_deletechatfiles(self) -> None:
+        """Test case for deletechatfiles
+
+        Delete files uploaded by a user for chat.
+        """
+        pass
+
     def test_deletechats(self) -> None:
         """Test case for deletechats
 
@@ -69,10 +76,24 @@ class TestChatApi(unittest.TestCase):
         """
         pass
 
+    def test_getchatfiles(self) -> None:
+        """Test case for getchatfiles
+
+        Get files uploaded by a user for Chat.
+        """
+        pass
+
     def test_listchats(self) -> None:
         """Test case for listchats
 
         Retrieves all saved Chats
+        """
+        pass
+
+    def test_uploadchatfiles(self) -> None:
+        """Test case for uploadchatfiles
+
+        Upload files for Chat.
         """
         pass
 

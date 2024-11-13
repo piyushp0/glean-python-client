@@ -73,9 +73,9 @@ class ListAnnouncementsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in announcements (list)
         _items = []
         if self.announcements:
-            for _item in self.announcements:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_announcements in self.announcements:
+                if _item_announcements:
+                    _items.append(_item_announcements.to_dict())
             _dict['announcements'] = _items
         return _dict
 

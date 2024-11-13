@@ -89,9 +89,9 @@ class ChatMessageCitation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in reference_ranges (list)
         _items = []
         if self.reference_ranges:
-            for _item in self.reference_ranges:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_reference_ranges in self.reference_ranges:
+                if _item_reference_ranges:
+                    _items.append(_item_reference_ranges.to_dict())
             _dict['referenceRanges'] = _items
         return _dict
 

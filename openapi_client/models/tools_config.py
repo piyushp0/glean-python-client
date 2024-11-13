@@ -73,9 +73,9 @@ class ToolsConfig(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in available_tools (list)
         _items = []
         if self.available_tools:
-            for _item in self.available_tools:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_available_tools in self.available_tools:
+                if _item_available_tools:
+                    _items.append(_item_available_tools.to_dict())
             _dict['availableTools'] = _items
         return _dict
 

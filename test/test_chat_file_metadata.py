@@ -39,7 +39,8 @@ class TestChatFileMetadata(unittest.TestCase):
                 status = 'PROCESSING',
                 upload_time = 56,
                 processed_size = 56,
-                failure_reason = 'PARSE_FAILED'
+                failure_reason = 'PARSE_FAILED',
+                mime_type = ''
             )
         else:
             return ChatFileMetadata(

@@ -56,9 +56,15 @@ class TestClientConfig(unittest.TestCase):
                         ''
                         ], 
                     gpt_agent_enabled = True, 
-                    file_upload_enabled = True, 
+                    file_upload = openapi_client.models.file_upload_config.FileUploadConfig(
+                        enabled = True, 
+                        max_file_count = 56, 
+                        max_file_size = 56, ), 
                     chat_history_enabled = True, 
-                    chat_guide_url = '', ),
+                    chat_guide_url = '', 
+                    prompts_enabled = True, 
+                    default_user_can_share_prompts = True, 
+                    file_upload_enabled = True, ),
                 tools = openapi_client.models.tools_config.ToolsConfig(
                     available_tools = [
                         openapi_client.models.tool_metadata.ToolMetadata(
@@ -69,6 +75,7 @@ class TestClientConfig(unittest.TestCase):
                             display_description = '', 
                             logo_url = '', 
                             object_name = '["HR ticket","Email","Chat message"]', 
+                            knowledge_type = 'NEUTRAL_KNOWLEDGE', 
                             created_by = openapi_client.models.person_object.PersonObject(
                                 name = '', 
                                 obfuscated_id = '', ), 
@@ -77,15 +84,22 @@ class TestClientConfig(unittest.TestCase):
                                 obfuscated_id = '', ), 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             last_updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            write_action_type = 'REDIRECT', 
                             auth = openapi_client.models.auth_config.AuthConfig(
                                 is_on_prem = True, 
+                                uses_central_auth = True, 
                                 type = 'NONE', 
+                                grant_type = 'AUTH_CODE', 
                                 status = 'AWAITING_AUTH', 
                                 client_url = '', 
                                 scopes = [
                                     ''
                                     ], 
-                                authorization_url = '', ), 
+                                audiences = [
+                                    ''
+                                    ], 
+                                authorization_url = '', 
+                                last_authorized_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
                             permissions = openapi_client.models.object_permissions.ObjectPermissions(
                                 write = openapi_client.models.write_permission.WritePermission(
                                     scope_type = 'GLOBAL', 
@@ -96,6 +110,9 @@ class TestClientConfig(unittest.TestCase):
                 shortcuts = openapi_client.models.shortcuts_config.ShortcutsConfig(
                     shortcuts_prefix = '', 
                     use_external_shortcuts = True, ),
+                search = openapi_client.models.search_client_config.SearchClientConfig(
+                    available = True, 
+                    placeholder = '', ),
                 bad_versions = [
                     ''
                     ],
@@ -129,20 +146,28 @@ class TestClientConfig(unittest.TestCase):
                         company_background_image_name = '', 
                         company_logo_url = '', 
                         company_wide_logo_url = '', 
-                        company_logo_background_color = '', ), 
+                        company_logo_background_color = '', 
+                        company_mobile_background_image_name = '', ), 
                     dark = openapi_client.models.branding.Branding(
                         company_background_image_name = '', 
                         company_logo_url = '', 
                         company_wide_logo_url = '', 
-                        company_logo_background_color = '', ), 
+                        company_logo_background_color = '', 
+                        company_mobile_background_image_name = '', ), 
                     product_terms = openapi_client.models.product_terms.ProductTerms(
                         assistant = openapi_client.models.product_term.ProductTerm(
-                            display_name = '', ), 
+                            display_name = '', 
+                            localizations = {
+                                'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                                    display_name = '', )
+                                }, ), 
                         glean_assistant = openapi_client.models.product_term.ProductTerm(
-                            display_name = '', ), ), ),
+                            display_name = '', ), 
+                        public_knowledge = , ), ),
                 greeting_format = '\%t, \%n (This would be the current default Glean greeting)',
                 task_see_all_label = '',
                 task_see_all_link = '',
+                search_placeholder = '',
                 shortcuts_prefix = '',
                 sso_company_provider = 'gsuite',
                 feedback_customizations = openapi_client.models.feedback_customizations.FeedbackCustomizations(

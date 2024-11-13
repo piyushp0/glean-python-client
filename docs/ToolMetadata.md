@@ -13,10 +13,12 @@ Name | Type | Description | Notes
 **display_description** | **str** | Description of the tool meant for a human. | 
 **logo_url** | **str** | URL used to fetch the logo. | [optional] 
 **object_name** | **str** | Name of the generated object. This will be used to indicate to the end user what the generated object contains. | [optional] 
+**knowledge_type** | **str** | Indicates the kind of knowledge a tool would access or modify. | [optional] 
 **created_by** | [**PersonObject**](PersonObject.md) |  | [optional] 
 **last_updated_by** | [**PersonObject**](PersonObject.md) |  | [optional] 
 **created_at** | **datetime** | The time the tool was created in ISO format (ISO 8601) | [optional] 
 **last_updated_at** | **datetime** | The time the tool was last updated in ISO format (ISO 8601) | [optional] 
+**write_action_type** | **str** | Valid only for write actions. Represents the type of write action. REDIRECT - The client renders the URL which contains information for carrying out the action. EXECUTION - Send a request to an external server and execute the action. | [optional] 
 **auth** | [**AuthConfig**](AuthConfig.md) |  | [optional] 
 **permissions** | [**ObjectPermissions**](ObjectPermissions.md) |  | [optional] 
 

@@ -73,9 +73,9 @@ class ListPinsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in pins (list)
         _items = []
         if self.pins:
-            for _item in self.pins:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_pins in self.pins:
+                if _item_pins:
+                    _items.append(_item_pins.to_dict())
             _dict['pins'] = _items
         return _dict
 

@@ -37,8 +37,8 @@ class FeedResult(BaseModel):
     @field_validator('category')
     def category_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['DOCUMENT_SUGGESTION', 'DOCUMENT_SUGGESTION_SCENARIO', 'TRENDING_DOCUMENT', 'USE_CASE', 'VERIFICATION_REMINDER', 'EVENT', 'ANNOUNCEMENT', 'MENTION', 'DATASOURCE_AFFINITY', 'RECENT', 'COMPANY_RESOURCE', 'EXPERIMENTAL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'EXTERNAL_TASKS', 'DISPLAYABLE_LIST', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION']):
-            raise ValueError("must be one of enum values ('DOCUMENT_SUGGESTION', 'DOCUMENT_SUGGESTION_SCENARIO', 'TRENDING_DOCUMENT', 'USE_CASE', 'VERIFICATION_REMINDER', 'EVENT', 'ANNOUNCEMENT', 'MENTION', 'DATASOURCE_AFFINITY', 'RECENT', 'COMPANY_RESOURCE', 'EXPERIMENTAL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'EXTERNAL_TASKS', 'DISPLAYABLE_LIST', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION')")
+        if value not in set(['DOCUMENT_SUGGESTION', 'DOCUMENT_SUGGESTION_SCENARIO', 'TRENDING_DOCUMENT', 'USE_CASE', 'VERIFICATION_REMINDER', 'EVENT', 'ANNOUNCEMENT', 'MENTION', 'DATASOURCE_AFFINITY', 'RECENT', 'COMPANY_RESOURCE', 'EXPERIMENTAL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'EXTERNAL_TASKS', 'DISPLAYABLE_LIST', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION', 'ZERO_STATE_WORKFLOW_SUGGESTION', 'ZERO_STATE_WORKFLOW_FAVORITES']):
+            raise ValueError("must be one of enum values ('DOCUMENT_SUGGESTION', 'DOCUMENT_SUGGESTION_SCENARIO', 'TRENDING_DOCUMENT', 'USE_CASE', 'VERIFICATION_REMINDER', 'EVENT', 'ANNOUNCEMENT', 'MENTION', 'DATASOURCE_AFFINITY', 'RECENT', 'COMPANY_RESOURCE', 'EXPERIMENTAL', 'PEOPLE_CELEBRATIONS', 'SOCIAL_LINK', 'EXTERNAL_TASKS', 'DISPLAYABLE_LIST', 'ZERO_STATE_CHAT_SUGGESTION', 'ZERO_STATE_CHAT_TOOL_SUGGESTION', 'ZERO_STATE_WORKFLOW_SUGGESTION', 'ZERO_STATE_WORKFLOW_FAVORITES')")
         return value
 
     model_config = ConfigDict(
@@ -86,9 +86,9 @@ class FeedResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in secondary_entries (list)
         _items = []
         if self.secondary_entries:
-            for _item in self.secondary_entries:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_secondary_entries in self.secondary_entries:
+                if _item_secondary_entries:
+                    _items.append(_item_secondary_entries.to_dict())
             _dict['secondaryEntries'] = _items
         return _dict
 

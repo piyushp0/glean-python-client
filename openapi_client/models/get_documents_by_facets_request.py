@@ -75,9 +75,9 @@ class GetDocumentsByFacetsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in filter_sets (list)
         _items = []
         if self.filter_sets:
-            for _item in self.filter_sets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_filter_sets in self.filter_sets:
+                if _item_filter_sets:
+                    _items.append(_item_filter_sets.to_dict())
             _dict['filterSets'] = _items
         return _dict
 

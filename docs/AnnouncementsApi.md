@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **createannouncement**
-> Announcement createannouncement(payload, x_scio_actas=x_scio_actas)
+> Announcement createannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create Announcement
 
@@ -59,10 +59,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.CreateAnnouncementRequest() # CreateAnnouncementRequest | Announcement content
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create Announcement
-        api_response = api_instance.createannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.createannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->createannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -78,6 +79,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**CreateAnnouncementRequest**](CreateAnnouncementRequest.md)| Announcement content | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -104,7 +106,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createdraftannouncement**
-> Announcement createdraftannouncement(payload, x_scio_actas=x_scio_actas)
+> Announcement createdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create draft Announcement
 
@@ -143,10 +145,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.CreateDraftAnnouncementRequest() # CreateDraftAnnouncementRequest | Draft announcement content
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create draft Announcement
-        api_response = api_instance.createdraftannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.createdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->createdraftannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -162,6 +165,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**CreateDraftAnnouncementRequest**](CreateDraftAnnouncementRequest.md)| Draft announcement content | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -188,7 +192,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteannouncement**
-> deleteannouncement(payload, x_scio_actas=x_scio_actas)
+> deleteannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete Announcement
 
@@ -226,10 +230,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.DeleteAnnouncementRequest() # DeleteAnnouncementRequest | Delete announcement request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete Announcement
-        api_instance.deleteannouncement(payload, x_scio_actas=x_scio_actas)
+        api_instance.deleteannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling AnnouncementsApi->deleteannouncement: %s\n" % e)
 ```
@@ -243,6 +248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteAnnouncementRequest**](DeleteAnnouncementRequest.md)| Delete announcement request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -269,7 +275,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deletedraftannouncement**
-> deletedraftannouncement(payload, x_scio_actas=x_scio_actas)
+> deletedraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete draft Announcement
 
@@ -307,10 +313,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.DeleteAnnouncementRequest() # DeleteAnnouncementRequest | Delete draft announcement request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete draft Announcement
-        api_instance.deletedraftannouncement(payload, x_scio_actas=x_scio_actas)
+        api_instance.deletedraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling AnnouncementsApi->deletedraftannouncement: %s\n" % e)
 ```
@@ -324,6 +331,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteAnnouncementRequest**](DeleteAnnouncementRequest.md)| Delete draft announcement request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -350,7 +358,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getannouncement**
-> GetAnnouncementResponse getannouncement(payload, x_scio_actas=x_scio_actas)
+> GetAnnouncementResponse getannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read Announcement
 
@@ -389,10 +397,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.GetAnnouncementRequest() # GetAnnouncementRequest | GetAnnouncement request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read Announcement
-        api_response = api_instance.getannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->getannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -408,6 +417,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetAnnouncementRequest**](GetAnnouncementRequest.md)| GetAnnouncement request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -434,7 +444,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getdraftannouncement**
-> GetDraftAnnouncementResponse getdraftannouncement(payload, x_scio_actas=x_scio_actas)
+> GetDraftAnnouncementResponse getdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read draft Announcement
 
@@ -473,10 +483,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.GetAnnouncementRequest() # GetAnnouncementRequest | Get draft announcement request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read draft Announcement
-        api_response = api_instance.getdraftannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->getdraftannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -492,6 +503,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetAnnouncementRequest**](GetAnnouncementRequest.md)| Get draft announcement request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -518,7 +530,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listannouncements**
-> ListAnnouncementsResponse listannouncements(payload, x_scio_actas=x_scio_actas)
+> ListAnnouncementsResponse listannouncements(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 List Announcements
 
@@ -557,10 +569,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.ListAnnouncementsRequest() # ListAnnouncementsRequest | Includes request params for querying announcements.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # List Announcements
-        api_response = api_instance.listannouncements(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.listannouncements(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->listannouncements:\n")
         pprint(api_response)
     except Exception as e:
@@ -576,6 +589,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ListAnnouncementsRequest**](ListAnnouncementsRequest.md)| Includes request params for querying announcements. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -602,7 +616,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **previewannouncement**
-> PreviewStructuredTextResponse previewannouncement(payload, x_scio_actas=x_scio_actas)
+> PreviewStructuredTextResponse previewannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Preview Announcement
 
@@ -641,10 +655,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.PreviewStructuredTextRequest() # PreviewStructuredTextRequest | preview structured text request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Preview Announcement
-        api_response = api_instance.previewannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.previewannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->previewannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -660,6 +675,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PreviewStructuredTextRequest**](PreviewStructuredTextRequest.md)| preview structured text request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -686,7 +702,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **previewannouncementdraft**
-> PreviewUgcResponse previewannouncementdraft(payload, x_scio_actas=x_scio_actas)
+> PreviewUgcResponse previewannouncementdraft(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Preview draft Announcement
 
@@ -725,10 +741,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.PreviewUgcRequest() # PreviewUgcRequest | preview announcement request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Preview draft Announcement
-        api_response = api_instance.previewannouncementdraft(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.previewannouncementdraft(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->previewannouncementdraft:\n")
         pprint(api_response)
     except Exception as e:
@@ -744,6 +761,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PreviewUgcRequest**](PreviewUgcRequest.md)| preview announcement request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -770,7 +788,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **publishdraftannouncement**
-> publishdraftannouncement(payload, x_scio_actas=x_scio_actas)
+> publishdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Publish draft Announcement
 
@@ -808,10 +826,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.PublishDraftAnnouncementRequest() # PublishDraftAnnouncementRequest | Publish draft announcement content.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Publish draft Announcement
-        api_instance.publishdraftannouncement(payload, x_scio_actas=x_scio_actas)
+        api_instance.publishdraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling AnnouncementsApi->publishdraftannouncement: %s\n" % e)
 ```
@@ -825,6 +844,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PublishDraftAnnouncementRequest**](PublishDraftAnnouncementRequest.md)| Publish draft announcement content. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -851,7 +871,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unpublishannouncement**
-> Announcement unpublishannouncement(payload, x_scio_actas=x_scio_actas)
+> Announcement unpublishannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Unpublish Announcement
 
@@ -890,10 +910,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.UnpublishAnnouncementRequest() # UnpublishAnnouncementRequest | Unpublish announcement content.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Unpublish Announcement
-        api_response = api_instance.unpublishannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.unpublishannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->unpublishannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -909,6 +930,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**UnpublishAnnouncementRequest**](UnpublishAnnouncementRequest.md)| Unpublish announcement content. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -935,7 +957,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateannouncement**
-> Announcement updateannouncement(payload, x_scio_actas=x_scio_actas)
+> Announcement updateannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update Announcement
 
@@ -974,10 +996,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.UpdateAnnouncementRequest() # UpdateAnnouncementRequest | Announcement content. Id need to be specified for the announcement.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update Announcement
-        api_response = api_instance.updateannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.updateannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->updateannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -993,6 +1016,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**UpdateAnnouncementRequest**](UpdateAnnouncementRequest.md)| Announcement content. Id need to be specified for the announcement. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -1019,7 +1043,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updatedraftannouncement**
-> Announcement updatedraftannouncement(payload, x_scio_actas=x_scio_actas)
+> Announcement updatedraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update draft Announcement
 
@@ -1058,10 +1082,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.AnnouncementsApi(api_client)
     payload = openapi_client.UpdateDraftAnnouncementRequest() # UpdateDraftAnnouncementRequest | Draft announcement content. DraftId needs to be specified.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update draft Announcement
-        api_response = api_instance.updatedraftannouncement(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.updatedraftannouncement(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of AnnouncementsApi->updatedraftannouncement:\n")
         pprint(api_response)
     except Exception as e:
@@ -1077,6 +1102,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**UpdateDraftAnnouncementRequest**](UpdateDraftAnnouncementRequest.md)| Draft announcement content. DraftId needs to be specified. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

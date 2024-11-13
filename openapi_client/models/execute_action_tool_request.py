@@ -29,8 +29,9 @@ class ExecuteActionToolRequest(BaseModel):
     ExecuteActionToolRequest
     """ # noqa: E501
     name: StrictStr = Field(description="The name of the tool.")
+    action_instance_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of an action instance.", alias="actionInstanceId")
     parameters: Optional[Dict[str, WriteActionParameter]] = Field(default=None, description="The parameters to be passed to the tool for action.")
-    __properties: ClassVar[List[str]] = ["name", "parameters"]
+    __properties: ClassVar[List[str]] = ["name", "actionInstanceId", "parameters"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,9 +75,9 @@ class ExecuteActionToolRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in parameters (dict)
         _field_dict = {}
         if self.parameters:
-            for _key in self.parameters:
-                if self.parameters[_key]:
-                    _field_dict[_key] = self.parameters[_key].to_dict()
+            for _key_parameters in self.parameters:
+                if self.parameters[_key_parameters]:
+                    _field_dict[_key_parameters] = self.parameters[_key_parameters].to_dict()
             _dict['parameters'] = _field_dict
         return _dict
 
@@ -91,6 +92,7 @@ class ExecuteActionToolRequest(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
+            "actionInstanceId": obj.get("actionInstanceId"),
             "parameters": dict(
                 (_k, WriteActionParameter.from_dict(_v))
                 for _k, _v in obj["parameters"].items()

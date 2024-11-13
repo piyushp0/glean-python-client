@@ -29,7 +29,8 @@ class ResolutionStep(BaseModel):
     """ # noqa: E501
     step_text: Optional[StrictStr] = Field(default=None, description="text for what step to take", alias="stepText")
     link: Optional[StrictStr] = Field(default=None, description="optional link url for instructions")
-    __properties: ClassVar[List[str]] = ["stepText", "link"]
+    metadata: Optional[List[StrictStr]] = Field(default=None, description="optional metadata for the step")
+    __properties: ClassVar[List[str]] = ["stepText", "link", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +84,8 @@ class ResolutionStep(BaseModel):
 
         _obj = cls.model_validate({
             "stepText": obj.get("stepText"),
-            "link": obj.get("link")
+            "link": obj.get("link"),
+            "metadata": obj.get("metadata")
         })
         return _obj
 

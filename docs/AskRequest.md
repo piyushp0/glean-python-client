@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **operators** | **str** | Search operators to append to the query | [optional] 
 **backend** | **str** | Which backend to use to fulfill the requests. | [optional] 
 **chat_application_id** | **str** | The ID of the application this request originates from, used to determine the configuration of underlying chat processes when invoking the CHAT backend. This should correspond to the ID set during admin setup. If not specified, the default chat experience will be used. | [optional] 
+**inclusions** | [**ChatRestrictionFilters**](ChatRestrictionFilters.md) |  | [optional] 
+**exclusions** | [**ChatRestrictionFilters**](ChatRestrictionFilters.md) |  | [optional] 
 
 ## Example
 

@@ -251,7 +251,9 @@ class AuthenticationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -297,6 +299,7 @@ class AuthenticationApi:
     def createauthtoken(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -316,6 +319,8 @@ class AuthenticationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -340,6 +345,7 @@ class AuthenticationApi:
 
         _param = self._createauthtoken_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -367,6 +373,7 @@ class AuthenticationApi:
     def createauthtoken_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -386,6 +393,8 @@ class AuthenticationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -410,6 +419,7 @@ class AuthenticationApi:
 
         _param = self._createauthtoken_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -437,6 +447,7 @@ class AuthenticationApi:
     def createauthtoken_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -456,6 +467,8 @@ class AuthenticationApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -480,6 +493,7 @@ class AuthenticationApi:
 
         _param = self._createauthtoken_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -502,6 +516,7 @@ class AuthenticationApi:
     def _createauthtoken_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -517,7 +532,9 @@ class AuthenticationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -525,6 +542,8 @@ class AuthenticationApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
 

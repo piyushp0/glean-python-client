@@ -90,9 +90,9 @@ class CalendarAttendee(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in group_attendees (list)
         _items = []
         if self.group_attendees:
-            for _item in self.group_attendees:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_group_attendees in self.group_attendees:
+                if _item_group_attendees:
+                    _items.append(_item_group_attendees.to_dict())
             _dict['groupAttendees'] = _items
         return _dict
 

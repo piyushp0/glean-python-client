@@ -79,9 +79,9 @@ class CalendarAttendees(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in people (list)
         _items = []
         if self.people:
-            for _item in self.people:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_people in self.people:
+                if _item_people:
+                    _items.append(_item_people.to_dict())
             _dict['people'] = _items
         return _dict
 

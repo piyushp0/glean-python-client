@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **listentities**
-> ListEntitiesResponse listentities(payload, x_scio_actas=x_scio_actas)
+> ListEntitiesResponse listentities(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 List entities
 
@@ -49,10 +49,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.EntitiesApi(api_client)
     payload = openapi_client.ListEntitiesRequest() # ListEntitiesRequest | List people request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # List entities
-        api_response = api_instance.listentities(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.listentities(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of EntitiesApi->listentities:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**ListEntitiesRequest**](ListEntitiesRequest.md)| List people request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -94,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **people**
-> PeopleResponse people(payload, x_scio_actas=x_scio_actas)
+> PeopleResponse people(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read people
 
@@ -133,10 +135,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.EntitiesApi(api_client)
     payload = openapi_client.PeopleRequest() # PeopleRequest | People request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read people
-        api_response = api_instance.people(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.people(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of EntitiesApi->people:\n")
         pprint(api_response)
     except Exception as e:
@@ -152,6 +155,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PeopleRequest**](PeopleRequest.md)| People request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -178,7 +182,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **teams**
-> TeamsResponse teams(payload, x_scio_actas=x_scio_actas)
+> TeamsResponse teams(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read teams
 
@@ -217,10 +221,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.EntitiesApi(api_client)
     payload = openapi_client.TeamsRequest() # TeamsRequest | Teams request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read teams
-        api_response = api_instance.teams(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.teams(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of EntitiesApi->teams:\n")
         pprint(api_response)
     except Exception as e:
@@ -236,6 +241,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**TeamsRequest**](TeamsRequest.md)| Teams request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

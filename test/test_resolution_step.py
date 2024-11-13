@@ -37,7 +37,10 @@ class TestResolutionStep(unittest.TestCase):
         if include_optional:
             return ResolutionStep(
                 step_text = '',
-                link = ''
+                link = '',
+                metadata = [
+                    ''
+                    ]
             )
         else:
             return ResolutionStep(

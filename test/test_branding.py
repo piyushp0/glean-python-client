@@ -39,7 +39,8 @@ class TestBranding(unittest.TestCase):
                 company_background_image_name = '',
                 company_logo_url = '',
                 company_wide_logo_url = '',
-                company_logo_background_color = ''
+                company_logo_background_color = '',
+                company_mobile_background_image_name = ''
             )
         else:
             return Branding(

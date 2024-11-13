@@ -100,16 +100,16 @@ class EmailRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in recipients (list)
         _items = []
         if self.recipients:
-            for _item in self.recipients:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_recipients in self.recipients:
+                if _item_recipients:
+                    _items.append(_item_recipients.to_dict())
             _dict['recipients'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in cc_recipients (list)
         _items = []
         if self.cc_recipients:
-            for _item in self.cc_recipients:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_cc_recipients in self.cc_recipients:
+                if _item_cc_recipients:
+                    _items.append(_item_cc_recipients.to_dict())
             _dict['ccRecipients'] = _items
         # override the default output from pydantic by calling `to_dict()` of recipient_filters
         if self.recipient_filters:
@@ -117,16 +117,16 @@ class EmailRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in senders (list)
         _items = []
         if self.senders:
-            for _item in self.senders:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_senders in self.senders:
+                if _item_senders:
+                    _items.append(_item_senders.to_dict())
             _dict['senders'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in documents (list)
         _items = []
         if self.documents:
-            for _item in self.documents:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_documents in self.documents:
+                if _item_documents:
+                    _items.append(_item_documents.to_dict())
             _dict['documents'] = _items
         # override the default output from pydantic by calling `to_dict()` of feedback_payload
         if self.feedback_payload:

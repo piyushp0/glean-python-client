@@ -31,7 +31,8 @@ class Branding(BaseModel):
     company_logo_url: Optional[StrictStr] = Field(default=None, description="An image URL pointing to a custom logo that should be displayed to users. Must be square and recognizable down to 40x40px. SVG images with transparent background are preferred.", alias="companyLogoUrl")
     company_wide_logo_url: Optional[StrictStr] = Field(default=None, description="An image URL pointing to a wide format custom logo that should be displayed to users. Should be rectangular and recognizable at 40px height, and aspect ratio should be between 2:1 and 4:1. SVG images with transparent background are preferred.", alias="companyWideLogoUrl")
     company_logo_background_color: Optional[StrictStr] = Field(default=None, description="A hex RGB color to display behind custom logo (e.g. '#ff4080').", alias="companyLogoBackgroundColor")
-    __properties: ClassVar[List[str]] = ["companyBackgroundImageName", "companyLogoUrl", "companyWideLogoUrl", "companyLogoBackgroundColor"]
+    company_mobile_background_image_name: Optional[StrictStr] = Field(default=None, description="User facing company background image to be displayed to users on mobile devices on the home page.", alias="companyMobileBackgroundImageName")
+    __properties: ClassVar[List[str]] = ["companyBackgroundImageName", "companyLogoUrl", "companyWideLogoUrl", "companyLogoBackgroundColor", "companyMobileBackgroundImageName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +88,8 @@ class Branding(BaseModel):
             "companyBackgroundImageName": obj.get("companyBackgroundImageName"),
             "companyLogoUrl": obj.get("companyLogoUrl"),
             "companyWideLogoUrl": obj.get("companyWideLogoUrl"),
-            "companyLogoBackgroundColor": obj.get("companyLogoBackgroundColor")
+            "companyLogoBackgroundColor": obj.get("companyLogoBackgroundColor"),
+            "companyMobileBackgroundImageName": obj.get("companyMobileBackgroundImageName")
         })
         return _obj
 

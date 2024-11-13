@@ -44,7 +44,7 @@ class TestSearchApi(unittest.TestCase):
     def test_feed(self) -> None:
         """Test case for feed
 
-        Suggest a feed of documents and events
+        Feed of documents and events
         """
         pass
 

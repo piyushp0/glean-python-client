@@ -7,6 +7,7 @@ Structure for file uploaded by a user for Chat.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Unique identifier of the file. | [optional] 
+**url** | **str** | Url of the file. | [optional] 
 **name** | **str** | Name of the uploaded file. | [optional] 
 **metadata** | [**ChatFileMetadata**](ChatFileMetadata.md) |  | [optional] 
 

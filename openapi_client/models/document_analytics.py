@@ -94,9 +94,9 @@ class DocumentAnalytics(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in facet_analytics (list)
         _items = []
         if self.facet_analytics:
-            for _item in self.facet_analytics:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_facet_analytics in self.facet_analytics:
+                if _item_facet_analytics:
+                    _items.append(_item_facet_analytics.to_dict())
             _dict['facetAnalytics'] = _items
         return _dict
 

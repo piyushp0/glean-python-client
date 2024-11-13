@@ -29,21 +29,21 @@ class AlertData(BaseModel):
     """
     Admin alert related information that is used to construct the admin alert email
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the admin alert")
-    triggered_time: Optional[datetime] = Field(default=None, description="The time that the alert was triggered", alias="triggeredTime")
-    project_name: Optional[StrictStr] = Field(default=None, description="Human readable name of the project instance", alias="projectName")
-    help_link: Optional[StrictStr] = Field(default=None, description="Help link for the alert that the admin can reference", alias="helpLink")
-    datasource: Optional[StrictStr] = Field(default=None, description="Datasource that the alert is related to (possibly null)")
     banner_type: Optional[StrictStr] = Field(default=None, description="Banner type to display for this alert", alias="bannerType")
     banner_text: Optional[StrictStr] = Field(default=None, description="Text to display for the alert banner", alias="bannerText")
     alert_description: Optional[StrictStr] = Field(default=None, description="Text for what happened section of an admin alert.", alias="alertDescription")
     relevance_description: Optional[StrictStr] = Field(default=None, description="Text for why this matters section of an admin alert.", alias="relevanceDescription")
     resolution_steps_description: Optional[StrictStr] = Field(default=None, description="Text for to do section before actual steps.", alias="resolutionStepsDescription")
     resolution_steps: Optional[List[ResolutionStep]] = Field(default=None, description="Steps to take to resolve an alert which are optionally mapped to a link for instructions (e.g. help doc)", alias="resolutionSteps")
+    help_link: Optional[StrictStr] = Field(default=None, description="Help link for the alert that the admin can reference", alias="helpLink")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the admin alert")
+    triggered_time: Optional[datetime] = Field(default=None, description="The time that the alert was triggered", alias="triggeredTime")
+    project_name: Optional[StrictStr] = Field(default=None, description="Human readable name of the project instance", alias="projectName")
+    datasource: Optional[StrictStr] = Field(default=None, description="Datasource that the alert is related to (possibly null)")
     instance_display_name: Optional[StrictStr] = Field(default=None, description="datasource instance's user set display name", alias="instanceDisplayName")
     instance_name: Optional[StrictStr] = Field(default=None, description="datasource instance's name e.g. confluence_0a0odwv", alias="instanceName")
     email_subject_description: Optional[StrictStr] = Field(default=None, description="custom text in subject line", alias="emailSubjectDescription")
-    __properties: ClassVar[List[str]] = ["name", "triggeredTime", "projectName", "helpLink", "datasource", "bannerType", "bannerText", "alertDescription", "relevanceDescription", "resolutionStepsDescription", "resolutionSteps", "instanceDisplayName", "instanceName", "emailSubjectDescription"]
+    __properties: ClassVar[List[str]] = ["bannerType", "bannerText", "alertDescription", "relevanceDescription", "resolutionStepsDescription", "resolutionSteps", "helpLink", "name", "triggeredTime", "projectName", "datasource", "instanceDisplayName", "instanceName", "emailSubjectDescription"]
 
     @field_validator('banner_type')
     def banner_type_validate_enum(cls, value):
@@ -97,9 +97,9 @@ class AlertData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in resolution_steps (list)
         _items = []
         if self.resolution_steps:
-            for _item in self.resolution_steps:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_resolution_steps in self.resolution_steps:
+                if _item_resolution_steps:
+                    _items.append(_item_resolution_steps.to_dict())
             _dict['resolutionSteps'] = _items
         return _dict
 
@@ -113,17 +113,17 @@ class AlertData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "triggeredTime": obj.get("triggeredTime"),
-            "projectName": obj.get("projectName"),
-            "helpLink": obj.get("helpLink"),
-            "datasource": obj.get("datasource"),
             "bannerType": obj.get("bannerType"),
             "bannerText": obj.get("bannerText"),
             "alertDescription": obj.get("alertDescription"),
             "relevanceDescription": obj.get("relevanceDescription"),
             "resolutionStepsDescription": obj.get("resolutionStepsDescription"),
             "resolutionSteps": [ResolutionStep.from_dict(_item) for _item in obj["resolutionSteps"]] if obj.get("resolutionSteps") is not None else None,
+            "helpLink": obj.get("helpLink"),
+            "name": obj.get("name"),
+            "triggeredTime": obj.get("triggeredTime"),
+            "projectName": obj.get("projectName"),
+            "datasource": obj.get("datasource"),
             "instanceDisplayName": obj.get("instanceDisplayName"),
             "instanceName": obj.get("instanceName"),
             "emailSubjectDescription": obj.get("emailSubjectDescription")

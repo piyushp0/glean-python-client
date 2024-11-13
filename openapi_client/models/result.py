@@ -74,9 +74,9 @@ class Result(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in structured_results (list)
         _items = []
         if self.structured_results:
-            for _item in self.structured_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_structured_results in self.structured_results:
+                if _item_structured_results:
+                    _items.append(_item_structured_results.to_dict())
             _dict['structuredResults'] = _items
         return _dict
 

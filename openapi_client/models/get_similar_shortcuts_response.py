@@ -73,9 +73,9 @@ class GetSimilarShortcutsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in shortcuts (list)
         _items = []
         if self.shortcuts:
-            for _item in self.shortcuts:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_shortcuts in self.shortcuts:
+                if _item_shortcuts:
+                    _items.append(_item_shortcuts.to_dict())
             _dict['shortcuts'] = _items
         return _dict
 

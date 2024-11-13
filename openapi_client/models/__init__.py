@@ -23,6 +23,7 @@ from openapi_client.models.add_collection_items_request import AddCollectionItem
 from openapi_client.models.add_collection_items_response import AddCollectionItemsResponse
 from openapi_client.models.add_credential_request import AddCredentialRequest
 from openapi_client.models.added_collections import AddedCollections
+from openapi_client.models.admin_alert_email_template_properties import AdminAlertEmailTemplateProperties
 from openapi_client.models.agent_client_config import AgentClientConfig
 from openapi_client.models.agent_config import AgentConfig
 from openapi_client.models.ai_app_action_counts import AiAppActionCounts
@@ -79,6 +80,7 @@ from openapi_client.models.chat_request import ChatRequest
 from openapi_client.models.chat_response import ChatResponse
 from openapi_client.models.chat_restriction_filters import ChatRestrictionFilters
 from openapi_client.models.chat_result import ChatResult
+from openapi_client.models.chat_zero_state_suggestion_options import ChatZeroStateSuggestionOptions
 from openapi_client.models.client_config import ClientConfig
 from openapi_client.models.client_config_brandings import ClientConfigBrandings
 from openapi_client.models.cluster_group import ClusterGroup
@@ -131,6 +133,7 @@ from openapi_client.models.delete_announcement_request import DeleteAnnouncement
 from openapi_client.models.delete_answer_boards_request import DeleteAnswerBoardsRequest
 from openapi_client.models.delete_answer_boards_response import DeleteAnswerBoardsResponse
 from openapi_client.models.delete_answer_request import DeleteAnswerRequest
+from openapi_client.models.delete_chat_files_request import DeleteChatFilesRequest
 from openapi_client.models.delete_chats_request import DeleteChatsRequest
 from openapi_client.models.delete_collection_item_request import DeleteCollectionItemRequest
 from openapi_client.models.delete_collection_item_response import DeleteCollectionItemResponse
@@ -140,6 +143,7 @@ from openapi_client.models.delete_query_history_error import DeleteQueryHistoryE
 from openapi_client.models.delete_query_history_request import DeleteQueryHistoryRequest
 from openapi_client.models.delete_query_history_response import DeleteQueryHistoryResponse
 from openapi_client.models.delete_shortcut_request import DeleteShortcutRequest
+from openapi_client.models.disambiguation import Disambiguation
 from openapi_client.models.displayable_list import DisplayableList
 from openapi_client.models.displayable_list_config import DisplayableListConfig
 from openapi_client.models.displayable_list_format import DisplayableListFormat
@@ -162,6 +166,7 @@ from openapi_client.models.document_spec_one_of import DocumentSpecOneOf
 from openapi_client.models.document_spec_one_of1 import DocumentSpecOneOf1
 from openapi_client.models.document_spec_one_of2 import DocumentSpecOneOf2
 from openapi_client.models.document_visibility import DocumentVisibility
+from openapi_client.models.download_insights_request import DownloadInsightsRequest
 from openapi_client.models.draft_properties import DraftProperties
 from openapi_client.models.edit_answer_board_request import EditAnswerBoardRequest
 from openapi_client.models.edit_answer_board_response import EditAnswerBoardResponse
@@ -172,13 +177,12 @@ from openapi_client.models.edit_collection_request import EditCollectionRequest
 from openapi_client.models.edit_collection_response import EditCollectionResponse
 from openapi_client.models.edit_document_collections_request import EditDocumentCollectionsRequest
 from openapi_client.models.edit_document_collections_response import EditDocumentCollectionsResponse
-from openapi_client.models.edit_permissions_request import EditPermissionsRequest
-from openapi_client.models.edit_permissions_response import EditPermissionsResponse
 from openapi_client.models.edit_pin_request import EditPinRequest
 from openapi_client.models.email_request import EmailRequest
 from openapi_client.models.email_request_chat_feedback_payload import EmailRequestChatFeedbackPayload
 from openapi_client.models.email_request_feedback_payload import EmailRequestFeedbackPayload
 from openapi_client.models.entities_sort_order import EntitiesSortOrder
+from openapi_client.models.entity_type import EntityType
 from openapi_client.models.error_info import ErrorInfo
 from openapi_client.models.error_message import ErrorMessage
 from openapi_client.models.event_classification import EventClassification
@@ -194,6 +198,7 @@ from openapi_client.models.facet_filter_set import FacetFilterSet
 from openapi_client.models.facet_filter_value import FacetFilterValue
 from openapi_client.models.facet_result import FacetResult
 from openapi_client.models.facet_value import FacetValue
+from openapi_client.models.favorite_info import FavoriteInfo
 from openapi_client.models.feed_entry import FeedEntry
 from openapi_client.models.feed_entry_ui_config import FeedEntryUiConfig
 from openapi_client.models.feed_request import FeedRequest
@@ -204,7 +209,8 @@ from openapi_client.models.feed_result import FeedResult
 from openapi_client.models.feedback import Feedback
 from openapi_client.models.feedback_channel import FeedbackChannel
 from openapi_client.models.feedback_customizations import FeedbackCustomizations
-from openapi_client.models.feedback_debug_info import FeedbackDebugInfo
+from openapi_client.models.file_upload_config import FileUploadConfig
+from openapi_client.models.followup_action import FollowupAction
 from openapi_client.models.generated_attachment import GeneratedAttachment
 from openapi_client.models.generated_attachment_content import GeneratedAttachmentContent
 from openapi_client.models.generated_qna import GeneratedQna
@@ -217,6 +223,8 @@ from openapi_client.models.get_answer_request import GetAnswerRequest
 from openapi_client.models.get_answer_response import GetAnswerResponse
 from openapi_client.models.get_chat_application_request import GetChatApplicationRequest
 from openapi_client.models.get_chat_application_response import GetChatApplicationResponse
+from openapi_client.models.get_chat_files_request import GetChatFilesRequest
+from openapi_client.models.get_chat_files_response import GetChatFilesResponse
 from openapi_client.models.get_chat_request import GetChatRequest
 from openapi_client.models.get_chat_response import GetChatResponse
 from openapi_client.models.get_collection_request import GetCollectionRequest
@@ -241,6 +249,7 @@ from openapi_client.models.get_shortcut_request_one_of import GetShortcutRequest
 from openapi_client.models.get_shortcut_response import GetShortcutResponse
 from openapi_client.models.get_similar_shortcuts_request import GetSimilarShortcutsRequest
 from openapi_client.models.get_similar_shortcuts_response import GetSimilarShortcutsResponse
+from openapi_client.models.glean_assist_insights_response import GleanAssistInsightsResponse
 from openapi_client.models.grant_permission import GrantPermission
 from openapi_client.models.group import Group
 from openapi_client.models.group_type import GroupType
@@ -306,6 +315,9 @@ from openapi_client.models.preview_ugc_response import PreviewUgcResponse
 from openapi_client.models.product_term import ProductTerm
 from openapi_client.models.product_term_localizations_value import ProductTermLocalizationsValue
 from openapi_client.models.product_terms import ProductTerms
+from openapi_client.models.prompt_template import PromptTemplate
+from openapi_client.models.prompt_template_mutable_properties import PromptTemplateMutableProperties
+from openapi_client.models.prompt_template_result import PromptTemplateResult
 from openapi_client.models.public_config_request import PublicConfigRequest
 from openapi_client.models.publish_draft_announcement_request import PublishDraftAnnouncementRequest
 from openapi_client.models.query_insight import QueryInsight
@@ -330,12 +342,14 @@ from openapi_client.models.reminder_request import ReminderRequest
 from openapi_client.models.remove_credential_request import RemoveCredentialRequest
 from openapi_client.models.removed_collections import RemovedCollections
 from openapi_client.models.resolution_step import ResolutionStep
+from openapi_client.models.restriction_filters import RestrictionFilters
 from openapi_client.models.result import Result
 from openapi_client.models.result_tab import ResultTab
 from openapi_client.models.results_description import ResultsDescription
 from openapi_client.models.results_request import ResultsRequest
 from openapi_client.models.results_response import ResultsResponse
 from openapi_client.models.scope_type import ScopeType
+from openapi_client.models.search_client_config import SearchClientConfig
 from openapi_client.models.search_request import SearchRequest
 from openapi_client.models.search_request_input_details import SearchRequestInputDetails
 from openapi_client.models.search_request_options import SearchRequestOptions
@@ -378,6 +392,7 @@ from openapi_client.models.thumbnail import Thumbnail
 from openapi_client.models.time_interval import TimeInterval
 from openapi_client.models.time_point import TimePoint
 from openapi_client.models.tool_config import ToolConfig
+from openapi_client.models.tool_info import ToolInfo
 from openapi_client.models.tool_metadata import ToolMetadata
 from openapi_client.models.tools_config import ToolsConfig
 from openapi_client.models.ugc_draft import UgcDraft
@@ -392,6 +407,7 @@ from openapi_client.models.update_displayable_lists_response import UpdateDispla
 from openapi_client.models.update_draft_announcement_request import UpdateDraftAnnouncementRequest
 from openapi_client.models.update_shortcut_request import UpdateShortcutRequest
 from openapi_client.models.update_shortcut_response import UpdateShortcutResponse
+from openapi_client.models.upload_chat_files_response import UploadChatFilesResponse
 from openapi_client.models.upload_image_response import UploadImageResponse
 from openapi_client.models.user import User
 from openapi_client.models.user_activity import UserActivity
@@ -407,6 +423,17 @@ from openapi_client.models.verification_feed import VerificationFeed
 from openapi_client.models.verification_metadata import VerificationMetadata
 from openapi_client.models.verify_request import VerifyRequest
 from openapi_client.models.viewer_info import ViewerInfo
+from openapi_client.models.workflow import Workflow
+from openapi_client.models.workflow_feedback_info import WorkflowFeedbackInfo
+from openapi_client.models.workflow_input_field import WorkflowInputField
+from openapi_client.models.workflow_metadata import WorkflowMetadata
+from openapi_client.models.workflow_mutable_properties import WorkflowMutableProperties
+from openapi_client.models.workflow_result import WorkflowResult
+from openapi_client.models.workflow_schema import WorkflowSchema
+from openapi_client.models.workflow_step import WorkflowStep
+from openapi_client.models.workflow_tag import WorkflowTag
+from openapi_client.models.workflow_tool_config import WorkflowToolConfig
+from openapi_client.models.workflow_tool_parameter import WorkflowToolParameter
 from openapi_client.models.write_action import WriteAction
 from openapi_client.models.write_action_parameter import WriteActionParameter
 from openapi_client.models.write_permission import WritePermission

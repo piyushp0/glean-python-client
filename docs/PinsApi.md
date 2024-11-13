@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **editpin**
-> PinDocument editpin(payload, x_scio_actas=x_scio_actas)
+> PinDocument editpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Update pin
 
@@ -51,10 +51,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.PinsApi(api_client)
     payload = openapi_client.EditPinRequest() # EditPinRequest | Edit pins request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Update pin
-        api_response = api_instance.editpin(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.editpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of PinsApi->editpin:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,6 +71,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**EditPinRequest**](EditPinRequest.md)| Edit pins request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -96,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getpin**
-> GetPinResponse getpin(payload, x_scio_actas=x_scio_actas)
+> GetPinResponse getpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read pin
 
@@ -135,10 +137,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.PinsApi(api_client)
     payload = openapi_client.GetPinRequest() # GetPinRequest | Get pin request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read pin
-        api_response = api_instance.getpin(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of PinsApi->getpin:\n")
         pprint(api_response)
     except Exception as e:
@@ -154,6 +157,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetPinRequest**](GetPinRequest.md)| Get pin request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -180,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listpins**
-> ListPinsResponse listpins(payload, x_scio_actas=x_scio_actas)
+> ListPinsResponse listpins(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 List pins
 
@@ -218,10 +222,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.PinsApi(api_client)
     payload = None # object | List pins request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # List pins
-        api_response = api_instance.listpins(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.listpins(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of PinsApi->listpins:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +242,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | **object**| List pins request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -263,7 +269,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pin**
-> PinDocument pin(payload, x_scio_actas=x_scio_actas)
+> PinDocument pin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create pin
 
@@ -302,10 +308,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.PinsApi(api_client)
     payload = openapi_client.PinRequest() # PinRequest | Details about the document and query for the pin.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create pin
-        api_response = api_instance.pin(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.pin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of PinsApi->pin:\n")
         pprint(api_response)
     except Exception as e:
@@ -321,6 +328,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PinRequest**](PinRequest.md)| Details about the document and query for the pin. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -347,7 +355,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unpin**
-> unpin(payload, x_scio_actas=x_scio_actas)
+> unpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete pin
 
@@ -385,10 +393,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.PinsApi(api_client)
     payload = openapi_client.Unpin() # Unpin | Details about the pin being unpinned.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete pin
-        api_instance.unpin(payload, x_scio_actas=x_scio_actas)
+        api_instance.unpin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling PinsApi->unpin: %s\n" % e)
 ```
@@ -402,6 +411,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**Unpin**](Unpin.md)| Details about the pin being unpinned. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

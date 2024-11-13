@@ -73,9 +73,9 @@ class RelatedObjects(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in related_objects (dict)
         _field_dict = {}
         if self.related_objects:
-            for _key in self.related_objects:
-                if self.related_objects[_key]:
-                    _field_dict[_key] = self.related_objects[_key].to_dict()
+            for _key_related_objects in self.related_objects:
+                if self.related_objects[_key_related_objects]:
+                    _field_dict[_key_related_objects] = self.related_objects[_key_related_objects].to_dict()
             _dict['relatedObjects'] = _field_dict
         return _dict
 

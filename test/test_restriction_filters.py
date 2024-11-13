@@ -36,11 +36,8 @@ class TestRestrictionFilters(unittest.TestCase):
         model = RestrictionFilters()
         if include_optional:
             return RestrictionFilters(
-                document_specs = [
+                container_specs = [
                     null
-                    ],
-                datasource_instances = [
-                    ''
                     ]
             )
         else:

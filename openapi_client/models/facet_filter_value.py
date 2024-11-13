@@ -38,8 +38,8 @@ class FacetFilterValue(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['EQUALS', 'LT', 'GT']):
-            raise ValueError("must be one of enum values ('EQUALS', 'LT', 'GT')")
+        if value not in set(['EQUALS', 'ID_EQUALS', 'LT', 'GT']):
+            raise ValueError("must be one of enum values ('EQUALS', 'ID_EQUALS', 'LT', 'GT')")
         return value
 
     model_config = ConfigDict(

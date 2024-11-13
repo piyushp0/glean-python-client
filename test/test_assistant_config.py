@@ -55,9 +55,15 @@ class TestAssistantConfig(unittest.TestCase):
                     ''
                     ],
                 gpt_agent_enabled = True,
-                file_upload_enabled = True,
+                file_upload = openapi_client.models.file_upload_config.FileUploadConfig(
+                    enabled = True, 
+                    max_file_count = 56, 
+                    max_file_size = 56, ),
                 chat_history_enabled = True,
-                chat_guide_url = ''
+                chat_guide_url = '',
+                prompts_enabled = True,
+                default_user_can_share_prompts = True,
+                file_upload_enabled = True
             )
         else:
             return AssistantConfig(

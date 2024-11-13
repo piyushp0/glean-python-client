@@ -79,10 +79,10 @@ class FeedbackCustomizations(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in feature_channels (dict of array)
         _field_dict_of_array = {}
         if self.feature_channels:
-            for _key in self.feature_channels:
-                if self.feature_channels[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.feature_channels[_key]
+            for _key_feature_channels in self.feature_channels:
+                if self.feature_channels[_key_feature_channels] is not None:
+                    _field_dict_of_array[_key_feature_channels] = [
+                        _item.to_dict() for _item in self.feature_channels[_key_feature_channels]
                     ]
             _dict['featureChannels'] = _field_dict_of_array
         return _dict

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**adminsearch**](SearchApi.md#adminsearch) | **POST** /adminsearch | Search the index (admin)
 [**autocomplete**](SearchApi.md#autocomplete) | **POST** /autocomplete | Autocomplete
-[**feed**](SearchApi.md#feed) | **POST** /feed | Suggest a feed of documents and events
+[**feed**](SearchApi.md#feed) | **POST** /feed | Feed of documents and events
 [**peoplesuggest**](SearchApi.md#peoplesuggest) | **POST** /peoplesuggest | Suggest people
 [**peoplesuggestadmin**](SearchApi.md#peoplesuggestadmin) | **POST** /peoplesuggestadmin | Suggest people (admin)
 [**recommendations**](SearchApi.md#recommendations) | **POST** /recommendations | Recommend documents
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **adminsearch**
-> SearchResponse adminsearch(x_scio_actas=x_scio_actas, payload=payload)
+> SearchResponse adminsearch(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
 
 Search the index (admin)
 
@@ -52,11 +52,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.SearchApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     payload = openapi_client.SearchRequest() # SearchRequest | Admin search request (optional)
 
     try:
         # Search the index (admin)
-        api_response = api_instance.adminsearch(x_scio_actas=x_scio_actas, payload=payload)
+        api_response = api_instance.adminsearch(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
         print("The response of SearchApi->adminsearch:\n")
         pprint(api_response)
     except Exception as e:
@@ -71,6 +72,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **payload** | [**SearchRequest**](SearchRequest.md)| Admin search request | [optional] 
 
 ### Return type
@@ -100,7 +102,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **autocomplete**
-> AutocompleteResponse autocomplete(payload, x_scio_actas=x_scio_actas)
+> AutocompleteResponse autocomplete(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Autocomplete
 
@@ -139,10 +141,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.SearchApi(api_client)
     payload = openapi_client.AutocompleteRequest() # AutocompleteRequest | Autocomplete request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Autocomplete
-        api_response = api_instance.autocomplete(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.autocomplete(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of SearchApi->autocomplete:\n")
         pprint(api_response)
     except Exception as e:
@@ -158,6 +161,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**AutocompleteRequest**](AutocompleteRequest.md)| Autocomplete request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -184,9 +188,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feed**
-> FeedResponse feed(payload, x_scio_actas=x_scio_actas)
+> FeedResponse feed(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
-Suggest a feed of documents and events
+Feed of documents and events
 
 The personalized feed/home includes different types of contents including suggestions, recents, calendar events and many more.
 
@@ -223,10 +227,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.SearchApi(api_client)
     payload = openapi_client.FeedRequest() # FeedRequest | Includes request params, client data and more for making user's feed.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
-        # Suggest a feed of documents and events
-        api_response = api_instance.feed(payload, x_scio_actas=x_scio_actas)
+        # Feed of documents and events
+        api_response = api_instance.feed(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of SearchApi->feed:\n")
         pprint(api_response)
     except Exception as e:
@@ -242,6 +247,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**FeedRequest**](FeedRequest.md)| Includes request params, client data and more for making user&#39;s feed. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -269,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **peoplesuggest**
-> PeopleSuggestResponse peoplesuggest(payload, x_scio_actas=x_scio_actas)
+> PeopleSuggestResponse peoplesuggest(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Suggest people
 
@@ -308,10 +314,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.SearchApi(api_client)
     payload = openapi_client.PeopleSuggestRequest() # PeopleSuggestRequest | Includes request params for type of suggestions.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Suggest people
-        api_response = api_instance.peoplesuggest(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.peoplesuggest(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of SearchApi->peoplesuggest:\n")
         pprint(api_response)
     except Exception as e:
@@ -327,6 +334,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PeopleSuggestRequest**](PeopleSuggestRequest.md)| Includes request params for type of suggestions. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -353,7 +361,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **peoplesuggestadmin**
-> PeopleSuggestResponse peoplesuggestadmin(payload, x_scio_actas=x_scio_actas)
+> PeopleSuggestResponse peoplesuggestadmin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Suggest people (admin)
 
@@ -392,10 +400,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.SearchApi(api_client)
     payload = openapi_client.PeopleSuggestRequest() # PeopleSuggestRequest | Includes request params for type of suggestions.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Suggest people (admin)
-        api_response = api_instance.peoplesuggestadmin(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.peoplesuggestadmin(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of SearchApi->peoplesuggestadmin:\n")
         pprint(api_response)
     except Exception as e:
@@ -411,6 +420,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**PeopleSuggestRequest**](PeopleSuggestRequest.md)| Includes request params for type of suggestions. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -437,7 +447,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **recommendations**
-> RecommendationsResponse recommendations(x_scio_actas=x_scio_actas, payload=payload)
+> RecommendationsResponse recommendations(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
 
 Recommend documents
 
@@ -475,11 +485,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.SearchApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     payload = openapi_client.RecommendationsRequest() # RecommendationsRequest | Recommendations request (optional)
 
     try:
         # Recommend documents
-        api_response = api_instance.recommendations(x_scio_actas=x_scio_actas, payload=payload)
+        api_response = api_instance.recommendations(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
         print("The response of SearchApi->recommendations:\n")
         pprint(api_response)
     except Exception as e:
@@ -494,6 +505,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **payload** | [**RecommendationsRequest**](RecommendationsRequest.md)| Recommendations request | [optional] 
 
 ### Return type
@@ -524,7 +536,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search**
-> SearchResponse search(x_scio_actas=x_scio_actas, payload=payload)
+> SearchResponse search(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
 
 Search
 
@@ -562,11 +574,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.SearchApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     payload = openapi_client.SearchRequest() # SearchRequest | Search request (optional)
 
     try:
         # Search
-        api_response = api_instance.search(x_scio_actas=x_scio_actas, payload=payload)
+        api_response = api_instance.search(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
         print("The response of SearchApi->search:\n")
         pprint(api_response)
     except Exception as e:
@@ -581,6 +594,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **payload** | [**SearchRequest**](SearchRequest.md)| Search request | [optional] 
 
 ### Return type

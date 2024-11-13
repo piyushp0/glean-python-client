@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **disable_spellcheck** | **bool** | Whether or not to disable spellcheck. | [optional] 
 **disable_query_autocorrect** | **bool** | Disables automatic adjustment of the input query for spelling corrections or other reasons. | [optional] 
 **return_llm_content_over_snippets** | **bool** | [beta] Enables expanded content to be returned for LLM usage. The size of content per result returned should be modified using maxSnippetSize. Server may return less or more than what is specified in maxSnippetSize. For more details, https://docs.google.com/document/d/1CTOLSxWWT9WDEnHVLoCUaxbGYyXYP8kctPRF-RluSQY/edit. Requires sufficient permissions. | [optional] 
+**inclusions** | [**RestrictionFilters**](RestrictionFilters.md) |  | [optional] 
+**exclusions** | [**RestrictionFilters**](RestrictionFilters.md) |  | [optional] 
 
 ## Example
 

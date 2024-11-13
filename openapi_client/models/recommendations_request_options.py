@@ -79,9 +79,9 @@ class RecommendationsRequestOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in facet_filter_sets (list)
         _items = []
         if self.facet_filter_sets:
-            for _item in self.facet_filter_sets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_facet_filter_sets in self.facet_filter_sets:
+                if _item_facet_filter_sets:
+                    _items.append(_item_facet_filter_sets.to_dict())
             _dict['facetFilterSets'] = _items
         # override the default output from pydantic by calling `to_dict()` of context
         if self.context:

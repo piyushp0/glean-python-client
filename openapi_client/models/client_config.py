@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.assistant_config import AssistantConfig
 from openapi_client.models.client_config_brandings import ClientConfigBrandings
 from openapi_client.models.feedback_customizations import FeedbackCustomizations
+from openapi_client.models.search_client_config import SearchClientConfig
 from openapi_client.models.shortcuts_config import ShortcutsConfig
 from openapi_client.models.themes import Themes
 from openapi_client.models.tools_config import ToolsConfig
@@ -37,6 +38,7 @@ class ClientConfig(BaseModel):
     assistant: Optional[AssistantConfig] = None
     tools: Optional[ToolsConfig] = None
     shortcuts: Optional[ShortcutsConfig] = None
+    search: Optional[SearchClientConfig] = None
     bad_versions: Optional[List[StrictStr]] = Field(default=None, description="Known bad client versions that should force update themselves", alias="badVersions")
     feed_people_celebrations_enabled: Optional[StrictBool] = Field(default=None, description="Whether people celebrations is enabled or not for the instance", alias="feedPeopleCelebrationsEnabled")
     feed_suggested_enabled: Optional[StrictBool] = Field(default=None, description="Whether the suggested feed is enabled", alias="feedSuggestedEnabled")
@@ -63,11 +65,11 @@ class ClientConfig(BaseModel):
     greeting_format: Optional[StrictStr] = Field(default=None, description="Describes how to format the web app greeting. Possible format options include \\%t - timely greeting \\%n - the user's first name", alias="greetingFormat")
     task_see_all_label: Optional[StrictStr] = Field(default=None, description="Label for the external link at the end of the Task card in order to guide user to the source.", alias="taskSeeAllLabel")
     task_see_all_link: Optional[StrictStr] = Field(default=None, description="Link used in conjunction with taskSeeAllLabel to redirect user to the task's source.", alias="taskSeeAllLink")
-    search_placeholder: Optional[StrictStr] = Field(default=None, description="Custom autocomplete box placeholder to replace rotating prompts", alias="searchPlaceholder")
+    search_placeholder: Optional[StrictStr] = Field(default=None, description="Custom autocomplete box placeholder to replace rotating prompts. Deprecated for `search.placeholder`", alias="searchPlaceholder")
     shortcuts_prefix: Optional[StrictStr] = Field(default=None, description="Company-wide custom prefix for Go Links.", alias="shortcutsPrefix")
     sso_company_provider: Optional[StrictStr] = Field(default=None, description="SSO provider used by the company", alias="ssoCompanyProvider")
     feedback_customizations: Optional[FeedbackCustomizations] = Field(default=None, alias="feedbackCustomizations")
-    __properties: ClassVar[List[str]] = ["assistant", "tools", "shortcuts", "badVersions", "feedPeopleCelebrationsEnabled", "feedSuggestedEnabled", "feedTrendingEnabled", "feedRecentsEnabled", "feedMentionsEnabled", "gptAgentEnabled", "chatHistoryEnabled", "boolValues", "integerValues", "companyDisplayName", "customSerpMarkdown", "onboardingQuery", "isOrgChartLinkVisible", "isOrgChartAccessible", "isPeopleSetup", "isPilotMode", "webAppUrl", "userOutreach", "searchLinkUrlTemplate", "chatLinkUrlTemplate", "themes", "brandings", "greetingFormat", "taskSeeAllLabel", "taskSeeAllLink", "searchPlaceholder", "shortcutsPrefix", "ssoCompanyProvider", "feedbackCustomizations"]
+    __properties: ClassVar[List[str]] = ["assistant", "tools", "shortcuts", "search", "badVersions", "feedPeopleCelebrationsEnabled", "feedSuggestedEnabled", "feedTrendingEnabled", "feedRecentsEnabled", "feedMentionsEnabled", "gptAgentEnabled", "chatHistoryEnabled", "boolValues", "integerValues", "companyDisplayName", "customSerpMarkdown", "onboardingQuery", "isOrgChartLinkVisible", "isOrgChartAccessible", "isPeopleSetup", "isPilotMode", "webAppUrl", "userOutreach", "searchLinkUrlTemplate", "chatLinkUrlTemplate", "themes", "brandings", "greetingFormat", "taskSeeAllLabel", "taskSeeAllLink", "searchPlaceholder", "shortcutsPrefix", "ssoCompanyProvider", "feedbackCustomizations"]
 
     @field_validator('sso_company_provider')
     def sso_company_provider_validate_enum(cls, value):
@@ -127,6 +129,9 @@ class ClientConfig(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of shortcuts
         if self.shortcuts:
             _dict['shortcuts'] = self.shortcuts.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of search
+        if self.search:
+            _dict['search'] = self.search.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user_outreach
         if self.user_outreach:
             _dict['userOutreach'] = self.user_outreach.to_dict()
@@ -154,6 +159,7 @@ class ClientConfig(BaseModel):
             "assistant": AssistantConfig.from_dict(obj["assistant"]) if obj.get("assistant") is not None else None,
             "tools": ToolsConfig.from_dict(obj["tools"]) if obj.get("tools") is not None else None,
             "shortcuts": ShortcutsConfig.from_dict(obj["shortcuts"]) if obj.get("shortcuts") is not None else None,
+            "search": SearchClientConfig.from_dict(obj["search"]) if obj.get("search") is not None else None,
             "badVersions": obj.get("badVersions"),
             "feedPeopleCelebrationsEnabled": obj.get("feedPeopleCelebrationsEnabled"),
             "feedSuggestedEnabled": obj.get("feedSuggestedEnabled"),

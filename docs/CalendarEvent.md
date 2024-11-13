@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **conference_data** | [**ConferenceData**](ConferenceData.md) |  | [optional] 
 **description** | **str** | The HTML description of the event. | [optional] 
 **datasource** | **str** | The app or other repository type from which the event was extracted | [optional] 
+**has_transcript** | **bool** | The event has a transcript associated with it enabling features like summarization | [optional] 
 **classifications** | [**List[EventClassification]**](EventClassification.md) |  | [optional] 
 **generated_attachments** | [**List[GeneratedAttachment]**](GeneratedAttachment.md) |  | [optional] 
 

@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addcredential**](UserApi.md#addcredential) | **POST** /addcredential | Create credentials
 [**deletequeryhistory**](UserApi.md#deletequeryhistory) | **POST** /deletequeryhistory | Delete query history
-[**editpermissions**](UserApi.md#editpermissions) | **POST** /editpermissions | Update permissions
 [**invite**](UserApi.md#invite) | **POST** /invite | Send invitation
 [**publicconfig**](UserApi.md#publicconfig) | **POST** /publicclientconfig | Read public client configuration
 [**removecredential**](UserApi.md#removecredential) | **POST** /removecredential | Delete credentials
@@ -14,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **addcredential**
-> addcredential(payload, x_scio_actas=x_scio_actas)
+> addcredential(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Create credentials
 
@@ -52,10 +51,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.UserApi(api_client)
     payload = openapi_client.AddCredentialRequest() # AddCredentialRequest | Credential content
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Create credentials
-        api_instance.addcredential(payload, x_scio_actas=x_scio_actas)
+        api_instance.addcredential(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling UserApi->addcredential: %s\n" % e)
 ```
@@ -69,6 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**AddCredentialRequest**](AddCredentialRequest.md)| Credential content | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -95,7 +96,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deletequeryhistory**
-> DeleteQueryHistoryResponse deletequeryhistory(payload, x_scio_actas=x_scio_actas)
+> DeleteQueryHistoryResponse deletequeryhistory(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete query history
 
@@ -134,10 +135,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.UserApi(api_client)
     payload = openapi_client.DeleteQueryHistoryRequest() # DeleteQueryHistoryRequest | Delete query history request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete query history
-        api_response = api_instance.deletequeryhistory(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.deletequeryhistory(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of UserApi->deletequeryhistory:\n")
         pprint(api_response)
     except Exception as e:
@@ -153,6 +155,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**DeleteQueryHistoryRequest**](DeleteQueryHistoryRequest.md)| Delete query history request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -178,92 +181,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **editpermissions**
-> EditPermissionsResponse editpermissions(payload, x_scio_actas=x_scio_actas)
-
-Update permissions
-
-Update the permissions for a given user.
-
-### Example
-
-* Bearer Authentication (BearerAuth):
-
-```python
-import openapi_client
-from openapi_client.models.edit_permissions_request import EditPermissionsRequest
-from openapi_client.models.edit_permissions_response import EditPermissionsResponse
-from openapi_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://domain-be.glean.com/rest/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
-    host = "https://domain-be.glean.com/rest/api/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: BearerAuth
-configuration = openapi_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
-    payload = openapi_client.EditPermissionsRequest() # EditPermissionsRequest | Permissions
-    x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
-
-    try:
-        # Update permissions
-        api_response = api_instance.editpermissions(payload, x_scio_actas=x_scio_actas)
-        print("The response of UserApi->editpermissions:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling UserApi->editpermissions: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **payload** | [**EditPermissionsRequest**](EditPermissionsRequest.md)| Permissions | 
- **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
-
-### Return type
-
-[**EditPermissionsResponse**](EditPermissionsResponse.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Invalid request |  -  |
-**401** | Not authorized |  -  |
-**429** | Too Many Requests |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **invite**
-> invite(payload, x_scio_actas=x_scio_actas)
+> invite(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Send invitation
 
@@ -301,10 +220,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.UserApi(api_client)
     payload = openapi_client.InviteRequest() # InviteRequest | Invite request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Send invitation
-        api_instance.invite(payload, x_scio_actas=x_scio_actas)
+        api_instance.invite(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling UserApi->invite: %s\n" % e)
 ```
@@ -318,6 +238,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**InviteRequest**](InviteRequest.md)| Invite request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -344,7 +265,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **publicconfig**
-> ClientConfig publicconfig(x_scio_actas=x_scio_actas, payload=payload)
+> ClientConfig publicconfig(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
 
 Read public client configuration
 
@@ -382,11 +303,12 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.UserApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     payload = openapi_client.PublicConfigRequest() # PublicConfigRequest | Public Config request (optional)
 
     try:
         # Read public client configuration
-        api_response = api_instance.publicconfig(x_scio_actas=x_scio_actas, payload=payload)
+        api_response = api_instance.publicconfig(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, payload=payload)
         print("The response of UserApi->publicconfig:\n")
         pprint(api_response)
     except Exception as e:
@@ -401,6 +323,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **payload** | [**PublicConfigRequest**](PublicConfigRequest.md)| Public Config request | [optional] 
 
 ### Return type
@@ -427,7 +350,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **removecredential**
-> removecredential(payload, x_scio_actas=x_scio_actas)
+> removecredential(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Delete credentials
 
@@ -465,10 +388,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.UserApi(api_client)
     payload = openapi_client.RemoveCredentialRequest() # RemoveCredentialRequest | Credential content
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Delete credentials
-        api_instance.removecredential(payload, x_scio_actas=x_scio_actas)
+        api_instance.removecredential(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling UserApi->removecredential: %s\n" % e)
 ```
@@ -482,6 +406,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**RemoveCredentialRequest**](RemoveCredentialRequest.md)| Credential content | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 
@@ -508,7 +433,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **support_email**
-> support_email(payload, x_scio_actas=x_scio_actas)
+> support_email(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Send support email
 
@@ -546,10 +471,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.UserApi(api_client)
     payload = openapi_client.EmailRequest() # EmailRequest | Support request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Send support email
-        api_instance.support_email(payload, x_scio_actas=x_scio_actas)
+        api_instance.support_email(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
     except Exception as e:
         print("Exception when calling UserApi->support_email: %s\n" % e)
 ```
@@ -563,6 +489,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**EmailRequest**](EmailRequest.md)| Support request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

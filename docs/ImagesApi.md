@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **images**
-> bytearray images(x_scio_actas=x_scio_actas, key=key, type=type, id=id, ds=ds, cid=cid)
+> bytearray images(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, key=key, type=type, id=id, ds=ds, cid=cid)
 
 Get image
 
@@ -46,6 +46,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.ImagesApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     key = 'key_example' # str | Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used. (optional)
     type = openapi_client.ImageType() # ImageType | The type of image requested. Supported values are listed in ImageMetadata.type enum. (optional)
     id = 'id_example' # str | ID, if a specific entity/type is requested. The id may have different meaning for each type. for user, it is user id, for UGC, it is the id of the content, and so on. (optional)
@@ -54,7 +55,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Get image
-        api_response = api_instance.images(x_scio_actas=x_scio_actas, key=key, type=type, id=id, ds=ds, cid=cid)
+        api_response = api_instance.images(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, key=key, type=type, id=id, ds=ds, cid=cid)
         print("The response of ImagesApi->images:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +70,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **key** | **str**| Primary key for the image being asked. The key is returned by the API when an image is uploaded. If key is used, other parameters should not be used. | [optional] 
  **type** | [**ImageType**](.md)| The type of image requested. Supported values are listed in ImageMetadata.type enum. | [optional] 
  **id** | **str**| ID, if a specific entity/type is requested. The id may have different meaning for each type. for user, it is user id, for UGC, it is the id of the content, and so on. | [optional] 
@@ -100,7 +102,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadimage**
-> UploadImageResponse uploadimage(payload, x_scio_actas=x_scio_actas, type=type, id=id, ds=ds, cid=cid)
+> UploadImageResponse uploadimage(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, type=type, id=id, ds=ds, cid=cid)
 
 Upload images
 
@@ -139,6 +141,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.ImagesApi(api_client)
     payload = None # bytearray | Content and metadata for the image. Content is in the POST body, metadata is in the URL.
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     type = openapi_client.ImageType() # ImageType | The type of image requested. Supported values are listed in ImageMetadata.type enum. (optional)
     id = 'id_example' # str | ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype. (optional)
     ds = 'ds_example' # str | A specific datasource for which an image is requested for. The ds may have different meaning for each type and can also be empty for some. For USER, it is empty or datasource the icon is asked for. For UGC, it is the UGC datasource. For ICON, it is datasource instance the icon is asked for. (optional)
@@ -146,7 +149,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload images
-        api_response = api_instance.uploadimage(payload, x_scio_actas=x_scio_actas, type=type, id=id, ds=ds, cid=cid)
+        api_response = api_instance.uploadimage(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, type=type, id=id, ds=ds, cid=cid)
         print("The response of ImagesApi->uploadimage:\n")
         pprint(api_response)
     except Exception as e:
@@ -162,6 +165,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | **bytearray**| Content and metadata for the image. Content is in the POST body, metadata is in the URL. | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **type** | [**ImageType**](.md)| The type of image requested. Supported values are listed in ImageMetadata.type enum. | [optional] 
  **id** | **str**| ID, if a specific entity/type is requested. The id may have different meaning for each type. For USER, it is user id For UGC, it is the id of the content For ICON, the doctype. | [optional] 
  **ds** | **str**| A specific datasource for which an image is requested for. The ds may have different meaning for each type and can also be empty for some. For USER, it is empty or datasource the icon is asked for. For UGC, it is the UGC datasource. For ICON, it is datasource instance the icon is asked for. | [optional] 

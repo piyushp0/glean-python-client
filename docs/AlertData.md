@@ -6,17 +6,17 @@ Admin alert related information that is used to construct the admin alert email
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the admin alert | [optional] 
-**triggered_time** | **datetime** | The time that the alert was triggered | [optional] 
-**project_name** | **str** | Human readable name of the project instance | [optional] 
-**help_link** | **str** | Help link for the alert that the admin can reference | [optional] 
-**datasource** | **str** | Datasource that the alert is related to (possibly null) | [optional] 
 **banner_type** | **str** | Banner type to display for this alert | [optional] 
 **banner_text** | **str** | Text to display for the alert banner | [optional] 
 **alert_description** | **str** | Text for what happened section of an admin alert. | [optional] 
 **relevance_description** | **str** | Text for why this matters section of an admin alert. | [optional] 
 **resolution_steps_description** | **str** | Text for to do section before actual steps. | [optional] 
 **resolution_steps** | [**List[ResolutionStep]**](ResolutionStep.md) | Steps to take to resolve an alert which are optionally mapped to a link for instructions (e.g. help doc) | [optional] 
+**help_link** | **str** | Help link for the alert that the admin can reference | [optional] 
+**name** | **str** | The name of the admin alert | [optional] 
+**triggered_time** | **datetime** | The time that the alert was triggered | [optional] 
+**project_name** | **str** | Human readable name of the project instance | [optional] 
+**datasource** | **str** | Datasource that the alert is related to (possibly null) | [optional] 
 **instance_display_name** | **str** | datasource instance&#39;s user set display name | [optional] 
 **instance_name** | **str** | datasource instance&#39;s name e.g. confluence_0a0odwv | [optional] 
 **email_subject_description** | **str** | custom text in subject line | [optional] 

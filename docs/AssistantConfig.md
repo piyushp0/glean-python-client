@@ -15,9 +15,12 @@ Name | Type | Description | Notes
 **redlisted_datasources** | **List[str]** | A list of datasources that are disabled in Chat | [optional] 
 **greenlisted_datasource_instances** | **List[str]** | A list of datasources that are always visible in Chat | [optional] 
 **gpt_agent_enabled** | **bool** | Whether the GPT agent (general mode) for Chat is enabled | [optional] 
-**file_upload_enabled** | **bool** | Whether file upload for Chat is enabled for the deployment | [optional] 
+**file_upload** | [**FileUploadConfig**](FileUploadConfig.md) |  | [optional] 
 **chat_history_enabled** | **bool** | Whether the chat history for Chat is enabled for the deployment | [optional] 
 **chat_guide_url** | **str** | Redirect URL for \&quot;Chat guide\&quot; in the default chat starter subheader | [optional] 
+**prompts_enabled** | **bool** | Whether prompt templates feature are enabled for the deployment. | [optional] 
+**default_user_can_share_prompts** | **bool** | Whether a default user can share prompts to the prompt library. | [optional] 
+**file_upload_enabled** | **bool** | Whether file upload for Chat is enabled for the deployment | [optional] 
 
 ## Example
 

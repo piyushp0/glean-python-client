@@ -37,6 +37,7 @@ class TestExecuteActionToolRequest(unittest.TestCase):
         if include_optional:
             return ExecuteActionToolRequest(
                 name = '',
+                action_instance_id = '',
                 parameters = {
                     'key' : openapi_client.models.write_action_parameter.WriteActionParameter(
                         type = 'UNKNOWN', 

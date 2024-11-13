@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.ask_experimental_metadata import AskExperimentalMetadata
+from openapi_client.models.chat_restriction_filters import ChatRestrictionFilters
 from openapi_client.models.document_spec import DocumentSpec
 from openapi_client.models.search_request import SearchRequest
 from typing import Optional, Set
@@ -37,7 +38,9 @@ class AskRequest(BaseModel):
     operators: Optional[StrictStr] = Field(default=None, description="Search operators to append to the query")
     backend: Optional[StrictStr] = Field(default=None, description="Which backend to use to fulfill the requests.")
     chat_application_id: Optional[StrictStr] = Field(default=None, description="The ID of the application this request originates from, used to determine the configuration of underlying chat processes when invoking the CHAT backend. This should correspond to the ID set during admin setup. If not specified, the default chat experience will be used.", alias="chatApplicationId")
-    __properties: ClassVar[List[str]] = ["detectOnly", "AskExperimentalMetadata", "searchRequest", "excludedDocumentSpecs", "operators", "backend", "chatApplicationId"]
+    inclusions: Optional[ChatRestrictionFilters] = None
+    exclusions: Optional[ChatRestrictionFilters] = None
+    __properties: ClassVar[List[str]] = ["detectOnly", "AskExperimentalMetadata", "searchRequest", "excludedDocumentSpecs", "operators", "backend", "chatApplicationId", "inclusions", "exclusions"]
 
     @field_validator('backend')
     def backend_validate_enum(cls, value):
@@ -97,10 +100,16 @@ class AskRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in excluded_document_specs (list)
         _items = []
         if self.excluded_document_specs:
-            for _item in self.excluded_document_specs:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_excluded_document_specs in self.excluded_document_specs:
+                if _item_excluded_document_specs:
+                    _items.append(_item_excluded_document_specs.to_dict())
             _dict['excludedDocumentSpecs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of inclusions
+        if self.inclusions:
+            _dict['inclusions'] = self.inclusions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of exclusions
+        if self.exclusions:
+            _dict['exclusions'] = self.exclusions.to_dict()
         return _dict
 
     @classmethod
@@ -119,7 +128,9 @@ class AskRequest(BaseModel):
             "excludedDocumentSpecs": [DocumentSpec.from_dict(_item) for _item in obj["excludedDocumentSpecs"]] if obj.get("excludedDocumentSpecs") is not None else None,
             "operators": obj.get("operators"),
             "backend": obj.get("backend"),
-            "chatApplicationId": obj.get("chatApplicationId")
+            "chatApplicationId": obj.get("chatApplicationId"),
+            "inclusions": ChatRestrictionFilters.from_dict(obj["inclusions"]) if obj.get("inclusions") is not None else None,
+            "exclusions": ChatRestrictionFilters.from_dict(obj["exclusions"]) if obj.get("exclusions") is not None else None
         })
         return _obj
 

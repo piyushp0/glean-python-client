@@ -38,7 +38,9 @@ class TestExecuteActionToolResponse(unittest.TestCase):
             return ExecuteActionToolResponse(
                 message = '',
                 error = '',
-                result_url = ''
+                raw_external_response = '',
+                result_url = '',
+                title = ''
             )
         else:
             return ExecuteActionToolResponse(

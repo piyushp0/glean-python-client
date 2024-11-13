@@ -37,26 +37,11 @@ class TestEmailRequest(unittest.TestCase):
         if include_optional:
             return EmailRequest(
                 email_template = 'ADMIN_ALERT',
-                alert_data = openapi_client.models.alert_data.AlertData(
-                    name = '', 
-                    triggered_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                    project_name = '', 
-                    help_link = '', 
-                    datasource = '', 
-                    banner_type = 'ACTION_REQUIRED', 
-                    banner_text = '', 
-                    alert_description = '', 
-                    relevance_description = '', 
-                    resolution_steps_description = '', 
-                    resolution_steps = [
-                        openapi_client.models.resolution_step.ResolutionStep(
-                            step_text = '', 
-                            link = '', )
-                        ], 
-                    instance_display_name = '', 
-                    instance_name = '', 
-                    email_subject_description = '', ),
+                alert_data = None,
                 recipients = [
+                    {"name":"George Clooney","obfuscatedId":"abc123"}
+                    ],
+                cc_recipients = [
                     {"name":"George Clooney","obfuscatedId":"abc123"}
                     ],
                 recipient_filters = openapi_client.models.people_filters.PeopleFilters(
@@ -132,7 +117,12 @@ class TestEmailRequest(unittest.TestCase):
                     comments = '', 
                     previous_messages = [
                         ''
-                        ], )
+                        ], ),
+                dlp_report_data = openapi_client.models.dlp_report_data.DlpReportData(
+                    frequency = 'WEEKLY', 
+                    request_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    report_name = '', 
+                    status = 'SUCCESS', )
             )
         else:
             return EmailRequest(

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **step_text** | **str** | text for what step to take | [optional] 
 **link** | **str** | optional link url for instructions | [optional] 
+**metadata** | **List[str]** | optional metadata for the step | [optional] 
 
 ## Example
 

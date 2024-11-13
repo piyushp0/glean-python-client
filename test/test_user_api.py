@@ -41,13 +41,6 @@ class TestUserApi(unittest.TestCase):
         """
         pass
 
-    def test_editpermissions(self) -> None:
-        """Test case for editpermissions
-
-        Update permissions
-        """
-        pass
-
     def test_invite(self) -> None:
         """Test case for invite
 

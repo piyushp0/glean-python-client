@@ -53,6 +53,7 @@ class SearchApi:
     def adminsearch(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Admin search request")] = None,
         _request_timeout: Union[
             None,
@@ -73,6 +74,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Admin search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -99,6 +102,7 @@ class SearchApi:
 
         _param = self._adminsearch_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -129,6 +133,7 @@ class SearchApi:
     def adminsearch_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Admin search request")] = None,
         _request_timeout: Union[
             None,
@@ -149,6 +154,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Admin search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -175,6 +182,7 @@ class SearchApi:
 
         _param = self._adminsearch_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -205,6 +213,7 @@ class SearchApi:
     def adminsearch_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Admin search request")] = None,
         _request_timeout: Union[
             None,
@@ -225,6 +234,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Admin search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -251,6 +262,7 @@ class SearchApi:
 
         _param = self._adminsearch_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -276,6 +288,7 @@ class SearchApi:
     def _adminsearch_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -292,7 +305,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -300,6 +315,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -356,6 +373,7 @@ class SearchApi:
         self,
         payload: Annotated[AutocompleteRequest, Field(description="Autocomplete request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -377,6 +395,8 @@ class SearchApi:
         :type payload: AutocompleteRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -402,6 +422,7 @@ class SearchApi:
         _param = self._autocomplete_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -430,6 +451,7 @@ class SearchApi:
         self,
         payload: Annotated[AutocompleteRequest, Field(description="Autocomplete request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -451,6 +473,8 @@ class SearchApi:
         :type payload: AutocompleteRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -476,6 +500,7 @@ class SearchApi:
         _param = self._autocomplete_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -504,6 +529,7 @@ class SearchApi:
         self,
         payload: Annotated[AutocompleteRequest, Field(description="Autocomplete request")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -525,6 +551,8 @@ class SearchApi:
         :type payload: AutocompleteRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -550,6 +578,7 @@ class SearchApi:
         _param = self._autocomplete_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -573,6 +602,7 @@ class SearchApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -588,7 +618,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -596,6 +628,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -652,6 +686,7 @@ class SearchApi:
         self,
         payload: Annotated[FeedRequest, Field(description="Includes request params, client data and more for making user's feed.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,7 +700,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FeedResponse:
-        """Suggest a feed of documents and events
+        """Feed of documents and events
 
         The personalized feed/home includes different types of contents including suggestions, recents, calendar events and many more.
 
@@ -673,6 +708,8 @@ class SearchApi:
         :type payload: FeedRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -698,6 +735,7 @@ class SearchApi:
         _param = self._feed_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -727,6 +765,7 @@ class SearchApi:
         self,
         payload: Annotated[FeedRequest, Field(description="Includes request params, client data and more for making user's feed.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,7 +779,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FeedResponse]:
-        """Suggest a feed of documents and events
+        """Feed of documents and events
 
         The personalized feed/home includes different types of contents including suggestions, recents, calendar events and many more.
 
@@ -748,6 +787,8 @@ class SearchApi:
         :type payload: FeedRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -773,6 +814,7 @@ class SearchApi:
         _param = self._feed_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -802,6 +844,7 @@ class SearchApi:
         self,
         payload: Annotated[FeedRequest, Field(description="Includes request params, client data and more for making user's feed.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -815,7 +858,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Suggest a feed of documents and events
+        """Feed of documents and events
 
         The personalized feed/home includes different types of contents including suggestions, recents, calendar events and many more.
 
@@ -823,6 +866,8 @@ class SearchApi:
         :type payload: FeedRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -848,6 +893,7 @@ class SearchApi:
         _param = self._feed_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -872,6 +918,7 @@ class SearchApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -887,7 +934,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -895,6 +944,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -951,6 +1002,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -972,6 +1024,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -997,6 +1051,7 @@ class SearchApi:
         _param = self._peoplesuggest_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1025,6 +1080,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1046,6 +1102,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1071,6 +1129,7 @@ class SearchApi:
         _param = self._peoplesuggest_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1099,6 +1158,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1120,6 +1180,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1145,6 +1207,7 @@ class SearchApi:
         _param = self._peoplesuggest_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1168,6 +1231,7 @@ class SearchApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1183,7 +1247,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1191,6 +1257,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1247,6 +1315,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1268,6 +1337,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1293,6 +1364,7 @@ class SearchApi:
         _param = self._peoplesuggestadmin_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1321,6 +1393,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1342,6 +1415,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1367,6 +1442,7 @@ class SearchApi:
         _param = self._peoplesuggestadmin_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1395,6 +1471,7 @@ class SearchApi:
         self,
         payload: Annotated[PeopleSuggestRequest, Field(description="Includes request params for type of suggestions.")],
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1416,6 +1493,8 @@ class SearchApi:
         :type payload: PeopleSuggestRequest
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1441,6 +1520,7 @@ class SearchApi:
         _param = self._peoplesuggestadmin_serialize(
             payload=payload,
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1464,6 +1544,7 @@ class SearchApi:
         self,
         payload,
         x_scio_actas,
+        x_glean_auth_type,
         _request_auth,
         _content_type,
         _headers,
@@ -1479,7 +1560,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1487,6 +1570,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1542,6 +1627,7 @@ class SearchApi:
     def recommendations(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[RecommendationsRequest], Field(description="Recommendations request")] = None,
         _request_timeout: Union[
             None,
@@ -1562,6 +1648,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Recommendations request
         :type payload: RecommendationsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1588,6 +1676,7 @@ class SearchApi:
 
         _param = self._recommendations_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1619,6 +1708,7 @@ class SearchApi:
     def recommendations_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[RecommendationsRequest], Field(description="Recommendations request")] = None,
         _request_timeout: Union[
             None,
@@ -1639,6 +1729,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Recommendations request
         :type payload: RecommendationsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1665,6 +1757,7 @@ class SearchApi:
 
         _param = self._recommendations_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1696,6 +1789,7 @@ class SearchApi:
     def recommendations_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[RecommendationsRequest], Field(description="Recommendations request")] = None,
         _request_timeout: Union[
             None,
@@ -1716,6 +1810,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Recommendations request
         :type payload: RecommendationsRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1742,6 +1838,7 @@ class SearchApi:
 
         _param = self._recommendations_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1768,6 +1865,7 @@ class SearchApi:
     def _recommendations_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -1784,7 +1882,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1792,6 +1892,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:
@@ -1847,6 +1949,7 @@ class SearchApi:
     def search(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Search request")] = None,
         _request_timeout: Union[
             None,
@@ -1867,6 +1970,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1893,6 +1998,7 @@ class SearchApi:
 
         _param = self._search_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1924,6 +2030,7 @@ class SearchApi:
     def search_with_http_info(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Search request")] = None,
         _request_timeout: Union[
             None,
@@ -1944,6 +2051,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1970,6 +2079,7 @@ class SearchApi:
 
         _param = self._search_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2001,6 +2111,7 @@ class SearchApi:
     def search_without_preload_content(
         self,
         x_scio_actas: Annotated[Optional[StrictStr], Field(description="Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).")] = None,
+        x_glean_auth_type: Annotated[Optional[StrictStr], Field(description="Auth type being used to access the endpoint (should be non-empty only for global tokens).")] = None,
         payload: Annotated[Optional[SearchRequest], Field(description="Search request")] = None,
         _request_timeout: Union[
             None,
@@ -2021,6 +2132,8 @@ class SearchApi:
 
         :param x_scio_actas: Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens).
         :type x_scio_actas: str
+        :param x_glean_auth_type: Auth type being used to access the endpoint (should be non-empty only for global tokens).
+        :type x_glean_auth_type: str
         :param payload: Search request
         :type payload: SearchRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -2047,6 +2160,7 @@ class SearchApi:
 
         _param = self._search_serialize(
             x_scio_actas=x_scio_actas,
+            x_glean_auth_type=x_glean_auth_type,
             payload=payload,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2073,6 +2187,7 @@ class SearchApi:
     def _search_serialize(
         self,
         x_scio_actas,
+        x_glean_auth_type,
         payload,
         _request_auth,
         _content_type,
@@ -2089,7 +2204,9 @@ class SearchApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2097,6 +2214,8 @@ class SearchApi:
         # process the header parameters
         if x_scio_actas is not None:
             _header_params['X-Scio-Actas'] = x_scio_actas
+        if x_glean_auth_type is not None:
+            _header_params['X-Glean-Auth-Type'] = x_glean_auth_type
         # process the form parameters
         # process the body parameter
         if payload is not None:

@@ -17,11 +17,12 @@ Name | Type | Description | Notes
 **pathname** | **str** | The path the client was at when the feedback event triggered. | [optional] 
 **channels** | **List[str]** | Where the feedback will be sent, e.g. to Glean, the user&#39;s company, or both. If no channels are specified, feedback will go only to Glean. | [optional] 
 **url** | **str** | The URL the client was at when the feedback event triggered. | [optional] 
+**ui_tree** | **List[str]** | The UI element tree associated with the event, if any. | [optional] 
 **ui_element** | **str** | The UI element associated with the event, if any. | [optional] 
 **manual_feedback_info** | [**ManualFeedbackInfo**](ManualFeedbackInfo.md) |  | [optional] 
 **seen_feedback_info** | [**SeenFeedbackInfo**](SeenFeedbackInfo.md) |  | [optional] 
 **user_view_info** | [**UserViewInfo**](UserViewInfo.md) |  | [optional] 
-**debug_info** | [**FeedbackDebugInfo**](FeedbackDebugInfo.md) |  | [optional] 
+**workflow_feedback_info** | [**WorkflowFeedbackInfo**](WorkflowFeedbackInfo.md) |  | [optional] 
 **application_id** | **str** | The application ID of the client that sent the feedback event. | [optional] 
 
 ## Example

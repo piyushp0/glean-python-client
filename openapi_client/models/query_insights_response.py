@@ -77,16 +77,16 @@ class QueryInsightsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in query_insights (list)
         _items = []
         if self.query_insights:
-            for _item in self.query_insights:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_query_insights in self.query_insights:
+                if _item_query_insights:
+                    _items.append(_item_query_insights.to_dict())
             _dict['queryInsights'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in low_performing_query_insights (list)
         _items = []
         if self.low_performing_query_insights:
-            for _item in self.low_performing_query_insights:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_low_performing_query_insights in self.low_performing_query_insights:
+                if _item_low_performing_query_insights:
+                    _items.append(_item_low_performing_query_insights.to_dict())
             _dict['lowPerformingQueryInsights'] = _items
         return _dict
 

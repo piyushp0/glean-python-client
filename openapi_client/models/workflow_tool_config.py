@@ -20,15 +20,19 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.workflow_tool_parameter import WorkflowToolParameter
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FeedbackDebugInfo(BaseModel):
+class WorkflowToolConfig(BaseModel):
     """
-    FeedbackDebugInfo
+    WorkflowToolConfig
     """ # noqa: E501
-    desktop_app_version: Optional[StrictStr] = Field(default=None, description="The version of the desktop app from which the feedback was sent, if applicable", alias="desktopAppVersion")
-    __properties: ClassVar[List[str]] = ["desktopAppVersion"]
+    id: Optional[StrictStr] = Field(default=None, description="The id of the action/tool being used.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the tool being used.")
+    datasources_filter: Optional[List[StrictStr]] = Field(default=None, description="Run this tool on only these datasource instance ids.", alias="datasourcesFilter")
+    input_template: Optional[List[WorkflowToolParameter]] = Field(default=None, alias="inputTemplate")
+    __properties: ClassVar[List[str]] = ["id", "name", "datasourcesFilter", "inputTemplate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +52,7 @@ class FeedbackDebugInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FeedbackDebugInfo from a JSON string"""
+        """Create an instance of WorkflowToolConfig from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +73,18 @@ class FeedbackDebugInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in input_template (list)
+        _items = []
+        if self.input_template:
+            for _item_input_template in self.input_template:
+                if _item_input_template:
+                    _items.append(_item_input_template.to_dict())
+            _dict['inputTemplate'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FeedbackDebugInfo from a dict"""
+        """Create an instance of WorkflowToolConfig from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +92,10 @@ class FeedbackDebugInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "desktopAppVersion": obj.get("desktopAppVersion")
+            "id": obj.get("id"),
+            "name": obj.get("name"),
+            "datasourcesFilter": obj.get("datasourcesFilter"),
+            "inputTemplate": [WorkflowToolParameter.from_dict(_item) for _item in obj["inputTemplate"]] if obj.get("inputTemplate") is not None else None
         })
         return _obj
 

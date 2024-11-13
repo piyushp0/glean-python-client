@@ -77,9 +77,9 @@ class SearchResultSnippet(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in ranges (list)
         _items = []
         if self.ranges:
-            for _item in self.ranges:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_ranges in self.ranges:
+                if _item_ranges:
+                    _items.append(_item_ranges.to_dict())
             _dict['ranges'] = _items
         return _dict
 

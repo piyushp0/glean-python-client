@@ -36,7 +36,11 @@ class TestProductTerm(unittest.TestCase):
         model = ProductTerm()
         if include_optional:
             return ProductTerm(
-                display_name = ''
+                display_name = '',
+                localizations = {
+                    'key' : openapi_client.models.product_term_localizations_value.ProductTerm_localizations_value(
+                        display_name = '', )
+                    }
             )
         else:
             return ProductTerm(

@@ -18,18 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from openapi_client.models.permissions import Permissions
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.chat_file import ChatFile
 from typing import Optional, Set
 from typing_extensions import Self
 
-class EditPermissionsResponse(BaseModel):
+class UploadChatFilesResponse(BaseModel):
     """
-    EditPermissionsResponse
+    UploadChatFilesResponse
     """ # noqa: E501
-    permissions: Permissions
-    __properties: ClassVar[List[str]] = ["permissions"]
+    files: Optional[List[ChatFile]] = Field(default=None, description="Files uploaded for chat.")
+    __properties: ClassVar[List[str]] = ["files"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +49,7 @@ class EditPermissionsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EditPermissionsResponse from a JSON string"""
+        """Create an instance of UploadChatFilesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,14 +70,18 @@ class EditPermissionsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of permissions
-        if self.permissions:
-            _dict['permissions'] = self.permissions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in files (list)
+        _items = []
+        if self.files:
+            for _item_files in self.files:
+                if _item_files:
+                    _items.append(_item_files.to_dict())
+            _dict['files'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EditPermissionsResponse from a dict"""
+        """Create an instance of UploadChatFilesResponse from a dict"""
         if obj is None:
             return None
 
@@ -85,7 +89,7 @@ class EditPermissionsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "permissions": Permissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
+            "files": [ChatFile.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None
         })
         return _obj
 

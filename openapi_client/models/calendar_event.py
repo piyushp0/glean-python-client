@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.calendar_attendees import CalendarAttendees
 from openapi_client.models.conference_data import ConferenceData
@@ -41,9 +41,10 @@ class CalendarEvent(BaseModel):
     conference_data: Optional[ConferenceData] = Field(default=None, alias="conferenceData")
     description: Optional[StrictStr] = Field(default=None, description="The HTML description of the event.")
     datasource: Optional[StrictStr] = Field(default=None, description="The app or other repository type from which the event was extracted")
+    has_transcript: Optional[StrictBool] = Field(default=None, description="The event has a transcript associated with it enabling features like summarization", alias="hasTranscript")
     classifications: Optional[List[EventClassification]] = None
     generated_attachments: Optional[List[GeneratedAttachment]] = Field(default=None, alias="generatedAttachments")
-    __properties: ClassVar[List[str]] = ["time", "eventType", "id", "url", "attendees", "location", "conferenceData", "description", "datasource", "classifications", "generatedAttachments"]
+    __properties: ClassVar[List[str]] = ["time", "eventType", "id", "url", "attendees", "location", "conferenceData", "description", "datasource", "hasTranscript", "classifications", "generatedAttachments"]
 
     @field_validator('event_type')
     def event_type_validate_enum(cls, value):
@@ -106,16 +107,16 @@ class CalendarEvent(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in classifications (list)
         _items = []
         if self.classifications:
-            for _item in self.classifications:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_classifications in self.classifications:
+                if _item_classifications:
+                    _items.append(_item_classifications.to_dict())
             _dict['classifications'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in generated_attachments (list)
         _items = []
         if self.generated_attachments:
-            for _item in self.generated_attachments:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_generated_attachments in self.generated_attachments:
+                if _item_generated_attachments:
+                    _items.append(_item_generated_attachments.to_dict())
             _dict['generatedAttachments'] = _items
         return _dict
 
@@ -138,6 +139,7 @@ class CalendarEvent(BaseModel):
             "conferenceData": ConferenceData.from_dict(obj["conferenceData"]) if obj.get("conferenceData") is not None else None,
             "description": obj.get("description"),
             "datasource": obj.get("datasource"),
+            "hasTranscript": obj.get("hasTranscript"),
             "classifications": [EventClassification.from_dict(_item) for _item in obj["classifications"]] if obj.get("classifications") is not None else None,
             "generatedAttachments": [GeneratedAttachment.from_dict(_item) for _item in obj["generatedAttachments"]] if obj.get("generatedAttachments") is not None else None
         })

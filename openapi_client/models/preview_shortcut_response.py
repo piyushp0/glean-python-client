@@ -79,9 +79,9 @@ class PreviewShortcutResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in existing_url_shortcuts (list)
         _items = []
         if self.existing_url_shortcuts:
-            for _item in self.existing_url_shortcuts:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_existing_url_shortcuts in self.existing_url_shortcuts:
+                if _item_existing_url_shortcuts:
+                    _items.append(_item_existing_url_shortcuts.to_dict())
             _dict['existingUrlShortcuts'] = _items
         # override the default output from pydantic by calling `to_dict()` of error
         if self.error:

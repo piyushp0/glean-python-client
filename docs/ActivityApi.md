@@ -88,7 +88,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feedback**
-> feedback(x_scio_actas=x_scio_actas, feedback=feedback, payload=payload)
+> feedback(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, feedback=feedback, payload=payload)
 
 Report client activity
 
@@ -125,12 +125,13 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.ActivityApi(api_client)
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
     feedback = 'feedback_example' # str | A URL encoded versions of Feedback. This is useful for requests. (optional)
     payload = openapi_client.Feedback() # Feedback |  (optional)
 
     try:
         # Report client activity
-        api_instance.feedback(x_scio_actas=x_scio_actas, feedback=feedback, payload=payload)
+        api_instance.feedback(x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type, feedback=feedback, payload=payload)
     except Exception as e:
         print("Exception when calling ActivityApi->feedback: %s\n" % e)
 ```
@@ -143,6 +144,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
  **feedback** | **str**| A URL encoded versions of Feedback. This is useful for requests. | [optional] 
  **payload** | [**Feedback**](Feedback.md)|  | [optional] 
 

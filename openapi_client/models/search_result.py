@@ -37,8 +37,8 @@ class SearchResult(BaseModel):
     native_app_url: Optional[StrictStr] = Field(default=None, description="A deep link, if available, into the datasource's native application for the user's platform (e.g. slack://...).", alias="nativeAppUrl")
     snippets: Optional[List[SearchResultSnippet]] = Field(default=None, description="Text content from the result document which contains search query terms, if available.")
     expanded_snippets: Optional[List[StrictStr]] = Field(default=None, description="The expanded snippets for this result. This is only populated if the query has the expand_snippets parameter set to true.", alias="expandedSnippets")
-    full_text: Optional[StrictStr] = Field(default=None, description="The full body text of the result if not already contained in the snippets", alias="fullText")
-    full_text_list: Optional[List[StrictStr]] = Field(default=None, description="The full body text of the result if not already contained in the snippets; each item in the array represents a separate line in the original text", alias="fullTextList")
+    full_text: Optional[StrictStr] = Field(default=None, description="The full body text of the result if not already contained in the snippets. Only populated for conversation results (e.g. results from a messaging app such as Slack).", alias="fullText")
+    full_text_list: Optional[List[StrictStr]] = Field(default=None, description="The full body text of the result if not already contained in the snippets; each item in the array represents a separate line in the original text. Only populated for conversation results (e.g. results from a messaging app such as Slack).", alias="fullTextList")
     related_results: Optional[List[RelatedDocuments]] = Field(default=None, description="A list of results related to this search result. Eg. for conversation results it contains individual messages from the conversation document which will be shown on SERP.", alias="relatedResults")
     clustered_results: Optional[List[SearchResult]] = Field(default=None, description="A list of results that should be displayed as associated with this result.", alias="clusteredResults")
     all_clustered_results: Optional[List[ClusterGroup]] = Field(default=None, description="A list of results that should be displayed as associated with this result.", alias="allClusteredResults")
@@ -95,9 +95,9 @@ class SearchResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in structured_results (list)
         _items = []
         if self.structured_results:
-            for _item in self.structured_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_structured_results in self.structured_results:
+                if _item_structured_results:
+                    _items.append(_item_structured_results.to_dict())
             _dict['structuredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of document
         if self.document:
@@ -105,44 +105,44 @@ class SearchResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in snippets (list)
         _items = []
         if self.snippets:
-            for _item in self.snippets:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_snippets in self.snippets:
+                if _item_snippets:
+                    _items.append(_item_snippets.to_dict())
             _dict['snippets'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in related_results (list)
         _items = []
         if self.related_results:
-            for _item in self.related_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_related_results in self.related_results:
+                if _item_related_results:
+                    _items.append(_item_related_results.to_dict())
             _dict['relatedResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in clustered_results (list)
         _items = []
         if self.clustered_results:
-            for _item in self.clustered_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_clustered_results in self.clustered_results:
+                if _item_clustered_results:
+                    _items.append(_item_clustered_results.to_dict())
             _dict['clusteredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in all_clustered_results (list)
         _items = []
         if self.all_clustered_results:
-            for _item in self.all_clustered_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_all_clustered_results in self.all_clustered_results:
+                if _item_all_clustered_results:
+                    _items.append(_item_all_clustered_results.to_dict())
             _dict['allClusteredResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in attachments (list)
         _items = []
         if self.attachments:
-            for _item in self.attachments:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_attachments in self.attachments:
+                if _item_attachments:
+                    _items.append(_item_attachments.to_dict())
             _dict['attachments'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in backlink_results (list)
         _items = []
         if self.backlink_results:
-            for _item in self.backlink_results:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_backlink_results in self.backlink_results:
+                if _item_backlink_results:
+                    _items.append(_item_backlink_results.to_dict())
             _dict['backlinkResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of must_include_suggestions
         if self.must_include_suggestions:
@@ -153,9 +153,9 @@ class SearchResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in pins (list)
         _items = []
         if self.pins:
-            for _item in self.pins:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_pins in self.pins:
+                if _item_pins:
+                    _items.append(_item_pins.to_dict())
             _dict['pins'] = _items
         return _dict
 

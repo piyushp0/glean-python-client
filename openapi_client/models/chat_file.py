@@ -29,9 +29,10 @@ class ChatFile(BaseModel):
     Structure for file uploaded by a user for Chat.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the file.")
+    url: Optional[StrictStr] = Field(default=None, description="Url of the file.")
     name: Optional[StrictStr] = Field(default=None, description="Name of the uploaded file.")
     metadata: Optional[ChatFileMetadata] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "metadata"]
+    __properties: ClassVar[List[str]] = ["id", "url", "name", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +89,7 @@ class ChatFile(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "url": obj.get("url"),
             "name": obj.get("name"),
             "metadata": ChatFileMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None
         })

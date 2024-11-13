@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **getevents**
-> GetEventsResponse getevents(payload, x_scio_actas=x_scio_actas)
+> GetEventsResponse getevents(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
 
 Read events
 
@@ -47,10 +47,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.CalendarApi(api_client)
     payload = openapi_client.GetEventsRequest() # GetEventsRequest | GetEvents request
     x_scio_actas = 'x_scio_actas_example' # str | Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). (optional)
+    x_glean_auth_type = 'x_glean_auth_type_example' # str | Auth type being used to access the endpoint (should be non-empty only for global tokens). (optional)
 
     try:
         # Read events
-        api_response = api_instance.getevents(payload, x_scio_actas=x_scio_actas)
+        api_response = api_instance.getevents(payload, x_scio_actas=x_scio_actas, x_glean_auth_type=x_glean_auth_type)
         print("The response of CalendarApi->getevents:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payload** | [**GetEventsRequest**](GetEventsRequest.md)| GetEvents request | 
  **x_scio_actas** | **str**| Email address of a user on whose behalf the request is intended to be made (should be non-empty only for global tokens). | [optional] 
+ **x_glean_auth_type** | **str**| Auth type being used to access the endpoint (should be non-empty only for global tokens). | [optional] 
 
 ### Return type
 

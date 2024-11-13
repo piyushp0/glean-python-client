@@ -119,9 +119,9 @@ class CreateDraftAnnouncementRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in audience_filters (list)
         _items = []
         if self.audience_filters:
-            for _item in self.audience_filters:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_audience_filters in self.audience_filters:
+                if _item_audience_filters:
+                    _items.append(_item_audience_filters.to_dict())
             _dict['audienceFilters'] = _items
         return _dict
 

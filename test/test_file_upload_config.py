@@ -15,10 +15,10 @@
 
 import unittest
 
-from openapi_client.models.feedback_debug_info import FeedbackDebugInfo
+from openapi_client.models.file_upload_config import FileUploadConfig
 
-class TestFeedbackDebugInfo(unittest.TestCase):
-    """FeedbackDebugInfo unit test stubs"""
+class TestFileUploadConfig(unittest.TestCase):
+    """FileUploadConfig unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,25 +26,27 @@ class TestFeedbackDebugInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> FeedbackDebugInfo:
-        """Test FeedbackDebugInfo
+    def make_instance(self, include_optional) -> FileUploadConfig:
+        """Test FileUploadConfig
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `FeedbackDebugInfo`
+        # uncomment below to create an instance of `FileUploadConfig`
         """
-        model = FeedbackDebugInfo()
+        model = FileUploadConfig()
         if include_optional:
-            return FeedbackDebugInfo(
-                desktop_app_version = ''
+            return FileUploadConfig(
+                enabled = True,
+                max_file_count = 56,
+                max_file_size = 56
             )
         else:
-            return FeedbackDebugInfo(
+            return FileUploadConfig(
         )
         """
 
-    def testFeedbackDebugInfo(self):
-        """Test FeedbackDebugInfo"""
+    def testFileUploadConfig(self):
+        """Test FileUploadConfig"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

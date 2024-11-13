@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **collection_item** | [**CollectionItem**](CollectionItem.md) |  | [optional] 
 **person** | [**Person**](Person.md) |  | [optional] 
 **app** | [**AppResult**](AppResult.md) |  | [optional] 
+**prompt_template** | [**PromptTemplateResult**](PromptTemplateResult.md) |  | [optional] 
+**workflow** | [**WorkflowResult**](WorkflowResult.md) |  | [optional] 
 **activities** | [**List[UserActivity]**](UserActivity.md) | List of activity where each activity has user, action, timestamp. | [optional] 
 **document_visitor_count** | [**CountInfo**](CountInfo.md) |  | [optional] 
 

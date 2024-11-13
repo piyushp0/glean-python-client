@@ -20,17 +20,15 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from openapi_client.models.permissions import Permissions
 from typing import Optional, Set
 from typing_extensions import Self
 
-class EditPermissionsRequest(BaseModel):
+class ChatZeroStateSuggestionOptions(BaseModel):
     """
-    EditPermissionsRequest
+    ChatZeroStateSuggestionOptions
     """ # noqa: E501
-    user_ids: Optional[List[StrictStr]] = Field(default=None, description="The ids of the users whose permissions will be edited", alias="userIds")
-    permissions: Permissions
-    __properties: ClassVar[List[str]] = ["userIds", "permissions"]
+    application_id: Optional[StrictStr] = Field(default=None, description="The Chat Application ID this feed request should be scoped to. Empty means there is no Chat Application ID..", alias="applicationId")
+    __properties: ClassVar[List[str]] = ["applicationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +48,7 @@ class EditPermissionsRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EditPermissionsRequest from a JSON string"""
+        """Create an instance of ChatZeroStateSuggestionOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +69,11 @@ class EditPermissionsRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of permissions
-        if self.permissions:
-            _dict['permissions'] = self.permissions.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EditPermissionsRequest from a dict"""
+        """Create an instance of ChatZeroStateSuggestionOptions from a dict"""
         if obj is None:
             return None
 
@@ -86,8 +81,7 @@ class EditPermissionsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "userIds": obj.get("userIds"),
-            "permissions": Permissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
+            "applicationId": obj.get("applicationId")
         })
         return _obj
 

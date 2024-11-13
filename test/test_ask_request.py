@@ -47,7 +47,9 @@ class TestAskRequest(unittest.TestCase):
                     ],
                 operators = '',
                 backend = 'SEARCH',
-                chat_application_id = ''
+                chat_application_id = '',
+                inclusions = None,
+                exclusions = None
             )
         else:
             return AskRequest(

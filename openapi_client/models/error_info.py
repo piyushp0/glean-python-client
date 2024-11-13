@@ -77,16 +77,16 @@ class ErrorInfo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in invalid_operators (list)
         _items = []
         if self.invalid_operators:
-            for _item in self.invalid_operators:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_invalid_operators in self.invalid_operators:
+                if _item_invalid_operators:
+                    _items.append(_item_invalid_operators.to_dict())
             _dict['invalidOperators'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in error_messages (list)
         _items = []
         if self.error_messages:
-            for _item in self.error_messages:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_error_messages in self.error_messages:
+                if _item_error_messages:
+                    _items.append(_item_error_messages.to_dict())
             _dict['errorMessages'] = _items
         return _dict
 
