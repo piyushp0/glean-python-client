@@ -85,6 +85,9 @@ class GetDocumentsResponse(BaseModel):
         if obj is None:
             return None
 
+        if isinstance(obj, str):
+            obj = json.loads(obj)
+
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
